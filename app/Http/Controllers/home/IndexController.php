@@ -13,8 +13,8 @@ class IndexController extends Controller
 {
     public function index()
     {
-    	$info=Type::get(['id','typename'])->first();
-      dd($info);
-    	//return view('welcome','info'=>$info);
+    	//$info=Type::get(['id','typename'])->first();
+        //dd($info);
+    	return view('welcome');
     }
 }
