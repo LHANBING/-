@@ -62,22 +62,27 @@
             
             	<!-- User Photo -->
             	
-               
+               <?php  
+
+
+                    $result = DB::table('manager')->where('id',session('uid'))->first();
+                    // dd($result);
+
+                ?>
 
                 
                     <div id="mws-user-photo">
-                        <img src="" alt="User Photo">
+                        <img src="{{$result->m_photo}}" alt="User Photo">
                     </div>
                 
                 <!-- Username and Functions -->
                 <div id="mws-user-functions">
                    <div id="mws-username">
-                       Hello,Alex
-                    </div> 
-                    <ul>
-                    	<li><a href="#">修改头像</a></li>
-                        <li><a href="#">修改密码</a></li>
-                        <li><a href="index.html">退出</a></li>
+                       Hello, {{$result->m_name}}
+                    </div > 
+                    <ul style="text-align: center;">
+                        <li><a href="">修改头像</a></li>
+                        <li><a href="">退出</a></li>
                     </ul>
                 </div>
             </div>
@@ -110,8 +115,8 @@
                     <li>
                         <a href="#"><i class="icon-users"></i> 用户管理</a>
                         <ul class="closed">
-                            <li><a href="/admin/user/add">用户添加</a></li>
-                            <li><a href="/admin/user/index">用户列表</a></li>
+                            <li><a href="/admin/user">用户列表</a></li>
+                            <li><a href="/admin/user/create">用户添加</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -121,8 +126,8 @@
                     <li>
                         <a href="#"><i class="icon-users"></i> 管理员用户管理</a>
                         <ul class="closed">
-                            <li><a href="/admin/manager/index">管理员用户列表</a></li>
-                            <li><a href="/admin/manager/add">管理员用户添加</a></li>
+                            <li><a href="/admin/manager">管理员用户列表</a></li>
+                            <li><a href="/admin/manager/create">管理员用户添加</a></li>
                             
                         </ul>
                     </li>
@@ -133,8 +138,8 @@
                     <li>
                         <a href="#"><i class="icon-users"></i> 分类管理</a>
                         <ul class="closed">
-                            <li><a href="/admin/type/father">父分类</a></li>
-                            <li><a href="/admin/type/son">子分类</a></li>
+                            <li><a href="/admin/type">分类列表</a></li>
+                            <li><a href="/admin/type/create">添加父分类</a></li>
                             
                         </ul>
                     </li>
@@ -145,7 +150,7 @@
                     <li>
                         <a href="#"><i class="icon-users"></i> 订单管理</a>
                         <ul class="closed">
-                            <li><a href="/admin/order/index">查看订单</a></li>
+                            <li><a href="/admin/order">查看订单</a></li>
                             <!-- <li><a href="/admin/order/delete">删除订单</a></li> -->
                             
                         </ul>
@@ -155,22 +160,9 @@
             <div id="mws-navigation">
                 <ul>
                     <li>
-                        <a href="#"><i class="icon-users"></i> 地址管理管理</a>
-                        <ul class="closed">
-                            <li><a href="/admin/address/index">查看用户地址</a></li>
-                            <!-- <li><a href="/admin/user/create">修改地址</a></li> -->
-                            
-                        </ul>
-                    </li>
-                </ul>
-            </div>  
-            <div id="mws-navigation">
-                <ul>
-                    <li>
                         <a href="#"><i class="icon-users"></i> 钱袋管理管理</a>
                         <ul class="closed">
-                            <li><a href="/admin/wallet/index">已出售订单</a></li>
-                            <li><a href="/admin/wallet/service">售后</a></li>
+                            <li><a href="/admin/wallet">已出售订单</a></li>
                             
                         </ul>
                     </li>
@@ -181,8 +173,8 @@
                     <li>
                         <a href="#"><i class="icon-users"></i> 广告管理</a>
                         <ul class="closed">
-                            <li><a href="/admin/advs/index">查看广告</a></li>
-                            <li><a href="/admin/advs/add">添加广告</a></li>
+                            <li><a href="/admin/advs">查看广告</a></li>
+                            <li><a href="/admin/advs/create">添加广告</a></li>
                             
                         </ul>
                     </li>
@@ -193,8 +185,8 @@
                     <li>
                         <a href="#"><i class="icon-users"></i> 友情链接管理</a>
                         <ul class="closed">
-                            <li><a href="/admin/friendlink/index">查看友情链接</a></li>
-                            <li><a href="/admin/friendlink/add">添加友情链接</a></li>
+                            <li><a href="/admin/friendlink">查看友情链接</a></li>
+                            <li><a href="/admin/friendlink/create">添加友情链接</a></li>
                             
                         </ul>
                     </li>

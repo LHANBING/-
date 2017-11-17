@@ -16,52 +16,46 @@ Route::get('/', function () {
 });
 
 //进入后台登录
-Route::get('admin/login','AdminLoginController@login');
+Route::get('admin/login','admins\AdminLoginController@login');
+
+//忘了密码可以这样添加管理员
+Route::get('mima','admins\AdminLoginController@mima');
+
 //处理后台登录
-Route::post('/admin/dologin','AdminLoginController@dologin');
+Route::post('/admin/dologin','admins\AdminLoginController@dologin');
 //验证码
-Route::get('/code','AdminLoginController@code');
+Route::get('/code','admins\AdminLoginController@code');
 
 //进入后台首页
-Route::group(['prefix'=>'admin'],function(){
+Route::group(['middleware'=>'adminlogin','prefix'=>'admin','namespace'=>'admins'],function(){
 	//后台首页
-	Route::get('/index','AdminController@index');
+	Route::resource('/','AdminController');
 
-	//用户列表
-	Route::get('/user/index','UserController@index');
-	//用户添加
-	Route::get('/user/add','UserController@add');
+	//用户
+	Route::resource('/user','UserController');
 
 	//管理员用户列表
-	Route::get('/manager/index','ManagerController@index');
-	//管理员用户添加
-	Route::get('/manager/add','ManagerController@add');
+	Route::resource('/manager','ManagerController');
 
 	//分类父分类列表
-	Route::get('/type/father','TypeController@father');
+	Route::resource('/type','TypeController');
+
 	//分类子分类
-	Route::get('/type/son','TypeController@son');
+	Route::resource('/typechild','TypechildController');
 
 	//订单列表
-	Route::get('/order/index','OrderController@index');
-
-	//地址列表
-	Route::get('/address/index','AddressController@index');
+	Route::resource('/order','OrderController');
 
 	//钱袋已售出订单
-	Route::get('/wallet/index','WalletController@index');
-	//售后
-	Route::get('/wallet/service','WalletController@service');
+	Route::resource('/wallet','WalletController');
 
 	//广告列表
-	Route::get('/advs/index','AdvsController@index');
-	//广告添加
-	Route::get('/advs/add','AdvsController@add');
+	Route::resource('/advs','AdvsController');
+	
 
 	//友情链接列表
-	Route::get('/friendlink/index','FriendLinkController@index');
-	//友情链接添加
-	Route::get('/friendlink/add','FriendLinkController@add');
+	Route::resource('/friendlink','FriendLinkController');
+	
 
 });
 

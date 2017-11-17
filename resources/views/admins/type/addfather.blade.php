@@ -1,6 +1,6 @@
 @extends('admins.layout.admins')
 
-@section('title','子分类页面')
+@section('title','添加父分类页面')
 
 @section('content')
   
@@ -10,7 +10,7 @@
         <span>
             <i class="icon-table">
             </i>
-            子分类页面
+            添加父分类页面
         </span>
     </div>
     
