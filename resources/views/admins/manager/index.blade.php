@@ -13,25 +13,32 @@
             管理员用户列表页面
         </span>
     </div>
+    @if(session('msg'))
+                        <div class="mws-form-message info">                 
+
+                            {{session('msg')}}
+
+                        </div>
+                    @endif
     <div class="mws-panel-body no-padding">
         <div id="DataTables_Table_1_wrapper" class="dataTables_wrapper" role="grid">
-       		 <form action="/admin/user" method="get">
+       		 <form action="/admin/manager" method="get">
 	            <div id="DataTables_Table_1_length" class="dataTables_length">
 	                <label>
-	                    显示
-	                    <select size="1" name="num" aria-controls="DataTables_Table_1">
-	                        <option value="10">
-	                            10
-	                        </option>
-	                        <option value="25">
-	                            25
-	                        </option>
-	                        <option value="50">
-	                            50
-	                        </option>
-	                    </select>
-	                    条数据
-	                </label>
+                        显示
+                        <select size="1" name="num" aria-controls="DataTables_Table_1">
+                            <option value="10" @if(isset($request->num) ? $request->num : '10' ) @endif>
+                                10
+                            </option>
+                            <option value="25"  @if($request->num == '25') selected="selected" @endif>
+                                25
+                            </option>
+                            <option value="50"  @if($request->num == '50') selected="selected" @endif>
+                                50
+                            </option>
+                        </select>
+                        条数据
+                    </label>
 	            </div>
 	            <div class="dataTables_filter" id="DataTables_Table_1_filter">
 	                <label>
@@ -47,36 +54,26 @@
             <table class="mws-datatable-fn mws-table dataTable" id="DataTables_Table_1"
             aria-describedby="DataTables_Table_1_info">
                 <thead>
-                    <tr role="row">
+                    <tr role="row" >
                         <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
                         style="width: 191px;">
                             ID
                         </th>
+                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
+                        rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
+                        style="width: 125.193px;">
+                            管理员头像
+                        </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
                         style="width: 200px;">
-                            用户名
-                        </th>
-                        <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                        rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending"
-                        style="width: 180px;">
-                            邮箱
-                        </th>
-                        <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                        rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending"
-                        style="width: 166.193px;">
-                            手机号
+                            管理员名
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
                         style="width: 125.193px;">
-                            头像
-                        </th>
-                        <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                        rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
-                        style="width: 125.193px;">
-                            状态
+                            管理级别
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
@@ -87,31 +84,26 @@
                 </thead>
                 <tbody role="alert" aria-live="polite" aria-relevant="all">
 					
-					{{--@foreach($res as $k => $v) 
+					@foreach($res as $k => $v) 
 
                     <tr class="@if($k % 2 == 0) odd @else even @endif" style="height: 90px">
-                        <td class="">
+                        <td class=""  style="text-align: center">
                            {{$v->id}}
                         </td>
-                         <td class="">
-                           {{$v->username}}
-                        </td>
-                         <td class="">
-                           {{$v->email}}
-                        </td>
-                         <td class="">
-                           {{$v->phone}}
-                        </td>
-                         <td class="">
-                         	<img src="{{$v->profile}}" width="50%" alt="">
-                        </td>
-                         <td class="">
-                         	<button class="btn btn-info">{{$v->status ? '开启':'关闭'}}</button>
-                        </td>
-                        <td class="">
-                           <a href="/admin/user/{{$v->id}}/edit" class="btn btn-danger">修改</a>
 
-                           <form action="/admin/user/{{$v->id}}" method="post" style="display: inline;">
+                        <td class="" style="text-align: center">
+                            <img src="{{$v->m_photo}}" width="50%" alt="">
+                        </td>
+                         <td class="" style="text-align: center">
+                           {{$v->m_name}}
+                        </td>
+                         <td class="" style="text-align: center">
+                           {{$v->auth ? '超级管理员' : '管理员'}}
+                        </td>
+                        <td class="" style="text-align: center">
+                           <a href="/admin/manager/{{$v->id}}/edit" class="btn btn-danger">修改</a>
+
+                           <form action="/admin/manager/{{$v->id}}" method="post" style="display: inline;">
                              
                              {{ csrf_field() }}
                              {{ method_field('DELETE') }}
@@ -121,14 +113,14 @@
 
                     </tr>
 
-                    @endforeach--}}
+                    @endforeach
                     
                 </tbody>
             </table>
-           {{-- <div class="dataTables_info" id="DataTables_Table_1_info">
+            <div class="dataTables_info" id="DataTables_Table_1_info">
                 Showing 1 to {{$last}} of {{$count}} entries
             </div>
-            --}}
+            
                 <style>
                     .pagination li{
                         float: left;
@@ -177,9 +169,9 @@
                     margin: 0px;
                 }
                 </style>
-            <div class="dataTables_paginate paging_full_numbers" id="paginate">
+             <div class="dataTables_paginate paging_full_numbers" id="paginate">
 
-                 {{--   {!! $res->appends($request->all())->render() !!}  --}}
+                    {!! $res->appends($request->all())->render() !!}
             </div>
         </div>
     </div>
@@ -189,5 +181,8 @@
 
 @section('js')
 
+   <script type="text/javascript">
+        $('.mws-form-message').delay(3000).slideUp(1000);
+    </script>
 
 @endsection
