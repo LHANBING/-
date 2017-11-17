@@ -26,8 +26,8 @@
                 <ul class="message-l">
                     <div class="topMessage">
                         <div class="menu-hd">
-                            <a href="/home/login" target="_top" class="h">亲，请登录</a>
-                            <a href="/home/register" target="_top">免费注册</a>
+                            <a href="/home/login/index" target="_top" class="h">亲，请登录</a>
+                            <a href="/home/register/index" target="_top">免费注册</a>
                         </div>
                     </div>
                 </ul>
@@ -707,8 +707,8 @@
                                 </em>
                             </div>
                             <div class="member-logout">
-                                <a class="am-btn-warning btn" href="/home/login">登录</a>
-                                <a class="am-btn-warning btn" href="/home/register">注册</a>
+                                <a class="am-btn-warning btn" href="/home/login/index">登录</a>
+                                <a class="am-btn-warning btn" href="/home/register/index">注册</a>
                             </div>
                             <div class="member-login">
                                 <a href="#"><strong>0</strong>待收货</a>

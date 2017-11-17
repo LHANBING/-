@@ -1,10 +1,17 @@
 @extends('homes.layout.center')
 @section('title','收货地址')
 
-@section('js')
+@section('cssjs')
 
+		
+		<link href="/homes/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css">
+		<link href="/homes/AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css">
 
-	<link href="/homes/css/addstyle.css" rel="stylesheet" type="text/css">
+		<link href="/homes/css/personal.css" rel="stylesheet" type="text/css">
+		<link href="/homes/css/addstyle.css" rel="stylesheet" type="text/css">
+		<script src="/homes/AmazeUI-2.4.2/assets/js/jquery.min.js" type="text/javascript"></script>
+		<script src="/homes/AmazeUI-2.4.2/assets/js/amazeui.js"></script>
+
 @endsection()
 
 @section('content')
@@ -34,52 +41,20 @@
 										<span class="street">雄楚大道666号(中南财经政法大学)</span></p>
 								</div>
 								<div class="new-addr-btn">
-									<a href="#"><i class="am-icon-edit"></i>编辑</a>
+									{{$id=10}}
+									<a href="/home/center/address/{{$id}}/edit"><i class="am-icon-edit"></i>编辑</a>
 									<span class="new-addr-bar">|</span>
-									<a onclick="delClick(this);" href="javascript:void(0);"><i class="am-icon-trash"></i>删除</a>
+
+									<form action="/home/center/address/{{$id}}" method="post" style="float: right">
+									<i class="am-icon-trash"></i><button style="border:0px;background:white">删除</button>
+									
+									{{ method_field('DELETE') }}
+									{{ csrf_field() }}
+									</form>
+
 								</div>
 							</li>
 
-							<li class="user-addresslist">
-								<span class="new-option-r"><i class="am-icon-check-circle"></i>设为默认</span>
-								<p class="new-tit new-p-re">
-									<span class="new-txt">小叮当</span>
-									<span class="new-txt-rd2">159****1622</span>
-								</p>
-								<div class="new-mu_l2a new-p-re">
-									<p class="new-mu_l2cw">
-										<span class="title">地址：</span>
-										<span class="province">湖北</span>省
-										<span class="city">武汉</span>市
-										<span class="dist">洪山</span>区
-										<span class="street">雄楚大道666号(中南财经政法大学)</span></p>
-								</div>
-								<div class="new-addr-btn">
-									<a href="#"><i class="am-icon-edit"></i>编辑</a>
-									<span class="new-addr-bar">|</span>
-									<a onclick="delClick(this);" href="javascript:void(0);"><i class="am-icon-trash"></i>删除</a>
-								</div>
-							</li>
-							<li class="user-addresslist">
-								<span class="new-option-r"><i class="am-icon-check-circle"></i>设为默认</span>
-								<p class="new-tit new-p-re">
-									<span class="new-txt">小叮当</span>
-									<span class="new-txt-rd2">159****1622</span>
-								</p>
-								<div class="new-mu_l2a new-p-re">
-									<p class="new-mu_l2cw">
-										<span class="title">地址：</span>
-										<span class="province">湖北</span>省
-										<span class="city">武汉</span>市
-										<span class="dist">洪山</span>区
-										<span class="street">雄楚大道666号(中南财经政法大学)</span></p>
-								</div>
-								<div class="new-addr-btn">
-									<a href="#"><i class="am-icon-edit"></i>编辑</a>
-									<span class="new-addr-bar">|</span>
-									<a onclick="delClick(this);" href="javascript:void(0);"><i class="am-icon-trash"></i>删除</a>
-								</div>
-							</li>
 						</ul>
 						<div class="clear"></div>
 						<a data-am-modal="{target: '#doc-modal-1', closeViaDimmer: 0}" class="new-abtn-type">添加新地址</a>
@@ -95,7 +70,7 @@
 								<hr>
 
 								<div style="margin-top: 20px;" class="am-u-md-12 am-u-lg-8">
-									<form class="am-form am-form-horizontal">
+									<form class="am-form am-form-horizontal" method="post" action="/home/center/address">
 
 										<div class="am-form-group">
 											<label class="am-form-label" for="user-name">收货人</label>
@@ -138,8 +113,12 @@
 
 										<div class="am-form-group">
 											<div class="am-u-sm-9 am-u-sm-push-3">
-												<a class="am-btn am-btn-danger">保存</a>
-												<a data-am-modal-close="" class="am-close am-btn am-btn-danger" href="javascript: void(0)">取消</a>
+												
+												<button style="border:0PX"><a class="am-btn am-btn-danger">提交</a></button>
+
+												
+												{{ csrf_field() }}
+												
 											</div>
 										</div>
 									</form>
@@ -161,8 +140,14 @@
 							if($ww>640) {
 								$("#doc-modal-1").removeClass("am-modal am-modal-no-btn")
 							}
+
+
+							
 						})
-					</script>
+
+
+											
+						</script>
 
 					<div class="clear"></div>
 

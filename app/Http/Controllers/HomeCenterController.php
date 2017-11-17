@@ -9,12 +9,7 @@ use App\Http\Controllers\Controller;
 
 class HomeCenterController extends Controller
 {
-    public function index ()
-    {
-
-    	return view('homes.center.index');
-    }
-
+   
     public function info ()
     {
     	return view('homes.center.info');
@@ -24,4 +19,46 @@ class HomeCenterController extends Controller
     {
     	return view('homes.center.address'); 
     }
+
+    public function order () 
+    {
+        return view('homes.center.order');
+    }
+
+    public function change () 
+    {
+        return view('homes.center.change');
+    }
+
+    public function bill ()
+    {
+        return view('homes.center.bill');
+    }
+
+    public function billlist () 
+    {
+        return view('homes.center.billlist');
+    }
+    
+    public function  collection() 
+    {
+        return view('homes.center.collection');
+    }
+  
+    public function  foot() 
+    {
+        return view('homes.center.foot');
+    }
+  
+    public function  comment() 
+    {
+        return view('homes.center.comment');
+    }
+
+    public function news () 
+    {
+        return view('homes.center.news');
+    }
+
+
 }
