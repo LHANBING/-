@@ -19,6 +19,11 @@ class HomeLoginController extends Controller
     	return view('homes.register');
     }
 
+    public function doregister (Request $request)
+    {
+        
+    }
+
     public function dologin()
     {
     	return view('homes.index');

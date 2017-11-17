@@ -73,15 +73,16 @@ Route::post('/home/dologin','HomeLoginController@dologin');
 //进入注册页面
 Route::get('/home/register','HomeLoginController@register');
 
-
-/*//进入前台首页
-Route::group([],function(){
-	//前台首页
-	Route::get('home/index','HomeController@index');
-
-});*/
+Route::post('/home/doregister','HomeLoginController@doregister');
 
 
+
+//个人中心
+Route::get('/home/center/index','HomeCenterController@index');
+Route::get('/home/center/info','HomeCenterController@info');
+
+//前台订单管理页面
+Route::resource('/home/order','HomeOrderController');
 
 
 
