@@ -9,6 +9,7 @@
 		<meta name="format-detection" content="telephone=no">
 		<meta name="renderer" content="webkit">
 		<meta http-equiv="Cache-Control" content="no-siteapp" />
+		<meta name="csrf-token" content="{{ csrf_token() }}">
 
 		<link rel="stylesheet" href="/homes/AmazeUI-2.4.2/assets/css/amazeui.min.css" />
 		<link href="/homes/css/dlstyle.css" rel="stylesheet" type="text/css">
@@ -36,7 +37,7 @@
 
 							<div class="am-tabs-bd">
 								<div class="am-tab-panel am-active">
-									<form method="post">
+									<form action="/homes/doregister" method="post">
 										
 							   <div class="user-email">
 										<label for="email"><i class="am-icon-envelope-o"></i></label>
@@ -49,31 +50,23 @@
                 				 <div class="user-pass">
 								    <label for="passwordRepeat"><i class="am-icon-lock"></i></label>
 								    <input type="password" name="" id="passwordRepeat" placeholder="确认密码">
-                 </div>	
-                 
-                 </form>
-                 
-								 <div class="login-links">
-										<label for="reader-me">
-											<input id="reader-me" type="checkbox"> 点击表示您同意商城《服务协议》
-										</label>
-							  	</div>
-										<div class="am-cf">
+                 </div>							
+	  				    			<div class="am-cf">
 											<input type="submit" name="" value="注册" class="am-btn am-btn-primary am-btn-sm am-fl">
 										</div>
-
+   				 </form>
 								</div>
 
 								<div class="am-tab-panel">
-									<form method="post">
+									<form method="post" action="/home/doregister">
                 				 <div class="user-phone">
 								    <label for="phone"><i class="am-icon-mobile-phone am-icon-md"></i></label>
-								    <input type="tel" name="" id="phone" placeholder="请输入手机号">
+								    <input type="tel" name="phone" id="phone" placeholder="请输入手机号">
                				  </div>																			
 										<div class="verification">
 											<label for="code"><i class="am-icon-code-fork"></i></label>
 											<input type="tel" name="" id="code" placeholder="请输入验证码">
-											<a class="btn" href="javascript:void(0);" onclick="sendMobileCode();" id="sendMobileCode">
+											<a class="btn" href="javascript:void(0);"  id="sendMobileCode">
 												<span id="dyMobileButton">获取</span></a>
 										</div>
                 				 <div class="user-pass">
@@ -84,16 +77,12 @@
 								    <label for="passwordRepeat"><i class="am-icon-lock"></i></label>
 								    <input type="password" name="" id="passwordRepeat" placeholder="确认密码">
               				   </div>	
-									</form>
-								 <div class="login-links">
-										<label for="reader-me">
-											<input id="reader-me" type="checkbox"> 点击表示您同意商城《服务协议》
-										</label>
-							  	</div>
+									
+								
 										<div class="am-cf">
 											<input type="submit" name="" value="注册" class="am-btn am-btn-primary am-btn-sm am-fl">
 										</div>
-								
+								</form>
 									<hr>
 								</div>
 
@@ -101,6 +90,11 @@
 									$(function() {
 									    $('#doc-my-tabs').tabs();
 									  })
+									$.ajaxSetup({
+									        headers: {
+									            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+									        }
+									});
 								</script>
 
 							</div>
