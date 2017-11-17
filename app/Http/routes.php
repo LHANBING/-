@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 //进入后台登录
 Route::get('admin/login','admins\AdminLoginController@login');
@@ -59,27 +57,47 @@ Route::group(['middleware'=>'adminlogin','prefix'=>'admin','namespace'=>'admins'
 
 });
 
+//前台首页
+Route::get('/','home\IndexController@index');
+
 
 //进入前台登录
-Route::get('/home/login','HomeLoginController@login');
+Route::get('/home/login/index','home\login\LoginController@index');
 //处理前台登录
-Route::post('/home/dologin','HomeLoginController@dologin');
+Route::post('/home/login/dologin','home\login\LoginController@dologin');
 //进入注册页面
-Route::get('/home/register','HomeLoginController@register');
 
-Route::post('/home/doregister','HomeLoginController@doregister');
+ Route::get('/home/register/index','home\register\registerController@index');
 
-
+ Route::post('/home/register/doregister','home\register\registerController@doregister');
 
 //个人中心
-Route::get('/home/center/index','HomeCenterController@index');
-Route::get('/home/center/info','HomeCenterController@info');
+Route::group(['prefix'=>'home/center','namespace'=>'home\center'],function(){
+	//个人中心主页
+	Route::get('index','IndexController@index');
+	//个人信息
+	Route::get('/info/index','InfoController@index');
+	Route::post('/info/edit','InfoController@edit');
+	//地址管理
+	Route::resource('/address','AddressController');
+	//订单管理
+	Route::get('/order/index','OrderController@index');
+	//退换货
+	Route::get('/change/index','ChangeController@index');
+	//账单
+	Route::get('/bill/index','BillController@index');
+	Route::get('/bill/in','BillController@in');
+	Route::get('/bill/out','BillController@out');
+	//收藏
+	Route::get('/collection/index','CollectionController@index');
+	//足迹
+	Route::get('/foot/index','FootController@index');
+	//评论
+	Route::get('/comment/index','CommentController@index');
+	//消息
+	Route::get('/news/index','NewsController@index');
 
-//前台订单管理页面
-Route::resource('/home/order','HomeOrderController');
-
-
-
+});
 
 
 

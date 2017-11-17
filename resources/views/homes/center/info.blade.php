@@ -1,8 +1,15 @@
 @extends('homes.layout.center')
 @section('title','个人信息')
 
-@section('js')
-	<link href="/homes/css/infstyle.css" rel="stylesheet" type="text/css">
+@section('cssjs')
+		<link href="/homes/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css">
+		<link href="/homes/AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css">
+
+		<link href="/homes/css/personal.css" rel="stylesheet" type="text/css">
+		<link href="/homes/css/infstyle.css" rel="stylesheet" type="text/css">
+		<script src="/homes/AmazeUI-2.4.2/assets/js/jquery.min.js" type="text/javascript"></script>
+		<script src="/homes/AmazeUI-2.4.2/assets/js/amazeui.js" type="text/javascript"></script>
+			
 @endsection()
 
 @section('content')
@@ -42,7 +49,7 @@
 
 						<!--个人信息 -->
 						<div class="info-main">
-							<form class="am-form am-form-horizontal">
+							<form class="am-form am-form-horizontal" action="/home/center/info/edit" method="post"> 
 
 								<div class="am-form-group">
 									<label for="user-name2" class="am-form-label">昵称</label>
@@ -141,9 +148,11 @@
 									</div>
 								</div>
 								<div class="info-btn">
-									<div class="am-btn am-btn-danger">保存修改</div>
+									<button style="border:0px">
+										<div class="am-btn am-btn-danger">保存修改</div>
+									</button>
 								</div>
-
+									{{csrf_field() }}
 							</form>
 						</div>
 
