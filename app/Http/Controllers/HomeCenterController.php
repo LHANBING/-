@@ -19,4 +19,9 @@ class HomeCenterController extends Controller
     {
     	return view('homes.center.info');
     }
+
+    public function address ()
+    {
+    	return view('homes.center.address'); 
+    }
 }

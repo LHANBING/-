@@ -80,6 +80,7 @@ Route::post('/home/doregister','HomeLoginController@doregister');
 //个人中心
 Route::get('/home/center/index','HomeCenterController@index');
 Route::get('/home/center/info','HomeCenterController@info');
+Route::get('/home/center/address','HomeCenterController@address');
 
 //前台订单管理页面
 Route::resource('/home/order','HomeOrderController');
