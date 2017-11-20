@@ -1,6 +1,6 @@
 @extends('admins.layout.admins')
 
-@section('title','添加父分类页面')
+@section('title','添加子分类页面')
 
 @section('content')
   
@@ -10,7 +10,7 @@
         <span>
             <i class="icon-table">
             </i>
-            添加父分类页面
+            添加子分类页面
         </span>
     </div>
 
@@ -27,13 +27,23 @@
 
 
 	<div class="mws-panel-body no-padding">
-		<form class="mws-form" action="/admin/type" method="post" enctype="multipart/form-data">
+		<form class="mws-form" action="/admin/typechild" method="post" enctype="multipart/form-data">
 			<div class="mws-form-inline">
 
 				<div class="mws-form-row">
-					<label class="mws-form-label">父分区名</label>
+					<label class="mws-form-label">父分区id</label>
 					<div class="mws-form-item">
-						<input type="text" class="small" name="typename" value={{old('m_name')}}>
+						<input type="text" class="small" name="type_id" value="{{$type_id}}">
+					</div>
+				</div>
+			</div>
+
+			<div class="mws-form-inline">
+
+				<div class="mws-form-row">
+					<label class="mws-form-label">子分区名</label>
+					<div class="mws-form-item">
+						<input type="text" class="small" name="typechildname">
 					</div>
 				</div>
 			</div>

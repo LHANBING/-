@@ -13,7 +13,7 @@
             管理员用户列表页面
         </span>
     </div>
-    @if(session('msg'))
+                     @if(session('msg'))
                         <div class="mws-form-message info">                 
 
                             {{session('msg')}}

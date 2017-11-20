@@ -1,130 +1,166 @@
-<!DOCTYPE html>
-<html>
+@extends('homes.lcr')
 
-	<head lang="en">
-		<meta charset="UTF-8">
-		<title>注册</title>
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-		<meta name="format-detection" content="telephone=no">
-		<meta name="renderer" content="webkit">
-		<meta http-equiv="Cache-Control" content="no-siteapp" />
-		<meta name="csrf-token" content="{{ csrf_token() }}">
+@section('title','注册')
 
-		<link rel="stylesheet" href="/homes/AmazeUI-2.4.2/assets/css/amazeui.min.css" />
-		<link href="/homes/css/dlstyle.css" rel="stylesheet" type="text/css">
-		<script src="/homes/AmazeUI-2.4.2/assets/js/jquery.min.js"></script>
-		<script src="/homes/AmazeUI-2.4.2/assets/js/amazeui.min.js"></script>
+@section('content')
+<div class="login-box">
+    <div class="am-tabs" id="doc-my-tabs">
+        <ul class="am-tabs-nav am-nav am-nav-tabs am-nav-justify">
+            <li>
+                <a href="">
+                    手机号注册
+                </a>
+            </li>
+        </ul>
+        <div class="am-tab-panel">
+            <form  action="{{ url('/home/register/') }}" method="post">
+                <div class="user-phone">
+                    <label for="phone">
+                        <i class="am-icon-mobile-phone am-icon-md">
+                        </i>
+                    </label>
+                    <input type="tel" name="tel" id="phone" placeholder="请输入手机号">
+                </div>
+                <div id="phonemsg" class="yanzheng">
 
-	</head>
+                </div>
+                <div class="verification">
+                    <label for="code">
+                        <i class="am-icon-code-fork">
+                        </i>
+                    </label>
+                    <input type="text" name="code" id="code" placeholder="请输入验证码">
+                    <a class="btn" href="javascript:void(0)" id="sendMobileCode">
+                        <span id="dyMobileButton">
+                            获取
+                        </span>
+                    </a>
+                </div>
+                <div id="codemsg" class="yanzheng">
 
-	<body>
+                </div>
+                <div class="user-pass">
+                    <label for="password">
+                        <i class="am-icon-lock">
+                        </i>
+                    </label>
+                    <input type="password" name="password" id="password" placeholder="设置密码">
+                </div>
+                <div id="passwordmsg" class="yanzheng">
 
-		<div class="login-boxtitle">
-			<a href="home/demo.html"><img alt="" src="/homes/images/logobig.png" /></a>
-		</div>
+                </div>
+                <div class="user-pass">
+                    <label for="passwordRepeat">
+                        <i class="am-icon-lock">
+                        </i>
+                    </label>
+                    <input type="password" name="confirmpassword" id="passwordRepeat" placeholder="确认密码">
+                </div>
+                <div id="confirmpasswordmsg" class="yanzheng">
 
-		<div class="res-banner">
-			<div class="res-main">
-				<div class="login-banner-bg"><span></span><img src="/homes/images/big.jpg" /></div>
-				<div class="login-box">
+                </div>
+                <div>
+                <a href="/home/login" class="zcnext am-fr am-btn-default">
+		            登录
+		        </a>
+                </div>
+            </form>
+            <div class="am-cf">
+            	{{ csrf_field() }}
+                <input type="submit" id="submit" value="注册" class="am-btn am-btn-primary am-btn-sm am-fl">
+            	
+            </div>
+            <hr>
+        </div>
+    </div>
+</div>
+@endsection
 
-						<div class="am-tabs" id="doc-my-tabs">
-							<ul class="am-tabs-nav am-nav am-nav-tabs am-nav-justify">
-								<li class="am-active"><a href="">邮箱注册</a></li>
-								<li><a href="">手机号注册</a></li>
-							</ul>
+@section('js')
+<script type="text/javascript">
 
-							<div class="am-tabs-bd">
-								<div class="am-tab-panel am-active">
-									<form action="/homes/doregister" method="post">
-										
-							   <div class="user-email">
-										<label for="email"><i class="am-icon-envelope-o"></i></label>
-										<input type="email" name="" id="email" placeholder="请输入邮箱账号">
-                 </div>										
-                				 <div class="user-pass">
-								    <label for="password"><i class="am-icon-lock"></i></label>
-								    <input type="password" name="" id="password" placeholder="设置密码">
-                 </div>										
-                				 <div class="user-pass">
-								    <label for="passwordRepeat"><i class="am-icon-lock"></i></label>
-								    <input type="password" name="" id="passwordRepeat" placeholder="确认密码">
-                 </div>							
-	  				    			<div class="am-cf">
-											<input type="submit" name="" value="注册" class="am-btn am-btn-primary am-btn-sm am-fl">
-										</div>
-   				 </form>
-								</div>
+		
+		$('#phone').blur(function() 
+		{		
 
-								<div class="am-tab-panel">
-									<form method="post" action="/home/doregister">
-                				 <div class="user-phone">
-								    <label for="phone"><i class="am-icon-mobile-phone am-icon-md"></i></label>
-								    <input type="tel" name="phone" id="phone" placeholder="请输入手机号">
-               				  </div>																			
-										<div class="verification">
-											<label for="code"><i class="am-icon-code-fork"></i></label>
-											<input type="tel" name="" id="code" placeholder="请输入验证码">
-											<a class="btn" href="javascript:void(0);"  id="sendMobileCode">
-												<span id="dyMobileButton">获取</span></a>
-										</div>
-                				 <div class="user-pass">
-								    <label for="password"><i class="am-icon-lock"></i></label>
-								    <input type="password" name="" id="password" placeholder="设置密码">
-                			 </div>										
-                			 <div class="user-pass">
-								    <label for="passwordRepeat"><i class="am-icon-lock"></i></label>
-								    <input type="password" name="" id="passwordRepeat" placeholder="确认密码">
-              				   </div>	
-									
-								
-										<div class="am-cf">
-											<input type="submit" name="" value="注册" class="am-btn am-btn-primary am-btn-sm am-fl">
-										</div>
-								</form>
-									<hr>
-								</div>
+			 checkTel($(this),$('#phonemsg'));
 
-								<script>
-									$(function() {
-									    $('#doc-my-tabs').tabs();
-									  })
-									$.ajaxSetup({
-									        headers: {
-									            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-									        }
-									});
-								</script>
+			 
+		})
 
-							</div>
-						</div>
+		$('#sendMobileCode').click(function() 
+			{	
+				// 获取手机号
+				var phone = $('#phone').val();
+				// 发送ajax
+				$.post("/home/register/phone",{tel:phone,'_token':'{{csrf_token()}}'},function(data) {
+						
+						alert(data);
+					/*if (data) 
+					{
+						alert('短信已发送！');
 
-				</div>
-			</div>
+					}else
+					{
+						alert ('短信发送失败！请重新操作！');
+					}*/
+
+				})
+				//消除默认设置 
+				return false;
+			})
+
+		$('#code').blur(function() 
+		{		
+
+			checkVerifyCode($(this), $('#codemsg'), 6);
+				
 			
-					<div class="footer ">
-						<div class="footer-hd ">
-							<p>
-								<a href="# ">恒望科技</a>
-								<b>|</b>
-								<a href="# ">商城首页</a>
-								<b>|</b>
-								<a href="# ">支付宝</a>
-								<b>|</b>
-								<a href="# ">物流</a>
-							</p>
-						</div>
-						<div class="footer-bd ">
-							<p>
-								<a href="# ">关于恒望</a>
-								<a href="# ">合作伙伴</a>
-								<a href="# ">联系我们</a>
-								<a href="# ">网站地图</a>
-								<em>© 2015-2025 Hengwang.com 版权所有</em>
-							</p>
-						</div>
-					</div>
-	</body>
+		})
 
-</html>
+		$('#password').blur(function() 
+		{		
+			checkPassword($(this),$('#passwordmsg'), 6);
+
+			 
+		})
+		
+
+		$('#passwordRepeat').blur(function() 
+		{		
+			 checkRelPassword($('#password'), $(this), $('#confirmpasswordmsg'), 6);
+
+
+		})
+
+
+	$('#submit').click(function() 
+		{	
+			// 获取手机号
+			var phone = $('#phone').val();
+			// 获取输入的验证码
+			var code = $('#code').val();
+			// 获取输入的密码和确认密码
+			var password = $('#password').val();
+			
+
+			// 发送ajax
+			$.post("{{url('/home/register')}}",{tel:phone,code:code,password:password,'_token':"{{csrf_token()}}"},function(data) {
+				
+				if(data)
+				{
+					alert('注册成功！');
+					
+				}
+
+				// console.log(data);
+
+				})
+			
+			//消除默认设置
+			return false;
+
+		})
+	
+	</script>	
+@endsection

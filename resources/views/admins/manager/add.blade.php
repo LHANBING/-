@@ -5,8 +5,12 @@
 @section('content')
 <div class="mws-panel grid_8">
 	<div class="mws-panel-header">
-		<span>用户添加页面</span>
-	</div>
+        <span>
+            <i class="icon-table">
+            </i>
+           用户添加页面
+        </span>
+    </div>
 
 	@if (count($errors) > 0)
 	    <div class="alert alert-danger mws-form-message error">
