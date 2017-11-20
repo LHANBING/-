@@ -108,16 +108,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {   
-        $data = $request->except('_token','_method');
-        $res = DB::table('kang')->where('id',$id)->update($data);
-
-        if($res)
-        {
-            return redirect('/admin/kang')->with('msg','修改成功');
-        }else
-        {
-            return back();
-        }
+        
     }
 
     /**
@@ -130,8 +121,7 @@ class UserController extends Controller
     {
        $res = User::where('id',$id)->first();
 
-       // dd($res);
-        // $data = unlink('.'.$res->profile);
+       
 
         if ( $res['user_photo'] == "/homes/user_photo/default.jpg" ) 
         {
