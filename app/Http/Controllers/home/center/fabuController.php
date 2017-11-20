@@ -1,17 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\admins;
+namespace App\Http\Controllers\home\center;
 
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Http\Model\Order;
-use App\Http\Model\Order_money;
-use App\Http\Model\User;
-use DB;
 
-class WalletController extends Controller
+class fabuController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,22 +16,8 @@ class WalletController extends Controller
      */
     public function index()
     {
-        //查询收入总金额 
-        $pay_money=Order_money::value('shouru');
-
-        //查询进账订单信息
-        $jin= Order::whereIn('buy_order_status', [2,3,4])->get();
-        
-        $info = Order::join('users',function($join){
-            $join->on('users.id','=','orders.buy_uid');
-        })->get();
-
-        $inf = Order::join('users',function($join){
-            $join->on('users.id','=','orders.sale_uid');
-        })->get();
-
-
-        return view('admins.wallet.jinindex',['pay'=>$pay_money,'jin'=>$jin,'info'=>$info ,'inf'=>$inf]); 
+        //
+        return view('homes.center.fabuershou');
     }
 
     /**

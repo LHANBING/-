@@ -128,6 +128,7 @@
                                 <li class="qc" style="width: 100px"><a href="#">团购</a></li>
                                 <li class="qc last" style="width: 100px"><a href="#">大包装</a></li>
 							</ul>
+						  
 						</div>					
 		        				
 						<!--侧边导航 -->

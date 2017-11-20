@@ -46,8 +46,20 @@ Route::group(['middleware'=>'adminlogin','prefix'=>'admin','namespace'=>'admins'
 	//订单列表
 	Route::resource('/order','OrderController');
 
-	//钱袋已售出订单
+	//钱袋总进账金额
 	Route::resource('/wallet','WalletController');
+	//钱袋总支出金额
+	Route::resource('/wallets','WalletsController');
+
+	
+
+	
+
+
+
+
+
+
 
 	//广告列表
 	Route::resource('/advs','AdvsController');
@@ -106,6 +118,10 @@ Route::group(['prefix'=>'home/center','namespace'=>'home\center'],function(){
 	Route::get('/comment/index','CommentController@index');
 	//消息
 	Route::get('/news/index','NewsController@index');
+	//出售订单
+	// Route::get('','shouchuOrderController@index');
+	//发布二手
+	Route::get('/fabu/index','fabuController@index');
 
 });
 

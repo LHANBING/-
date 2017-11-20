@@ -118,7 +118,12 @@
                                 <li class="qc" style="width: 100px"><a href="#">团购</a></li>
                                 <li class="qc last" style="width: 100px"><a href="#">大包装</a></li>
 							</ul>
+<<<<<<< HEAD
 						</div>	
+=======
+						    
+						</div>
+>>>>>>> 1fce47d8b44a52fe6bb78b0434649a4b83405a40
 			</div>
 			<b class="line"></b>
 		<div class="center">
@@ -128,29 +133,7 @@
 
 				@show
 				</div>
-				<!--底部-->
-				<div class="footer">
-					<div class="footer-hd">
-						<p>
-							<a href="homes/#">恒望科技</a>
-							<b>|</b>
-							<a href="homes/#">商城首页</a>
-							<b>|</b>
-							<a href="homes/#">支付宝</a>
-							<b>|</b>
-							<a href="homes/#">物流</a>
-						</p>
-					</div>
-					<div class="footer-bd">
-						<p>
-							<a href="homes/#">关于恒望</a>
-							<a href="homes/#">合作伙伴</a>
-							<a href="homes/#">联系我们</a>
-							<a href="homes/#">网站地图</a>
-							<em>© 2015-2025 Hengwang.com 版权所有</em>
-						</p>
-					</div>
-				</div>
+				
 			</div>
 
 			<aside class="menu">
@@ -167,8 +150,17 @@
 						</ul>
 					</li>
 					<li class="person">
-						<a href="#">我的交易</a>
+						<a href="#">购买二手</a>
 						<ul>
+							<li><a href="/home/center/order/index">订单管理</a></li>
+							<li> <a href="/home/center/change/index">退款售后</a></li>
+						</ul>
+					</li>
+					<li class="person">
+						<a href="#">出售二手</a>
+						<ul>
+							<li><a href="/home/center/fabu/index">发布二手</a></li>
+							<li><a href="/home/center/order/index">我的二手</a></li>
 							<li><a href="/home/center/order/index">订单管理</a></li>
 							<li> <a href="/home/center/change/index">退款售后</a></li>
 						</ul>
@@ -196,6 +188,29 @@
 
 			</aside>
 		</div>
+		<!--底部-->
+				<div class="footer">
+					<div class="footer-hd">
+						<p>
+							<a href="homes/#">恒望科技</a>
+							<b>|</b>
+							<a href="homes/#">商城首页</a>
+							<b>|</b>
+							<a href="homes/#">支付宝</a>
+							<b>|</b>
+							<a href="homes/#">物流</a>
+						</p>
+					</div>
+					<div class="footer-bd">
+						<p>
+							<a href="homes/#">关于恒望</a>
+							<a href="homes/#">合作伙伴</a>
+							<a href="homes/#">联系我们</a>
+							<a href="homes/#">网站地图</a>
+							<em>© 2015-2025 Hengwang.com 版权所有</em>
+						</p>
+					</div>
+				</div>
 
 	</body>
 

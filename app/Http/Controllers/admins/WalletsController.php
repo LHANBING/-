@@ -8,10 +8,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Model\Order;
 use App\Http\Model\Order_money;
-use App\Http\Model\User;
-use DB;
 
-class WalletController extends Controller
+class WalletsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,22 +18,15 @@ class WalletController extends Controller
      */
     public function index()
     {
-        //查询收入总金额 
-        $pay_money=Order_money::value('shouru');
+        //查询支出总金额 
+        $pay=Order_money::value('shouru');
 
-        //查询进账订单信息
-        $jin= Order::whereIn('buy_order_status', [2,3,4])->get();
-        
-        $info = Order::join('users',function($join){
-            $join->on('users.id','=','orders.buy_uid');
-        })->get();
-
-        $inf = Order::join('users',function($join){
-            $join->on('users.id','=','orders.sale_uid');
-        })->get();
-
-
-        return view('admins.wallet.jinindex',['pay'=>$pay_money,'jin'=>$jin,'info'=>$info ,'inf'=>$inf]); 
+        //查询出账订单信息
+        $chu=Order::whereIn('buy_order_status', [1, 2, 3, 4])->get();
+        // dd($chu);
+        // echo '<pre>';
+        // var_dump($chu);
+        return view('admins.wallet.chuindex',['pay'=>$pay,'chu'=>$chu]); 
     }
 
     /**
