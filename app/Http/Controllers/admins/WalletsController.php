@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Http\Model\Order;
+use App\Http\Model\Order_money;
 
 class WalletsController extends Controller
 {
@@ -16,7 +18,15 @@ class WalletsController extends Controller
      */
     public function index()
     {
-        return view('admins.wallet.chuindex'); 
+        //查询支出总金额 
+        $pay=Order_money::value('shouru');
+
+        //查询出账订单信息
+        $chu=Order::whereIn('buy_order_status', [1, 2, 3, 4])->get();
+        // dd($chu);
+        // echo '<pre>';
+        // var_dump($chu);
+        return view('admins.wallet.chuindex',['pay'=>$pay,'chu'=>$chu]); 
     }
 
     /**

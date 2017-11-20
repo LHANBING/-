@@ -8,7 +8,7 @@
        <span> <i class="icol-coins"></i>&nbsp;进账总金额</span>
         
     </div>
-<div class="mws-panel-body"><h1>咸鱼二手商贸有限公司自成立以来总进账:{{$pay}}元!</h1></div>
+<div class="mws-panel-body"><h1>咸鱼二手订单总进账:{{$pay}} 元!</h1></div>
 
 </div>
   <div class="mws-panel grid_8">
@@ -90,7 +90,7 @@
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
                         style="width: 123px;">
-                           订单状态
+                           买家订单状态
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
@@ -100,32 +100,46 @@
                     </tr>
                 </thead>
                 <tbody role="alert" aria-live="polite" aria-relevant="all">
+
+                 @foreach($jin as $k => $v)
                     <tr class="odd">
                         <td class="  sorting_1">
-                            Gecko
+                            {{$v->id}}
                         </td>
                         <td class=" ">
-                            Firefox 1.0
+                            {{$v->order_num}}
                         </td>
                         <td class=" ">
-                            Win 98+ / OSX.2+
+                            订单商品名称
                         </td>
                         <td class=" ">
-                            1.7
+                        {{$info[$k]->username}}
                         </td>
                         <td class=" ">
-                            A
+                        {{$inf[$k]->username}}
                         </td>
                         <td class=" ">
-                            1.7
+                            {{$v->pay_time}}
+                        </td>
+                        <td class=" ">                    
+    {{$v->pay_money}} + {{$v->pay_yunfei}} ={{$v->pay_money+$v->pay_yunfei}}
                         </td>
                         <td class=" ">
-                            A
+                            
+                    @if($v->buy_order_status == 2)
+                            待发货
+                    @elseif($v->buy_order_status == 3)
+                            待收货  
+                    @elseif($v->buy_order_status == 4)
+                            等待确认收货 
+                    @endif
                         </td>
                         <td class=" ">
-                            A
+                           <a href="" class='btn btn-success btn-lg btn-block'>给卖家打款</a>
+                           <a href="" class='btn btn-primary btn-lg btn-block'>退款给买家</a>
                         </td>
                     </tr>
+                @endforeach;
                 </tbody>
             </table>
             <div class="dataTables_info" id="DataTables_Table_1_info">
