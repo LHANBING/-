@@ -144,7 +144,7 @@ class UserController extends Controller
             }
         }
     }
-    }
+
        
 
     public function status($status,$id)
