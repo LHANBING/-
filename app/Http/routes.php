@@ -35,11 +35,12 @@ Route::group(['middleware'=>'adminlogin','prefix'=>'admin','namespace'=>'admins'
 	//管理员用户列表
 	Route::resource('/manager','ManagerController');
 
+	//分类子分类
+	Route::get('/typechild/add','TypechildController@add');
+	Route::resource('/typechild','TypechildController');
+
 	//分类父分类列表
 	Route::resource('/type','TypeController');
-
-	//分类子分类
-	Route::resource('/typechild','TypechildController');
 
 	//订单列表
 	Route::resource('/order','OrderController');
