@@ -65,17 +65,16 @@ Route::group(['middleware'=>'adminlogin','prefix'=>'admin','namespace'=>'admins'
 Route::get('/','home\IndexController@index');
 
 //进入前台注册页面
-Route::post('/home/register/phone','homes\HomeRegisterController@phone');
-// Route::post('/home/register/code','HomeRegisterController@code');
-Route::resource('/home/register','homes\HomeRegisterController');
+Route::post('/home/register/phone','home\HomeRegisterController@phone');
+Route::resource('/home/register','home\HomeRegisterController');
 
 //进入前台登录页面
-Route::resource('/home/login','homes\HomeLoginController');
+Route::resource('/home/login','home\HomeLoginController');
 
 
 //进入前台密码修改页面
-Route::post('/home/change/phone','homes\HomeChangeController@phone');
-Route::resource('/home/change','homes\HomeChangeController');
+Route::post('/home/change/phone','home\HomeChangeController@phone');
+Route::resource('/home/change','home\HomeChangeController');
 
 
 
