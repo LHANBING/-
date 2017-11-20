@@ -69,12 +69,15 @@ Route::post('/home/register/phone','home\HomeRegisterController@phone');
 Route::resource('/home/register','home\HomeRegisterController');
 
 //进入前台登录页面
+Route::get('/home/logout','home\HomeLoginController@logout');
+
 Route::resource('/home/login','home\HomeLoginController');
 
 
 //进入前台密码修改页面
 Route::post('/home/change/phone','home\HomeChangeController@phone');
 Route::resource('/home/change','home\HomeChangeController');
+
 
 
 
