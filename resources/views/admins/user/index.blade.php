@@ -3,7 +3,17 @@
 @section('title','用户列表页面')
 
 @section('content')
-  
+  @if(session('msg'))
+
+    <div class="mws-form-message success">
+        
+    
+            {{ session('msg') }}
+
+        
+    </div>
+
+    @endif
 
 <div class="mws-panel grid_8">
     <div class="mws-panel-header">
@@ -19,27 +29,17 @@
 	            <div id="DataTables_Table_1_length" class="dataTables_length">
 	                <label>
 	                    显示
-	                    <select size="1" name="num" aria-controls="DataTables_Table_1">
-	                        <option value="10">
-	                            10
-	                        </option>
-	                        <option value="25">
-	                            25
-	                        </option>
-	                        <option value="50">
-	                            50
-	                        </option>
-	                    </select>
-	                    条数据
-	                </label>
-	            </div>
-	            <div class="dataTables_filter" id="DataTables_Table_1_filter">
-	                <label>
-	                    关键字:
-	                    <input type="text" name="search" aria-controls="DataTables_Table_1" value="{{ isset($request->search) ? $request->search : '' }}">
-	                </label>
-		
-					<button class="btn btn-danger">搜索</button>
+	                     <select name="num" size="1" aria-controls="DataTables_Table_1">
+                        <option value="5" @if($request->num == '5') selected="selected" @endif>5</option>
+                        <option value="10" @if($request->num == '10') selected="selected" @endif>10</option>
+                        <option value="15" @if($request->num == '15') selected="selected" @endif>15</option>
+                        
+                    </select>条数据</label></div>
+                    <div class="dataTables_filter" id="DataTables_Table_1_filter">
+                        <label>关键字: <input type="text" name="search" aria-controls="DataTables_Table_1" value="{{ $request->search }}"></label>
+
+                        <button class="btn btn-danger">搜索</button>
+                    </div>
 
 	            </div>
 			</form>
@@ -70,47 +70,52 @@
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
-                        style="width: 125.193px;">
+                        style="width: 100px;">
                             头像
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
-                        style="width: 125.193px;">
+                        style="width: 100px;">
                             状态
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
-                        style="width: 160px;">
+                        style="width: 200px;">
                             操作
                         </th>
                     </tr>
                 </thead>
                 <tbody role="alert" aria-live="polite" aria-relevant="all">
 					
-					{{--@foreach($res as $k => $v) 
+					@foreach($res as $k => $v) 
 
                     <tr class="@if($k % 2 == 0) odd @else even @endif" style="height: 90px">
-                        <td class="">
+                        <td class="" style="text-align:center;">
                            {{$v->id}}
                         </td>
-                         <td class="">
+                         <td class="" style="text-align:center;">
                            {{$v->username}}
                         </td>
-                         <td class="">
+                         <td class="" style="text-align:center;">
                            {{$v->email}}
                         </td>
-                         <td class="">
-                           {{$v->phone}}
+                         <td class="" style="text-align:center;">
+                           {{$v->tel}}
                         </td>
-                         <td class="">
-                         	<img src="{{$v->profile}}" width="50%" alt="">
-                        </td>
-                         <td class="">
-                         	<button class="btn btn-info">{{$v->status ? '开启':'关闭'}}</button>
-                        </td>
-                        <td class="">
-                           <a href="/admin/user/{{$v->id}}/edit" class="btn btn-danger">修改</a>
-
+                         <td class="" style="text-align:center;">
+                         	<img src="{{$v->user_photo}}" width="50%" alt="">
+                        </td> 
+                        @if( $v->status > 3)
+                         <td class="" style="text-align:center;">
+                         	<a href="/admin/user/status/{{$v->status}}/{{$v->id}}"><button class="btn btn-info"> 开启</button></a>
+                         </td>
+                        
+                         @else
+                         <td class="" style="text-align:center;">      
+                             <a href="/admin/user/status/{{$v->status}}/{{$v->id}}"><button class="btn btn-info">关闭</button></a>      
+                         </td>      
+                        @endif
+                        <td class="" style="text-align:center;">
                            <form action="/admin/user/{{$v->id}}" method="post" style="display: inline;">
                              
                              {{ csrf_field() }}
@@ -121,65 +126,59 @@
 
                     </tr>
 
-                    @endforeach--}}
+                    @endforeach
                     
                 </tbody>
             </table>
-           {{-- <div class="dataTables_info" id="DataTables_Table_1_info">
+            
+            <div class="dataTables_info" id="DataTables_Table_1_info">
                 Showing 1 to {{$last}} of {{$count}} entries
             </div>
-            --}}
-                <style>
-                    .pagination li{
-                        float: left;
-                        height: 20px;
-                        padding: 0 10px;
-                        display: block;
-                        font-size: 12px;
-                        line-height: 20px;
-                        text-align: center;
-                        cursor: pointer;
-                        outline: none;
-                        background-color: #444444;
-                        color: #fff;
-                        text-decoration: none;
-                        border-right: 1px solid #232323;
-                        border-left: 1px solid #666666;
-                        border-right: 1px solid rgba(0, 0, 0, 0.5);
-                        border-left: 1px solid rgba(255, 255, 255, 0.15);
-                        -webkit-box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.5), inset 0px 1px 0px rgba(255, 255, 255, 0.15);
-                        -moz-box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.5), inset 0px 1px 0px rgba(255, 255, 255, 0.15);
-                        box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.5), inset 0px 1px 0px rgba(255, 255, 255, 0.15);
-                    }
+            
+            <style type="text/css">
+            .pagination li{
+            
+            background-color: #444444;
+            border-left: 1px solid rgba(255, 255, 255, 0.15);
+            border-right: 1px solid rgba(0, 0, 0, 0.5);
+            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.5), 0 1px 0 rgba(255, 255, 255, 0.15) inset;
+            
+            cursor: pointer;
+            display: block;
+            float: left;
+            font-size: 12px;
+            height: 20px;
+            line-height: 20px;
+            outline: medium none;
+            padding: 0 10px;
+            text-align: center;
+            text-decoration: none;}
 
-                  
-                .pagination a {
-                       color: #fff;
-                   } 
+            .pagination a{
+                color: #fff;
+            }
+              .pagination  .active{
+            background-color: #c5d52b;
+            background-image: none;
+            border: medium none;
+            box-shadow: 0 0 4px rgba(0, 0, 0, 0.25) inset;
+            color: #323232;
+            }
+            .pagination .disabled{
+            color: #666666;
+            cursor: default;}
+            
+            .dataTables_paginate ul{
+                margin: 0px;
+            } 
 
-                .pagination .active{
-                        background-color: #88a9eb;
-                        color: #323232;
-                        border: none;
-                        background-image: none;
-                        -webkit-box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.25);
-                        -moz-box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.25);
-                        box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.25);
-
-                  }
-
-                .pagination .disabled{
-                    color: #666666;
-                    cursor: default;
-                  }
+        </style>
+         <div class="dataTables_paginate paging_full_numbers" id="DataTables_Table_1_paginate">
+          
                 
-                .pagination{
-                    margin: 0px;
-                }
-                </style>
-            <div class="dataTables_paginate paging_full_numbers" id="paginate">
-
-                 {{--   {!! $res->appends($request->all())->render() !!}  --}}
+            {!! $res->appends($request->all())->render() !!}
+        
+        
             </div>
         </div>
     </div>
@@ -189,5 +188,8 @@
 
 @section('js')
 
+    <script type="text/javascript">
+        $('.mws-form-message').delay(3000).slideUp(1000);
+    </script>
 
 @endsection

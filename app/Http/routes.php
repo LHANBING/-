@@ -31,6 +31,7 @@ Route::group(['middleware'=>'adminlogin','prefix'=>'admin','namespace'=>'admins'
 
 	//用户
 	Route::resource('/user','UserController');
+	Route::get('/user/status/{status}/{id}','UserController@status');
 
 	//管理员用户列表
 	Route::resource('/manager','ManagerController');
@@ -58,19 +59,25 @@ Route::group(['middleware'=>'adminlogin','prefix'=>'admin','namespace'=>'admins'
 
 });
 
+
+
 //前台首页
 Route::get('/','home\IndexController@index');
 
+//进入前台注册页面
+Route::post('/home/register/phone','homes\HomeRegisterController@phone');
+// Route::post('/home/register/code','HomeRegisterController@code');
+Route::resource('/home/register','homes\HomeRegisterController');
 
-//进入前台登录
-Route::get('/home/login/index','home\login\LoginController@index');
-//处理前台登录
-Route::post('/home/login/dologin','home\login\LoginController@dologin');
-//进入注册页面
+//进入前台登录页面
+Route::resource('/home/login','homes\HomeLoginController');
 
- Route::get('/home/register/index','home\register\registerController@index');
 
- Route::post('/home/register/doregister','home\register\registerController@doregister');
+//进入前台密码修改页面
+Route::post('/home/change/phone','homes\HomeChangeController@phone');
+Route::resource('/home/change','homes\HomeChangeController');
+
+
 
 //个人中心
 Route::group(['prefix'=>'home/center','namespace'=>'home\center'],function(){
