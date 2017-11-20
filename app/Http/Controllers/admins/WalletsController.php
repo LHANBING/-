@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admins;
 
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class HomeOrderController extends Controller
+class WalletsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,7 @@ class HomeOrderController extends Controller
      */
     public function index()
     {
-        
+        return view('admins.wallet.chuindex'); 
     }
 
     /**

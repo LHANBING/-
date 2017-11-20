@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Http\Model\Order;
+use App\Http\Model\Order_money;
 
 class WalletController extends Controller
 {
@@ -16,7 +18,13 @@ class WalletController extends Controller
      */
     public function index()
     {
-        return view('admins.wallet.index'); 
+        //查询收入总金额 
+        $pay_money=Order_money::value('shouru');
+
+        //查询进账订单信息
+        $chu=Order::get();
+
+        return view('admins.wallet.jinindex',['pay'=>$pay_money,'chu'=>$chu]); 
     }
 
     /**

@@ -160,10 +160,10 @@
             <div id="mws-navigation">
                 <ul>
                     <li>
-                        <a href="#"><i class="icon-users"></i> 钱袋管理管理</a>
+                        <a href="#"><i class="icon-users"></i>钱袋管理</a>
                         <ul class="closed">
-                            <li><a href="/admin/wallet">已出售订单</a></li>
-                            
+                            <li><a href="/admin/wallet">总进账详情</a></li>
+                            <li><a href="/admin/wallets">总出账详情</a></li>   
                         </ul>
                     </li>
                 </ul>
