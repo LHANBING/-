@@ -121,7 +121,10 @@ Route::group(['prefix'=>'home/center','namespace'=>'home\center'],function(){
 	//出售订单
 	// Route::get('','shouchuOrderController@index');
 	//发布二手
+	Route::post('/fabu/type','fabuController@type');
 	Route::get('/fabu/index','fabuController@index');
+	
+
 
 });
 

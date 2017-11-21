@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Http\Model\Type;
+use App\Http\Model\Typechild;
 
 class fabuController extends Controller
 {
@@ -16,8 +18,9 @@ class fabuController extends Controller
      */
     public function index()
     {
-        //
-        return view('homes.center.fabuershou');
+        $res = Type::all();
+        $reschild = Typechild::all();
+        return view('homes.center.fabuershou',['res'=>$res,'reschild'=>$reschild]);
     }
 
     /**
@@ -38,7 +41,7 @@ class fabuController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        echo 1313;
     }
 
     /**
@@ -85,4 +88,15 @@ class fabuController extends Controller
     {
         //
     }
+
+    public function type(Request $request)
+    {
+        
+        $id = $request->except('_token');
+        $res = Typechild::where('type_id',$id)
+        ->where('status','1')
+        ->get();
+        echo json_encode($res);
+    }
+
 }
