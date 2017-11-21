@@ -43,7 +43,31 @@ class fabuController extends Controller
      */
     public function store(Request $request)
     {
-        $res = $request->except('_token');
+
+        // var_dump($request->all());die;
+        if($request->hasFile('goods_photo')){
+
+            //修改名字
+            $name = rand(1111,9999).time();
+            //获取后缀
+            $suffix = $request->file('goods_photo')->getClientOriginalExtension();
+            //移动图片
+            $request->file('goods_photo')->move('./Uploads',$name.'.'.$suffix);
+
+        }
+
+        $res = $request->except('_token','goods_photo','content');
+
+        $res['goods_photo'] = '/Uploads/'.$name.'.'.$suffix;
+        $res['user_id'] = session('uid');
+
+        $data = Good::create($res);
+
+        if ($data) {
+            return redirect('/home/center/fabu')->with('msg','添加成功');
+        }else{
+            return back()->withInput();
+        }
     }
 
     /**
@@ -54,7 +78,7 @@ class fabuController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
