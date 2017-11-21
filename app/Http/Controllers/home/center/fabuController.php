@@ -8,6 +8,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Model\Type;
 use App\Http\Model\Typechild;
+use App\Http\Model\Good;
+use App\Http\Model\Goodsdetail;
 
 class fabuController extends Controller
 {
@@ -41,7 +43,7 @@ class fabuController extends Controller
      */
     public function store(Request $request)
     {
-        echo 1313;
+        $res = $request->except('_token');
     }
 
     /**

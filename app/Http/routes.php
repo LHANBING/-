@@ -90,8 +90,6 @@ Route::post('/home/change/phone','home\HomeChangeController@phone');
 Route::resource('/home/change','home\HomeChangeController');
 
 
-
-
 //个人中心
 Route::group(['prefix'=>'home/center','namespace'=>'home\center'],function(){
 	//个人中心主页
@@ -131,7 +129,7 @@ Route::group(['prefix'=>'home/center','namespace'=>'home\center'],function(){
 	// Route::get('','shouchuOrderController@index');
 	//发布二手
 	Route::post('/fabu/type','fabuController@type');
-	Route::get('/fabu/index','fabuController@index');
+	Route::resource('/fabu','fabuController');
 	
 
 
