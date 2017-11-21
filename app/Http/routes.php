@@ -99,9 +99,17 @@ Route::group(['prefix'=>'home/center','namespace'=>'home\center'],function(){
 	Route::get('index','IndexController@index');
 	//个人信息
 	Route::get('/info/index','InfoController@index');
-	Route::post('/info/edit','InfoController@edit');
+	Route::get('/info/edit','InfoController@edit');
+	Route::post('/info/doedit','InfoController@doedit');
+	Route::get('/info/perfect','InfoController@perfect');
+	Route::post('/info/doperfect','InfoController@doperfect');
+	Route::get('/info/user_change','InfoController@user_change');
+	Route::post('/info/douser_change','InfoController@douser_change');
+
+
 	//地址管理
 	Route::resource('/address','AddressController');
+
 	//订单管理
 	Route::get('/order/index','OrderController@index');
 	//退换货

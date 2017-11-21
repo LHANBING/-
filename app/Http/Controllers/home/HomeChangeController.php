@@ -56,7 +56,7 @@ class HomeChangeController extends Controller
         //往session存入code
         session(['code'=>$code]);
 
-        var_dump(session('code'));die;
+       
 
         $client  = new Client($config);
         $sendSms = new SendSms;
@@ -69,12 +69,15 @@ class HomeChangeController extends Controller
 
 		
 
-		if($resp)
+		if($resp->Code =='OK')
 			{	
 				//向session中存入验证码
-				// session('code',$code);
+				session(['code'=>$code]);
 				
-				echo 1;
+				
+                
+                echo 1;
+                return view('homes/change');
 				
 			}else
 			{
@@ -91,21 +94,20 @@ class HomeChangeController extends Controller
      */
     public function store(Request $request)
     {  	
-    	dd(session('code'));
-    	
+
 
     	// 使用Hash加密新密码
     	$password= Hash::make($request->input('password'));
     	 
       	// // 获取存入session中的code
-      	// $session_code = session('code');
+      	$session_code = session('code');
 
       	
        //验证码是否一致
-       if(1)
+       if($request->input('code') == $session_code)
        {
        		// 将修改的密码存入数据库
- 			User::Where('tel',$request->input('phone'))->update(['password'=>$password]);
+ 			User::Where('tel',$request->input('tel'))->update(['password'=>$password]);
 
        		echo 1 ;
        		

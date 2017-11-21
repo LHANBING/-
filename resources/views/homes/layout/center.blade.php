@@ -213,11 +213,8 @@
                                     个人信息
                                 </a>
                             </li>
-                            <li>
-                                <a href="safety.html">
-                                    安全设置(占位)
-                                </a>
-                            </li>
+                            <li> <a href="/home/center/info/user_change">修改密码</a></li>
+                            <li> <a href="/home/center/address">收货地址</a></li>
                             <li>
                                 <a href="/home/center/address">
                                     收货地址
@@ -274,16 +271,7 @@
                             我的资产
                         </a>
                         <ul>
-                            <li>
-                                <a href="coupon.html">
-                                    优惠券(占位)
-                                </a>
-                            </li>
-                            <li>
-                                <a href="bonus.html">
-                                    红包(占位)
-                                </a>
-                            </li>
+                            <li> <a href="bonus.html">充值</a></li>
                             <li>
                                 <a href="/home/center/bill/index">
                                     账单明细
@@ -369,5 +357,6 @@
             </div>
         </div>
     </body>
+
 
 </html>

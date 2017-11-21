@@ -1,5 +1,5 @@
 @extends('homes.layout.center')
-@section('title','个人信息')
+@section('title','完善个人信息')
 
 @section('cssjs')
 		<link href="/homes/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css">
@@ -17,31 +17,19 @@
 <div class="user-info">
 						<!--标题 -->
 						<div class="am-cf am-padding">
-							<div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">个人资料</strong> / <small>Personal&nbsp;information</small></div>
+							<div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">完善个人信息</strong> / <small>PerectPersonal&nbsp;information</small></div>
 						</div>
 						<hr/>
 
-						<!--头像 -->
-						<div class="user-infoPic">
-
-							<div class="filePic">
-
-								<img class="am-circle am-img-thumbnail" src="{{$res->user_photo}}" readonly alt="" />
 							
-
-							</div>
-
-							
-						</div>
-
-						<!--个人信息 -->
+							<!--个人信息 -->
 						<div class="info-main">
-							<form class="am-form am-form-horizontal" action="/home/center/info/edit" method="" enctype="multipart/form-data" > 
+							<form class="am-form am-form-horizontal" action="/home/center/info/doperfect" method="post" enctype="multipart/form-data" > 
 
 								<div class="am-form-group">
 									<label for="user-name2" class="am-form-label">昵称:</label>
 									<div class="am-form-content">
-										<input type="text" id="user-name2" name="username"  value="{{$res->username}}" readonly>
+										<input type="text" id="user-name2" name="username"  value="{{$res->username}}" >
 
 									</div>
 								</div>
@@ -50,7 +38,7 @@
 								<div class="am-form-group">
 									<label for="user-phone" class="am-form-label">电话:</label>
 									<div class="am-form-content">
-										<input id="user-phone" type="tel" name="tel" value="{{$res->tel}}" readonly >
+										<input id="user-phone" type="tel" name="tel" value="{{$res->tel}}"  >
 
 									</div>
 								</div>
@@ -58,7 +46,7 @@
 								<div class="am-form-group">
 									<label for="user-email" class="am-form-label">qq:</label>
 									<div class="am-form-content">
-										<input id="user-email" name="qq" type="text"  value="{{$res->qq}}" readonly>
+										<input id="user-qq" name="qq" type="text"  value="{{$res->qq}}" >
 
 									</div>
 								</div>
@@ -66,32 +54,38 @@
 								<div class="am-form-group">
 									<label for="user-email" class="am-form-label">电子邮箱:</label>
 									<div class="am-form-content">
-										<input id="user-email" name="email" type="email"  value="{{$res->email}}" readonly>
+										<input id="user-email" name="email" type="email"  value="{{$res->email}}" >
+
+									</div>
+								</div>
+								
+
+								<div class="filePic">
+                                 <label for="user-email" class="am-form-label">头像：</label>
+								<img class="am-circle am-img-thumbnail" src="{{$res->user_photo}}" readonly alt="" />
+								
+                        		 <div class="am-form-content">
+										<input id="user-email" name="user_photo" type="file"  >
 
 									</div>
 								</div>
 
-							</form>
-								<div class="info-btn">
-								
-								@if($res->perfect_edit == 0)	
-									<a href="/home/center/info/perfect">
-										<div class="am-btn am-btn-danger" style="border:0px">完善个人信息</div>
+                                <div class="info-btn">
+										{{ csrf_field() }}
+										<button class="am-btn am-btn-danger" >保存</button>
 									
-								  	</a>
-									
-		                        @else
-									<a href="/home/center/info/edit">
-										<div class="am-btn am-btn-danger" style="border:0px">修改个人信息</div>
-									
-								  	</a>
-								@endif
+		                        
 								</div>
-                                
 
-									
+							</form>
+					</div>
+
 							
-						</div>
+
+							
+					
+
+						
 
 </div>
 
