@@ -241,7 +241,7 @@
                         </a>
                         <ul>
                             <li>
-                                <a href="/home/center/fabu/index">
+                                <a href="/home/center/fabu">
                                     发布二手
                                 </a>
                             </li>

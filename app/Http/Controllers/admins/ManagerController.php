@@ -36,7 +36,7 @@ class ManagerController extends Controller
      */
     public function create()
     {
-        $res = Manager::where('id',session('uid'))->first();
+        $res = Manager::where('id',session('mid'))->first();
         if ($res->auth == 1) {
             return view('admins.manager.add');
         }else{

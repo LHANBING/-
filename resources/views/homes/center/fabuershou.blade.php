@@ -22,7 +22,7 @@
 		<div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">发布二手</strong> / <small>New</small></div>
 	</div>
 	<hr>
-	<form action="/home/center/fabu" class="am-form" id="doc-vld-msg" enctype="multipart/form-data">
+	<form action="/home/center/fabu" class="am-form" id="doc-vld-msg" method="post" enctype="multipart/form-data">
    
   <fieldset>
     <div class="am-form-group">
@@ -30,45 +30,45 @@
                   <div class="am-form-content ">
                     <div class="birth-select" style="float: left;">
                       父分类 : 
-                        <select  id="father" style="width: 150px">
+                        <select  id="father" style="width: 150px" name="type_id">
                         @foreach($res as $v=>$k)
                         <option value="{{$k->id}}">{{$k->typename}}</option>
                         @endforeach
                       </select>
                     </div>
-                    <div class="birth-select" >
-                      子分类 : <select  id="son" style="width: 150px">
+                    <div class="birth-select"  >
+                      子分类 : <select  id="son" style="width: 150px" name='typechild_id'>
                       </select>
                     </div>
                   </div>
     <div class="am-form-group">
       <label for="doc-vld-name-2-1">商品标题：</label>
-      <input type="text" id="doc-vld-name-2-1" minlength="20" name="title" placeholder="请输入商品的标题" required/>
+      <input type="text" id="doc-vld-name-2-1" minlength="2" maxlength="10" name="title" placeholder="请输入商品的标题" required/>
     </div>
 
     <div class="am-form-group">
       <label for="doc-vld-name-2-1">商品现价：</label>
-      <input type="text" id="doc-vld-name-2-1" minlength="20" name="newprice" placeholder="请输入商品现在的价格" required/>
+      <input type="text" id="doc-vld-name-2-1" minlength="1" maxlength="10" name="newprice" placeholder="请输入商品现在的价格" required/>
     </div>
 
     <div class="am-form-group">
       <label for="doc-vld-name-2-1">商品原价：</label>
-      <input type="text" id="doc-vld-name-2-1" minlength="20" name="oldprice" placeholder="请输入商品原来的价格" required/>
+      <input type="text" id="doc-vld-name-2-1" minlength="1" maxlength="10" name="oldprice" placeholder="请输入商品原来的价格" required/>
     </div>
 
     <div class="am-form-group">
       <label for="doc-vld-name-2-1">商品运费：</label>
-      <input type="text" id="doc-vld-name-2-1" minlength="20" name="transprice" placeholder="请输入商品所需运费" required/>
+      <input type="text" id="doc-vld-name-2-1" minlength="1" name="transprice" placeholder="请输入商品所需运费" required/>
     </div>
 
     <div class="am-form-group">
       <label for="doc-vld-name-2-1">卖家地址：</label>
-      <input type="text" id="doc-vld-name-2-1" minlength="20" name="address" placeholder="请输入商品的发货地址" required/>
+      <input type="text" id="doc-vld-name-2-1" minlength="2" name="address" placeholder="请输入商品的发货地址" required/>
     </div>
 
     <div class="am-form-group">
       <label for="doc-vld-ta-2-1">商品介绍：</label>
-      <textarea id="doc-vld-ta-2-1" minlength="8" maxlength="250"></textarea>
+      <textarea id="doc-vld-ta-2-1" minlength="8" maxlength="250" name="content"></textarea>
     </div>
 
     <div class="am-form-group">
@@ -78,13 +78,13 @@
 
     <div class="am-form-group">
       <label for="doc-vld-name-2-1">商品详细图片：</label>
-      <input type="file" id="doc-vld-name-2-1" name="goods_photo"/>
+      <input type="file" id="doc-vld-name-2-1" name="multi_photo"/>
     </div>
-
+    {{ csrf_field() }}
     <button class="am-btn am-btn-secondary" type="submit">提交</button>
   </fieldset>
 </form>
-
+  
 <script>
     $.ajaxSetup({
     headers: {

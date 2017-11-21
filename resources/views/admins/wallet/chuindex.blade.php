@@ -8,7 +8,7 @@
        <span> <i class="icol-coins"></i>&nbsp;出账总金额</span>
         
     </div>
-<div class="mws-panel-body"><h1>咸鱼二手订单总出账:1元!</h1></div>
+<div class="mws-panel-body"><h1>咸鱼二手订单总出账:&nbsp;{{$pay}} 元!</h1></div>
 
 </div>
   <div class="mws-panel grid_8">
@@ -92,11 +92,11 @@
                         style="width: 123px;">
                            订单状态
                         </th>
-                        <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
+                       <!--  <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
                         style="width: 123px;">
                            操作
-                        </th>
+                        </th> -->
                     </tr>
                 </thead>
                 <tbody role="alert" aria-live="polite" aria-relevant="all">
@@ -110,13 +110,13 @@
                             {{$v->order_num}}
                         </td>
                         <td class=" ">
-                            订单商品名称
+                            {{$in[$k]->title}}
                         </td>
                         <td class=" ">
-                            买家id
+                            {{$info[$k]->tel}}
                         </td>
                         <td class=" ">
-                            卖家id
+                            {{$inf[$k]->tel}}
                         </td>
                         <td class=" ">
                             {{$v->pay_time}}
@@ -126,16 +126,18 @@
                         </td>
                         <td class=" ">
                             
-                    @if($v->buy_order_status == 1)
-                            已付款
-                    @else
-                            未付款    
+                    @if($v->buy_order_status == 5)
+                            交易完成<br>(待评价)
+                    @elseif($v->buy_order_status == 6)
+                            退货中  
+                    @elseif($v->buy_order_status == 7)
+                            退款中
                     @endif
                         </td>
-                        <td class=" ">
+                        <!-- <td class=" ">
                            <a href="" class='btn btn-success btn-lg btn-block'>给卖家打款</a>
                            <a href="" class='btn btn-primary btn-lg btn-block'>退款给买家</a>
-                        </td>
+                        </td> -->
                     </tr>
                 @endforeach;
                 </tbody>
