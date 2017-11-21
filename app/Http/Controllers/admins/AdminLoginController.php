@@ -41,7 +41,7 @@ class AdminLoginController extends Controller
             return redirect('/admin/login')->with('msg','验证码错误');
         }
 
-        $request->session()->put('uid',$uname->id);
+        $request->session()->put('mid',$uname->id);
 
         return view('admins.index');
     }

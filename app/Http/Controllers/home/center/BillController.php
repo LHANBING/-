@@ -22,5 +22,5 @@ class BillController extends Controller
     public function out ()
     {
     	return view('homes.center.billlist');
-    } 
+    }
 }

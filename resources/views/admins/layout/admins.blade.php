@@ -65,7 +65,7 @@
                <?php  
 
 
-                    $result = DB::table('manager')->where('id',session('uid'))->first();
+                    $result = DB::table('manager')->where('id',session('mid'))->first();
                     // dd($result);
 
                 ?>
