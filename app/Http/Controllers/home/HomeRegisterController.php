@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\homes;
+namespace App\Http\Controllers\home;
 
 use Illuminate\Http\Request;
 
@@ -12,7 +12,7 @@ use Hash;
 
 use Flc\Dysms\Client;
 use Flc\Dysms\Request\SendSms;
-// use session;
+use session;
 use Cookie;
 class HomeRegisterController extends Controller
 {	
@@ -52,10 +52,6 @@ class HomeRegisterController extends Controller
 		// 生成验证码
         $code = rand(100000, 999999);
 
-        //往session存入code
-        session(['code'=>$code]);
-
-        var_dump(session('code'));die;
 
         $client  = new Client($config);
         $sendSms = new SendSms;
@@ -66,18 +62,22 @@ class HomeRegisterController extends Controller
         $sendSms->setOutId('demo');
 		$resp= $client->execute($sendSms);
 
-		if($resp)
+       
+        
+		if($resp->Code =='OK')
 			{	
 				//向session中存入验证码
-				// session('code',$code);
+				session()->put('code', $code);
 				
 				echo 1;
+                return view('homes/register');
 				
 			}else
 			{
 				echo 0;
 				
 			}
+
     }
 
     /**
@@ -88,19 +88,20 @@ class HomeRegisterController extends Controller
      */
     public function store(Request $request)
     {  	
-    	dd(session('code'));
     	// 获取注册信息并放入数组res
-    	$res = $request->all();
+    	$res = $request->except('_token','code');
+
 
     	// 使用Hash加密注册密码
     	$res['password'] = Hash::make($request->input('password'));
     	 
-      	// // 获取存入session中的code
-      	// $session_code = session('code');
+         // 获取存入session中的code
+      	$session_code = session('code');
 
+     
       	
        //验证码是否一致
-       if(1)
+       if($session_code == $request->input('code'))
        {
        		// 注册信息存入数据库
  			User::insert($res);

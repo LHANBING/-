@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
 use App\Http\Model\User;
 use Hash;
 
@@ -107,7 +106,10 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
+
     {   
+
+  
         
     }
 
@@ -118,10 +120,10 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-       $res = User::where('id',$id)->first();
+    {   
 
-       
+        $res = User::where('id',$id)->first();
+
 
         if ( $res['user_photo'] == "/homes/user_photo/default.jpg" ) 
         {
@@ -147,6 +149,8 @@ class UserController extends Controller
             }
         }
     }
+
+       
 
     public function status($status,$id)
     {   

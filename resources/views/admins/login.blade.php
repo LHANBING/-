@@ -30,14 +30,14 @@
             <div class="mws-login-lock"><i class="icon-lock"></i></div>
             <div id="mws-login-form">
                 
-              {{-- @if(session('msg'))
+              @if(session('msg'))
                         <div class="mws-form-message info">                 
 
                             {{session('msg')}}
 
                         </div>
                     @endif
-            --}} 
+            
                 <form class="mws-form" action="/admin/dologin" method="post">
                     <div class="mws-form-row">
                         <div class="mws-form-item">
@@ -52,8 +52,7 @@
                      <div class="mws-form-row">
                         <div class="mws-form-item">
                             <input type="text" name="code" class="mws-login-password required" placeholder="请输入验证码" style="width: 120px;margin-right: 20px">
-                            <img src="/admin/code" class="img-rounded" alt=""  onclick="this.src = this.src += '?1'">
-                            <!-- // <img src="/admin/code" alt=""  class="img-rounded" onclick="this.src = this.src += '?1'"> -->
+                            <img src="{{url('/code')}}" class="img-rounded" alt=""  onclick="this.src = this.src += '?1'">
                         </div>
                     </div>
                     <div class="mws-form-row">

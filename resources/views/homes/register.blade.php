@@ -79,11 +79,15 @@
 @section('js')
 <script type="text/javascript">
 
-		
+		  var checktel = false;
+		  var checkverifyCode = false;
+		  var checkpassword = false;
+		  var checkrelpassword = false;
+
 		$('#phone').blur(function() 
 		{		
 
-			 checkTel($(this),$('#phonemsg'));
+			 checktel = checkTel($(this),$('#phonemsg'));
 
 			 
 		})
@@ -92,20 +96,37 @@
 			{	
 				// 获取手机号
 				var phone = $('#phone').val();
+				
+				if(checktel == 100 ){
 				// 发送ajax
 				$.post("/home/register/phone",{tel:phone,'_token':'{{csrf_token()}}'},function(data) {
+
 						
-						alert(data);
-					/*if (data) 
-					{
-						alert('短信已发送！');
+					if (data) 
+					{	
+						layer.open({
+						 
+						  content: '短信已发送！'
+						});
+						
 
 					}else
-					{
-						alert ('短信发送失败！请重新操作！');
-					}*/
+					{	
+						layer.open({
+						 
+						  content:'短信发送失败！请重新操作！'
+						});
+						
+					}
 
-				})
+				 })
+				}else
+				{
+					layer.open({
+						  
+						  content:'您输入的手机号码格式不正确，无法获取验证码！'
+						});
+				}
 				//消除默认设置 
 				return false;
 			})
@@ -113,14 +134,14 @@
 		$('#code').blur(function() 
 		{		
 
-			checkVerifyCode($(this), $('#codemsg'), 6);
+			checkverifyCode = checkVerifyCode($(this), $('#codemsg'), 6);
 				
 			
 		})
 
 		$('#password').blur(function() 
 		{		
-			checkPassword($(this),$('#passwordmsg'), 6);
+			checkpassword = checkPassword($(this),$('#passwordmsg'), 6);
 
 			 
 		})
@@ -128,7 +149,7 @@
 
 		$('#passwordRepeat').blur(function() 
 		{		
-			 checkRelPassword($('#password'), $(this), $('#confirmpasswordmsg'), 6);
+			 checkrelpassword = checkRelPassword($('#password'), $(this), $('#confirmpasswordmsg'), 6);
 
 
 		})
@@ -143,20 +164,32 @@
 			// 获取输入的密码和确认密码
 			var password = $('#password').val();
 			
-
+			
+			if(checktel == 100 && checkverifyCode == 100 && checkpassword == 100 && checkrelpassword == 100){
 			// 发送ajax
 			$.post("{{url('/home/register')}}",{tel:phone,code:code,password:password,'_token':"{{csrf_token()}}"},function(data) {
 				
 				if(data)
-				{
-					alert('注册成功！');
+				{	
+
+					layer.open({
+						 
+						  content: '注册成功！'
+						});
+					
 					
 				}
 
-				// console.log(data);
+				
 
 				})
-			
+			  }else
+			  {
+			  	layer.open({
+						  
+						  content:'请填写正确的注册信息！'
+						});
+			  }
 			//消除默认设置
 			return false;
 

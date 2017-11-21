@@ -1,6 +1,6 @@
 @extends('homes.lcr')
 
-@section('title','忘记密码')
+@section('title','找回密码')
 
 
 @section('content')
@@ -10,7 +10,7 @@
         <ul class="am-tabs-nav am-nav am-nav-tabs am-nav-justify">
             <li>
                 <a href="">
-                    修改密码
+                    找回密码
                 </a>
             </li>
         </ul>
@@ -74,14 +74,17 @@
     </form>
     <div class="am-cf">
         {{ csrf_field()}}
-        <input type="submit" name="submit" value="修改" class="am-btn am-btn-primary am-btn-sm">
+        <input type="submit" name="submit" id="submit"value="修改" class="am-btn am-btn-primary am-btn-sm">
     </div>
 </div>
 @endsection
 
 @section('js')
 <script type="text/javascript">
-    
+          var checktel = false;
+          var checkverifyCode = false;
+          var checkpassword = false;
+          var checkrelpassword = false;
 
         $('#phone').blur(function() 
         {       
@@ -95,20 +98,36 @@
             {   
                 // 获取手机号
                 var phone = $('#phone').val();
+                if(checktel == 100){
                 // 发送ajax
                 $.post("/home/change/phone",{tel:phone,'_token':'{{csrf_token()}}'},function(data) {
                         
-                        alert(data);
-                    /*if (data) 
+                        
+                    if (data) 
                     {
-                        alert('短信已发送！');
+                        layer.open({
+                         
+                          content: '短信已发送！'
+                        });
+                        
 
                     }else
-                    {
-                        alert ('短信发送失败！请重新操作！');
-                    }*/
+                    {   
+                        layer.open({
+                          
+                          content: '短信发送失败！请重新操作！'
+                        });
+                        
+                    }
 
                 })
+                }else
+                {
+                    layer.open({
+                          
+                          content:'您输入的手机号码格式不正确，无法获取验证码！'
+                        });
+                }
                 //消除默认设置 
                 return false;
             })
@@ -140,22 +159,34 @@
             var phone = $('#phone').val();
             // 获取输入的验证码
             var code = $('#code').val();
-            // 获取输入的新密码和确认密码
+            // 获取输入的新密码
             var password = $('#newpassword').val();
-            
+
+            if(checktel == 100 && checkverifyCode == 100 && checkpassword == 100 && checkrelpassword == 100)
+            {
             // 发送ajax
             $.post("{{url('/home/change')}}",{tel:phone,code:code,password:password,'_token':'{{csrf_token()}}'},function(data) {
                 
                 if(data)
-                {
-                    alert('修改成功！');
+                {   
+                    layer.open({
+                         
+                          content: '修改成功！'
+                        });
+                    
                     
                 }
 
-                // console.log(data);
+                
 
                 })
-            
+             }else
+              {
+                layer.open({
+                          
+                          content:'请填写正确的修改信息！'
+                        });
+              }
             //消除默认设置
             return false;
 
