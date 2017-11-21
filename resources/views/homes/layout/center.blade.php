@@ -87,7 +87,7 @@
                 <!--悬浮搜索框-->
                 <div class="nav white">
                     <div class="logo">
-                        <img src="/homes/images/logo.png" />
+                        <img src="/homes/images/logo.png" style="width:150px;"/>
                     </div>
                     <div class="logoBig">
                         <li>
@@ -129,11 +129,7 @@
                     <div class="logo">
                         <img src="/homes/images/logo.png" />
                     </div>
-                    <div class="logoBig">
-                        <li>
-                            <img src="/homes/images/logobig.png" />
-                        </li>
-                    </div>
+                  
                     <div class="search-bar pr">
                         <a name="index_none_header_sysc" href="#">
                         </a>

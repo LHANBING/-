@@ -4,14 +4,13 @@
 @section('cssjs')
 		<link href="/homes/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css">
 		<link href="/homes/AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css">
-		
+
 		<link href="/homes/css/personal.css" rel="stylesheet" type="text/css">
 		<link href="/homes/css/orstyle.css" rel="stylesheet" type="text/css">
 
 		<script src="/homes/AmazeUI-2.4.2/assets/js/jquery.min.js"></script>
 		<script src="/homes/AmazeUI-2.4.2/assets/js/amazeui.js"></script>
 
-	
 @endsection()
 
 @section('content')
@@ -42,7 +41,7 @@
 											商品
 										</div>
 										<div class="th th-price">
-											单价
+											价格/运费
 										</div>
 										<div class="th th-number">
 											数量
@@ -51,7 +50,7 @@
 											商品操作
 										</div>
 										<div class="th th-amount">
-											合计
+											合计(含运费)
 										</div>
 										<div class="th th-status">
 											交易状态
@@ -64,12 +63,12 @@
 									<div class="order-main">
 										<div class="order-list">
 											
-										
+										@foreach($res as $k => $v)
 											<!--不同状态订单-->
 											<div class="order-status3">
 												<div class="order-title">
-													<div class="dd-num">订单编号：<a href="javascript:;">1601430</a></div>
-													<span>成交时间：2015-12-20</span>
+													<div class="dd-num">订单编号：<a href="javascript:;">{{$v->order_num}}</a></div>
+													<span>下单时间 : {{$v->order_atime}}</span>
 													<!--    <em>店铺：小桔灯</em>-->
 												</div>
 												<div class="order-content">
@@ -86,26 +85,28 @@
 																<div class="item-info">
 																	<div class="item-basic-info">
 																		<a href="#">
-																			<p>礼盒袜子女秋冬 纯棉袜加厚 韩国可爱 </p>
-																			<p class="info-little">颜色分类：李清照
-																				<br>尺码：均码</p>
+																			
+																			<p class="info-little">商品名称：
+																			</p>
+																			{{$v->title}}
 																		</a>
 																	</div>
 																</div>
 															</li>
 															<li class="td td-price">
 																<div class="item-price">
-																	333.00
+																	{{$v->newprice}}
+																	
 																</div>
 															</li>
 															<li class="td td-number">
 																<div class="item-number">
-																	<span>×</span>2
+																	<span>×</span>{{$v->goods_num}}
 																</div>
 															</li>
 															<li class="td td-operation">
 																<div class="item-operation">
-																	<a href="refund.html">退款/退货</a>
+																	<a href="refund.html">待定</a>
 																</div>
 															</li>
 														</ul>
@@ -114,8 +115,7 @@
 													<div class="order-right">
 														<li class="td td-amount">
 															<div class="item-amount">
-																合计：676.00
-																<p>含运费：<span>10.00</span></p>
+																{{}}
 															</div>
 														</li>
 														<div class="move-right">
@@ -136,7 +136,7 @@
 												</div>
 
 											</div>
-
+										@endforeach
 										</div>
 
 									</div>
@@ -864,7 +864,7 @@
 				$.post('/home/center/order/list',{id:10},function(data){
 
 
-					//alert(data);
+					alert(data);
 				})
 
 
