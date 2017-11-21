@@ -52,7 +52,7 @@
                      <div class="mws-form-row">
                         <div class="mws-form-item">
                             <input type="text" name="code" class="mws-login-password required" placeholder="请输入验证码" style="width: 120px;margin-right: 20px">
-                            <img src="/admin/code" class="img-rounded" alt=""  onclick="this.src = this.src += '?1'">
+                            <img src="/code" class="img-rounded" alt=""  onclick="this.src = this.src += '?1'">
                             <!-- // <img src="/admin/code" alt=""  class="img-rounded" onclick="this.src = this.src += '?1'"> -->
                         </div>
                     </div>

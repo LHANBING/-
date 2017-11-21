@@ -42,6 +42,7 @@ Route::group(['prefix'=>'admin'],function(){
 
 	//订单列表
 	Route::get('/order/index','OrderController@index');
+	Route::get('/order/online','OrderController@online');
 
 	//地址列表
 	Route::get('/address/index','AddressController@index');
@@ -88,6 +89,8 @@ Route::group(['prefix'=>'home/center','namespace'=>'home\center'],function(){
 	Route::resource('/address','AddressController');
 	//订单管理
 	Route::get('/order/index','OrderController@index');
+	Route::post('/order/list','OrderController@list');
+
 	//退换货
 	Route::get('/change/index','ChangeController@index');
 	//账单

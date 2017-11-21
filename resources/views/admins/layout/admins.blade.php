@@ -145,8 +145,8 @@
                     <li>
                         <a href="#"><i class="icon-users"></i> 订单管理</a>
                         <ul class="closed">
-                            <li><a href="/admin/order/index">查看订单</a></li>
-                            <!-- <li><a href="/admin/order/delete">删除订单</a></li> -->
+                            <li><a href="/admin/order/index">已完成订单</a></li>
+                            <li><a href="/admin/order/online">在线订单</a></li> 
                             
                         </ul>
                     </li>
