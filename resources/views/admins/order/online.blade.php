@@ -10,24 +10,24 @@
         <span>
             <i class="icon-table">
             </i>
-            已完成订单列表
+            在线订单列表
         </span>
     </div>
     <div class="mws-panel-body no-padding">
         <div id="DataTables_Table_1_wrapper" class="dataTables_wrapper" role="grid">
-       		 <form action="/admin/order/index" method="get">
+       		 <form action="/admin/order/online" method="get">
 	            <div id="DataTables_Table_1_length" class="dataTables_length">
 	                <label>
 	                    显示
 	                    <select size="1" name="num" aria-controls="DataTables_Table_1">
-	                        <option value="5" @if(isset($request->num) ? $request->num : '5' ) @endif>
+	                        <option value="5" {{--@if(isset($request->num) ? $request->num : '5' ) @endif--}}>
 	                            5
 	                        </option>
-	                        <option value="10" @if($request->num == '10') selected="selected" @endif >
+	                        <option value="10" {{--@if($request->num == '10') selected="selected" @endif --}}>
 	                            10
 	                        </option>
-	                        <option value="15" @if($request->num == '15')
-                             selected = "selected" @endif   >
+	                        <option value="15" {{--@if($request->num == '15')
+                             selected = "selected" @endif--}}   >
 	                            15
 	                        </option>
 	                    </select>
@@ -83,7 +83,12 @@
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
                         style="width: 60px;">
-                            结单时间
+                                买家状态
+                        </th>
+                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
+                        rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
+                        style="width: 60px;">
+                                卖家状态
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
@@ -100,10 +105,10 @@
                 </thead>
                 <tbody role="alert" aria-live="polite" aria-relevant="all">
 					
-                    @foreach($re as $k => $v) 
+                    @foreach($re as $k => $v)
 					
                     
-                    <tr class="@if($k % 2 == 0) odd @else even @endif" style="height: 90px">
+                    <tr class="{{--@if($k % 2 == 0) odd @else even @endif--}}" style="height: 90px">
                         <td class="">
                            {{$v->id}}
                         </td>
@@ -118,38 +123,49 @@
                          <td class="">
                          	  {{$v->title}}
                                X 
-                              {{$r[$k]->goods_num}}
+                           {{$r[$k]->goods_num}}
                         </td>
                         <td class="">
-                             {{$r[$k]->order_num}}
+                         {{$r[$k]->order_num}}
                         </td>
                          <td class="">
-                            {{$r[$k]->order_atime}}
+                         {{$r[$k]->order_atime}}
                             
                         </td>
                          <td class="">
-                            {{$r[$k]->order_otime}} 
-                           
-                         
-                           
-                            
-                        </td>
-                        <td class="">
-                             {{$r[$k]->pay_money  }}
-                            +
-                            {{$r[$k]->pay_yunfei}}    元
+                               
+                @if($r[$k]->buy_order_status == '0') 待付款 
+                @elseif($r[$k]->buy_order_status == '1') 待发货 
+                @elseif($r[$k]->buy_order_status == '2') 待收货 
+                @elseif($r[$k]->buy_order_status == '3') 确认收货 
+                 
+                @endif
+         
                         </td>
                        
                         <td class="">
+                @if($r[$k]->sale_order_status == '0') nimabi  
+                @elseif($r[$k]->sale_order_status == '1') 待发货 
+                @elseif($r[$k]->sale_order_status == '2') 待收货 
+                @elseif($r[$k]->sale_order_status == '3')卖家确认收货 
+                 
+                @endif
+               
+                        </td>
+                        <td class="">
+                               {{$r[$k]->pay_money  }}
+                            +
+                            {{$r[$k]->pay_yunfei}}    元
                          
+                        </td>
+                        <td class="">
                          <a href="" style="color:blue;font-size:15px">查看评价</a>
                           
                         </td>
-  
                     </tr>
 
                 
-                    @endforeach
+                   @endforeach
                     
                 </tbody>
             </table>
@@ -208,7 +224,8 @@
                 </style>
             <div class="dataTables_paginate paging_full_numbers" id="paginate">
 
-                  {!! $re->appends($request->all())->render() !!}  
+                 
+                    {!! $re->appends($request->all())->render() !!}  
             </div>
         </div>
     </div>

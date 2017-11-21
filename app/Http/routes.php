@@ -44,32 +44,31 @@ Route::group(['middleware'=>'adminlogin','prefix'=>'admin','namespace'=>'admins'
 	Route::resource('/type','TypeController');
 
 	//订单列表
-	Route::resource('/order','OrderController');
-
+	Route::get('/order/index','OrderController@index');
+	Route::get('/order/online','OrderController@online');
+	
 	//钱袋总进账金额
 	Route::resource('/wallet','WalletController');
 	//钱袋总支出金额
 	Route::resource('/wallets','WalletsController');
 
-	
-
-	
-
-
-
-
-
-
-
 	//广告列表
 	Route::resource('/advs','AdvsController');
 	
-
 	//友情链接列表
 	Route::resource('/friendlink','FriendLinkController');
 	
 
 });
+
+
+
+
+
+
+
+
+
 
 
 
@@ -112,6 +111,8 @@ Route::group(['prefix'=>'home/center','namespace'=>'home\center'],function(){
 
 	//订单管理
 	Route::get('/order/index','OrderController@index');
+	Route::post('/order/list','OrderController@list');
+
 	//退换货
 	Route::get('/change/index','ChangeController@index');
 	//账单
