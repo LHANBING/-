@@ -102,6 +102,7 @@
                 <tbody role="alert" aria-live="polite" aria-relevant="all">
 
                  @foreach($jin as $k => $v)
+                   
                     <tr class="odd">
                         <td class="  sorting_1">
                             {{$v->id}}
@@ -110,13 +111,13 @@
                             {{$v->order_num}}
                         </td>
                         <td class=" ">
-                            订单商品名称
+                            {{$in[$k]->title}}
                         </td>
                         <td class=" ">
-                        {{$info[$k]->username}}
+                        {{$info[$k]->tel}}
                         </td>
                         <td class=" ">
-                        {{$inf[$k]->username}}
+                        {{$inf[$k]->tel}}
                         </td>
                         <td class=" ">
                             {{$v->pay_time}}
@@ -135,8 +136,22 @@
                     @endif
                         </td>
                         <td class=" ">
-                           <a href="" class='btn btn-success btn-lg btn-block'>给卖家打款</a>
-                           <a href="" class='btn btn-primary btn-lg btn-block'>退款给买家</a>
+                            <form action="/admin/wallet/{{$v->id}}" method="POST">
+                                {{ csrf_field() }}
+                                {{ method_field('PUT') }}
+                                <button class='btn btn-success btn-lg btn-block'>
+                                    给卖家打款
+                                </button>
+                            </form>
+                            
+                            <form action="/admin/wallet/{{$v->id}}" method="POST" style='margin-top: 10px;'>
+                                {{ csrf_field() }}
+                                {{ method_field('DELETE') }}
+                                <button class='btn btn-primary btn-lg btn-block'>
+                                    退款给买家
+                                </button>
+                            </form>
+                           
                         </td>
                     </tr>
                 @endforeach;
