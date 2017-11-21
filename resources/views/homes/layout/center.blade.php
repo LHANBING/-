@@ -214,12 +214,7 @@
                                 </a>
                             </li>
                             <li> <a href="/home/center/info/user_change">修改密码</a></li>
-                            <li> <a href="/home/center/address">收货地址</a></li>
-                            <li>
-                                <a href="/home/center/address">
-                                    收货地址
-                                </a>
-                            </li>
+                            <li> <a href="/home/center/address">收货地址</a></li>                  
                         </ul>
                     </li>
                     <li class="person">

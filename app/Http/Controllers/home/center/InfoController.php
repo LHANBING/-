@@ -12,10 +12,11 @@ use App\Http\Model\User;
 class InfoController extends Controller
 {
     public function index ()
-    {	 $id = session('uid');
-		
+    {	$id = session('uid');
+		echo session('uid');
     	$res = User::where('id',$id)->first();
-    	
+    	echo '<pre>';
+    	var_dump($res);die;
    		return view('homes.center.info',['res'=>$res]);
     }
 
