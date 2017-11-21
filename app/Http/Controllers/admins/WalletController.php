@@ -26,16 +26,24 @@ class WalletController extends Controller
         //查询进账订单信息
         $jin= Order::whereIn('buy_order_status', [2,3,4])->get();
         
+        //多表联查买家手机号
         $info = Order::join('users',function($join){
             $join->on('users.id','=','orders.buy_uid');
         })->get();
+        // dd($info);
 
+
+        //多表联查卖家手机号
         $inf = Order::join('users',function($join){
             $join->on('users.id','=','orders.sale_uid');
         })->get();
 
+        //多表联查商品标题
 
-        return view('admins.wallet.jinindex',['pay'=>$pay_money,'jin'=>$jin,'info'=>$info ,'inf'=>$inf]); 
+        $in = Order::join('goods','goods.id','=','orders.goods_id')->get();
+
+
+        return view('admins.wallet.jinindex',['pay'=>$pay_money,'jin'=>$jin,'info'=>$info ,'inf'=>$inf,'in'=>$in]); 
     }
 
     /**
@@ -90,8 +98,49 @@ class WalletController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //查询出订单信息
+        $res = Order::where('id',$id)->first();
+
+        //商品价格
+        $money = $res->pay_money + $res->pay_yunfei ;
+
+        // 查询卖家id
+        $sale_uid = $res->sale_uid;
+
         //
-    }
+        $zhichu = Order_money::value('zhichu');
+
+        $qianbao = User::where('id',$sale_uid)->value('money');
+
+        $a = $zhichu+$money;
+
+        $b = $qianbao+$money;
+
+        // dd($user1);
+        // 开启事务
+        DB::beginTransaction();  
+        try {  
+                // 出账总金额加上商品价格 
+                $user1 = DB::table('orders_money')->where('id',1)->update(['zhichu' => '-'.$a]);
+                // 卖家账户加上商品价格
+                $user2 = DB::table('users')->where('id',$sale_uid)->update(['money'=> $b]);
+                // 更改买家状态为待评价
+                $c= DB::table('orders')->where('id',$id)->update(['buy_order_status' => '5']);
+                //更改卖家状态为待评价
+                $d= DB::table('orders')->where('id',$id)->update(['sale_order_status'=> '5']);          
+                    if( $user1 && $user2 && $c && $d){  
+                            DB::commit(); 
+                            return redirect('/admin/wallet');
+                        
+                    }else{
+                        return redirect('404');
+                    }
+
+            } catch (\Exception $e) {  
+                DB::rollBack();  
+                return redirect('404');  
+            }  
+        }
 
     /**
      * Remove the specified resource from storage.
@@ -101,6 +150,47 @@ class WalletController extends Controller
      */
     public function destroy($id)
     {
+        //查询出订单信息
+        $res = Order::where('id',$id)->first();
+
+        //商品价格
+        $money = $res->pay_money + $res->pay_yunfei ;
+
+        // 查询卖家id
+        $buy_uid = $res->buy_uid;
+
         //
+        $shouru = Order_money::value('shouru');
+
+        $qianbao = User::where('id',$buy_uid)->value('money');
+
+        $a = $shouru-$money;
+
+        $b = $qianbao+$money;
+
+        // dd($user1);
+        // 开启事务
+        DB::beginTransaction();  
+        try {  
+                // 出账总金额加上商品价格 
+                $user1 = DB::table('orders_money')->where('id',1)->update(['shouru' => $a]);
+                // 卖家账户加上商品价格
+                $user2 = DB::table('users')->where('id',$buy_uid)->update(['money'=> $b]);
+                // 更改买家状态为待评价
+                $c= DB::table('orders')->where('id',$id)->update(['buy_order_status' => '5']);
+                //更改卖家状态为待评价
+                $d= DB::table('orders')->where('id',$id)->update(['sale_order_status'=> '5']);          
+                    if( $user1 && $user2 && $c && $d){  
+                            DB::commit(); 
+                            return redirect('/admin/wallet');
+                        
+                    }else{
+                        return redirect('404');
+                    }
+
+            } catch (\Exception $e) {  
+                DB::rollBack();  
+                return redirect('404');  
+            }  
     }
 }
