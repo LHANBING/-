@@ -19,14 +19,27 @@ class WalletsController extends Controller
     public function index()
     {
         //查询支出总金额 
-        $pay=Order_money::value('shouru');
+        $pay=Order_money::value('zhichu');
 
         //查询出账订单信息
-        $chu=Order::whereIn('buy_order_status', [1, 2, 3, 4])->get();
-        // dd($chu);
-        // echo '<pre>';
-        // var_dump($chu);
-        return view('admins.wallet.chuindex',['pay'=>$pay,'chu'=>$chu]); 
+        $chu=Order::whereIn('buy_order_status', [5,6,7])->get();
+        
+        //多表联查买家手机号
+        $info = Order::join('users',function($join){
+            $join->on('users.id','=','orders.buy_uid');
+        })->get();
+        // dd($info);
+
+
+        //多表联查卖家手机号
+        $inf = Order::join('users',function($join){
+            $join->on('users.id','=','orders.sale_uid');
+        })->get();
+
+        //多表联查商品标题
+        $in = Order::join('goods','goods.id','=','orders.goods_id')->get();
+
+        return view('admins.wallet.chuindex',['pay'=>$pay,'chu'=>$chu,'info'=>$info ,'inf'=>$inf,'in'=>$in]); 
     }
 
     /**
