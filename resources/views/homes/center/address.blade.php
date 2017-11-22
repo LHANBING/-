@@ -19,6 +19,144 @@
 
 
 					<div class="user-address">
+						
+						<a data-am-modal="{target: '#doc-modal-1', closeViaDimmer: 0}" class="new-abtn-type">添加新地址</a>
+						<!--例子-->
+						<div id="doc-modal-1" class="">
+
+							<div class="add-dress">
+
+								<!--标题 -->
+								<div class="am-cf am-padding">
+									<div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">新增地址</strong> / <small>Add&nbsp;address</small></div>
+								</div>
+								<hr>
+
+								<div style="margin-top: 20px;" class="am-u-md-12 am-u-lg-8">
+									<form class="am-form am-form-horizontal" method="post" action="/home/center/address">
+
+										<div class="am-form-group">
+											<label class="am-form-label" for="user-name">收货人</label>
+											<div class="am-form-content">
+												<input type="text" placeholder="收货人" id="user-name">
+											</div>
+										</div>
+
+										<div class="am-form-group">
+											<label class="am-form-label" for="user-phone">手机号码</label>
+											<div class="am-form-content">
+												<input type="email" placeholder="手机号必填" id="user-phone">
+											</div>
+										</div>
+										<div class="am-form-group">
+											<label class="am-form-label" for="user-address">所在地</label>
+											<div class="am-form-content address">
+
+		    <head>
+		        <link rel="stylesheet" type="text/css" href="/homes/city/style/cssreset-min.css">
+		        <link rel="stylesheet" type="text/css" href="/homes/city/style/common.css">
+		        <style type="text/css">
+		            .citys{
+		                margin-bottom: 10px;
+		            }
+		            .citys p{
+		                line-height: 28px;
+		            }
+		            .warning{
+		                color: #c00;
+		            }
+		            .main a{
+		                margin-right: 8px;
+		                color: #369;
+		            }
+		        </style>
+		        <script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+		        <script type="text/javascript" src="/homes/city/script/jquery.citys.js"></script>
+		    </head>
+		     <body>   
+        
+           
+            <script type="text/javascript">
+                $('#demo2').citys({
+                    required:false,
+                    nodata:'disabled',
+                    onChange:function(data){
+                        var text = data['direct']?'(直辖市)':'';
+                        $('#place').text('当前选中地区：'+data['province']+text+' '+data['city']+' '+data['area']);
+                    }
+                });
+            </script>
+            <div id="demo3" class="citys">
+                <p>
+                    <select name="province"></select>
+                    <select name="city"></select>
+                    <select name="area"></select>
+                    <select name="town"></select>
+                </p>
+            </div>
+            
+            <script type="text/javascript">
+                var $town = $('#demo3 select[name="town"]');
+                var townFormat = function(info){
+                    $town.hide().empty();
+                    if(info['code']%1e4&&info['code']<7e5){ //是否为“区”且不是港澳台地区
+                        $.ajax({
+                            url:'http://passer-by.com/data_location/town/'+info['code']+'.json',
+                            dataType:'json',
+                            success:function(town){
+                                $town.show();
+                                for(i in town){
+                                        $town.append('<option value="'+i+'">'+town[i]+'</option>');
+                                }
+                            }
+                        });
+                    }
+                };
+                $('#demo3').citys({
+                    province:'福建',
+                    city:'厦门',
+                    area:'思明',
+                    onChange:function(info){
+                        townFormat(info);
+                    }
+                },function(api){
+                    var info = api.getInfo();
+                    townFormat(info);
+                });
+            </script>
+            
+        
+    </body>
+
+
+											</div>
+										</div>
+
+										<div class="am-form-group">
+											<label class="am-form-label" for="user-intro">详细地址</label>
+											<div class="am-form-content">
+												<textarea placeholder="输入详细地址" id="user-intro" rows="3" class=""></textarea>
+												<small>100字以内写出你的详细地址...</small>
+											</div>
+										</div>
+
+										<div class="am-form-group">
+											<div class="am-u-sm-9 am-u-sm-push-3">
+												
+												<button style="border:0PX"><a class="am-btn am-btn-danger">提交</a></button>
+
+												
+												{{ csrf_field() }}
+												
+											</div>
+										</div>
+									</form>
+								</div>
+
+							</div>
+
+						</div>
+						<div class="clear"></div>
 						<!--标题 -->
 						<div class="am-cf am-padding">
 							<div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">地址管理</strong> / <small>Address&nbsp;list</small></div>
@@ -57,99 +195,9 @@
 
 						</ul>
 						<div class="clear"></div>
-						<a data-am-modal="{target: '#doc-modal-1', closeViaDimmer: 0}" class="new-abtn-type">添加新地址</a>
-						<!--例子-->
-						<div id="doc-modal-1" class="">
-
-							<div class="add-dress">
-
-								<!--标题 -->
-								<div class="am-cf am-padding">
-									<div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">新增地址</strong> / <small>Add&nbsp;address</small></div>
-								</div>
-								<hr>
-
-								<div style="margin-top: 20px;" class="am-u-md-12 am-u-lg-8">
-									<form class="am-form am-form-horizontal" method="post" action="/home/center/address">
-
-										<div class="am-form-group">
-											<label class="am-form-label" for="user-name">收货人</label>
-											<div class="am-form-content">
-												<input type="text" placeholder="收货人" id="user-name">
-											</div>
-										</div>
-
-										<div class="am-form-group">
-											<label class="am-form-label" for="user-phone">手机号码</label>
-											<div class="am-form-content">
-												<input type="email" placeholder="手机号必填" id="user-phone">
-											</div>
-										</div>
-										<div class="am-form-group">
-											<label class="am-form-label" for="user-address">所在地</label>
-											<div class="am-form-content address">
-												<select data-am-selected="" style="display: none;">
-													<option value="a">浙江省</option>
-													<option selected="" value="b">湖北省</option>
-												</select><div data-am-dropdown="" id="am-selected-whbzi" class="am-selected am-dropdown ">  <button class="am-selected-btn am-btn am-dropdown-toggle am-btn-default" type="button">    <span class="am-selected-status am-fl">湖北省</span>    <i class="am-selected-icon am-icon-caret-down"></i>  </button>  <div class="am-selected-content am-dropdown-content">    <h2 class="am-selected-header"><span class="am-icon-chevron-left">返回</span></h2>       <ul class="am-selected-list">                     <li data-value="a" data-group="0" data-index="0" class="">         <span class="am-selected-text">浙江省</span>         <i class="am-icon-check"></i></li>                                 <li data-value="b" data-group="0" data-index="1" class="am-checked">         <span class="am-selected-text">湖北省</span>         <i class="am-icon-check"></i></li>            </ul>    <div class="am-selected-hint"></div>  </div></div>
-												<select data-am-selected="" style="display: none;">
-													<option value="a">温州市</option>
-													<option selected="" value="b">武汉市</option>
-												</select><div data-am-dropdown="" id="am-selected-rfo2y" class="am-selected am-dropdown ">  <button class="am-selected-btn am-btn am-dropdown-toggle am-btn-default" type="button">    <span class="am-selected-status am-fl">武汉市</span>    <i class="am-selected-icon am-icon-caret-down"></i>  </button>  <div class="am-selected-content am-dropdown-content">    <h2 class="am-selected-header"><span class="am-icon-chevron-left">返回</span></h2>       <ul class="am-selected-list">                     <li data-value="a" data-group="0" data-index="0" class="">         <span class="am-selected-text">温州市</span>         <i class="am-icon-check"></i></li>                                 <li data-value="b" data-group="0" data-index="1" class="am-checked">         <span class="am-selected-text">武汉市</span>         <i class="am-icon-check"></i></li>            </ul>    <div class="am-selected-hint"></div>  </div></div>
-												<select data-am-selected="" style="display: none;">
-													<option value="a">瑞安区</option>
-													<option selected="" value="b">洪山区</option>
-												</select><div data-am-dropdown="" id="am-selected-leihk" class="am-selected am-dropdown ">  <button class="am-selected-btn am-btn am-dropdown-toggle am-btn-default" type="button">    <span class="am-selected-status am-fl">洪山区</span>    <i class="am-selected-icon am-icon-caret-down"></i>  </button>  <div class="am-selected-content am-dropdown-content">    <h2 class="am-selected-header"><span class="am-icon-chevron-left">返回</span></h2>       <ul class="am-selected-list">                     <li data-value="a" data-group="0" data-index="0" class="">         <span class="am-selected-text">瑞安区</span>         <i class="am-icon-check"></i></li>                                 <li data-value="b" data-group="0" data-index="1" class="am-checked">         <span class="am-selected-text">洪山区</span>         <i class="am-icon-check"></i></li>            </ul>    <div class="am-selected-hint"></div>  </div></div>
-											</div>
-										</div>
-
-										<div class="am-form-group">
-											<label class="am-form-label" for="user-intro">详细地址</label>
-											<div class="am-form-content">
-												<textarea placeholder="输入详细地址" id="user-intro" rows="3" class=""></textarea>
-												<small>100字以内写出你的详细地址...</small>
-											</div>
-										</div>
-
-										<div class="am-form-group">
-											<div class="am-u-sm-9 am-u-sm-push-3">
-												
-												<button style="border:0PX"><a class="am-btn am-btn-danger">提交</a></button>
-
-												
-												{{ csrf_field() }}
-												
-											</div>
-										</div>
-									</form>
-								</div>
-
-							</div>
-
-						</div>
-
 					</div>
 
-					<script type="text/javascript">
-						$(document).ready(function() {							
-							$(".new-option-r").click(function() {
-								$(this).parent('.user-addresslist').addClass("defaultAddr").siblings().removeClass("defaultAddr");
-							});
-							
-							var $ww = $(window).width();
-							if($ww>640) {
-								$("#doc-modal-1").removeClass("am-modal am-modal-no-btn")
-							}
-
-
-							
-						})
-
-
-											
-						</script>
-
-					<div class="clear"></div>
+					
 
 				
 

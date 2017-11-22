@@ -62,7 +62,7 @@
 
 								<div class="filePic">
                                  <label for="user-email" class="am-form-label">头像：</label>
-								<img class="am-circle am-img-thumbnail" src="{{$res->user_photo}}" readonly alt="" />
+								<img class="am-circle am-img-thumbnail" src="http://ozstangaz.bkt.clouddn.com/userphoto/{{$res->user_photo}}" readonly alt="" />
 								
                         		 <div class="am-form-content">
 										<input id="user-email" name="user_photo" type="file"  >

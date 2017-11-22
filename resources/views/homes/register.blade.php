@@ -102,7 +102,7 @@
 				$.post("/home/register/phone",{tel:phone,'_token':'{{csrf_token()}}'},function(data) {
 
 						
-					if (data) 
+					if (data == "1") 
 					{	
 						layer.open({
 						 
@@ -169,7 +169,7 @@
 			// 发送ajax
 			$.post("{{url('/home/register')}}",{tel:phone,code:code,password:password,'_token':"{{csrf_token()}}"},function(data) {
 				
-				if(data)
+				if(data == "1")
 				{	
 
 					layer.open({
@@ -178,6 +178,12 @@
 						});
 					
 					
+				}else
+				{
+					layer.open({
+						 
+						  content: '注册失败！'
+						});
 				}
 
 				
