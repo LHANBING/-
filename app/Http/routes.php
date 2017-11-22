@@ -109,7 +109,9 @@ Route::group(['prefix'=>'home/center','namespace'=>'home\center'],function(){
 
 	//订单管理
 	Route::get('/order/index','OrderController@index');
+	Route::post('/order/list1','OrderController@list1');
 	Route::post('/order/list','OrderController@list');
+	Route::get('/order/pay','OrderController@pay');
 
 	//退换货
 	Route::get('/change/index','ChangeController@index');
@@ -125,6 +127,7 @@ Route::group(['prefix'=>'home/center','namespace'=>'home\center'],function(){
 	Route::get('/comment/index','CommentController@index');
 	//消息
 	Route::get('/news/index','NewsController@index');
+	Route::post('/news/add','NewsController@add');
 	//出售订单
 	// Route::get('','shouchuOrderController@index');
 	//发布二手

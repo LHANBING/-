@@ -87,7 +87,7 @@
                 <!--悬浮搜索框-->
                 <div class="nav white">
                     <div class="logo">
-                        <img src="/homes/images/logo.png" style="width:150px;"/>
+                        <img src="/homes/images/logo.png" style="width:150px"/>
                     </div>
                     <div class="logoBig">
                         <li>
