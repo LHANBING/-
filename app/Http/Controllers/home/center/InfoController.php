@@ -8,15 +8,19 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Http\Model\User;
-
+use Hash;
 class InfoController extends Controller
 {
     public function index ()
-    {	 $id = session('uid');
-		
+    {	
+        $id = session('uid');
+		if($id){
     	$res = User::where('id',$id)->first();
-    	
    		return view('homes.center.info',['res'=>$res]);
+        }else
+        {
+            return view('homes.login');
+        }
     }
 
 
@@ -56,10 +60,28 @@ class InfoController extends Controller
     	return view('homes.center.user_change');
     }
 
-     public function douser_change (Request $requeste)
+     public function douser_change (Request $request)
     {	
+        $uid = session('uid');
+        $users = User::where('id', $uid)->first();
+        $pass = Hash::check($request->input('oldpassword'),$users->password);
+        
 
-    		echo 'doedit';
+        if($pass)
+        {
+             $password = Hash::make($request->input('newpassword'));
+             $info = User::where('id',$uid)->update(['password'=>$password]);
+             
+                 if ($info) {
+                    echo 1;
+                 }else
+                 {
+                    echo 0;
+                 }
+        }else
+        {
+            echo 0;
+        }
     	
     }
 

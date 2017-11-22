@@ -95,6 +95,7 @@ Route::group(['middleware'=>'homelogin','prefix'=>'home/center','namespace'=>'ho
 	Route::post('/info/doedit','InfoController@doedit');
 	Route::get('/info/perfect','InfoController@perfect');
 	Route::post('/info/doperfect','InfoController@doperfect');
+	
 	Route::get('/info/user_change','InfoController@user_change');
 	Route::post('/info/douser_change','InfoController@douser_change');
 
@@ -108,10 +109,15 @@ Route::group(['middleware'=>'homelogin','prefix'=>'home/center','namespace'=>'ho
 
 	//退换货
 	Route::get('/change/index','ChangeController@index');
+
+	//充值
+	Route::get('/recharge/index','RechargeController@index');
+	Route::post('/dorecharge','RechargeController@dorecharge');
 	//账单
 	Route::get('/bill/index','BillController@index');
 	Route::get('/bill/in','BillController@in');
 	Route::get('/bill/out','BillController@out');
+
 	//收藏
 	Route::get('/collection/index','CollectionController@index');
 	//足迹

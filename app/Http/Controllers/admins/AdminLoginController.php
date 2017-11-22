@@ -22,7 +22,7 @@ class AdminLoginController extends Controller
     }
 
     public function dologin(Request $request)
-    {
+    {   
         $res = $request->except('_token');
 
         // var_dump($res);

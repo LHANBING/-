@@ -25,8 +25,8 @@
 						<div class="user-infoPic">
 
 							<div class="filePic">
-
-								<img class="am-circle am-img-thumbnail" src="{{$res->user_photo}}" readonly alt="" />
+	                                  
+								<img class="am-circle am-img-thumbnail" src="http://ozstangaz.bkt.clouddn.com/userphoto/{{$res->user_photo}}" readonly alt="" />
 							
 
 							</div>
