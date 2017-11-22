@@ -8,6 +8,19 @@
         <title>
             @yield('title')
         </title>
+
+        <script src="/homes/validate.js"></script>
+
+        <script type="text/javascript" src="{{url('/homes/layer1/jquery.js')}}"></script>
+            <script type="text/javascript" src="{{url('/homes/layer1/layer.js')}}"></script>
+            <script type="text/javascript" src="{{url('/homes/layer1/extend/layer.ext.js')}}"></script>
+        <style type="text/css">
+            .yanzheng{
+                color: red;
+                font-size:12px;
+            }
+        </style>
+
         @section('cssjs')
         <link href="/homes/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet"
         type="text/css">
@@ -214,12 +227,7 @@
                                 </a>
                             </li>
                             <li> <a href="/home/center/info/user_change">修改密码</a></li>
-                            <li> <a href="/home/center/address">收货地址</a></li>
-                            <li>
-                                <a href="/home/center/address">
-                                    收货地址
-                                </a>
-                            </li>
+                            <li> <a href="/home/center/address">收货地址</a></li>                  
                         </ul>
                     </li>
                     <li class="person">
@@ -271,7 +279,7 @@
                             我的资产
                         </a>
                         <ul>
-                            <li> <a href="bonus.html">充值</a></li>
+                            <li> <a href="/home/center/recharge/index">充值</a></li>
                             <li>
                                 <a href="/home/center/bill/index">
                                     账单明细
@@ -356,6 +364,21 @@
                 </p>
             </div>
         </div>
+
+        <script type="text/javascript">
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+
+
+         </script>
+          @section('js')
+            
+          @show
     </body>
 
 

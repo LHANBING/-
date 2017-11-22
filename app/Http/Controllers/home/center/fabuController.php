@@ -10,6 +10,7 @@ use App\Http\Model\Type;
 use App\Http\Model\Typechild;
 use App\Http\Model\Good;
 use App\Http\Model\Goodsdetail;
+use DB;
 
 class fabuController extends Controller
 {
@@ -63,11 +64,28 @@ class fabuController extends Controller
 
         $data = Good::create($res);
 
+        //添加goods_detail表数据
+        $detail = $request->only('content');
+
         if ($data) {
-            return redirect('/home/center/fabu')->with('msg','添加成功');
-        }else{
-            return back()->withInput();
-        }
+
+            $good = DB::table('goods')
+            ->orderBy('id','desc')
+            ->first();
+
+            $goods_id = $good->id;
+
+            $detail['goods_id'] = $good->id;
+            // var_dump($detail);die;
+
+            $res = Goodsdetail::create($detail);
+
+            if ($res) {
+                 return redirect('/home/center/fabu');
+             }else{
+                return back()->withInput();
+                 }
+            }
     }
 
     /**
@@ -78,7 +96,7 @@ class fabuController extends Controller
      */
     public function show($id)
     {
-        
+       
     }
 
     /**

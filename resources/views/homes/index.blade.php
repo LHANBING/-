@@ -103,10 +103,10 @@
 		
 
 
-			<div class="banner">
+			<div class="banner ">
                       <!--轮播 -->
 						<div class="am-slider am-slider-default scoll" data-am-flexslider id="demo-slider-0">
-							<ul class="am-slides">
+							<ul class="am-slides" style="overflow: hidden;">
 								<li class="banner1"><a href="introduction.html"><img src="/homes/images/ad1.jpg" /></a></li>
 								<li class="banner2"><a><img src="/homes/images/ad2.jpg" /></a></li>
 								<li class="banner3"><a><img src="/homes/images/ad3.jpg" /></a></li>
@@ -139,8 +139,7 @@
 									<div class="category">
 										<ul class="category-list" id="js_climit_li">
 
-											@foreach($res as $k=>$v)
-											@if($v->status==1)
+											@foreach($type as $k=>$v)
 											<li class="appliance js_toggle relative">
 												<div class="category-info">
 													<h3 class="category-name b-category-name"><i><img src="/homes/images/cake.png"></i><a class="ml-22" title="点心">{{$v->typename}}</a></h3>
@@ -152,9 +151,9 @@
 																<div class="sort-side">
 																	<dl class="dl-sort">
 																		<dt><span title="蛋糕">{{$v->typename}}</span></dt>
-																		@foreach($reschild as $key=>$val)
-																		@if($v->id == $val->type_id && $val->status==1)
-																		<dd><a title="蒸蛋糕" href="#"><span>{{$val->typechildname}}</span></a></dd>
+																		@foreach($typechild as $key=>$val)
+																		@if($v->id == $val->type_id)
+																		<dd><a title="蒸蛋糕" href="/home/listtype/{{$v->id}}"><span>{{$val->typechildname}}</span></a></dd>
 																		@endif
 																		@endforeach
 																	</dl>
@@ -175,7 +174,6 @@
 													</div>
 												</div>
 											</li>
-											@endif
 											@endforeach
 										</ul>
 									</div>
@@ -227,47 +225,7 @@
 			<div class="shopMainbg">
 				<div class="shopMain" id="shopmain">
 
-					<!--今日推荐 -->
-
-					<div class="am-g am-g-fixed recommendation">
-						<div class="clock am-u-sm-3" ">
-							<img src="/homes/images/2016.png "></img>
-							<p>今日<br>推荐</p>
-						</div>
-						<div class="am-u-sm-4 am-u-lg-3 ">
-							<div class="info ">
-								<h3>真的有鱼</h3>
-								<h4>开年福利篇</h4>
-							</div>
-							<div class="recommendationMain one">
-								<a href="introduction.html"><img src="/homes/images/tj.png "></img></a>
-							</div>
-						</div>						
-						<div class="am-u-sm-4 am-u-lg-3 ">
-							<div class="info ">
-								<h3>囤货过冬</h3>
-								<h4>让爱早回家</h4>
-							</div>
-							<div class="recommendationMain two">
-								<img src="/homes/images/tj1.png "></img>
-							</div>
-						</div>
-						<div class="am-u-sm-4 am-u-lg-3 ">
-							<div class="info ">
-								<h3>浪漫情人节</h3>
-								<h4>甜甜蜜蜜</h4>
-							</div>
-							<div class="recommendationMain three">
-								<img src="/homes/images/tj2.png "></img>
-							</div>
-						</div>
-
-					</div>
-					<div class="clear "></div>
 					<!--热门活动 -->
-
-
-
 					<div class="am-container activity ">
 						<div class="shopTitle ">
 							<h4>活动</h4>
@@ -325,269 +283,60 @@
 					<div class="clear "></div>
 
 
-
-
-
-
+					@foreach($type as $typek => $typev)
                     <div id="f1">
 					<!--甜点-->
 					
 					<div class="am-container ">
-						<div class="shopTitle ">
-							<h4>甜品</h4>
-							<h3>每一道甜品都有一个故事</h3>
-							<div class="today-brands ">
-								<a href="# ">桂花糕</a>
-								<a href="# ">奶皮酥</a>
-								<a href="# ">栗子糕 </a>
-								<a href="# ">马卡龙</a>
-								<a href="# ">铜锣烧</a>
-								<a href="# ">豌豆黄</a>
+						<div class="shopTitle " style="border-bottom:0px solid #000;">
+
+							<h4>{{$typev->typename}}</h4>
+							<h3>商品的故事</h3>
+							<div class="today-brands " style="text-align:left; right: 360px;">
+
+								@foreach($typechild as $typechildk=>$typechildv)
+								@if($typev->id == $typechildv->type_id)
+								<a href="/home/listtype/{{$typev->id}}" style="font-size: 1.2em;color: skyblue">{{$typechildv->typechildname}}</a>
+								@endif
+								@endforeach
 							</div>
-							<span class="more ">
-                    <a href="# ">更多美味<i class="am-icon-angle-right" style="padding-left:10px ;" ></i></a>
-                        </span>
+							
 						</div>
 					</div>
 					
+
+					@endforeach
+
+					<div class="am-container " style="height: 10px;border-bottom: 2px solid #FF5400"></div>
+					<div style="height: 10px"></div>
+
 					<div class="am-g am-g-fixed floodFour">
-						<div class="am-u-sm-5 am-u-md-4 text-one list ">
-							<div class="word">
-								<a class="outer" href="#"><span class="inner"><b class="text">核桃</b></span></a>
-								<a class="outer" href="#"><span class="inner"><b class="text">核桃</b></span></a>
-								<a class="outer" href="#"><span class="inner"><b class="text">核桃</b></span></a>	
-								<a class="outer" href="#"><span class="inner"><b class="text">核桃</b></span></a>
-								<a class="outer" href="#"><span class="inner"><b class="text">核桃</b></span></a>
-								<a class="outer" href="#"><span class="inner"><b class="text">核桃</b></span></a>									
-							</div>
-							<a href="# ">
-								<div class="outer-con ">
-									<div class="title ">
-									开抢啦！
-									</div>
-									<div class="sub-title ">
-										零食大礼包
-									</div>									
-								</div>
-                                  <img src="/homes/images/act1.png " />								
-							</a>
-							<div class="triangle-topright"></div>						
-						</div>
 						
-							<div class="am-u-sm-7 am-u-md-4 text-two sug">
-								<div class="outer-con ">
-									<div class="title ">
-										雪之恋和风大福
-									</div>									
-									<div class="sub-title ">
-										¥13.8
-									</div>
-									<i class="am-icon-shopping-basket am-icon-md  seprate"></i>
-								</div>
-								<a href="# "><img src="/homes/images/2.jpg" /></a>
-							</div>
+							@foreach($goods as $goodsk=>$goodsv)
+							
 
 							<div class="am-u-sm-7 am-u-md-4 text-two">
 								<div class="outer-con ">
 									<div class="title ">
-										雪之恋和风大福
+										{{$goodsv->title}}
 									</div>
 									<div class="sub-title ">
-										¥13.8
+										现价:{{$goodsv->newprice}}
 									</div>
-									<i class="am-icon-shopping-basket am-icon-md  seprate"></i>
+									<div class="sub-title ">
+										原件:{{$goodsv->newprice}}
+									</div>
 								</div>
-								<a href="# "><img src="/homes/images/1.jpg" /></a>
+								<a href="/home/listdetail/{{$goodsv->id}}"><img src="{{$goodsv->goods_photo}}" style="width: 60%" /></a>
 							</div>
+						
+							@endforeach
 
-
-						<div class="am-u-sm-3 am-u-md-2 text-three big">
-							<div class="outer-con ">
-								<div class="title ">
-									小优布丁
-								</div>
-								<div class="sub-title ">
-									¥4.8
-								</div>
-								<i class="am-icon-shopping-basket am-icon-md  seprate"></i>
-							</div>
-							<a href="# "><img src="/homes/images/5.jpg" /></a>
-						</div>
-
-						<div class="am-u-sm-3 am-u-md-2 text-three sug">
-							<div class="outer-con ">
-								<div class="title ">
-									小优布丁
-								</div>
-								<div class="sub-title ">
-									¥4.8
-								</div>
-								<i class="am-icon-shopping-basket am-icon-md  seprate"></i>
-							</div>
-							<a href="# "><img src="/homes/images/3.jpg" /></a>
-						</div>
-
-						<div class="am-u-sm-3 am-u-md-2 text-three ">
-							<div class="outer-con ">
-								<div class="title ">
-									小优布丁
-								</div>
-								<div class="sub-title ">
-									¥4.8
-								</div>
-								<i class="am-icon-shopping-basket am-icon-md  seprate"></i>
-							</div>
-							<a href="# "><img src="/homes/images/4.jpg" /></a>
-						</div>
-
-						<div class="am-u-sm-3 am-u-md-2 text-three last big ">
-							<div class="outer-con ">
-								<div class="title ">
-									小优布丁
-								</div>
-								<div class="sub-title ">
-									¥4.8
-								</div>
-								<i class="am-icon-shopping-basket am-icon-md  seprate"></i>
-							</div>
-							<a href="# "><img src="/homes/images/5.jpg" /></a>
-						</div>
 
 					</div>
+
                  <div class="clear "></div>  
                  </div>
-                 
-  
-                    <div id="f2">
-					<!--坚果-->
-					<div class="am-container ">
-						<div class="shopTitle ">
-							<h4>坚果</h4>
-							<h3>酥酥脆脆，回味无穷</h3>
-							<div class="today-brands ">
-								<a href="# ">腰果</a>
-								<a href="# ">松子</a>
-								<a href="# ">夏威夷果 </a>
-								<a href="# ">碧根果</a>
-								<a href="# ">开心果</a>
-								<a href="# ">核桃仁</a>
-							</div>
-							<span class="more ">
-                    <a href="# ">更多美味<i class="am-icon-angle-right" style="padding-left:10px ;" ></i></a>
-                        </span>
-						</div>
-					</div>
-					<div class="am-g am-g-fixed floodThree ">
-						<div class="am-u-sm-4 text-four list">
-							<div class="word">
-								<a class="outer" href="#"><span class="inner"><b class="text">核桃</b></span></a>
-								<a class="outer" href="#"><span class="inner"><b class="text">核桃</b></span></a>
-								<a class="outer" href="#"><span class="inner"><b class="text">核桃</b></span></a>	
-								<a class="outer" href="#"><span class="inner"><b class="text">核桃</b></span></a>
-								<a class="outer" href="#"><span class="inner"><b class="text">核桃</b></span></a>
-								<a class="outer" href="#"><span class="inner"><b class="text">核桃</b></span></a>									
-							</div>
-							<a href="# ">
-								<img src="/homes/images/act1.png " />
-								<div class="outer-con ">
-									<div class="title ">
-										雪之恋和风大福
-									</div>									
-								</div>
-							</a>
-							<div class="triangle-topright"></div>	
-						</div>
-						<div class="am-u-sm-4 text-four">
-							<a href="# ">
-								<img src="/homes/images/6.jpg" />
-								<div class="outer-con ">
-									<div class="title ">
-										雪之恋和风大福
-									</div>								
-									<div class="sub-title ">
-										¥13.8
-									</div>
-									<i class="am-icon-shopping-basket am-icon-md  seprate"></i>
-								</div>
-							</a>
-						</div>
-						<div class="am-u-sm-4 text-four sug">
-							<a href="# ">
-								<img src="/homes/images/7.jpg" />
-								<div class="outer-con ">
-									<div class="title ">
-										雪之恋和风大福
-									</div>
-									<div class="sub-title ">
-										¥13.8
-									</div>
-									<i class="am-icon-shopping-basket am-icon-md  seprate"></i>
-								</div>
-							</a>
-						</div>
-						
-						<div class="am-u-sm-6 am-u-md-3 text-five big ">
-							<a href="# ">
-								<img src="/homes/images/10.jpg" />
-								<div class="outer-con ">
-									<div class="title ">
-										雪之恋和风大福
-									</div>		
-									<div class="sub-title ">
-										¥13.8
-									</div>
-									<i class="am-icon-shopping-basket am-icon-md  seprate"></i>
-								</div>
-							</a>
-						</div>						
-						<div class="am-u-sm-6 am-u-md-3 text-five ">
-							<a href="# ">
-								<img src="/homes/images/8.jpg" />
-								<div class="outer-con ">
-									<div class="title ">
-										雪之恋和风大福
-									</div>	
-									<div class="sub-title ">
-										¥13.8
-									</div>
-									<i class="am-icon-shopping-basket am-icon-md  seprate"></i>
-								</div>
-							</a>
-						</div>						
-						<div class="am-u-sm-6 am-u-md-3 text-five sug">
-							<a href="# ">
-								<img src="/homes/images/9.jpg" />
-								<div class="outer-con ">
-									<div class="title ">
-										雪之恋和风大福
-									</div>
-									<div class="sub-title ">
-										¥13.8
-									</div>
-									<i class="am-icon-shopping-basket am-icon-md  seprate"></i>
-								</div>
-							</a>
-						</div>
-						<div class="am-u-sm-6 am-u-md-3 text-five big">
-							<a href="# ">
-								<img src="/homes/images/10.jpg" />
-								<div class="outer-con ">
-									<div class="title ">
-										雪之恋和风大福
-									</div>			
-									<div class="sub-title ">
-										¥13.8
-									</div>
-									<i class="am-icon-shopping-basket am-icon-md  seprate"></i>
-								</div>
-							</a>
-						</div>
-						
-					</div>
-
-					<div class="clear "></div>
-					</div>
-   
    
 					<div class="footer ">
 						<div class="footer-hd ">

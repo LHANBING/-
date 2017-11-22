@@ -38,6 +38,7 @@ Route::group(['middleware'=>'adminlogin','prefix'=>'admin','namespace'=>'admins'
 
 	//分类子分类
 	Route::get('/typechild/add','TypechildController@add');
+	Route::get('/typechild/shows','TypechildController@shows');
 	Route::resource('/typechild','TypechildController');
 
 	//分类父分类列表
@@ -66,12 +67,6 @@ Route::group(['middleware'=>'adminlogin','prefix'=>'admin','namespace'=>'admins'
 
 
 
-
-
-
-
-
-
 //前台首页
 Route::get('/','home\IndexController@index');
 
@@ -90,9 +85,9 @@ Route::post('/home/change/phone','home\HomeChangeController@phone');
 Route::resource('/home/change','home\HomeChangeController');
 
 
-//个人中心
-Route::group(['prefix'=>'home/center','namespace'=>'home\center'],function(){
-	//个人中心主页
+//进入个人中心
+Route::group(['middleware'=>'homelogin','prefix'=>'home/center','namespace'=>'home\center'],function(){
+	//首页
 	Route::get('index','IndexController@index');
 	//个人信息
 	Route::get('/info/index','InfoController@index');
@@ -131,10 +126,18 @@ Route::group(['prefix'=>'home/center','namespace'=>'home\center'],function(){
 	Route::post('/fabu/type','fabuController@type');
 	Route::resource('/fabu','fabuController');
 	
+	
+
 
 
 });
 
+//进入前台
+// Route::group(['middleware'=>'homelogin','prefix'=>'home','namespace'=>'home'],function(){
+Route::group(['prefix'=>'home','namespace'=>'home'],function(){
+	//商品分类列表
+	Route::resource('/listtype','ListTypeController');
+	//商品详情页
+	Route::resource('/listdetail','ListDetailController');
 
-
-
+});
