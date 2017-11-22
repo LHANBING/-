@@ -130,6 +130,11 @@ Route::group(['prefix'=>'home/center','namespace'=>'home\center'],function(){
 	//发布二手
 	Route::post('/fabu/type','fabuController@type');
 	Route::resource('/fabu','fabuController');
+
+	//我的二手
+	Route::resource('/myershou','myershouController');
+	Route::get('/myersho/xiajia/{id}','myershouController@xiajia');
+	Route::get('/myersho/shangjia/{id}','myershouController@shangjia');
 	
 
 

@@ -87,7 +87,7 @@
                 <!--悬浮搜索框-->
                 <div class="nav white">
                     <div class="logo">
-                        <img src="/homes/images/logo.png" />
+                        <!-- <img src="/homes/images/logo.png" /> -->
                     </div>
                     <div class="logoBig">
                         <li>
@@ -250,7 +250,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="/home/center/order/index">
+                                <a href="/home/center/myershou">
                                     我的二手
                                 </a>
                             </li>
