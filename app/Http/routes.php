@@ -132,13 +132,18 @@ Route::group(['middleware'=>'homelogin','prefix'=>'home/center','namespace'=>'ho
 	//出售订单
 	// Route::get('','shouchuOrderController@index');
 	//发布二手
+	
 	Route::post('/fabu/type','fabuController@type');
+	Route::post('/fabu/uploadimg','fabuController@uploadimg');
 	Route::resource('/fabu','fabuController');
 
 	//我的二手
 	Route::resource('/myershou','myershouController');
 	Route::get('/myersho/xiajia/{id}','myershouController@xiajia');
 	Route::get('/myersho/shangjia/{id}','myershouController@shangjia');
+
+	//出售二手/订单管理
+	Route::resource('maiOrder','maiOrderController');
 	
 	
 

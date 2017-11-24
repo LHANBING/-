@@ -245,7 +245,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="/home/center/order/index">
+                                <a href="/home/center/maiOrder">
                                     订单管理
                                 </a>
                             </li>
