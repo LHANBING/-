@@ -112,7 +112,7 @@
 																{{$v->pay_yunfei}}元
  															</div>
 															</li>
-														</ul>
+															</ul>
 
 													</div>
 													<div class="order-right">
@@ -125,6 +125,7 @@
 															@elseif ($v->buy_order_status ==2) 待发货 
 															@elseif ($v->buy_order_status ==3) 待收货 
 															@elseif ($v->buy_order_status ==4) 待评价 
+															@elseif ($v->buy_order_status ==5) 已完成 
 														
 															@endif
 
@@ -139,13 +140,14 @@
 				@if ($v->buy_order_status ==1) <div class="am-btn am-btn-danger anniu test{{$v->buy_order_status}}" id="zhifu{{$v->id}}">一键支付{{$v->id}}
 				
 				</div>
-				@elseif ($v->buy_order_status ==2)<div class="am-btn am-btn-danger anniu test{{$v->buy_order_status}}"
-					id="fahuo{{$v->id}}"> 提醒发货{{$v->id}} </div>
-				@elseif ($v->buy_order_status ==3) <div class="am-btn am-btn-danger anniu test{{$v->buy_order_status}}">确认收货 </div>
-			    @elseif ($v->buy_order_status ==4) <div class="am-btn am-btn-danger anniu test{{$v->buy_order_status}}">评价商品</div>
+				@elseif ($v->buy_order_status ==2)<div class="am-btn am-btn-danger anniu test{{$v->buy_order_status}}" id="fahuo{{$v->id}}"> 提醒发货{{$v->id}} </div>
+
+				@elseif ($v->buy_order_status ==3) <div class="am-btn am-btn-danger anniu test{{$v->buy_order_status}}" id="shouhuo{{$v->id}}">确认收货 </div>
+				 @elseif ($v->buy_order_status ==4) <div class="am-btn am-btn-danger anniu test{{$v->buy_order_status}}"><a href="/home/center/comment/add?id={{$v->id}}" style="color:white">评价商品</a></div>
+			    @elseif ($v->buy_order_status ==5) <div class="am-btn am-btn-danger anniu test{{$v->buy_order_status}}"><a href="/home/center/comment/index" style="color:white">查看评价</a></div>
 				@endif	
 					
-
+							
 
 												</li>
 														</div>
@@ -380,10 +382,8 @@
 
 								if(data){
 
-									alert('消息已发送');
-
-									id.attr('class','disabled');
-									id.css('background','blue');
+									alert('消息已发送,请耐心等待哦,若长时间未收到货,请联系买家电话或点击举报');
+									
 								}else{
 									alert('消息发送失败');
 								}
@@ -391,6 +391,41 @@
 						})
 					})
 
+				 //确认收货
+				 $('.test3').live('click',function(){
+
+				 		var id = $(this)
+
+				 	  $.post('/home/center/order/sure',{id:id.attr('id')},function(data){
+
+				 	 		if(data == 1){
+				 	 			alert('操作成功');
+
+				 	 			location.reload();
+
+				 	 		}else{
+				 	 			alert('操作失败')
+				 	 		}	
+				 	  })	
+
+				 })
+				 //确认收货分页
+				  $('.shouhuo').live('click',function(){
+
+				 		var id = $(this)
+
+				 	  $.post('/home/center/order/sure',{id:id.attr('id')},function(data){
+
+				 	 		if(data == 1){
+				 	 			alert('操作成功');
+				 	 			id.parents().find('#alls'+id.attr('id').substr(-1,1)).remove();
+
+				 	 		}else{
+				 	 			alert('操作失败')
+				 	 		}	
+				 	  })	
+
+				 })
 
 			</script>
 
@@ -442,7 +477,9 @@
 							 if(data[i].buy_order_status ==1){ var status ='待付款';  var btn="一键支付"; var a ="zhifu"}
 						else if(data[i].buy_order_status ==2){ var status ='待发货';  var btn="提醒发货"; var a ="fahuo"}
 						else if(data[i].buy_order_status ==3){ var status ='待收货';  var btn="确认收货"; var a ="shouhuo"}
-						else if(data[i].buy_order_status ==4){ var status ='待评价';  var btn="评价商品"; var a ="pingjia"}
+						else if(data[i].buy_order_status ==4){ var status ='待评价';  var btn=
+
+						"<a href='/home/center/comment/add?id="+data[i].id+"' style='color:white'>评价商品</a>"; var a ="pingjia"}
 						else if(data[i].buy_order_status ==5){ var status ='已完成';  var btn="查看评价"; var a ="show"}
 
 						var op = $('<div class="order-status3" id="alls'+data[i].id+'" > <div class="order-title"> <div class="dd-num">订单编号：<a href="javascript:;">'+data[i].order_num+'</a></div> <span>下单时间：'+data[i].order_atime+'</span> </div> <div class="order-content"> <div class="order-left"> <ul class="item-list"> <li class="td td-item"> <div class="item-pic"> <a class="J_MakePoint" href="#"> '+data[i].goods_photo+' </a> </div> <div class="item-info"> <div class="item-basic-info"> <a href="#"> <p class="info-little">商品名</p> <p class="info-little">'+data[i].title+' <br>卖家：'+data[i].sale_uid+' </p> </a> </div> </div> </li> <li class="td td-price"> <div class="item-price">'+data[i].newprice+' </div> </li> <li class="td td-number"> <div class="item-number"> <span>×</span>'+data[i].goods_num+'</div> </li> <li class="td td-operation"> <div class="item-operation">   <div class="item-amount"> '+ data[i].pay_money+' + '+data[i].pay_yunfei+'元</p> </div> </div> </li> </ul> </div> <div class="order-right">  <div class="move-right"> <li class="td td-status"> <div class="item-status"> <p class="Mystatus">'+status+'</p> <p class="order-info"><a href="orderinfo.html"></a></p> </div> </li> <li class="td td-change" style="margin-left: 20px"> <div class="am-btn am-btn-danger anniu '+a+'" id="allss'+data[i].id+'">'+btn +'</div> </li> </div> </div></div></div>'); 

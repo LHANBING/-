@@ -1,3 +1,12 @@
+@if(session('zcsg'))
+	 <script>	
+		alert("{{ session('zcsg')}}");
+		
+	 </script>	
+							
+@endif		
+					
+
 @extends('homes.layout.center')
 @section('title','评价管理')
 
@@ -13,13 +22,14 @@
 		<script src="/homes/AmazeUI-2.4.2/assets/js/jquery.min.js"></script>
 		<script src="/homes/AmazeUI-2.4.2/assets/js/amazeui.js"></script>
 
+
+
 @endsection()
 
 @section('content')
 
 <div class="user-comment">
-						<!--标题 -->
-						<div class="am-cf am-padding">
+	<div class="am-cf am-padding">
 							<div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">评价管理</strong> / <small>Manage&nbsp;Comment</small></div>
 						</div>
 						<hr>
@@ -27,8 +37,8 @@
 						<div data-am-tabs="" class="am-tabs am-tabs-d2 am-margin">
 
 							<ul class="am-avg-sm-2 am-tabs-nav am-nav am-nav-tabs">
-								<li class="am-active"><a href="#tab1">所有评价</a></li>
-								<li><a href="#tab2">有图评价</a></li>
+								<li class="am-active"><a href="#tab1">评价我的</a></li>
+								<li><a href="#tab2">我的评价</a></li>
 
 							</ul>
 
@@ -37,11 +47,12 @@
 
 									<div class="comment-main">
 										<div class="comment-list">
+											@foreach ($res as $k => $v)
 											<ul class="item-list">
 
 												
 												<div class="comment-top">
-													<div class="th th-price">
+													<div class="th th-price" style="width:350px">
 														评价
 													</div>
 													<div class="th th-item">
@@ -51,7 +62,7 @@
 												<li class="td td-item">
 													<div class="item-pic">
 														<a class="J_MakePoint" href="#">
-															<img class="itempic" src="/homes/images/kouhong.jpg_80x80.jpg">
+															<img class="itempic" src="{{$v->goods_photo}}">
 														</a>
 													</div>
 												</li>
@@ -61,25 +72,27 @@
 														<div class="item-opinion">好评</div>
 														<div class="item-name">
 															<a href="#">
-																<p class="item-basic-info">美康粉黛醉美唇膏 持久保湿滋润防水不掉色</p>
+																<p class="item-basic-info">
+																	{{$v->title}}
+																</p>
 															</a>
 														</div>
 													</div>
-													<div class="item-comment">
-														宝贝非常漂亮，超级喜欢！！！ 口红颜色很正呐，还有第两支半价，买三支免单一支的活动，下次还要来买。就是物流太慢了，还要我自己去取快递，店家不考虑换个物流么？
+													<div class="item-comment" style="height:100px">
+														{{$v->comment}} 
 													</div>
 
 													<div class="item-info">
 														<div>
-															<p class="info-little"><span>颜色：12#玛瑙</span> <span>包装：裸装</span> </p>
-															<p class="info-time">2015-12-24</p>
+															<p class="info-little">回复{{$k}} </p>
+															<p class="info-time">{{$v->time}}</p>
 
 														</div>
 													</div>
 												</li>
 
 											</ul>
-
+											@endforeach
 										</div>
 									</div>
 
@@ -88,11 +101,12 @@
 									
 									<div class="comment-main">
 										<div class="comment-list">
-											<ul class="item-list">
-												
+											@foreach ($re as $k => $v)
+											<ul class="item-list" id="{{$res[$k]->id}}all">
+
 												
 												<div class="comment-top">
-													<div class="th th-price">
+													<div class="th th-price" style="width:350px">
 														评价
 													</div>
 													<div class="th th-item">
@@ -102,36 +116,38 @@
 												<li class="td td-item">
 													<div class="item-pic">
 														<a class="J_MakePoint" href="#">
-															<img class="itempic" src="/homes/images/kouhong.jpg_80x80.jpg">
+															<img class="itempic" src="{{$v->goods_photo}}">
 														</a>
 													</div>
-												</li>											
-												
+												</li>
+
 												<li class="td td-comment">
 													<div class="item-title">
 														<div class="item-opinion">好评</div>
 														<div class="item-name">
 															<a href="#">
-																<p class="item-basic-info">美康粉黛醉美唇膏 持久保湿滋润防水不掉色</p>
+																<p class="item-basic-info">
+																	{{$v->title}}
+																</p>
 															</a>
 														</div>
 													</div>
-													<div class="item-comment">
-														宝贝非常漂亮，超级喜欢！！！ 口红颜色很正呐，还有第两支半价，买三支免单一支的活动，下次还要来买。就是物流太慢了，还要我自己去取快递，店家不考虑换个物流么？
-													<div class="filePic"><img alt="" src="/homes/images/image.jpg"></div>	
+													<div class="item-comment" style="height:100px">
+														{{$v->comment}} 
 													</div>
 
 													<div class="item-info">
 														<div>
-															<p class="info-little"><span>颜色：12#玛瑙</span> <span>包装：裸装</span> </p>
-															<p class="info-time">2015-12-24</p>
+											<p class="info-little dels" id="{{$res[$k]->id}}del" style="cursor:pointer;">删除{{$res[$k]->id}} </p>
+											<p class="info-time">{{$v->time}}</p>
 
 														</div>
 													</div>
 												</li>
 
 											</ul>
-
+											@endforeach
+								
 										</div>
 									</div>									
 									
@@ -140,6 +156,34 @@
 						</div>
 
 					</div>
+
+					<script>
+						$('.dels').click(function(){
+
+							 b = $(this);
+
+							 id = parseInt(b.attr('id')); 
+							
+							$.post('/home/center/comment/del',{id:id},function(data){
+
+								if(data ==1 ){
+
+										alert('删除成功');
+									    b.parents().find($('#'+id+'all')).remove();
+								}else{
+									    alert('删除失败');
+								}
+
+							})
+						})	
+
+						$.ajaxSetup({
+						        headers: {
+						            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+						        }
+						});
+
+					</script>
 				
 
 @endsection()

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Model\Good;
+use App\Http\Model\Order;
 
 use \DB;
 class OrderController extends Controller
@@ -16,14 +17,19 @@ class OrderController extends Controller
     	
             $_session['uid']=10;
     		//联查商品
-    		$res=Good::join('orders',function($join){
+    	/*	$res=Good::join('orders',function($join){
 
     			$join->on('goods.id','=','orders.goods_id');
 
-  	  		})->where('orders.buy_uid',$_session['uid'])->orderBy('orders.buy_order_status')->get();
+  	  		})->where('orders.buy_uid',$_session['uid'])->orderBy('orders.buy_order_status')->get(); 
+	*/
+            $res = DB::table('orders')->join('goods','goods.id','=','orders.goods_id')
+                                      ->join('goodsdetail','goodsdetail.goods_id','=','goods.id')
+                                      ->where('orders.buy_uid',$_session['uid'])
+                                      ->orderBy('orders.buy_order_status')
+                                      ->get();
+            //dd($res);                          
 
-
-    		
     	return  view('homes.center.order',['res'=>$res]);
     }
  
@@ -100,6 +106,25 @@ class OrderController extends Controller
           
             echo 2;
         }
+    }
+
+    public function sure(Request $Request)
+    {
+        $id = substr($Request->all()['id'],-1,1);
+
+     
+        $A=DB::table('orders')->where('id',$id)->update(['buy_order_status'=>'4','sale_order_status'=>'4']);
+  
+        
+        if($A ){
+        
+            echo 1;
+        }else{
+         
+            echo 0;
+        }
+
+    
     }
   
 }
