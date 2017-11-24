@@ -152,7 +152,7 @@
 
 
 
-		                    <button id='shanchu' class="am-btn am-btn-danger" onclick="shan({{$ress[$k]->id}})" style='margin-top:3px;'>删除</button>
+		                    <button id='shanchu{{$ress[$k]->id}}' class="am-btn am-btn-danger" onclick="shan({{$ress[$k]->id}})" style='margin-top:3px;'>删除</button>
 
 
 
@@ -210,12 +210,13 @@ function shang(id){
 }
 
 function shan(id){
+
 	if(confirm('确定删除么?')){
 		$.post('/home/center/myershou/'+id,{ '_method':'delete','_token':"{{csrf_token()}}"},function(data){
 			if(data['status'] == 1){
 				// layer.msg(data.info);
 				if(confirm('真的删除了啊')){
-					$('#shanchu').remove();
+					$('#shanchu'+id).parents('.item-list').remove();
 				}
 				
 			}else{

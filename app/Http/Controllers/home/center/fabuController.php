@@ -11,6 +11,8 @@ use App\Http\Model\Typechild;
 use App\Http\Model\Good;
 use App\Http\Model\Goodsdetail;
 use DB;
+use zgldh\QiniuStorage\QiniuStorage;
+
 
 class fabuController extends Controller
 {
@@ -45,47 +47,42 @@ class fabuController extends Controller
     public function store(Request $request)
     {
 
-        // var_dump($request->all());die;
-        if($request->hasFile('goods_photo')){
 
-            //修改名字
-            $name = rand(1111,9999).time();
-            //获取后缀
-            $suffix = $request->file('goods_photo')->getClientOriginalExtension();
-            //移动图片
-            $request->file('goods_photo')->move('./Uploads',$name.'.'.$suffix);
+        $res = $request->except('_token','content','pic');
+        $ress = $request->all();
+        // dd($ress);
+        if($ress['pic']){
 
+            $res['user_id'] = session('uid');
+
+            $res['goodsbianhao']=date('Ymd',time()).rand(100000,999999);
+
+            $data = Good::create($res);
+        
+             //添加goods_detail表数据
+            $detail = $request->only('content','pic');
+            $detail['goods_id'] = $data->id;
+            
+
+            $info = Goodsdetail::insertGetId($detail);
+
+            if ($info) {
+                //返回前台发布成功
+                 return redirect('/home/center/myershou')->with('fbcg','发布成功');
+             }else{
+                // 返回前台发布失败,让他重试 
+                return back()->withInput()->with('fbsb','发布失败,请重试!');
+                // return back()->withInput();
+             }
+
+        }else{
+            //返回前台 滚回去上传图片
+            return back()->withInput()->with('sctp','请上传图片后重试');
         }
 
-        $res = $request->except('_token','goods_photo','content');
+            
+            
 
-        $res['goods_photo'] = '/Uploads/'.$name.'.'.$suffix;
-        $res['user_id'] = session('uid');
-
-        $data = Good::create($res);
-
-        //添加goods_detail表数据
-        $detail = $request->only('content');
-
-        if ($data) {
-
-            $good = DB::table('goods')
-            ->orderBy('id','desc')
-            ->first();
-
-            $goods_id = $good->id;
-
-            $detail['goods_id'] = $good->id;
-            // var_dump($detail);die;
-
-            $res = Goodsdetail::create($detail);
-
-            if ($res) {
-                 return redirect('/home/center/fabu');
-             }else{
-                return back()->withInput();
-                 }
-            }
     }
 
     /**
@@ -141,6 +138,28 @@ class fabuController extends Controller
         ->where('status','1')
         ->get();
         echo json_encode($res);
+        // return 1 ;
+    }
+
+    //多图上传ajax方法
+    public function uploadimg(Request $request){
+        //实例化disk
+        $disk = QiniuStorage::disk('qiniu');
+
+        //获取图片文件信息
+        $file = $request->file('file');
+
+        //获取后缀
+        $suffix = $file->getClientOriginalExtension();
+
+        //拼装新的图片名称
+        $fileName = time().rand(100000,999999).'.'.$suffix;
+
+        //存进七牛
+        $bool=$disk->put('goods/'.$fileName,file_get_contents($file->getRealPath())); 
+
+        //返回文件名称
+        return $fileName;
     }
 
 }
