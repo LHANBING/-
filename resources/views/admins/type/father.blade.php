@@ -65,7 +65,7 @@
 
                                     <td class=" ">
 										<a href="/admin/typechild/{{$val->id}}/edit" class="btn btn-warning">修改</a>
-                                    	<a href="/admin/typechild/{{$val->id}}" class="btn btn-warning">查看商品列表</a>
+                                    	<a href="/admin/typechild/shows?id={{$val->id}}" class="btn btn-warning">查看商品列表</a>
                                     	<form action="/admin/typechild/{{$val->id}}" method="post" style="display: inline;">
 				                             {{ csrf_field() }}
 				                             {{ method_field('DELETE') }}

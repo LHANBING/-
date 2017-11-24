@@ -106,7 +106,10 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
+
+    {   
+
+  
         
     }
 
@@ -117,8 +120,10 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
+    {   
+
         $res = User::where('id',$id)->first();
+
 
         if ( $res['user_photo'] == "/homes/user_photo/default.jpg" ) 
         {

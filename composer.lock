@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "d4dc135850e2f32c072618722e28e7c7",
+    "content-hash": "5becc9fb288f99aeaf9515a9666a46d3",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -226,7 +226,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/flc1125/dysms/a60645c6b35a15fe7fed6282784d2094368fc8f5.zip",
+                "url": "https://api.github.com/repos/flc1125/dysms/zipball/a60645c6b35a15fe7fed6282784d2094368fc8f5",
                 "reference": "a60645c6b35a15fe7fed6282784d2094368fc8f5",
                 "shasum": ""
             },
@@ -261,7 +261,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/Gregwar/Captcha/b4f22bc4794b652fccefae5a5be9565305e11572.zip",
+                "url": "https://api.github.com/repos/Gregwar/Captcha/zipball/b4f22bc4794b652fccefae5a5be9565305e11572",
                 "reference": "b4f22bc4794b652fccefae5a5be9565305e11572",
                 "shasum": ""
             },
@@ -931,6 +931,56 @@
             "time": "2017-03-13T16:22:52+00:00"
         },
         {
+            "name": "predis/predis",
+            "version": "v1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nrk/predis.git",
+                "reference": "f0210e38881631afeafb56ab43405a92cafd9fd1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nrk/predis/zipball/f0210e38881631afeafb56ab43405a92cafd9fd1",
+                "reference": "f0210e38881631afeafb56ab43405a92cafd9fd1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.9"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.8"
+            },
+            "suggest": {
+                "ext-curl": "Allows access to Webdis when paired with phpiredis",
+                "ext-phpiredis": "Allows faster serialization and deserialization of the Redis protocol"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Predis\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Daniele Alessandri",
+                    "email": "suppakilla@gmail.com",
+                    "homepage": "http://clorophilla.net"
+                }
+            ],
+            "description": "Flexible and feature-complete Redis client for PHP and HHVM",
+            "homepage": "http://github.com/nrk/predis",
+            "keywords": [
+                "nosql",
+                "predis",
+                "redis"
+            ],
+            "time": "2016-06-16T16:22:20+00:00"
+        },
+        {
             "name": "psr/log",
             "version": "1.0.2",
             "source": {
@@ -1050,6 +1100,57 @@
             "time": "2016-03-09T05:03:14+00:00"
         },
         {
+            "name": "qiniu/php-sdk",
+            "version": "v7.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/qiniu/php-sdk.git",
+                "reference": "79290fd9cb5d72cc2feef779008b3aaeeac49eb9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/qiniu/php-sdk/79290fd9cb5d72cc2feef779008b3aaeeac49eb9.zip",
+                "reference": "79290fd9cb5d72cc2feef779008b3aaeeac49eb9",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0",
+                "squizlabs/php_codesniffer": "~2.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Qiniu\\": "src/Qiniu"
+                },
+                "files": [
+                    "src/Qiniu/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Qiniu",
+                    "email": "sdk@qiniu.com",
+                    "homepage": "http://www.qiniu.com"
+                }
+            ],
+            "description": "Qiniu Resource (Cloud) Storage SDK for PHP",
+            "homepage": "http://developer.qiniu.com/",
+            "keywords": [
+                "cloud",
+                "qiniu",
+                "sdk",
+                "storage"
+            ],
+            "time": "2017-11-07T06:12:11+00:00"
+        },
+        {
             "name": "swiftmailer/swiftmailer",
             "version": "v5.4.8",
             "source": {
@@ -1113,7 +1214,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/symfony/console/c9a214bc07f1d80c87681f4d7fb7aa97938f78d4.zip",
+                "url": "https://api.github.com/repos/symfony/console/zipball/c9a214bc07f1d80c87681f4d7fb7aa97938f78d4",
                 "reference": "c9a214bc07f1d80c87681f4d7fb7aa97938f78d4",
                 "shasum": ""
             },
@@ -1503,7 +1604,11 @@
             },
             "dist": {
                 "type": "zip",
+<<<<<<< HEAD
                 "url": "https://files.phpcomposer.com/files/symfony/http-kernel/3048915fd5456053435561c70f9586d2b88ef449.zip",
+=======
+                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/3048915fd5456053435561c70f9586d2b88ef449",
+>>>>>>> 5164e9a5ee9362947fe0669d0c660b488f835403
                 "reference": "3048915fd5456053435561c70f9586d2b88ef449",
                 "shasum": ""
             },
@@ -2036,6 +2141,58 @@
                 "environment"
             ],
             "time": "2015-05-30T15:59:26+00:00"
+        },
+        {
+            "name": "zgldh/qiniu-laravel-storage",
+            "version": "0.8.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zgldh/qiniu-laravel-storage.git",
+                "reference": "9fbd26df94fdb3dee3b545f30ed4944f0afdd287"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zgldh/qiniu-laravel-storage/zipball/9fbd26df94fdb3dee3b545f30ed4944f0afdd287",
+                "reference": "9fbd26df94fdb3dee3b545f30ed4944f0afdd287",
+                "shasum": ""
+            },
+            "require": {
+                "league/flysystem": "^1.0",
+                "php": ">=5.3.3",
+                "qiniu/php-sdk": "^7.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "zgldh\\QiniuStorage\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "zgldh",
+                    "email": "zgldh@hotmail.com",
+                    "role": "Original Developer"
+                },
+                {
+                    "name": "abcsun",
+                    "email": "chenglongsun_nj@163.com",
+                    "homepage": "http://github.com/abcsun",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Qiniu Resource (Cloud) Storage SDK for Laravel 5",
+            "keywords": [
+                "cloud",
+                "laravel",
+                "qiniu",
+                "sdk",
+                "storage"
+            ],
+            "time": "2017-10-18T06:01:28+00:00"
         }
     ],
     "packages-dev": [
@@ -3324,7 +3481,11 @@
         },
         {
             "name": "symfony/yaml",
+<<<<<<< HEAD
             "version": "v3.3.6",
+=======
+            "version": "v3.3.13",
+>>>>>>> 5164e9a5ee9362947fe0669d0c660b488f835403
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
@@ -3332,7 +3493,11 @@
             },
             "dist": {
                 "type": "zip",
+<<<<<<< HEAD
                 "url": "https://files.phpcomposer.com/files/symfony/yaml/ddc23324e6cfe066f3dd34a37ff494fa80b617ed.zip",
+=======
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/ddc23324e6cfe066f3dd34a37ff494fa80b617ed",
+>>>>>>> 5164e9a5ee9362947fe0669d0c660b488f835403
                 "reference": "ddc23324e6cfe066f3dd34a37ff494fa80b617ed",
                 "shasum": ""
             },

@@ -65,7 +65,7 @@
                <?php  
 
 
-                    $result = DB::table('manager')->where('id',session('uid'))->first();
+                    $result = DB::table('manager')->where('id',session('mid'))->first();
                     // dd($result);
 
                 ?>
@@ -151,8 +151,8 @@
                     <li>
                         <a href="#"><i class="icon-shopping-cart"></i> 订单管理</a>
                         <ul class="closed">
-                            <li><a href="/admin/order">查看订单</a></li>
-                            <!-- <li><a href="/admin/order/delete">删除订单</a></li> -->
+                            <li><a href="/admin/order/index">已完成订单</a></li>
+                            <li><a href="/admin/order/online">在线订单</a></li> 
                             
                         </ul>
                     </li>
@@ -161,10 +161,14 @@
             <div id="mws-navigation">
                 <ul>
                     <li>
+<<<<<<< HEAD
                         <a href="#"><i class="icon-database"></i> 钱袋管理管理</a>
+=======
+                        <a href="#"><i class="icon-users"></i>钱袋管理</a>
+>>>>>>> 5164e9a5ee9362947fe0669d0c660b488f835403
                         <ul class="closed">
-                            <li><a href="/admin/wallet">已出售订单</a></li>
-                            
+                            <li><a href="/admin/wallet">总进账详情</a></li>
+                            <li><a href="/admin/wallets">总出账详情</a></li>   
                         </ul>
                     </li>
                 </ul>

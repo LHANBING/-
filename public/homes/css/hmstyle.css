@@ -206,7 +206,7 @@ text-align: center;float:none}
 
 @media only screen and (min-width: 640px) {
 /*标题*/
-.shopTitle{background: #fff;}
+/* .shopTitle{background: #fff;} */
 .hmtop{background: #fff;}
 .am-container {padding-left:0px;padding-right:0px ;}
 .am-container.header{padding-left:21px; padding-right:40px ;}
@@ -365,7 +365,7 @@ text-align: center;float:none}
 
 
 /*标题*/
-.shopTitle{text-align: left;position: relative;border-bottom:2px solid #000;margin-top:10px ;}
+.shopTitle{text-align: left;position: relative;margin-top:10px ;}
 .activity .shopTitle{margin-top: 10px;}
 .shopTitle h4{float:left;border: none;margin:7px 0px ;font-size:20px;font-weight: 700;}
 .shopTitle h3{display:block;font-size: 14px;color: #999;float: left;margin-left: 10px;margin-top:12px;}

@@ -25,135 +25,65 @@
 						<div class="user-infoPic">
 
 							<div class="filePic">
-								<input type="file" class="inputPic" allowexts="gif,jpeg,jpg,png,bmp" accept="image/*">
-								<img class="am-circle am-img-thumbnail" src="/homes/images/getAvatar.do.jpg" alt="" />
+	                                  
+								<img class="am-circle am-img-thumbnail" src="http://ozstangaz.bkt.clouddn.com/userphoto/{{$res->user_photo}}" readonly alt="" />
+							
+
 							</div>
 
 							
-
-							<div class="info-m">
-								<div><b>用户名：<i>小叮当</i></b></div>
-								<div class="u-level">
-									<span class="rank r2">
-							             <s class="vip1"></s><a class="classes" href="#">铜牌会员</a>
-						            </span>
-								</div>
-								<div class="u-safety">
-									<a href="safety.html">
-									 账户安全
-									<span class="u-profile"><i class="bc_ee0000" style="width: 60px;" width="0">60分</i></span>
-									</a>
-								</div>
-							</div>
 						</div>
 
 						<!--个人信息 -->
 						<div class="info-main">
-							<form class="am-form am-form-horizontal" action="/home/center/info/edit" method="post"> 
+							<form class="am-form am-form-horizontal" action="/home/center/info/edit" method="" enctype="multipart/form-data" > 
 
 								<div class="am-form-group">
-									<label for="user-name2" class="am-form-label">昵称</label>
+									<label for="user-name2" class="am-form-label">昵称:</label>
 									<div class="am-form-content">
-										<input type="text" id="user-name2" placeholder="nickname">
+										<input type="text" id="user-name2" name="username"  value="{{$res->username}}" readonly>
 
 									</div>
 								</div>
 
+
 								<div class="am-form-group">
-									<label for="user-name" class="am-form-label">姓名</label>
+									<label for="user-phone" class="am-form-label">电话:</label>
 									<div class="am-form-content">
-										<input type="text" id="user-name2" placeholder="name">
+										<input id="user-phone" type="tel" name="tel" value="{{$res->tel}}" readonly >
 
 									</div>
 								</div>
 
 								<div class="am-form-group">
-									<label class="am-form-label">性别</label>
-									<div class="am-form-content sex">
-										<label class="am-radio-inline">
-											<input type="radio" name="radio10" value="male" data-am-ucheck> 男
-										</label>
-										<label class="am-radio-inline">
-											<input type="radio" name="radio10" value="female" data-am-ucheck> 女
-										</label>
-										<label class="am-radio-inline">
-											<input type="radio" name="radio10" value="secret" data-am-ucheck> 保密
-										</label>
-									</div>
-								</div>
-
-								<div class="am-form-group">
-									<label for="user-birth" class="am-form-label">生日</label>
-									<div class="am-form-content birth">
-										<div class="birth-select">
-											<select data-am-selected>
-												<option value="a">2015</option>
-												<option value="b">1987</option>
-											</select>
-											<em>年</em>
-										</div>
-										<div class="birth-select2">
-											<select data-am-selected>
-												<option value="a">12</option>
-												<option value="b">8</option>
-											</select>
-											<em>月</em></div>
-										<div class="birth-select2">
-											<select data-am-selected>
-												<option value="a">21</option>
-												<option value="b">23</option>
-											</select>
-											<em>日</em></div>
-									</div>
-							
-								</div>
-								<div class="am-form-group">
-									<label for="user-phone" class="am-form-label">电话</label>
+									<label for="user-email" class="am-form-label">qq:</label>
 									<div class="am-form-content">
-										<input id="user-phone" placeholder="telephonenumber" type="tel">
+										<input id="user-email" name="qq" type="text"  value="{{$res->qq}}" readonly>
 
 									</div>
 								</div>
+
 								<div class="am-form-group">
-									<label for="user-email" class="am-form-label">电子邮件</label>
+									<label for="user-email" class="am-form-label">电子邮箱:</label>
 									<div class="am-form-content">
-										<input id="user-email" placeholder="Email" type="email">
+										<input id="user-email" name="email" type="email"  value="{{$res->email}}" readonly>
 
 									</div>
 								</div>
-								<div class="am-form-group address">
-									<label for="user-address" class="am-form-label">收货地址</label>
-									<div class="am-form-content address">
-										<a href="address.html">
-											<p class="new-mu_l2cw">
-												<span class="province">湖北</span>省
-												<span class="city">武汉</span>市
-												<span class="dist">洪山</span>区
-												<span class="street">雄楚大道666号(中南财经政法大学)</span>
-												<span class="am-icon-angle-right"></span>
-											</p>
-										</a>
 
-									</div>
-								</div>
-								<div class="am-form-group safety">
-									<label for="user-safety" class="am-form-label">账号安全</label>
-									<div class="am-form-content safety">
-										<a href="safety.html">
-
-											<span class="am-icon-angle-right"></span>
-
-										</a>
-
-									</div>
-								</div>
-								<div class="info-btn">
-									<button style="border:0px">
-										<div class="am-btn am-btn-danger">保存修改</div>
-									</button>
-								</div>
-									{{csrf_field() }}
 							</form>
+								<div class="info-btn">
+								
+									<a href="/home/center/info/edit">
+										<div class="am-btn am-btn-danger" style="border:0px">修改个人信息</div>
+									
+								  	</a>
+								
+								</div>
+                                
+
+									
+							
 						</div>
 
 </div>

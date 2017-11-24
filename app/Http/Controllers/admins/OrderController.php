@@ -6,82 +6,76 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use App\Http\Model\Order;
+use App\Http\Model\User;
+use \DB;
 class OrderController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        return view('admins.order.index');
+    public function index(Request $request)
+    {  
+
+    	//联查买家
+    	$res = Order::join('users',function($join){
+
+    		$join->on('users.id','=','orders.buy_uid');
+
+    	})->where('orders.order_otime','>','')->get();
+
+    	//联查卖家
+    	$r = Order::join('users',function($join){
+
+    		$join->on('users.id','=','orders.sale_uid');
+
+    	})->where('orders.order_otime','>','')->get();
+ 		
+    	//查询信息
+ 		$re = DB::table('goods')->join('orders',function($join){
+
+    		$join->on('orders.goods_id','=','goods.id');
+
+    	})->where('order_num','like','%'.$request->input('search').'%')->where('orders.order_otime','>','')->orderBy('orders.id')->paginate($request->input('num',10));
+
+      	 
+ 		//获取总数
+        $count = Order::where('order_num','like','%'.$request->input('search').'%')->where('orders.order_otime','>','')->count();
+
+ 		$last  = $re->lastPage();
+ 	
+		return view('admins.order.index',['re'=>$re,'res'=>$res,'r'=>$r,'request'=>$request,'count'=>$count,'last'=>$last]);    	
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+    public function online (Request $request)
+    {    
+    	//联查买家
+    	$res = Order::join('users',function($join){
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+    		$join->on('users.id','=','orders.buy_uid');
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+    	})->where('orders.order_otime','')->get();
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+    	//联查卖家
+    	$r = Order::join('users',function($join){
+
+    		$join->on('users.id','=','orders.sale_uid');
+
+    	})->where('orders.order_otime','')->get();
+ 		
+ 		//查询信息
+ 		$re = DB::table('goods')->join('orders',function($join){
+
+    		$join->on('orders.goods_id','=','goods.id');
+
+    	})->where('order_num','like','%'.$request->input('search').'%')->where('orders.order_otime','')->orderBy('orders.id')->paginate($request->input('num',10));
+
+      	 
+ 		//获取总数
+        $count = Order::where('order_num','like','%'.$request->input('search').'%')->where('orders.order_otime','')->count();
+
+ 		$last  = $re->lastPage();
+ 	
+		return view('admins.order.online',['re'=>$re,'res'=>$res,'r'=>$r,'request'=>$request,'count'=>$count,'last'=>$last]);    	
+  
     }
 }

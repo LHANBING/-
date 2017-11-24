@@ -147,82 +147,15 @@
 
 								<!--消费走势-->
 								<div class="module-consumeTrend inner-module">
-									<h3 class="module-title">消费走势</h3>
+									<h3 class="module-income ng-scope" style="font-size: 24px;">余额</h3>
 									<div class="consumeTrend-chart" id="consumeTrend-chart">
-
+										&nbsp;&nbsp;&nbsp;<h2 style="font-size: 20px;">￥：元</h2>
 									</div>
 								</div>
 
-								<!--银行卡使用情况-->
-
-								<div class="module-card inner-module">
-									<h3 class="module-title">银行卡使用情况</h3>
-									<div class="card-chart valid">
-										<div class="cards-carousel" style="display: block;">
-											<div class="mask">
-
-												<div class="bac fn-left"></div>
-												<div style="background-image: url(/homes/images/combo.png);" class="bank ng-binding">中国农业银行</div>
-												<div class="details">
-													<a>查看详情</a>
-												</div>
-											</div>
-										</div>
-										<div class="cards-details" style="display: none;">
-											<div class="bank-name">
-												<div style="background-image: url(/homes/images/combo.png);" class="name fn-left"></div>
-												<span class="close fn-right"><a>X</a></span>
-											</div>
-											<div class="bank-detail">
-												<div class="totalin fn-left">
-													<span class="fn-left">流入</span>
-													<span class="amount fn-right">0.00</span>
-												</div>
-												<div class="totalout fn-left">
-													<span class="fn-left">流出</span>
-													<span class="amount fn-right">0.00</span>
-												</div>
-												<div class="expand fn-left">
-													<span class="fn-left">支出</span>
-													<span class="amount fn-right">0.00</span>
-												</div>
-												<div class="withdraw fn-left">
-													<span class="fn-left">提现</span>
-													<span class="amount fn-right">
-							                                0.00
-                            						</span>
-												</div>
-												<div class="recharge fn-left">
-													<span class="fn-left">充值</span>
-													<span class="amount fn-right">
-                                                            0.00
-                            						</span>
-												</div>
-
-												<div class="refund fn-left">
-													<span class="fn-left">银行卡退款</span>
-													<span class="amount fn-right ">0.00</span>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<script>
-									$(document).ready(function (ev) {
 								
-									    $('.cards-carousel .details').on('click', function (ev) {
-								             $('.cards-details').css("display","block");
-								             $('.cards-carousel').css("display","none");								 
-									    });									   									    
+
 								
-									    $('.cards-details .close').on('click', function (ev) {
-								             $('.cards-details').css("display","none");
-								             $('.cards-carousel').css("display","block");								 
-									    });									    
-									    									   								    
-									});
-								</script>
 
 							</div>
 

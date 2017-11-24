@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Model\Typechild;
+use App\Http\Model\Good;
+use App\Http\Model\Goodsdetail;
 
 
 class TypechildController extends Controller
@@ -66,7 +68,30 @@ class TypechildController extends Controller
      */
     public function show($id)
     {
-        echo '商品列表';
+        $res = Goodsdetail::where('goods_id',$id)->first();
+
+        // dd($res);die;
+
+        return view('admins.type.show',['res'=>$res]);
+
+    }
+     public function shows(Request $request)
+    {
+       /* $res = Good::where('typechild_id',$id)->get();
+        return view('admins.type.detail',['res'=>$res]);*/
+
+        $id = $_GET['id'];
+
+        $res = Good::where('title','like','%'.$request->input('search').'%')->
+        where('typechild_id',$id)->
+        orderBy('id','asc')->
+        paginate($request->input('num',10));
+
+        $count = Good::where('title','like','%'.$request->input('search').'%')->
+        where('typechild_id',$id)->count();
+        $last= $res->lastPage();
+
+        return view('admins.type.detail',['res'=>$res,'request'=>$request,'count'=>$count,'last'=>$last]);
     }
 
     /**

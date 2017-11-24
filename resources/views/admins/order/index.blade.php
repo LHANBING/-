@@ -10,24 +10,25 @@
         <span>
             <i class="icon-table">
             </i>
-            订单列表页面
+            已完成订单列表
         </span>
     </div>
     <div class="mws-panel-body no-padding">
         <div id="DataTables_Table_1_wrapper" class="dataTables_wrapper" role="grid">
-       		 <form action="/admin/user" method="get">
+       		 <form action="/admin/order/index" method="get">
 	            <div id="DataTables_Table_1_length" class="dataTables_length">
 	                <label>
 	                    显示
 	                    <select size="1" name="num" aria-controls="DataTables_Table_1">
-	                        <option value="10">
+	                        <option value="5" @if(isset($request->num) ? $request->num : '5' ) @endif>
+	                            5
+	                        </option>
+	                        <option value="10" @if($request->num == '10') selected="selected" @endif >
 	                            10
 	                        </option>
-	                        <option value="25">
-	                            25
-	                        </option>
-	                        <option value="50">
-	                            50
+	                        <option value="15" @if($request->num == '15')
+                             selected = "selected" @endif   >
+	                            15
 	                        </option>
 	                    </select>
 	                    条数据
@@ -39,7 +40,7 @@
 	                    <input type="text" name="search" aria-controls="DataTables_Table_1" value="{{ isset($request->search) ? $request->search : '' }}">
 	                </label>
 		
-					<button class="btn btn-danger">搜索</button>
+					<button class="btn btn-info">搜索</button>
 
 	            </div>
 			</form>
@@ -50,85 +51,113 @@
                     <tr role="row">
                         <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
-                        style="width: 191px;">
+                        style="width: 20px;">
                             ID
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
-                        style="width: 200px;">
-                            用户名
+                        style="width: 40px;">
+                            买家
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending"
-                        style="width: 180px;">
-                            邮箱
+                        style="width: 40px;">
+                            卖家
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending"
-                        style="width: 166.193px;">
-                            手机号
+                        style="width: 40px;">
+                            商品
+                        </th>
+                       
+                        <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
+                        rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
+                        style="width: 40px;">
+                            订单号
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
-                        style="width: 125.193px;">
-                            头像
+                        style="width: 60px;">
+                            下单时间
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
-                        style="width: 125.193px;">
-                            状态
+                        style="width: 60px;">
+                            结单时间
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
-                        style="width: 160px;">
+                        style="width: 60px;">
+                            价格/运费
+                        </th>
+
+                        <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
+                        rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
+                        style="width: 60px;">
                             操作
                         </th>
                     </tr>
                 </thead>
                 <tbody role="alert" aria-live="polite" aria-relevant="all">
 					
-					{{--@foreach($res as $k => $v) 
-
+                    @foreach($re as $k => $v) 
+					
+                    
                     <tr class="@if($k % 2 == 0) odd @else even @endif" style="height: 90px">
                         <td class="">
                            {{$v->id}}
                         </td>
+
                          <td class="">
-                           {{$v->username}}
+                            {{$res[$k]->username}}
+                        </td>
+                       
+                         <td class="">
+                         	{{$r[$k]->username}}
                         </td>
                          <td class="">
-                           {{$v->email}}
-                        </td>
-                         <td class="">
-                           {{$v->phone}}
-                        </td>
-                         <td class="">
-                         	<img src="{{$v->profile}}" width="50%" alt="">
-                        </td>
-                         <td class="">
-                         	<button class="btn btn-info">{{$v->status ? '开启':'关闭'}}</button>
+                         	  {{$v->title}}
+                               X 
+                              {{$r[$k]->goods_num}}
                         </td>
                         <td class="">
-                           <a href="/admin/user/{{$v->id}}/edit" class="btn btn-danger">修改</a>
-
-                           <form action="/admin/user/{{$v->id}}" method="post" style="display: inline;">
-                             
-                             {{ csrf_field() }}
-                             {{ method_field('DELETE') }}
-                             <button class="btn btn-warning">删除</button>  
-                           </form>
+                             {{$r[$k]->order_num}}
                         </td>
-
+                         <td class="">
+                            {{$r[$k]->order_atime}}
+                            
+                        </td>
+                         <td class="">
+                            {{$r[$k]->order_otime}} 
+                           
+                         
+                           
+                            
+                        </td>
+                        <td class="">
+                             {{$r[$k]->pay_money  }}
+                            +
+                            {{$r[$k]->pay_yunfei}}    元
+                        </td>
+                       
+                        <td class="">
+                         
+                         <a href="" style="color:blue;font-size:15px">查看评价</a>
+                          
+                        </td>
+  
                     </tr>
 
-                    @endforeach--}}
+                
+                    @endforeach
                     
                 </tbody>
             </table>
-           {{-- <div class="dataTables_info" id="DataTables_Table_1_info">
-                Showing 1 to {{$last}} of {{$count}} entries
+           <div class="dataTables_info" id="DataTables_Table_1_info">
+           
+              
             </div>
-            --}}
+        
                 <style>
                     .pagination li{
                         float: left;
@@ -179,7 +208,7 @@
                 </style>
             <div class="dataTables_paginate paging_full_numbers" id="paginate">
 
-                 {{--   {!! $res->appends($request->all())->render() !!}  --}}
+                  {!! $re->appends($request->all())->render() !!}  
             </div>
         </div>
     </div>
