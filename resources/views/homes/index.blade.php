@@ -16,6 +16,9 @@
 		<link href="/homes/css/skin.css" rel="stylesheet" type="text/css" />
 		<script src="/homes/AmazeUI-2.4.2/assets/js/jquery.min.js"></script>
 		<script src="/homes/AmazeUI-2.4.2/assets/js/amazeui.min.js"></script>
+		
+		<script src="/homes/js/jquery-1.8.3.min.js"></script>
+
 
 	</head>
 
@@ -37,11 +40,20 @@
 						<div class="menu-hd MyShangcheng"><a href="/home/logout" target="_top"><i class="am-icon-user am-icon-fw"></i>退出</a></div>
 					</div>
 					<div class="topMessage favorite">
-						<div class="menu-hd"><a href="#" target="_top"><i class="am-icon-heart am-icon-fw"></i><span>收藏夹</span></a>
-					</div>
-					
-				</ul>
+						<div class="menu-hd"><a href="home/center/news/index" target="_top" id="as"><img src="/homes/images/12news.png" alt="" style="width:13px;margin-top:-5px" /> 
+
+						@if($a == 0 )
+						<span>消息</span>
+						@else
+						<span id="news">消息{{$a}}</span>
+						@endif
+
+						</a>
+						</div>
+					</ul>
 				</div>
+
+			
 
 				<!--悬浮搜索框-->
 
@@ -429,6 +441,8 @@
 			
 		<script>
 			window.jQuery || document.write('<script src="/homes/basic/js/jquery.min.js "><\/script>');
+
+
 		</script>
 		<script type="text/javascript " src="/homes/basic/js/quick_links.js "></script>
 	</body>

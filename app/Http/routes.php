@@ -70,6 +70,7 @@ Route::group(['middleware'=>'adminlogin','prefix'=>'admin','namespace'=>'admins'
 //前台首页
 Route::get('/','home\IndexController@index');
 
+
 //进入前台注册页面
 Route::post('/home/register/phone','home\HomeRegisterController@phone');
 Route::resource('/home/register','home\HomeRegisterController');
@@ -112,6 +113,7 @@ Route::group(['middleware'=>'homelogin','prefix'=>'home/center','namespace'=>'ho
 	Route::post('/order/list1','OrderController@list1');
 	Route::post('/order/list','OrderController@list');
 	Route::get('/order/pay','OrderController@pay');
+	Route::post('/order/sure','OrderController@sure');
 
 	//退换货
 	Route::get('/change/index','ChangeController@index');
@@ -134,9 +136,15 @@ Route::group(['middleware'=>'homelogin','prefix'=>'home/center','namespace'=>'ho
 	Route::get('/foot/index','FootController@index');
 	//评论
 	Route::get('/comment/index','CommentController@index');
+	Route::get('/comment/add','CommentController@add');
+	Route::post('/comment/stro','CommentController@stro');
+	Route::post('/comment/del','CommentController@del');
 	//消息
 	Route::get('/news/index','NewsController@index');
 	Route::post('/news/add','NewsController@add');
+	Route::get('/news/readed','NewsController@readed');
+	Route::get('/news/show','NewsController@show');
+	Route::post('/news/del','NewsController@del');
 	//出售订单
 	// Route::get('','shouchuOrderController@index');
 	//发布二手
