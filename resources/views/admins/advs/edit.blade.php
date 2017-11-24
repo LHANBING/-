@@ -1,6 +1,6 @@
 @extends('admins.layout.admins')
 
-@section('title','友情链接添加页面')
+@section('title','广告修改页面')
 
 @section('content')
   
@@ -8,7 +8,7 @@
 <div class="mws-panel grid_8">
 						
                 	<div class="mws-panel-header">
-                    	<span><i class="icon-ok"></i> 添加广告</span>
+                    	<span><i class="icon-ok"></i> 修改广告</span>
                     </div> 
 
 						
@@ -32,50 +32,37 @@
 						                            </ul>
 						                        </div> -->
 
-                    	<form action="/admin/advs" class="mws-form" method="post" enctype="multipart/form-data">
+                    	<form action="/admin/advs/{{$res->id}}" class="mws-form" method="post" enctype="multipart/form-data">
                         	<div style="display:none;" class="mws-form-message error" id="mws-validate-error"></div>
                         	<div class="mws-form-inline">
                             	<div class="mws-form-row">
                                 	<label class="mws-form-label">商家:</label>
                                 	<div class="mws-form-item">
-                                    	<input type="text" class="required large" name="advs_a" value="{{old('advs_a')}}">
+                                    	<input type="text" class="required large" name="advs_a" value="{{$res->advs_a}}">
                                     </div>
                                 </div>
                             	<div class="mws-form-row">
                                 	<label class="mws-form-label">产品:</label>
                                 	<div class="mws-form-item">
-                                    	<input type="text" class="required email large" name="advs_d" value="{{old('advs_d')}}">
+                                    	<input type="text" class="required email large" name="advs_d" value="{{$res->advs_d}}">
                                     </div>
                                 </div>
                             	<div class="mws-form-row">
-                                	<label class="mws-form-label">广告详情:</label>
+                                	<label class="mws-form-label">产品详情:</label>
                                 	<div class="mws-form-item">
-                                    	<input type="text" class="required url large" name="advs_v" value="{{old('advs_v')}}">
+                                    	<input type="text" class="required url large" name="advs_v" value="{{$res->advs_v}}">
                                     </div>
                                 </div>
                             	
-                                <div class="mws-form-row">
-									<label class="mws-form-label">
-									    广告图片
-									</label>
-									<div class="mws-form-item">
-									    <div style="position: relative;" class="fileinput-holder" name="advs_s">
-									        
-									            
-									            <input type="file" name="advs_s" placeholder="文件上传" style="width: 100%; padding-
-									            right: 84px; position: absolute; top: 0px; right: 0px; margin: 0px; cursor:
-									            pointer; font-size: 999px; opacity: 0; z-index: 999;">
-									        </span>
-									    </div>
-									</div>
-									</div>
+                                
 									
 </div>
 <div class="mws-button-row">
 
 	{{ csrf_field() }}
+	{{method_field('PUT')}}
     <input type="submit" value='提交' class="btn btn-danger">
-    <input type="reset" class="btn btn-danger">
+    
 	
 </div>
 </form>
