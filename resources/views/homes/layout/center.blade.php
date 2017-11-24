@@ -12,8 +12,8 @@
         <script src="/homes/validate.js"></script>
 
         <script type="text/javascript" src="{{url('/homes/layer1/jquery.js')}}"></script>
-            <script type="text/javascript" src="{{url('/homes/layer1/layer.js')}}"></script>
-            <script type="text/javascript" src="{{url('/homes/layer1/extend/layer.ext.js')}}"></script>
+        <script type="text/javascript" src="{{url('/homes/layer1/layer.js')}}"></script>
+        <script type="text/javascript" src="{{url('/homes/layer1/extend/layer.ext.js')}}"></script>
         <style type="text/css">
             .yanzheng{
                 color: red;
@@ -223,7 +223,8 @@
                                 </a>
                             </li>
                             <li> <a href="/home/center/info/user_change">修改密码</a></li>
-                            <li> <a href="/home/center/address">收货地址</a></li>                  
+                            <li><a href="/home/center/address">收货地址管理</a></li>                  
+                                              
                         </ul>
                     </li>
                     <li class="person">

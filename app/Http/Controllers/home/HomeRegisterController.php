@@ -38,7 +38,7 @@ class HomeRegisterController extends Controller
     public function phone (Request $request)
     {	
     	
-	    $phone = $request->input('tel');
+	  $phone = $request->input('tel');
 	   
  		$res = User::where('tel',$phone)->first();
 		if($res)

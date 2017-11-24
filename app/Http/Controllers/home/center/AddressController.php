@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Http\Model\Useraddress;
+
 class AddressController extends Controller
 {
     /**
@@ -18,6 +20,7 @@ class AddressController extends Controller
     {
         return view('homes.center.address'); 
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -36,8 +39,45 @@ class AddressController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        echo "处理新增数据";
+    {   
+        $shi = $request->input('city');
+        var_dump($shi);die;
+        if($shi)
+        {
+            echo 1;
+        }
+        echo 0 ;die;
+        $res = $request->except('_token');
+        //从文件中读取数据到PHP变量
+        $json_string = file_get_contents('./homes/city/script/list.json');
+             
+        // 把JSON字符串转成PHP数组
+        $data = json_decode($json_string, true);
+         // province
+         // city
+         // area
+
+        // $sheng = $data[$req['sheng']];
+        // $shi = $data[$req['shi']];
+        // $xian = $data[$req['xian']];
+        // $xiangxi = $req['addr'];      
+
+        
+    
+
+
+
+        $res['user_id'] = session('uid');
+
+        // $data = Useraddress::insert($res);
+
+        // if($data){
+
+        //     return redirect('home/center/listindex');
+        // } else {
+
+        //     return back()->withInput();
+        // }
     }
 
     /**
