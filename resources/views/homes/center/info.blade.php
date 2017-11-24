@@ -74,18 +74,11 @@
 							</form>
 								<div class="info-btn">
 								
-								@if($res->perfect_edit == 0)	
-									<a href="/home/center/info/perfect">
-										<div class="am-btn am-btn-danger" style="border:0px">完善个人信息</div>
-									
-								  	</a>
-									
-		                        @else
 									<a href="/home/center/info/edit">
 										<div class="am-btn am-btn-danger" style="border:0px">修改个人信息</div>
 									
 								  	</a>
-								@endif
+								
 								</div>
                                 
 

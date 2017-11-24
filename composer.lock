@@ -1109,7 +1109,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/qiniu/php-sdk/zipball/79290fd9cb5d72cc2feef779008b3aaeeac49eb9",
+                "url": "https://files.phpcomposer.com/files/qiniu/php-sdk/79290fd9cb5d72cc2feef779008b3aaeeac49eb9.zip",
                 "reference": "79290fd9cb5d72cc2feef779008b3aaeeac49eb9",
                 "shasum": ""
             },
@@ -2148,7 +2148,11 @@
             },
             "dist": {
                 "type": "zip",
+<<<<<<< HEAD
                 "url": "https://api.github.com/repos/zgldh/qiniu-laravel-storage/zipball/9fbd26df94fdb3dee3b545f30ed4944f0afdd287",
+=======
+                "url": "https://files.phpcomposer.com/files/zgldh/qiniu-laravel-storage/9fbd26df94fdb3dee3b545f30ed4944f0afdd287.zip",
+>>>>>>> a632f67fd7451fb37480054a213cd4046fcf447d
                 "reference": "9fbd26df94fdb3dee3b545f30ed4944f0afdd287",
                 "shasum": ""
             },

@@ -110,13 +110,19 @@
 						});
 						
 
-					}else
+					}else if(data == "0")
 					{	
 						layer.open({
 						 
 						  content:'短信发送失败！请重新操作！'
 						});
 						
+					}else
+					{
+						layer.open({
+						 
+						  content:'该手机号已注册！'
+						});
 					}
 
 				 })

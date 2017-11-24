@@ -56,7 +56,7 @@ class HomeLoginController extends Controller
             return redirect('/');
         } else {
             // 返回登录页(带提示信息）
-        return redirect('/home/login')->with('status', '用户名或密码错误，请重新登录。');
+        return redirect('/home/login')->with('status', '手机号或密码错误，请重新登录。');
         }
          
     }

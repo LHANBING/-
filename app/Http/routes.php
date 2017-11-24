@@ -89,19 +89,23 @@ Route::resource('/home/change','home\HomeChangeController');
 Route::group(['middleware'=>'homelogin','prefix'=>'home/center','namespace'=>'home\center'],function(){
 	//首页
 	Route::get('index','IndexController@index');
+
 	//个人信息
 	Route::get('/info/index','InfoController@index');
+	// 修改个人资料
 	Route::get('/info/edit','InfoController@edit');
 	Route::post('/info/doedit','InfoController@doedit');
-	Route::get('/info/perfect','InfoController@perfect');
-	Route::post('/info/doperfect','InfoController@doperfect');
-	
+	// 修改头像
+	Route::post('/info/douserphoto','InfoController@douserphoto');
+	// 修改密码
 	Route::get('/info/user_change','InfoController@user_change');
 	Route::post('/info/douser_change','InfoController@douser_change');
 
-
 	//地址管理
+	Route::post('/address/listindex','AddressController@listindex');
 	Route::resource('/address','AddressController');
+	
+
 
 	//订单管理
 	Route::get('/order/index','OrderController@index');
@@ -112,6 +116,8 @@ Route::group(['middleware'=>'homelogin','prefix'=>'home/center','namespace'=>'ho
 	//退换货
 	Route::get('/change/index','ChangeController@index');
 
+
+
 	//充值
 	Route::get('/recharge/index','RechargeController@index');
 	Route::post('/dorecharge','RechargeController@dorecharge');
@@ -119,6 +125,8 @@ Route::group(['middleware'=>'homelogin','prefix'=>'home/center','namespace'=>'ho
 	Route::get('/bill/index','BillController@index');
 	Route::get('/bill/in','BillController@in');
 	Route::get('/bill/out','BillController@out');
+
+
 
 	//收藏
 	Route::get('/collection/index','CollectionController@index');

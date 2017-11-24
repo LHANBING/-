@@ -90,6 +90,16 @@ return [
             'access'    => 'public'  //空间访问控制 public 或 private
         ],
 
+        'qiniu' => [
+            'driver'  => 'qiniu',
+            'domain' => 'ozstangaz.bkt.clouddn.com',
+            'access_key'=> 'epNeudY5NPFcDddMNTY9n_yNYlZWee09PewJuTrq',  //AccessKey
+            'secret_key'=> 'hUqVxcvpx_p-5aWlRrZogCarcDAtShB_Uq0nzFPe',  //SecretKey
+            'bucket'    => 'zhangkang',  //Bucket名字
+            'notify_url'=> 'ozstangaz.bkt.clouddn.com',  //持久化处理回调地址
+            'access'    => 'public'  //空间访问控制 public 或 private
+        ],     
+
     ],
 
 ];
