@@ -106,7 +106,7 @@
 															</li>
 															<li class="td td-price">
 																<div class="item-price">
-																	<a href="">查看详情</a>
+																	<a href="/home/listdetail/{{$v->id}}">查看详情</a>
 																</div>
 															</li>
 														</ul>

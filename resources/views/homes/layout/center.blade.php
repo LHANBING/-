@@ -71,20 +71,6 @@
                             </a>
                         </div>
                     </div>
-                    <div class="topMessage mini-cart">
-                        <div class="menu-hd">
-                            <a id="mc-menu-hd" href="#" target="_top">
-                                <i class="am-icon-shopping-cart  am-icon-fw">
-                                </i>
-                                <span>
-                                    购物车
-                                </span>
-                                <strong id="J_MiniCartNum" class="h">
-                                    0
-                                </strong>
-                            </a>
-                        </div>
-                    </div>
                     <div class="topMessage favorite">
                         <div class="menu-hd">
                             <a href="#" target="_top">
@@ -291,11 +277,6 @@
                             <li>
                                 <a href="/home/center/collection/index">
                                     收藏
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/home/center/foot/index">
-                                    足迹
                                 </a>
                             </li>
                             <li>

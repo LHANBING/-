@@ -36,9 +36,6 @@
 					<div class="topMessage my-shangcheng">
 						<div class="menu-hd MyShangcheng"><a href="/home/logout" target="_top"><i class="am-icon-user am-icon-fw"></i>退出</a></div>
 					</div>
-					<div class="topMessage mini-cart">
-						<div class="menu-hd"><a id="mc-menu-hd" href="#" target="_top"><i class="am-icon-shopping-cart  am-icon-fw"></i><span>购物车</span><strong id="J_MiniCartNum" class="h">0</strong></a></div>
-					</div>
 					<div class="topMessage favorite">
 						<div class="menu-hd"><a href="#" target="_top"><i class="am-icon-heart am-icon-fw"></i><span>收藏夹</span></a>
 					</div>
@@ -230,9 +227,7 @@
 						<div class="shopTitle ">
 							<h4>活动</h4>
 							<h3>每期活动 优惠享不停 </h3>
-							<span class="more ">
-                              <a href="# ">全部活动<i class="am-icon-angle-right" style="padding-left:10px ;" ></i></a>
-                        	</span>
+							
 						</div>
 					  <div class="am-g am-g-fixed ">
 						<div class="am-u-sm-3 ">
@@ -246,41 +241,10 @@
 							</div>														
 						</div>
 						
-						<div class="am-u-sm-3 ">
-						  <div class="icon-sale two "></div>	
-							<h4>特惠</h4>
-							<div class="activityMain ">
-								<img src="/homes/images/activity2.jpg "></img>
-							</div>
-							<div class="info ">
-								<h3>春节送礼优选</h3>								
-							</div>							
-						</div>						
 						
-						<div class="am-u-sm-3 ">
-							<div class="icon-sale three "></div>
-							<h4>团购</h4>
-							<div class="activityMain ">
-								<img src="/homes/images/activity3.jpg "></img>
-							</div>
-							<div class="info ">
-								<h3>春节送礼优选</h3>
-							</div>							
-						</div>						
-
-						<div class="am-u-sm-3 last ">
-							<div class="icon-sale "></div>
-							<h4>超值</h4>
-							<div class="activityMain ">
-								<img src="/homes/images/activity.jpg "></img>
-							</div>
-							<div class="info ">
-								<h3>春节送礼优选</h3>
-							</div>													
-						</div>
 					  </div>
                    </div>
-					<div class="clear "></div>
+				<div class="clear "></div>
 
 
 					@foreach($type as $typek => $typev)
@@ -404,15 +368,7 @@
 						</div>
 
 					</div>
-					<div id="shopCart " class="item ">
-						<a href="# ">
-							<span class="message "></span>
-						</a>
-						<p>
-							购物车
-						</p>
-						<p class="cart_num ">0</p>
-					</div>
+				
 					<div id="asset " class="item ">
 						<a href="# ">
 							<span class="view "></span>
@@ -423,15 +379,7 @@
 						</div>
 					</div>
 
-					<div id="foot " class="item ">
-						<a href="# ">
-							<span class="zuji "></span>
-						</a>
-						<div class="mp_tooltip ">
-							我的足迹
-							<i class="icon_arrow_right_black "></i>
-						</div>
-					</div>
+				
 
 					<div id="brand " class="item ">
 						<a href="#">

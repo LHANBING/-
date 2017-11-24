@@ -58,20 +58,6 @@
                             </a>
                         </div>
                     </div>
-                    <div class="topMessage mini-cart">
-                        <div class="menu-hd">
-                            <a id="mc-menu-hd" href="#" target="_top">
-                                <i class="am-icon-shopping-cart  am-icon-fw">
-                                </i>
-                                <span>
-                                    购物车
-                                </span>
-                                <strong id="J_MiniCartNum" class="h">
-                                    0
-                                </strong>
-                            </a>
-                        </div>
-                    </div>
                     <div class="topMessage favorite">
                         <div class="menu-hd">
                             <a href="#" target="_top">
@@ -241,31 +227,12 @@
                             </div>
 
                         </div>
-                        <div id="shopCart" class="item">
-                            <a href="#">
-                                <span class="message"></span>
-                            </a>
-                            <p>
-                                购物车
-                            </p>
-                            <p class="cart_num">0</p>
-                        </div>
                         <div id="asset" class="item">
                             <a href="#">
                                 <span class="view"></span>
                             </a>
                             <div class="mp_tooltip">
                                 我的资产
-                                <i class="icon_arrow_right_black"></i>
-                            </div>
-                        </div>
-
-                        <div id="foot" class="item">
-                            <a href="#">
-                                <span class="zuji"></span>
-                            </a>
-                            <div class="mp_tooltip">
-                                我的足迹
                                 <i class="icon_arrow_right_black"></i>
                             </div>
                         </div>

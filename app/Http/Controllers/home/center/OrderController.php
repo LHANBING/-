@@ -66,6 +66,7 @@ class OrderController extends Controller
         $arr=DB::table('users')->join('orders',function($query){
 
             $query->on('orders.buy_uid','=','users.id');
+            
         })->where('orders.id',$id)->first();
 
         //判断用户钱是否够

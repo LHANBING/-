@@ -8,22 +8,7 @@
         <title>
             @yield('title')
         </title>
-        @section('cssjs')
-        
-        <link href="/homes/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css" />
-        <link href="/homes/AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css" />
-        <link href="/homes/basic/css/demo.css" rel="stylesheet" type="text/css" />
-        <link type="text/css" href="/homes/css/optstyle.css" rel="stylesheet" />
-        <link type="text/css" href="/homes/css/style.css" rel="stylesheet" />
-
-        <script type="text/javascript" src="/homes/basic/js/jquery-1.7.min.js"></script>
-        <script type="text/javascript" src="/homes/basic/js/quick_links.js"></script>
-
-        <script type="text/javascript" src="/homes/AmazeUI-2.4.2/assets/js/amazeui.js"></script>
-        <script type="text/javascript" src="/homes/js/jquery.imagezoom.min.js"></script>
-        <script type="text/javascript" src="/homes/js/jquery.flexslider.js"></script>
-        <script type="text/javascript" src="/homes/js/list.js"></script>
-        @show()
+       
     </head>
     
     <body>
@@ -55,20 +40,6 @@
                                 <i class="am-icon-user am-icon-fw">
                                 </i>
                                 退出
-                            </a>
-                        </div>
-                    </div>
-                    <div class="topMessage mini-cart">
-                        <div class="menu-hd">
-                            <a id="mc-menu-hd" href="#" target="_top">
-                                <i class="am-icon-shopping-cart  am-icon-fw">
-                                </i>
-                                <span>
-                                    购物车
-                                </span>
-                                <strong id="J_MiniCartNum" class="h">
-                                    0
-                                </strong>
                             </a>
                         </div>
                     </div>
@@ -167,7 +138,8 @@
         <div class="center">
             <div class="col-main">
                 <div class="main-wrap">
-                    @section('content') @show
+                    @section('content') 
+                    @show
                 </div>
             </div>
         </div>
