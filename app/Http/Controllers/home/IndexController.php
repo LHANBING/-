@@ -26,8 +26,21 @@ class IndexController extends Controller
         $res = array_slice($list,1,5);
         $goods = Good::whereIn('id',$res)->get();
     
-        $a= DB::table('message')->where('receive_uid',10)->where('mes_status','0')->count(); 
-    	return view('homes.index',['type'=>$type,'typechild'=>$typechild,'goods'=>$goods,'a'=>$a]);
+        //这是出售消息 
+        $b = DB::table('message')->join('orders','orders.id','=','message.order_id')
+                                    ->where('orders.sale_uid','=',session('uid'))
+                                    ->where('mes_status','0')
+                                    ->count();  
+        //这是购买消息   
+        $a = DB::table('message')->join('orders','orders.id','=','message.order_id')
+                                 ->where('orders.buy_uid','=',session('uid'))
+                                 ->where('mes_status','0') 
+                                 ->count();                             
+
+        $num = $a + $b;           
+        //dd($num);                 
+        
+    	return view('homes.index',['type'=>$type,'typechild'=>$typechild,'goods'=>$goods,'num'=>$num]);
     }
 
 }

@@ -14,16 +14,46 @@ class CommentController extends Controller
     public function index()
     {	
 
-    
+          
+        //评价我的
+    	/*$res=DB::table('comment')->join('goods','goods.id','=','comment.goods_id')
+                                 ->join('goodsdetail','goodsdetail.goods_id','=','comment.goods_id')
+                                 ->join('users','users.id','=','comment.ed_user_id')
+                                 ->where('comment.ed_user_id',session('uid'))
+                                 ->select('goodsdetail.pic','goods.title','comment.*','users.username')
+                                 ->get();*/
 
-    	$res=DB::table('goods')->join('comment','goods.id','=','comment.goods_id')
-    					       ->where('goods.user_id',10)
-    					       ->get();
+          $res =DB::table('comment')->join('orders','orders.id','=','comment.order_id')
+                                    ->join('goods','goods.id','=','orders.goods_id')
+                                    ->join('goodsdetail','goodsdetail.goods_id','=','goods.id')
+                                    ->join('users','users.id','=','orders.buy_uid')    //这里重点
+                                    ->where('orders.sale_uid','=',session('uid'))
+                                    ->select('goodsdetail.pic','goods.title','comment.*','users.username')
+                                    ->get();
+                                                                                               
 
-    	$re = DB::table('comment')->join('goods','goods.id','=','comment.goods_id')
-    						      ->where('comment.user_id',10)
-    						      ->get();
-        //dd($res);
+        //$res = DB::table('comment')->join('orders','orders.id','=','')                     
+                                 
+        //dd($res);                         
+
+        //我的评价
+    	/*$re = DB::table('comment')->join('goods','goods.id','=','comment.goods_id')
+                                  ->join('users','users.id','=','comment.w_user_id')
+                                  ->join('goodsdetail','goodsdetail.goods_id','=','goods.id')   
+    						      ->where('comment.w_user_id',session('uid'))
+                                  ->select('goodsdetail.pic','goods.title','comment.*','users.username')
+    						      ->get();*/
+
+       $re =DB::table('comment')->join('orders','orders.id','=','comment.order_id')
+                                    ->join('goods','goods.id','=','orders.goods_id')
+                                    ->join('goodsdetail','goodsdetail.goods_id','=','goods.id')
+                                    ->join('users','users.id','=','orders.sale_uid')         //这里重点
+                                    ->where('orders.buy_uid','=',session('uid'))
+                                    ->select('goodsdetail.pic','goods.title','comment.*','users.username')
+                                    ->get();
+         //dd($res); 
+                                                                
+       // dd($re);                          
     	return view('homes.center.comment',['res'=>$res,'re'=>$re]);
     }
 
@@ -32,28 +62,19 @@ class CommentController extends Controller
     	//订单id
     	$id = $Request->all()['id'];
 
-    	DB::beginTransaction();
+    
 
     	$arr=DB::table('orders')->join('users','users.id','=','orders.sale_uid')
     							->join('goods','goods.id','=','orders.goods_id')
+                                ->join('goodsdetail','goodsdetail.goods_id','=','goods.id')
     							->where('orders.id',$id)
-    							->select('goods.*','orders.*','users.*')
-    							->first();
-		
+    							->select('goods.title','orders.*','users.username','goodsdetail.pic','goods.newprice')
+    	       					->first();
+		//dd($arr); 
 		$con=DB::table('goodsdetail')->where('goods_id',$arr->goods_id)->first();
-
-    			
-
-                     		
-        if($con){             
-
-                DB::commit();
-    		return view('homes.center.addcomment',['arr'=>$arr,'con'=>$con,'oid'=>$id]);
-    	}else{
-                DB::rollback();    
-    		return redirect()->back();
-    	}
-
+          
+        return view('homes.center.addcomment',['arr'=>$arr,'con'=>$con,'oid'=>$id]);
+    
 
     }
 
@@ -61,41 +82,55 @@ class CommentController extends Controller
     {
     	$res=$Request->except('_token');
     
-    	$_session['uid']=10;
+    	//订单id
+         $id = $Request->all()['id'];
+
+         $or=DB::table('orders')->where('id',$id)->first();
         
+
 
     	//添加事务
     	DB::beginTransaction();
     	//添加评论
-    	$arr['goods_id']=$res['hidden'];
+    	/*$arr['goods_id']=$or->goods_id;
+
     	$arr['comment'] = $res['content'];
-    	$arr['user_id'] = $_session['uid'];
+
+    	$arr['w_user_id'] =session('uid');
+        $arr['ed_user_id']= $or->sale_uid;*/
+       // dd($res);
+        $arr['order_id'] = $id;
+        $arr['comment'] = $res['content'];
+
     	$bool=DB::table('comment')->insert($arr);
 
-    	//添加消息
-    	DB::table('goods')->where('user_id',$res['hidden'])->first();
-        $new['send_uid']=$_session['uid'];
-        $R=DB::table('orders')->where('id',$res['id'])->first();
-      	$new['receive_uid']=$R->sale_uid;
-    	$new['goods_id']=$res['hidden'];
-    	$new['msg_content']="评论提醒";
+        //给买家发送信息
+        $res1['order_id'] = $id;
+        $res1['msg_content'] = "评论成功";
+       
 
+       
 
         //修改订单状态()
-        $order = DB::table('orders')->where('id',$res['id'])
-                     ->update(['buy_order_status'=>'5','sale_order_status'=>'5']);  
+        $order = DB::table('orders')->where('id',$id)
+                     ->update(['buy_order_status'=>'5','sale_order_status'=>'5']);
 
-    	 $bools=DB::table('message')->insert($new);
 
-    	 if($bools && $bool && $order ){
+        $A = DB::table('message')->insert($res1);
+                  
+
+    	// $bools=DB::table('message')->insert($new);
+
+    	 if($bool && $order && $A ){
 
     	 		DB::commit();
     	 
-    	 		return redirect('/home/center/comment/index')->with('zcsg',"1");
+    	 		return redirect('/home/center/comment/index')->with('zcsg',"评论成功");
 
     	 }else{
+
     	 		DB::rollback();
-    	 		echo 0;
+    	 		return redirect()->back();
 
     	 }
     	

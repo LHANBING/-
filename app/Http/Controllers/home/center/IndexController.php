@@ -12,8 +12,69 @@ class IndexController extends Controller
 {
      public function index ()
     {
-    	$a= DB::table('message')->where('receive_uid',10)->where('mes_status','0')->count(); 
-    	return view('homes.center.index',['a'=>$a]);
+    	
+    	$users=DB::table('users')->where('id',session('uid'))->first();
+    
+    	//这是出售消息 
+        $b = DB::table('message')->join('orders','orders.id','=','message.order_id')
+                                    ->where('orders.sale_uid','=',session('uid'))
+                                    ->where('mes_status','0') 
+                                    ->count();  
+        //这是购买消息   
+        $a = DB::table('message')->join('orders','orders.id','=','message.order_id')
+                                   ->where('orders.buy_uid','=',session('uid'))
+                                   ->where('mes_status','0')  
+                                   ->count();                             
+        $num = $a +$b;  
+
+        //购买订单待付款
+        $bfukuan  = DB::table('orders')->where('buy_uid',session('uid'))
+        						   ->where('buy_order_status','1')
+        						   ->count();
+
+         //购买订单待发货
+        $bfahuo  = DB::table('orders')->where('buy_uid',session('uid'))
+        						   ->where('buy_order_status','2')
+        						   ->count();  
+
+       //购买订单待收货
+        $bshouhuo  = DB::table('orders')->where('buy_uid',session('uid'))
+        						   ->where('buy_order_status','3')
+        						   ->count();  
+       //购买订单待评价
+        $bpingjia  = DB::table('orders')->where('buy_uid',session('uid'))
+        						   ->where('buy_order_status','4')
+        						   ->count(); 
+
+
+        //出售订单待付款
+       $sfukuan  = DB::table('orders')->where('sale_uid',session('uid'))
+                                      ->where('sale_order_status','1')
+                                      ->count();
+           
+        //出售订单待发货  
+        $sfahuo  = DB::table('orders')->where('sale_uid',session('uid'))
+                                      ->where('sale_order_status','2')
+                                      ->count();
+                            
+        //出售订单待收货
+        $sshouhuo  = DB::table('orders')->where('sale_uid',session('uid'))
+                                      ->where('sale_order_status','3')
+                                      ->count();
+                                                       
+        //出售订单待评价                           
+        $spingjia  = DB::table('orders')->where('sale_uid',session('uid'))
+                                      ->where('sale_order_status','4')
+                                      ->count();
+                                                                                
+
+
+
+
+
+        //dd($bpingjia);						   
+
+    	return view('homes.center.index',['users'=>$users,'num'=>$num,'bfukuan'=>$bfukuan,'bfahuo'=>$bfahuo,'bshouhuo'=>$bshouhuo,'bpingjia'=>$bpingjia,'sfukuan'=>$sfukuan,'sfahuo'=>$sfahuo,'sshouhuo'=>$sshouhuo,'spingjia'=>$spingjia]);
     }
 
 }

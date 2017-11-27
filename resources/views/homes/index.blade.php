@@ -42,12 +42,11 @@
 					<div class="topMessage favorite">
 						<div class="menu-hd"><a href="home/center/news/index" target="_top" id="as"><img src="/homes/images/12news.png" alt="" style="width:13px;margin-top:-5px" /> 
 
-						@if($a == 0 )
-						<span>消息</span>
+						@if($num > 0)
+						<span>消息<span style="color:#d2364c;">{{$num}}</span></span>
 						@else
-						<span id="news">消息{{$a}}</span>
-						@endif
-
+						<span>消息</span>		 				
+						@endif	
 						</a>
 						</div>
 					</ul>
