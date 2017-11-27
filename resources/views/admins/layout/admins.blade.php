@@ -161,11 +161,7 @@
             <div id="mws-navigation">
                 <ul>
                     <li>
-<<<<<<< HEAD
-                        <a href="#"><i class="icon-database"></i> 钱袋管理管理</a>
-=======
                         <a href="#"><i class="icon-users"></i>钱袋管理</a>
->>>>>>> 5164e9a5ee9362947fe0669d0c660b488f835403
                         <ul class="closed">
                             <li><a href="/admin/wallet">总进账详情</a></li>
                             <li><a href="/admin/wallets">总出账详情</a></li>   

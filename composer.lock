@@ -226,7 +226,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/flc1125/dysms/zipball/a60645c6b35a15fe7fed6282784d2094368fc8f5",
+                "url": "https://files.phpcomposer.com/files/flc1125/dysms/a60645c6b35a15fe7fed6282784d2094368fc8f5.zip",
                 "reference": "a60645c6b35a15fe7fed6282784d2094368fc8f5",
                 "shasum": ""
             },
@@ -261,7 +261,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Gregwar/Captcha/zipball/b4f22bc4794b652fccefae5a5be9565305e11572",
+                "url": "https://files.phpcomposer.com/files/Gregwar/Captcha/b4f22bc4794b652fccefae5a5be9565305e11572.zip",
                 "reference": "b4f22bc4794b652fccefae5a5be9565305e11572",
                 "shasum": ""
             },
@@ -940,7 +940,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nrk/predis/zipball/f0210e38881631afeafb56ab43405a92cafd9fd1",
+                "url": "https://files.phpcomposer.com/files/nrk/predis/f0210e38881631afeafb56ab43405a92cafd9fd1.zip",
                 "reference": "f0210e38881631afeafb56ab43405a92cafd9fd1",
                 "shasum": ""
             },
@@ -1214,7 +1214,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/c9a214bc07f1d80c87681f4d7fb7aa97938f78d4",
+                "url": "https://files.phpcomposer.com/files/symfony/console/c9a214bc07f1d80c87681f4d7fb7aa97938f78d4.zip",
                 "reference": "c9a214bc07f1d80c87681f4d7fb7aa97938f78d4",
                 "shasum": ""
             },
@@ -1604,11 +1604,7 @@
             },
             "dist": {
                 "type": "zip",
-<<<<<<< HEAD
                 "url": "https://files.phpcomposer.com/files/symfony/http-kernel/3048915fd5456053435561c70f9586d2b88ef449.zip",
-=======
-                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/3048915fd5456053435561c70f9586d2b88ef449",
->>>>>>> 5164e9a5ee9362947fe0669d0c660b488f835403
                 "reference": "3048915fd5456053435561c70f9586d2b88ef449",
                 "shasum": ""
             },
@@ -2152,7 +2148,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zgldh/qiniu-laravel-storage/zipball/9fbd26df94fdb3dee3b545f30ed4944f0afdd287",
+                "url": "https://files.phpcomposer.com/files/zgldh/qiniu-laravel-storage/9fbd26df94fdb3dee3b545f30ed4944f0afdd287.zip",
                 "reference": "9fbd26df94fdb3dee3b545f30ed4944f0afdd287",
                 "shasum": ""
             },
@@ -3481,11 +3477,7 @@
         },
         {
             "name": "symfony/yaml",
-<<<<<<< HEAD
             "version": "v3.3.6",
-=======
-            "version": "v3.3.13",
->>>>>>> 5164e9a5ee9362947fe0669d0c660b488f835403
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
@@ -3493,11 +3485,7 @@
             },
             "dist": {
                 "type": "zip",
-<<<<<<< HEAD
                 "url": "https://files.phpcomposer.com/files/symfony/yaml/ddc23324e6cfe066f3dd34a37ff494fa80b617ed.zip",
-=======
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/ddc23324e6cfe066f3dd34a37ff494fa80b617ed",
->>>>>>> 5164e9a5ee9362947fe0669d0c660b488f835403
                 "reference": "ddc23324e6cfe066f3dd34a37ff494fa80b617ed",
                 "shasum": ""
             },
