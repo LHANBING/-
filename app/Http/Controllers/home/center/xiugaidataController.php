@@ -6,15 +6,14 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Http\Model\User;
-use App\Http\Model\Good;
-use App\Http\Model\Goodsdetail;
 use App\Http\Model\Type;
 use App\Http\Model\Typechild;
-use App\Http\Model\Order;
-use session;
+use App\Http\Model\Good;
+use App\Http\Model\Goodsdetail;
+use DB;
+use zgldh\QiniuStorage\QiniuStorage;
 
-class maiOrderController extends Controller
+class xiugaidataController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -24,25 +23,6 @@ class maiOrderController extends Controller
     public function index()
     {
         //
-        $id = session('uid');
-
-        // $zong = Order::where('sale_uid',$id)->get();
-        // $goods_id=[];
-        // foreach($zong as $k=>$z){
-        //     $goods_id[]=$z->id;
-        // }
-
-        // $good = Good::whereIn('id',$goods_id)->get();
-
-        // dd($good);
-
-        $zong = Order::join('goods','goods.id','=','orders.goods_id')
-        ->where('sale_uid',$id)
-        ->select('orders.order_num','orders.created_at','orders.pay_money','orders.pay_yunfei','goods.title')
-        ->get();
-
-        // dd($zong);
-        return view('homes.center.maiOrder',['zong'=>$zong]);
     }
 
     /**
@@ -86,6 +66,27 @@ class maiOrderController extends Controller
     public function edit($id)
     {
         //
+        $res = Type::all();
+        $reschild = Typechild::all();
+
+        // $good = Good::where('id',$id)->first();
+        // $good = Good::join('type','type.id','=','goods.type_id')
+        //             ->join('typechild','typechild.id','=','goods.typechild_id')
+        //             ->where('goods.id',$id)
+        //             ->first();
+
+         $good = Good::where('id',$id)->first();
+         $goods=Goodsdetail::where('goods_id',$id)->first();
+        $goodsdetail = $goods->content;
+
+        $pic = $goods->pic;
+
+
+        $img = json_decode($pic);
+
+         // dd($img);
+
+        return view('homes.center.xiugaidata',['res'=>$res,'reschild'=>$reschild,'good'=>$good,'goodsdetail'=>$goodsdetail,'img'=>$img]);
     }
 
     /**
@@ -98,6 +99,16 @@ class maiOrderController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $res = $request->except('_token','_method','content');
+
+        $info = Good::where('id',$id)->update($res);
+
+        if($info){
+            return redirect('/home/center/myershou')->with('xgcg','修改成功');
+        }else{
+            return redirect('/home/center/myershou')->with('xgsb','修改失败');
+        }
+
     }
 
     /**

@@ -12,8 +12,8 @@ class IndexController extends Controller
 {
      public function index ()
     {
-    	$a= DB::table('message')->where('receive_uid',10)->where('mes_status','0')->count(); 
-    	return view('homes.center.index',['a'=>$a]);
+    	// $a= DB::table('message')->where('receive_uid',10)->where('mes_status','0')->count(); 
+    	return view('homes.center.index');
     }
 
 }

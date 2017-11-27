@@ -23,6 +23,16 @@ class myershouController extends Controller
      */
     public function index()
     {   
+
+
+        /*$res = Goodsdetail::find(16);
+        $res = rtrim($res->pic);
+        // dd($res);
+         $ress = json_decode($res);
+        dd($ress);die;*/
+
+
+
         //获取登陆者的id
         $id = session('uid');
         // dd($id);
@@ -30,15 +40,30 @@ class myershouController extends Controller
         $res = Good::join('users','users.id','=','goods.user_id')
                    ->join('type','type.id','=','goods.type_id')
                    ->join('typechild','typechild.id','=','goods.typechild_id')
+                   ->join('goodsdetail','goodsdetail.goods_id','=','goods.id')
                    ->where('users.id',$id)
                    ->get();
         // dd($res);
 
         $ress = Good::where('user_id',$id)->get();    
-        // $ress = Good::where('user_id',$id)->get();   
+        // $ress = Good::where('user_id',$id)->get(); 
 
+        $arr = [];
+        foreach ($res as $k => $v) {
+            // $info = Goodsdetail::where('goods_id',$v->id)->get();
+            // echo '<pre>';
+            $pic1=json_decode($v->pic);
+            $gid = $v->goods_id;
+
+
+            $arr[$gid]= ($pic1->img1);
+        }
+        // var_dump($arr);
+
+        // $info = Goodsdetail::where('goods_id',$ress->id)->get();
+        // var_dump($info);
         // dd($ress); 
-        return view('homes.center.myershou',['res'=>$res,'ress'=>$ress]);
+        return view('homes.center.myershou',['res'=>$res,'ress'=>$ress,'arr'=>$arr]);
     }
 
     /**

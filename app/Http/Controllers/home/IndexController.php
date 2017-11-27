@@ -26,8 +26,8 @@ class IndexController extends Controller
         $res = array_slice($list,1,5);
         $goods = Good::whereIn('id',$res)->get();
     
-        $a= DB::table('message')->where('receive_uid',10)->where('mes_status','0')->count(); 
-    	return view('homes.index',['type'=>$type,'typechild'=>$typechild,'goods'=>$goods,'a'=>$a]);
+        //$a= DB::table('message')->where('receive_uid',10)->where('mes_status','0')->count(); 
+    	return view('homes.index',['type'=>$type,'typechild'=>$typechild,'goods'=>$goods]);
     }
 
 }
