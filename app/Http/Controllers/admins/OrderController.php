@@ -19,27 +19,36 @@ class OrderController extends Controller
 
     		$join->on('users.id','=','orders.buy_uid');
 
-    	})->where('orders.order_otime','>','')->get();
+    	})->where('order_num','like','%'.$request->input('search').'%')->where('orders.buy_order_status','=','5')->get();
 
     	//联查卖家
     	$r = Order::join('users',function($join){
 
     		$join->on('users.id','=','orders.sale_uid');
 
-    	})->where('orders.order_otime','>','')->get();
+    	})->where('order_num','like','%'.$request->input('search').'%')
+          ->where('orders.buy_order_status','=','5')
+          ->select('orders.*','users.username')  
+          ->get();
  		
     	//查询信息
  		$re = DB::table('goods')->join('orders',function($join){
 
     		$join->on('orders.goods_id','=','goods.id');
 
-    	})->where('order_num','like','%'.$request->input('search').'%')->where('orders.order_otime','>','')->orderBy('orders.id')->paginate($request->input('num',10));
+    	})->where('order_num','like','%'.$request->input('search').'%')->where('orders.buy_order_status','=','5')->orderBy('orders.id')->paginate($request->input('num',5));
 
-      	 
+                  
+
+      //dd($re);
+
+      	     
  		//获取总数
-        $count = Order::where('order_num','like','%'.$request->input('search').'%')->where('orders.order_otime','>','')->count();
+        $count = Order::where('order_num','like','%'.$request->input('search').'%')->where('orders.buy_order_status','=','5')->count();
 
  		$last  = $re->lastPage();
+
+       // dd($count);
  	
 		return view('admins.order.index',['re'=>$re,'res'=>$res,'r'=>$r,'request'=>$request,'count'=>$count,'last'=>$last]);    	
     }
@@ -51,7 +60,8 @@ class OrderController extends Controller
 
     		$join->on('users.id','=','orders.buy_uid');
 
-    	})->where('orders.order_otime','')->get();
+    	})->where('order_num','like','%'.$request->input('search').'%')
+          ->where('orders.buy_order_status','<','5')->get();
 
 
 
@@ -60,22 +70,60 @@ class OrderController extends Controller
 
     		$join->on('users.id','=','orders.sale_uid');
 
-    	})->where('orders.order_otime','')->get();
+    	})->where('order_num','like','%'.$request->input('search').'%')
+          ->where('orders.buy_order_status','<','5')
+          ->select('orders.*','users.username')  
+          ->get();
  		
  		//查询信息
  		$re = DB::table('goods')->join('orders',function($join){
 
     		$join->on('orders.goods_id','=','goods.id');
 
-    	})->where('order_num','like','%'.$request->input('search').'%')->where('orders.order_otime','')->orderBy('orders.id')->paginate($request->input('num',10));
+    	})->where('orders.buy_order_status','<','5')
+          ->where('order_num','like','%'.$request->input('search').'%')
+          ->orderBy('orders.id')
+          ->paginate($request->input('num',5));
 
-      	 
+          
+      	 //dd($re);
  		//获取总数
-        $count = Order::where('order_num','like','%'.$request->input('search').'%')->where('orders.order_otime','')->count();
+        $count = Order::where('order_num','like','%'.$request->input('search').'%')->where('orders.buy_order_status','<','5')->count();
 
  		$last  = $re->lastPage();
  	
 		return view('admins.order.online',['re'=>$re,'res'=>$res,'r'=>$r,'request'=>$request,'count'=>$count,'last'=>$last]);    	
   
     }
+
+
+   public function show (Request $Request)
+   {
+        //订单id
+        $id = $Request->all()['id'];
+        //有买家信息
+        $res=DB::table('comment')->join('orders','orders.id','=','comment.order_id')
+                                 ->join('users','users.id','=','orders.buy_uid')
+                                 ->join('goods','goods.id','=','orders.goods_id')
+                                 ->where('comment.order_id','=',$id)
+                                 ->select('users.username','orders.order_num','goods.title','comment.comment','comment.id')
+                                 ->first();
+        //有卖家信息                         
+        $res1=DB::table('comment')->join('orders','orders.id','=','comment.order_id')
+                                 ->join('users','users.id','=','orders.sale_uid')
+                                 ->join('goods','goods.id','=','orders.goods_id')
+                                 ->where('comment.order_id','=',$id)
+                                 ->select('users.username')
+                                 ->first();                          
+
+       if(!empty($res) && !empty($res1)){
+
+        return view('admins.order.show',['res'=>$res,'res1'=>$res1]);
+
+       }else{
+
+        return back()->with('mypj','没有评价'); 
+       }                        
+        
+   }
 }

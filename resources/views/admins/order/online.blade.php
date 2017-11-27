@@ -20,14 +20,14 @@
 	                <label>
 	                    显示
 	                    <select size="1" name="num" aria-controls="DataTables_Table_1">
-	                        <option value="5" {{--@if(isset($request->num) ? $request->num : '5' ) @endif--}}>
+	                        <option value="5" @if(isset($request->num) ? $request->num : '5' ) @endif>
 	                            5
 	                        </option>
-	                        <option value="10" {{--@if($request->num == '10') selected="selected" @endif --}}>
+	                        <option value="10" @if($request->num == '10') selected="selected" @endif >
 	                            10
 	                        </option>
-	                        <option value="15" {{--@if($request->num == '15')
-                             selected = "selected" @endif--}}   >
+	                        <option value="15" @if($request->num == '15')
+                             selected = "selected" @endif >
 	                            15
 	                        </option>
 	                    </select>
@@ -95,12 +95,6 @@
                         style="width: 60px;">
                             价格/运费
                         </th>
-
-                        <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                        rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
-                        style="width: 60px;">
-                            操作
-                        </th>
                     </tr>
                 </thead>
                 <tbody role="alert" aria-live="polite" aria-relevant="all">
@@ -108,7 +102,7 @@
                     @foreach($re as $k => $v)
 					
                     
-                    <tr class="{{--@if($k % 2 == 0) odd @else even @endif--}}" style="height: 90px">
+                    <tr class="@if($k % 2 == 0) odd @else even @endif" style="height: 90px">
                         <td class="">
                            {{$v->id}}
                         </td>
@@ -122,32 +116,31 @@
                         </td>
                          <td class="">
                          	  {{$v->title}}
-                               X 
-                           {{$r[$k]->goods_num}}
+                       
                         </td>
                         <td class="">
                          {{$r[$k]->order_num}}
                         </td>
                          <td class="">
-                         {{$r[$k]->order_atime}}
+                         {{$r[$k]->created_at}}
                             
                         </td>
                          <td class="">
                                
-                @if($r[$k]->buy_order_status == '0') 待付款 
-                @elseif($r[$k]->buy_order_status == '1') 待发货 
-                @elseif($r[$k]->buy_order_status == '2') 待收货 
-                @elseif($r[$k]->buy_order_status == '3') 确认收货 
+                @if($r[$k]->buy_order_status == '1') 待付款 
+                @elseif($r[$k]->buy_order_status == '2') 待发货 
+                @elseif($r[$k]->buy_order_status == '3') 待收货 
+                @elseif($r[$k]->buy_order_status == '4') 确认收货 
                  
                 @endif
          
                         </td>
                        
                         <td class="">
-                @if($r[$k]->sale_order_status == '0') nimabi  
-                @elseif($r[$k]->sale_order_status == '1') 待发货 
-                @elseif($r[$k]->sale_order_status == '2') 待收货 
-                @elseif($r[$k]->sale_order_status == '3')卖家确认收货 
+                @if($r[$k]->sale_order_status == '1') 待买家付款
+                @elseif($r[$k]->sale_order_status == '2') 待发货 
+                @elseif($r[$k]->sale_order_status == '3') 待收货 
+                @elseif($r[$k]->sale_order_status == '4')卖家确认收货 
                  
                 @endif
                
@@ -158,10 +151,7 @@
                             {{$r[$k]->pay_yunfei}}    元
                          
                         </td>
-                        <td class="">
-                         <a href="" style="color:blue;font-size:15px">查看评价</a>
-                          
-                        </td>
+                      
                     </tr>
 
                 
@@ -170,7 +160,7 @@
                 </tbody>
             </table>
            <div class="dataTables_info" id="DataTables_Table_1_info">
-           
+            Showing 1 to {{$last}} of {{$count}} entries
               
             </div>
         

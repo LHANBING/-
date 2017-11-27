@@ -10,156 +10,90 @@
         <span>
             <i class="icon-table">
             </i>
-            已完成订单列表
+            评论内容
         </span>
-      
     </div>
-
-              @if(session('mypj'))
-                        <div class="mws-form-message info">                 
-
-                            {{session('mypj')}}
-
-                        </div>
-              @endif
     <div class="mws-panel-body no-padding">
         <div id="DataTables_Table_1_wrapper" class="dataTables_wrapper" role="grid">
-       		 <form action="/admin/order/index" method="get">
-	            <div id="DataTables_Table_1_length" class="dataTables_length">
-	                <label>
-	                    显示
-	                    <select size="1" name="num" aria-controls="DataTables_Table_1">
-	                        <option value="5" @if(isset($request->num) ? $request->num : '5' ) @endif>
-	                            5
-	                        </option>
-	                        <option value="10" @if($request->num == '10') selected="selected" @endif >
-	                            10
-	                        </option>
-	                        <option value="15" @if($request->num == '15')
-                             selected = "selected" @endif   >
-	                            15
-	                        </option>
-	                    </select>
-	                    条数据
-	                </label>
-	            </div>
-	            <div class="dataTables_filter" id="DataTables_Table_1_filter">
-	                <label>
-	                    关键字:
-	                    <input type="text" name="search" aria-controls="DataTables_Table_1" value="{{ isset($request->search) ? $request->search : '' }}">
-	                </label>
-		
-					<button class="btn btn-info">搜索</button>
+       		
 
-	            </div>
-			</form>
             <table class="mws-datatable-fn mws-table dataTable" id="DataTables_Table_1"
             aria-describedby="DataTables_Table_1_info">
                 <thead>
                     <tr role="row">
                         <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
-                        style="width: 20px;">
+                        style="width: 80px;">
                             ID
                         </th>
+
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
-                        style="width: 40px;">
+                        style="width: 120px;">
                             买家
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending"
-                        style="width: 40px;">
+                        style="width: 120px;">
                             卖家
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending"
-                        style="width: 40px;">
+                        style="width: 100px;">
                             商品
                         </th>
                        
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
-                        style="width: 40px;">
+                        style="width: 120px;">
                             订单号
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
-                        style="width: 60px;">
-                            下单时间
+                        style="width: 180px;">
+                           评论内容
                         </th>
-                        <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                        rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
-                        style="width: 60px;">
-                            结单时间
-                        </th>
-                        <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                        rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
-                        style="width: 60px;">
-                            价格/运费
-                        </th>
-
-                        <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                        rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
-                        style="width: 60px;">
-                            操作
-                        </th>
+                    
                     </tr>
                 </thead>
                 <tbody role="alert" aria-live="polite" aria-relevant="all">
 					
-                    @foreach($re as $k => $v) 
+                   
 					
                     
-                    <tr class="@if($k % 2 == 0) odd @else even @endif" style="height: 90px">
+                    <tr class="" style="height: 90px">
                         <td class="">
-                           {{$v->id}}
+                         {{$res->id}}
                         </td>
-
+                          
                          <td class="">
-                            {{$res[$k]->username}}
+                            {{$res->username}}
                         </td>
                        
                          <td class="">
-                         	{{$r[$k]->username}}
+                         {{$res1->username}}
                         </td>
                          <td class="">
-                         	  {{$v->title}}
+                         	{{$res->title}}
                            
                         </td>
                         <td class="">
-                             {{$r[$k]->order_num}}
+                          {{$res->order_num}}
                         </td>
                          <td class="">
-                            {{$r[$k]->created_at}}
+                           {{$res->comment}}
                             
                         </td>
-                         <td class="">
-                            {{$r[$k]->order_otime}} 
-
-                        </td>
-                        <td class="">
-                             {{$r[$k]->pay_money  }}
-                            +
-                            {{$r[$k]->pay_yunfei}}    元
-                        </td>
-                       
-                        <td class="">
-                         
-                         <a href="/admin/order/show?id={{$v->id}}" class="btn btn-warning">查看评价</a>
-                          
-                        </td>
-  
                     </tr>
 
                 
-                    @endforeach
+                  
                     
                 </tbody>
             </table>
            <div class="dataTables_info" id="DataTables_Table_1_info">
            
-               Showing 1 to {{$last}} of {{$count}} entries
+       
             </div>
         
                 <style>
@@ -212,7 +146,7 @@
                 </style>
             <div class="dataTables_paginate paging_full_numbers" id="paginate">
 
-                  {!! $re->appends($request->all())->render() !!}  
+       
             </div>
         </div>
     </div>
@@ -221,9 +155,6 @@
 @endsection()
 
 @section('js')
-<script type="text/javascript">
-        $('.mws-form-message').delay(3000).slideUp(1000);
-</script>
 
 
 @endsection

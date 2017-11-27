@@ -31,16 +31,16 @@
 
 						<div data-am-tabs="" class="am-tabs am-tabs-d2">
 							<ul class="am-avg-sm-3 am-tabs-nav am-nav am-nav-tabs">
-								<li class="am-active"><a href="#tab1">我的消息</a></li>
+								<li class="am-active"><a href="#tab1">购买消息</a></li>
+								<li><a href="#tab2">出售消息</a></li>
 							</ul>
-
 							<div class="am-tabs-bd">
 								<div id="tab1" class="am-tab-panel am-fade am-in am-active">
 										@foreach ($arr as $k =>$v)	
-										<div class="order-list" id="all{{$ar[$k]->id}}">
+										<div class="order-list" id="all{{$v->id}}">
 											<div class="order-title">
-												<div class="dd-num">发送人 ：<a href="javascript:;">{{$v->username}}</a></div>
-												<span>发送时间：{{$v->create_at}}</span>
+												<div class="dd-num">卖家：<a href="javascript:;">{{$v->username}}</a></div>
+												<span>时间：11:11{{$v->create_at}}</span>
 											
 											</div>
 											<div class="order-content">
@@ -49,14 +49,17 @@
 														<li class="td td-item">
 															<div class="item-pic">
 																<a href="#" class="J_MakePoint">
-																	<img src="{{$v->user_photo}}" class="itempic J_ItemImg">
+																	<img src="" class="itempic J_ItemImg">
 																</a>
 															</div>
 															<div class="item-info">
-																<div class="item-basic-info">
-																	<a href="#">
-																		<p>{{$v->msg_content}}</p>
-																	</a>
+																<div class="item-basic-info" style="">
+																	
+																		{{$v->msg_content}}
+																	
+																</div>
+																<div style="text-align: left;margin-top: 10px">
+																	商品 : {{$v->title}}
 																</div>
 															</div>
 														</li>
@@ -69,22 +72,80 @@
 														<li class="td td-moneystatus td-status">
 															<div class="item-status zhen" >
 @if( $v->mes_status == 0)
-<p class="Mystatus read" id="{{$ar[$k]->id}}read" style="cursor: pointer;">朕已阅{{$ar[$k]->id}}</p> 
+<p class="Mystatus read" id="{{$v->id}}read" style="cursor: pointer;">朕已阅</p> 
 @else 
-<p class="Mystatus" id="{{$ar[$k]->id}}read" style="cursor:not-allowed;color:black">朕已阅{{$ar[$k]->id}}</p> 
+<p class="Mystatus" id="read" style="cursor:not-allowed;color:black">朕已阅</p> 
 @endif
 
 															</div>
 														</li>
 													</div>
 													<li class="td td-change td-changebutton">
-														<a href="/home/center/news/show?id={{$ar[$k]->id}}">
-													<div class="am-btn am-btn-danger anniu" id="{{$ar[$k]->id}}show" style="margin-right:10px">
-															查看</div>
-														</a>
+												
 														
-														<div class="am-btn am-btn-danger anniu del" id="{{$ar[$k]->id}}del">
-														   删除</div>
+														<div class="am-btn am-btn-danger anniu del" id="{{$v->id}}del">
+														   删除{{$v->id}}</div>
+														
+													</li>
+												
+														
+													
+
+												</div>
+											</div>
+										</div>
+									 	@endforeach	
+								</div>
+									<div id="tab2" class="am-tab-panel am-fade am-in am-active">
+										@foreach ($ar as $k =>$v)	
+										<div class="order-list" id="all{{$v->id}}">
+											<div class="order-title">
+												<div class="dd-num">买家：<a href="javascript:;">{{$v->username}}</a></div>
+												<span>时间：11:11{{$v->create_at}}</span>
+											
+											</div>
+											<div class="order-content">
+												<div class="order-left">
+													<ul class="item-list">
+														<li class="td td-item">
+															<div class="item-pic">
+																<a href="#" class="J_MakePoint">
+																	<img src="" class="itempic J_ItemImg">
+																</a>
+															</div>
+															<div class="item-info">
+																<div class="item-basic-info" style="">
+																	
+																		{{$v->msg_content}}
+																	
+																</div>
+																<div style="text-align: left;margin-top: 10px">
+																	商品 : {{$v->title}}
+																</div>
+															</div>
+														</li>
+
+													
+														<div class="clear"></div>
+													</ul>
+
+													<div class="change move-right">
+														<li class="td td-moneystatus td-status">
+															<div class="item-status zhen" >
+@if( $v->mes_status == 0)
+<p class="Mystatus read" id="{{$v->id}}read" style="cursor: pointer;">朕已阅</p> 
+@else 
+<p class="Mystatus" id="read" style="cursor:not-allowed;color:black">朕已阅</p> 
+@endif
+
+															</div>
+														</li>
+													</div>
+													<li class="td td-change td-changebutton">
+												
+														
+														<div class="am-btn am-btn-danger anniu del" id="{{$v->id}}del">
+														   删除{{$v->id}}</div>
 														
 													</li>
 												
@@ -122,12 +183,38 @@
 
 									if(data == 1){
 
+										layer.open({
+										  type: 1 
+										  ,title: '<div style="font-size:18px;color:#dd514c;">系统提示</div>'
+										  ,area: ['500px', '200px']
+										  ,shade: 0
+										  ,maxmin: false
+										  ,content: '<div style="font-size:15px;margin:30px">操作成功</div>'
+										  ,btn: ['确定'] 
+										  ,zIndex: layer.zIndex 
+										  ,success: function(layero){
+										    layer.setTop(layero); 
+										  }
+										});
+
 										read.attr('class','Mystatus')	
 										read.css('color','black');
 										read.css('cursor','not-allowed')
 										
 									}else{
-										alert('操作失败');
+										layer.open({
+										  type: 1 
+										  ,title: '<div style="font-size:18px;color:#dd514c;">系统提示</div>'
+										  ,area: ['500px', '200px']
+										  ,shade: 0
+										  ,maxmin: false
+										  ,content: '<div style="font-size:15px;margin:30px">抱歉,操作失败<br/>请重试</div>'
+										  ,btn: ['确定'] 
+										  ,zIndex: layer.zIndex 
+										  ,success: function(layero){
+										    layer.setTop(layero); 
+										  }
+										});
 									}
 
 							})
@@ -144,11 +231,38 @@
 
 									if(data == 1){
 
-										alert('删除成功');
+										
+										layer.open({
+										  type: 1 
+										  ,title: '<div style="font-size:18px;color:#dd514c;">系统提示</div>'
+										  ,area: ['500px', '200px']
+										  ,shade: 0
+										  ,maxmin: false
+										  ,content: '<div style="font-size:15px;margin:30px">删除成功</div>'
+										  ,btn: ['确定'] 
+										  ,zIndex: layer.zIndex 
+										  ,success: function(layero){
+										    layer.setTop(layero); 
+										  }
+										});
+
 										del.parents().find('#all'+ids).remove();
 									}else{
 
-										alert('删除失败,请重试');
+										
+										layer.open({
+										  type: 1 
+										  ,title: '<div style="font-size:18px;color:#dd514c;">系统提示</div>'
+										  ,area: ['500px', '200px']
+										  ,shade: 0
+										  ,maxmin: false
+										  ,content: '<div style="font-size:15px;margin:30px">抱歉,操作失败!<br>请重试</div>'
+										  ,btn: ['确定'] 
+										  ,zIndex: layer.zIndex 
+										  ,success: function(layero){
+										    layer.setTop(layero); 
+										  }
+										});
 									}
 
 								})

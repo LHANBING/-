@@ -26,28 +26,31 @@
 							<div class="comment-list">
 								<div class="item-pic" style="float:left">
 									<a class="J_MakePoint" href="#">
-										<img class="itempic" src="{{ $arr->goods_photo}}">
+										<img class="itempic" src="{{ $arr->pic}}">
 										
 										
 									</a>
 								</div>
 
-								 <div class="item-title" >
+								 <div class="item-title" style="width:800px">
 								
 									<div class="item-name" style="margin-top:20px">
-										<p class="item-basic-info">商品款 :{{ $arr->title}}</p>
+										<p class="item-basic-info">商品 :{{ $arr->title}}</p>
 									</div>
 									<div class="item-info">
+									  <div class="item-name" style="margin-top:20px">
+										<p class="item-basic-info">商家 :{{$arr->username}}</p>
+									  </div>
 										
-										<div class="item-price" style="margin-top:20px">
+										<div class="item-price" style="margin-top:10px">
 											价格：<strong>{{$arr->newprice}}</strong>
 										</div>
 
-										<div class="" style="margin-top:20px;margin-bottom:5px">
-											详情：
-
+										<div style="margin-top:10px">
+											详情：{{$con->content}}
 										</div>	
-										<strong>{{$con->content}}</strong>
+										
+
 																				
 									</div>
 								</div> 
@@ -55,7 +58,7 @@
 								<div>
 									<form action="/home/center/comment/stro" method="post">
 									<textarea name="content" style="margin-top:20px" placeholder="请写下对宝贝的感受吧，对他人帮助很大哦！" ></textarea>
-					<input type="hidden" name="hidden" value="{{$arr->goods_id}}">
+					
 					
 					<!--订单id-->
 				<input type="hidden" name="id" value="{{$oid}}">

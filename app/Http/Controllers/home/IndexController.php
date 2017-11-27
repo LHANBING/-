@@ -49,7 +49,21 @@ class IndexController extends Controller
             $goods_photo[$v->id] = $re->img1;
         }
 
-    	return view('homes.index',['type'=>$type,'typechild'=>$typechild,'goods'=>$goods,'goods_photo'=>$goods_photo]);
+
+         //这是出售消息 
+        $b = DB::table('message')->join('orders','orders.id','=','message.order_id')
+                                    ->where('orders.sale_uid','=',session('uid'))
+                                    ->where('mes_status','0')
+                                    ->count();  
+        //这是购买消息   
+        $a = DB::table('message')->join('orders','orders.id','=','message.order_id')
+                                 ->where('orders.buy_uid','=',session('uid'))
+                                 ->where('mes_status','0') 
+                                 ->count();                             
+
+        $num = $a + $b;           
+        //dd($num);        
+    	return view('homes.index',['type'=>$type,'typechild'=>$typechild,'goods'=>$goods,'goods_photo'=>$goods_photo,'num'=>$num]);
     
     }
 
