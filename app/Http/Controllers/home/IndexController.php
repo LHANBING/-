@@ -51,7 +51,6 @@ class IndexController extends Controller
 
     	return view('homes.index',['type'=>$type,'typechild'=>$typechild,'goods'=>$goods,'goods_photo'=>$goods_photo]);
     
-        
     }
 
 }

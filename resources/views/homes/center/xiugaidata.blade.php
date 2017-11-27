@@ -41,14 +41,14 @@
 
 
 	<div class="am-cf am-padding">
-		<div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">发布二手闲置物品</strong> / <small>New</small></div>
+		<div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">修改发布二手闲置物品</strong> / <small>New</small></div>
 	</div>
 	<hr>
 
   <!-- 图片上传 -->
-  <input type="file" multiple id="ssi-upload7"/>
+  <!-- <input type="file" multiple id="ssi-upload7"/> -->
 
-	<form action="/home/center/fabu" class="am-form" id="doc-vld-msg" method="post" enctype="multipart/form-data" style="margin-top: 20px">
+	<form action="/home/center/xiugaidata/{{$good->id}}" class="am-form" id="doc-vld-msg" method="post" enctype="multipart/form-data" style="margin-top: 20px">
    
   <fieldset>
     <div class="am-form-group">
@@ -57,52 +57,57 @@
     <div><label for="user-birth" >选择闲置分类</label></div>
 
       <select id="father" name="type_id" style='width:200px;float:left;margin-right: 15px '>
-        @foreach($res as $k=>$v)
+      @foreach($res as $k=>$v) 
           <option value="{{$v->id}}" > {{$v->typename}}</option>
-        @endforeach
+      @endforeach
+      
       </select>
       <select id="son" name='typechild_id' style='width:200px;margin-bottom:20px'>
+        
       </select>
 
    
 
     <div class="am-form-group">
       <label for="doc-vld-name-2-1">起个标题吧</label>
-      <input type="text" class="am-form-field am-radius" name="title" placeholder="售卖标题"/>
+      <input type="text" class="am-form-field am-radius" name="title" value="{{$good->title}}"/>
     </div>
     <div class="am-form-group">
       <label for="doc-vld-ta-2-1">详细介绍一下你闲置吧</label>
-      <textarea id="doc-vld-ta-2-1" minlength="8" maxlength="250" name="content" placeholder="对闲置物品的简单介绍,250字以内."></textarea>
+      <textarea id="doc-vld-ta-2-1" minlength="8" maxlength="250" name="content" >{{$goodsdetail}}</textarea>
     </div>
 
     <div class="am-form-group">
       <label for="doc-vld-name-2-1">你想多少钱出手呢?</label>
-      <input class="am-form-field am-radius" type="text" id="doc-vld-name-2-1" minlength="1" maxlength="10" name="newprice" placeholder="根据成色而定哦!" required/>
+      <input class="am-form-field am-radius" type="text" id="doc-vld-name-2-1" minlength="1" maxlength="10" name="newprice" value="{{$good->newprice}}" required/>
     </div>
 
     <div class="am-form-group">
       <label for="doc-vld-name-2-1">你购买的时候多少钱?</label>
-      <input class="am-form-field am-radius" type="text" id="doc-vld-name-2-1" minlength="1" maxlength="10" name="oldprice" placeholder="买的时候很贵吧" required/>
+      <input class="am-form-field am-radius" type="text" id="doc-vld-name-2-1" minlength="1" maxlength="10" name="oldprice" value="{{$good->oldprice}}" required/>
     </div>
 
     <div class="am-form-group">
       <label for="doc-vld-name-2-1">运费:</label>
-      <input class="am-form-field am-radius" type="text" id="doc-vld-name-2-1" minlength="1" name="transprice" placeholder="你觉得你给买家发快递过去需要多少钱" required/>
+      <input class="am-form-field am-radius" type="text" id="doc-vld-name-2-1" minlength="1" name="transprice" value="{{$good->transprice}}" required/>
     </div>
 
     <div class="am-form-group">
       <label for="doc-vld-name-2-1">你所在的城市：</label>
-      <input class="am-form-field am-radius" type="text" id="doc-vld-name-2-1" minlength="2" name="address" placeholder="请输入商品的发货地址" required/>
+      <input class="am-form-field am-radius" type="text" id="doc-vld-name-2-1" minlength="2" name="address" value="{{$good->address}}" required/>
     </div>
-    <input class="pic" type="hidden"  name="pic" value=''/>
+    <!-- <input class="pic" type="hidden"  name="pic" value=''/> -->
 
-
-    
-
-
+    <div style='width:1020px;height:300px;border:1px solid black '>  
+    @foreach($img as $k=>$v)   
+      <img src="http://ozstangaz.bkt.clouddn.com/{{$img->$k}}" alt="" style="width:200px;height:150px; float: left;margin:5px">
+  
+    @endforeach
+    </div>
 
    
     {{ csrf_field() }}
+    {{ method_field('PUT') }}
 
     <!-- 提交按钮 -->
     <button class="am-btn am-btn-primary am-btn-block" id='button' style="margin-top: 15px"><b>提交</b></button>
@@ -140,12 +145,13 @@
               }
         },'json');
    });
-  })
-     
+  })    
 </script>
-
-
-<script>
+<!-- <script>
+  
+</script>
+ -->
+<!-- <script>
    var imgNum=0;
     $('#ssi-upload7').ssi_uploader({
                     url: '/home/center/fabu/uploadimg',
@@ -156,12 +162,12 @@
                             position: 'top center'
                         }));
                     },
-                      onEachUpload: function (fileInfo,xhr) {
-                       imgNum++;
-                          console.log(xhr);
-                          var jsonData = $('.pic').val();
-                         $('.pic').val('');
-                          $('.pic').val(jsonData+'"img'+imgNum+'":"'+'goods/'+xhr+'",');
+                    onEachUpload: function (fileInfo ,xhr) {
+                     imgNum++;
+                        console.log(xhr);
+                        var jsonData = $('.pic').val();
+                       $('.pic').val('');
+                        $('.pic').val(jsonData+'"img'+imgNum+'":"'+'goods/'+xhr+'",');
 
                         ssi_modal.notify('error', $.extend({}, notifyOptions, {
                             classSize: 'auto',
@@ -177,8 +183,8 @@
                     
                 });
             
-</script>
-<script>
+</script> -->
+<!-- <script>
   $('#fbch').click(function(){
      layer.msg('恭喜您的闲置发布成功!');
   }).trigger('click');
@@ -188,6 +194,6 @@
     $('#sctp').click(function(){
      layer.msg('请您先上传闲置图片!');
   }).trigger('click');
-</script>
+</script> -->
 
 @endsection()

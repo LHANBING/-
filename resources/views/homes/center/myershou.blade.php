@@ -16,6 +16,13 @@
 
 @section('content')
 
+    @if(session('xgcg'))
+       <span id='xgcg'></span>           
+    @endif
+    @if(session('xgsb'))
+       <span id='xgsb'></span>           
+    @endif
+   
 
 	<div class="user-order">
     <!--标题 -->
@@ -89,7 +96,7 @@
                                         <li class="td td-item">
                                             <div class="item-pic">
                                                 <a class="J_MakePoint" href="#">
-                                                    <img class="itempic J_ItemImg" src="{{$v->goods_photo}}">
+                                  <img class="itempic J_ItemImg" src="http://ozstangaz.bkt.clouddn.com/{{$arr[$v->goods_id]}}">
                                                 </a>
                                             </div>
                                             <div class="item-info">
@@ -135,7 +142,7 @@
                                        	 </li>
                                        	 <li class="td td-price">
                                             <div class="item-price">
-                                               {{$v->fabutime}}
+                                               {{$ress[$k]->created_at}}
                                             </div>
                                        	 </li>
                                        	 <li class="td td-price">
@@ -148,7 +155,7 @@
 		                @endif
 
 
-		                    <a href=""><button class="am-btn am-btn-danger">修改</button></a>
+		                    <a href="/home/center/xiugaidata/{{$ress[$k]->id}}/edit"><button class="am-btn am-btn-danger">修改</button></a>
 
 
 
@@ -157,7 +164,7 @@
 
 
 
-		                    <a href=""><button class="am-btn am-btn-danger" style='margin-top:3px;'>详情</button></a>
+		                    <a href="/home/listdetail/{{$ress[$k]->id}}"><button class="am-btn am-btn-danger" style='margin-top:3px;'>详情</button></a>
                             </div>
                     
                                        	 </li>
@@ -228,6 +235,15 @@ function shan(id){
 	}
 }
 </script>	
+
+<script>
+  $('#xgcg').click(function(){
+     layer.msg('恭喜您,修改成功!');
+  }).trigger('click');
+   $('#xgsb').click(function(){
+     layer.msg('抱歉,修改失败,请重试!');
+  }).trigger('click');
+</script>
 			
 
 @endsection()

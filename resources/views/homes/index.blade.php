@@ -42,20 +42,11 @@
 					<div class="topMessage favorite">
 						<div class="menu-hd"><a href="home/center/news/index" target="_top" id="as"><img src="/homes/images/12news.png" alt="" style="width:13px;margin-top:-5px" /> 
 
-<<<<<<< HEAD
 						
 						<span>消息</span>
 						
 						<span id="news"></span>
 						
-=======
-				
-						<span>消息</span>
-				
-					
-						
-
->>>>>>> 2ec5bb8fd8f58db4a5c26ecbc140f1a8b5c8f4f4
 						</a>
 						</div>
 					</ul>

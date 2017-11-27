@@ -62,6 +62,10 @@ class fabuController extends Controller
              //添加goods_detail表数据
             $detail = $request->only('content','pic');
             $detail['goods_id'] = $data->id;
+            $detail['pic']= rtrim($detail['pic'],',');
+            $a = "{".$detail['pic']."}";
+
+            $detail['pic'] =$a;
             
             
             $info = Goodsdetail::insertGetId($detail);

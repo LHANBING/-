@@ -161,6 +161,9 @@ Route::group(['middleware'=>'homelogin','prefix'=>'home/center','namespace'=>'ho
 	Route::get('/myersho/xiajia/{id}','myershouController@xiajia');
 	Route::get('/myersho/shangjia/{id}','myershouController@shangjia');
 
+	//我的二手/修改二手
+	Route::resource('xiugaidata','xiugaidataController');
+
 	//出售二手/订单管理
 	Route::resource('maiOrder','maiOrderController');
 	
