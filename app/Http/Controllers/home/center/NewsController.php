@@ -12,33 +12,68 @@ class NewsController extends Controller
     public function index ()
     {
 
-        $arr=DB::table('message')->join('goods','goods.id','=','message.goods_id')
-                                 ->join('users','users.id','=','message.send_uid')      
-                                 ->where('message.receive_uid',10)
-                                 ->get();
+        //我的购买信息
+        /*$arr = DB::table('message')->join('goods','goods.id','=','message.goods_id')
+                                   ->join('users','users.id','=','message.send_uid')
+                                   ->join('goodsdetail','goodsdetail.goods_id','=','message.goods_id') 
+                                   ->where('message.shenfen','=','0')
+                                   ->where('message.receive_uid','=',session('uid'))
+                                   ->select('message.*','goods.title','goodsdetail.pic','users.username')
+                                   ->get();*/
 
-        $ar = DB::table('message') ->where('receive_uid',10)->get();                     
+          $arr = DB::table('message')->join('orders','orders.id','=','message.order_id')
+                                     ->join('goods','goods.id','=','orders.goods_id') 
+                                     ->join('goodsdetail','goodsdetail.goods_id','=','goods.id')
+                                     ->join('users','users.id','=','orders.sale_uid')
+                                     ->where('orders.buy_uid','=',session('uid'))
+                                     ->select('message.*','goods.title','goodsdetail.pic','users.username')
+                                     ->get();
+
+         //dd($arr);                                                       
+
+        //我的出售信息
+       /* $ar = DB::table('message')->join('goods','goods.id','=','message.goods_id')
+                                   ->join('users','users.id','=','message.send_uid')
+                                   ->join('goodsdetail','goodsdetail.goods_id','=','message.goods_id') 
+                                   ->where('message.shenfen','=','1')
+                                   ->where('message.receive_uid','=',session('uid'))
+                                   ->select('message.*','goods.title','goodsdetail.pic','users.username')
+                                   ->get();  */    
+         //我的出售信息                          
+          $ar = DB::table('message')->join('orders','orders.id','=','message.order_id')
+                                     ->join('goods','goods.id','=','orders.goods_id') 
+                                     ->join('goodsdetail','goodsdetail.goods_id','=','goods.id')
+                                     ->join('users','users.id','=','orders.buy_uid')
+                                     ->where('orders.sale_uid','=',session('uid'))
+                                     ->select('message.*','goods.title','goodsdetail.pic','users.username')
+                                     ->get();
+
+       // dd($ar);                            
+
     	return view('homes.center.news',['arr'=>$arr,'ar'=>$ar]);
     }
 
     public function add (Request $Request)
     {
     	//订单id	
-    	$ids=$Request->all()['id'];
-    	$id = substr($ids,-1,1);
+    	$id=$Request->all()['id'];
     	$res=DB::table('orders')->where('id',$id)->first();
 
-        //推送消息
-        $arr['send_uid']=$res->buy_uid;
-    	$arr['receive_uid']=$res->sale_uid;
-    	$arr['goods_id']=$res->goods_id;
-    	$arr['msg_content']="发货邀请";
-    	
-    	$bool=DB::table('message')->insert($arr);
+        DB::beginTransaction();
 
-    	if($bool ){
-    		echo 1;
+        //添加提醒消息
+         $arr['msg_content'] = "提醒发货";
+         $arr['order_id'] = $id;            
+        
+        $A=DB::table('message')->insert($arr);
+    	
+
+    	if($A ){
+    		  DB::commit();
+            echo 1;
+
     	}else{
+            DB::rollback();
     		echo 0;
     	}
 
@@ -52,16 +87,6 @@ class NewsController extends Controller
        $bool=DB::table('message')->where('id',$id)->update(['mes_status'=>'1']);
 
        echo $bool;
-    }
-
-    public function show(Request $Request)
-    {
-        $res=DB::table('message')->join('users','users.id','=','message.send_uid')
-                                 ->join('goods','goods.id','=','message.goods_id')   
-                                 ->where('message.id',$Request->all()['id'])->first();
-
-        
-        return view('homes.center.showNews',['res'=>$res]);
     }
 
 

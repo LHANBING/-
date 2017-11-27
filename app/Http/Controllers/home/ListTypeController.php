@@ -50,10 +50,33 @@ class ListTypeController extends Controller
      */
     public function show($id)
     {
-        
+        //商品子类
         $res = Good::where('type_id',$id)->get();
+        //商品详情的图片
+        $pic = [];
+        foreach ($res as $k => $v) {
+            $goods_id = $v->id;
+            $photo = Goodsdetail::where('id',$goods_id)->first()->pic;
+            $photo = json_decode($photo)->img1;
 
-        return view('homes.list.listtype',['res'=>$res]);
+            $pic[$goods_id] = $photo;
+            
+        }
+
+        // 商品详情的描述
+        $description = [];
+        foreach ($res as $key => $val) {
+            $goods_id = $val->id;
+            $content = Goodsdetail::where('id',$goods_id)->first()->content;
+            $description[$goods_id] = $content;
+            
+        }
+
+        // dd($description);
+
+      
+
+        return view('homes.list.listtype',['res'=>$res,'pic'=>$pic,'description'=>$description]);
 
 
     }

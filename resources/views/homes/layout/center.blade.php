@@ -71,15 +71,39 @@
                             </a>
                         </div>
                     </div>
+
+
                     <div class="topMessage favorite">
                        <div class="menu-hd" id="as"> <img src="/homes/images/12news.png" alt="" style="width:13px;margin-top:-5px" /> 
 
-                        @if( DB::table('message')->where('receive_uid',10)->where('mes_status','0')->count() == 0  )
+                      @if(   
+                        DB::table('message')->join('orders','orders.id','=','message.order_id')
+                                   ->where('orders.buy_uid','=',session('uid'))
+                                    ->where('mes_status','0')   
+                                   ->count() +
+                        DB::table('message')->join('orders','orders.id','=','message.order_id')
+                                    ->where('orders.sale_uid','=',session('uid'))
+                                     ->where('mes_status','0')  
+                                    ->count() 
+                          == 0)           
+
+
                         <span>消息</span>
-                        @else
-                        <span id="news">消息{{ DB::table('message')->where('receive_uid',10)->where('mes_status','0')->count() }}</span>
-                        @endif
-                        </div>
+                       @else 
+                        <span id="news">消息</span>
+                        <span style="color:#d2364c;"> 
+                            {{ DB::table('message')->join('orders','orders.id','=','message.order_id')
+                                    ->where('orders.buy_uid','=',session('uid'))
+                                     ->where('mes_status','0')   
+                                    ->count() +
+                           DB::table('message')->join('orders','orders.id','=','message.order_id')
+                                    ->where('orders.sale_uid','=',session('uid'))
+                                     ->where('mes_status','0')  
+                                    ->count()
+                              }}      
+                        </span>
+                       @endif  
+                            </div>
                 </ul>
                 </div>
              
@@ -286,14 +310,34 @@
                                 </a>
                             </li>
                             <li>
-                          @if(DB::table('message')->where('receive_uid',10)->where('mes_status','0')->count() > 0 )       
-                                <a href="/home/center/news/index">
-                     消息 <span style="color:red">{{ DB::table('message')->where('receive_uid',10)->where('mes_status','0')->count() }}</span>
-                     
-                                </a>
-                         @else 
-                          <a href="/home/center/news/index">消息 </a> 
-                          @endif      
+                                
+                     @if(  DB::table('message')->join('orders','orders.id','=','message.order_id')
+                                   ->where('orders.buy_uid','=',session('uid'))
+                                    ->where('mes_status','0')   
+                                   ->count() +
+                        DB::table('message')->join('orders','orders.id','=','message.order_id')
+                                    ->where('orders.sale_uid','=',session('uid'))
+                                     ->where('mes_status','0')  
+                                    ->count()  
+                          > 0)               
+                                
+                     <a href="/home/center/news/index">消息 
+                        <span style="color:red">
+                         {{ DB::table('message')->join('orders','orders.id','=','message.order_id')
+                                   ->where('orders.buy_uid','=',session('uid'))
+                                    ->where('mes_status','0')   
+                                   ->count() +
+                          DB::table('message')->join('orders','orders.id','=','message.order_id')
+                                    ->where('orders.sale_uid','=',session('uid'))
+                                     ->where('mes_status','0')  
+                                    ->count()  
+                           }}          
+                          </span>
+                           </a>
+                     @else
+                          <a href="/home/center/news/index">消息 </a>  
+                     @endif     
+
                             </li>
                         </ul>
                     </li>

@@ -96,7 +96,7 @@
 											
 										</div>
 	                        		 <div class="am-form-content">
-											<input name="user_photo" type="file" id="user_photo" style="height: 100px;width:100px;margin-top:-100px;margin-left: -30px;opacity: 0; ">
+											<input name="user_photo" type="file" id="user_photo" style="height: 125px;width:125px;margin-top:-110px;margin-left: -30px;opacity: 0; ">
 
 										</div>
 									  </form>
@@ -122,14 +122,16 @@
 
 @section('js')
  <script type="text/javascript">
- 		    
+ 		// 发送ajax用户名，电话，qq，电子邮箱的初始值    
  	  	var isnull = true;
  	  	var checktel = 100;
  	  	var isQQ = true;
  	  	var isemail = true;
 
-    	$('#user-name2').blur(function(){
-
+ 	  	 // 检测用户名
+    	$('#user-name2').blur(function()
+    	{
+    			//调用isNull函数检测用户名是否为空
  		      isnull= isNull($(this).val());
 
  		      if(isnull == false)
@@ -138,51 +140,60 @@
  		      } 
  	    })
 
-
- 	    $('#user-phone').blur(function(){
-
+    	// 检测手机号
+ 	    $('#user-phone').blur(function()
+ 	    {
+ 	    	//调用checkTel函数检测手机号
  		     checktel = checkTel($(this), $('#telmsg'));
  	    })
 
+ 	    // 检测qq
  	    $('#user-qq').blur(function(){
 
+ 	    	// 获取输入框中qq的值
  	    	var qq = $(this).val();
-
+ 	    	// 判断qq的值是否为空
  	    	if(qq != false)
  	    	{	
-
- 	    		 if(isNaN(qq) == false) //输入框中输入的是否为数字 false 为数字
- 	    		 {
+			//输入框中输入的是否为数字 false 为数字
+ 	    		 if(isNaN(qq) == false) 
+ 	    		 {		
+ 	    		 	  // 初始化
 	 	    		 var reg = new  RegExp();
-	 	    		     reg = /^[0-9]{6,12}$/;
+	 	    		  // 定义正则
+	 	    		  reg = /^[0-9]{6,12}$/;
+	 	    		  // 检测
 	 	    	     var info = reg.test(qq);
-	 	    	     
+	 	    	     // 对输入的qq的值进行判断
 	   				 if( info == false)
 	   				 {	
 	   				 	isQQ = false;
 	   				 	$('#qqmsg').text('QQ输入格式不正确');
 	   				 }else
-	   				 {	isQQ = true;
-	   				 	
+	   				 {	
+	   				 	isQQ = true;
 	   				 	$('#qqmsg').text('');
 	   				 } 
    				 }else
-	   				 {	isQQ = !isNaN(qq);
-	   				 	$('#qqmsg').text('QQ输入格式不正确');
-	   				 }	
+   				 {	
+   				 	isQQ = !isNaN(qq);
+   				 	$('#qqmsg').text('QQ输入格式不正确');
+   				 }	
  	    	}else
  	    	{
  	    		$('#qqmsg').text('');
  	    	}
  	    })
 
-
+ 	    
+		// 检测手机号
  	    $('#user-email').blur(function(){
-
+ 	    	// 获取输入框中电子邮箱的值
  	    	var email = $(this).val();
-
+ 	    	// 判断电子邮箱的值是否为空
  	    	if(email != false)
- 	    	{
+ 	    	{   
+ 	    	    //调用checkTel函数检测手机号
 	 	    	isemail = isEmail(email);
 
 	 	    	if(isemail == false)
@@ -199,22 +210,24 @@
  	    })
 
 												
-
+ 	    // 点击修改按钮发送ajax
  	    $('#edit').click(function() {
-
+ 	    	// 判断用户名，手机号，qq和电子邮箱输入框值是否符合格式 
 	 	    if(isnull == true && checktel == 100 && isemail == true  && isQQ == true)
 	 	    {		
-	 	    	console.log(isnull);
-	 	    	console.log(checktel);
-	 	    	console.log(isemail);
-	 	    	console.log(isQQ);
+	 	    	 //获取用户名的值 
 	 	    	 var username = $("#user-name2").val();
+	 	    	 // 获取手机号的值
 				 var tel = $("#user-phone").val();
-			     var qq = $("#user-qq").val();  
+				 // 获取qq的值
+			     var qq = $("#user-qq").val(); 
+			      //获取电子邮箱的值 
 				 var email = $("#user-email").val();
 
-				 $.post("/home/center/info/doedit",{'_token':'{{csrf_token()}}',username:username,tel:tel,qq:qq,email:email},function(data) {
-
+				 // 发送ajax
+				 $.post("/home/center/info/doedit",{'_token':'{{csrf_token()}}',username:username,tel:tel,qq:qq,email:email},function(data) 
+				 {
+				 	// 通过判断data的值,得到信息
 				 	 if(data)
 				 	 {
 				 	 	 layer.open({
@@ -233,10 +246,11 @@
 				 })
 
 	 	    }else
-	 	    {
+	 	    {	
+	 	    	// 不符合格式，弹出提示信息
 	 	    	layer.msg('填写修改信息有误');
 	 	    }
-
+	 	    //消除默认设置
 	 	    return false;
  	    })
 
@@ -244,14 +258,15 @@
 
  	    		$(function () 
  	    		{	
+ 	    			// 选择图片发生改变是
                     $("#user_photo").change(function (){ 
                         uploadImage();
                         
                     });
                  });
                             function uploadImage() {
-//                            判断是否有选择上传文件
-//                            input type file
+                          //  判断是否有选择上传文件
+                
                                 var imgPath = $("#user_photo").val();
                                 if (imgPath == "") {
                                     layer.alert("请选择修改图片！",{icon: 6});
@@ -264,8 +279,9 @@
                                 	layer.alert("请选择图片文件！",{icon: 6});
                                     return;
                                 }
+                                // 
                                 var formData = new FormData($( "#form1" )[0]);
-                                
+                                // 发送ajax
                                 $.ajax({
                                     type: "post",
                                     url: "/home/center/info/douserphoto",
@@ -274,17 +290,31 @@
                                     cache: false,
                                     contentType: false,
                                     processData: false,
-                                    beforeSend:function(){
+                                    beforeSend:function()
+                                    {
                                            a = layer.load();
-                                      },
-                                    success: function(data) {
+                                    },
+                                    success: function(data) 
+                                    {
                                         layer.close(a);
-                                      
-                                        alert(data);
+                                      	//消除默认设置
+                                        if(data.status == 1)
+                                        {	
+                                        	// 成功改变头像的值
+                                        	layer.alert("修改成功",{icon: 6});
+                                        	$('#photo').attr('src','http://ozstangaz.bkt.clouddn.com/userphoto/'+data.user_photo);
+                                        	
+                                        }else
+                                        {	
+                                        	// 失败不改变头像的值
+                                        	layer.alert("修改失败",{icon: 5});
+                                        	$('#photo').attr('src','http://ozstangaz.bkt.clouddn.com/userphoto/'+data.user_photo);
+                                        }
                                       
                                     },
                                     error: function(XMLHttpRequest, textStatus, errorThrown) {
-                                        alert("上传失败，请检查网络后重试");
+                                    	
+                                        layer.alert("上传失败，请检查网络后重试",{icon: 5});
                                     }
                                 });
                             }

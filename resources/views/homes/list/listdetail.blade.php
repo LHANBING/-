@@ -1,5 +1,5 @@
 @extends('homes.layout.list')
-@section('title','商品类别列表')
+@section('title','商品详情页')
 
 
 		<link href="/homes/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css" />
@@ -42,15 +42,12 @@
 					<section class="slider">
 						<div class="flexslider">
 							<ul class="slides">
+								@foreach($goods_photo as $k=>$v)
 								<li>
-									<img src="/homes/images/01.jpg" title="pic" />
+									<img src="http://ozstangaz.bkt.clouddn.com/{{$goods_photo->$k}}" title="pic" />
 								</li>
-								<li>
-									<img src="/homes/images/02.jpg" />
-								</li>
-								<li>
-									<img src="/homes/images/03.jpg" />
-								</li>
+								@endforeach
+								
 							</ul>
 						</div>
 					</section>
@@ -74,24 +71,17 @@
 							</script>
 
 							<div class="tb-booth tb-pic tb-s310">
-								<a href="/homes/images/01.jpg"><img src="/homes/images/01_mid.jpg" alt="细节展示放大镜特效" rel="/homes/images/01.jpg" class="jqzoom" /></a>
+								<a href="http://ozstangaz.bkt.clouddn.com/{{$goods_photo->img1}}"><img src="http://ozstangaz.bkt.clouddn.com/{{$goods_photo->img1}}" alt="细节展示放大镜特效" rel="http://ozstangaz.bkt.clouddn.com/{{$goods_photo->img1}}" class="jqzoom" /></a>
 							</div>
 							<ul class="tb-thumb" id="thumblist">
+								@foreach($goods_photo as $k=>$v)
 								<li class="tb-selected">
 									<div class="tb-pic tb-s40">
-										<a href="#"><img src="/homes/images/01_small.jpg" mid="/homes/images/01_mid.jpg" big="/homes/images/01.jpg"></a>
+										<a href="#"><img src="http://ozstangaz.bkt.clouddn.com/{{$goods_photo->$k}}" mid="http://ozstangaz.bkt.clouddn.com/{{$goods_photo->$k}}" big="http://ozstangaz.bkt.clouddn.com/{{$goods_photo->$k}}"></a>
 									</div>
 								</li>
-								<li>
-									<div class="tb-pic tb-s40">
-										<a href="#"><img src="/homes/images/02_small.jpg" mid="/homes/images/02_mid.jpg" big="/homes/images/02.jpg"></a>
-									</div>
-								</li>
-								<li>
-									<div class="tb-pic tb-s40">
-										<a href="#"><img src="/homes/images/03_small.jpg" mid="/homes/images/03_mid.jpg" big="/homes/images/03.jpg"></a>
-									</div>
-								</li>
+								@endforeach
+								
 							</ul>
 						</div>
 
@@ -103,38 +93,45 @@
 						<!--规格属性-->
 						<!--名称-->
 						<div class="tb-detail-hd">
-							<h1>	
-				 良品铺子 手剥松子218g 坚果炒货 巴西松子
-	          </h1>
+							<h1>{{ $goods->title}}</h1>
 						</div>
 						<div class="tb-detail-list">
 							<!--价格-->
 							<div class="tb-detail-price">
 								<li class="price iteminfo_price">
 									<dt>促销价</dt>
-									<dd><em>¥</em><b class="sys_item_price">56.90</b>  </dd>                                 
+									<dd><em>¥</em><b class="sys_item_price">{{$goods->newprice}}</b>  </dd>                                 
 								</li>
 								<li class="price iteminfo_mktprice">
 									<dt>原价</dt>
-									<dd><em>¥</em><b class="sys_item_mktprice">98.00</b></dd>									
+									<dd><em>¥</em><b class="sys_item_mktprice">{{$goods->oldprice}}</b></dd>
+									<dd><em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</em></dd>
+									<dd><em>运费</em></dd>									
+									<dd><em>¥</em>{{$goods->transprice}}</dd>									
 								</li>
 								<div class="clear"></div>
+
+							</div>
+
+							<div style="height: 50px;width: 100px;margin-left: 60px;margin-top: 20px">
+								<a href=""><img style="width: 30%" src="/homes/images/qq.jpg" alt="QQ"></a>
+								<a href=""><span>联系卖家</span></a>
 							</div>
 
 							
 							
 						</div>
-
+						<div style="height: 20px"></div>
 						<div class="pay">
 							
 							<li>
 								<div class="clearfix tb-btn tb-btn-buy theme-login">
-									<a id="LikBuy" title="点此按钮到下一步确认购买信息" href="#">立即购买</a>
+									<a id="LikBuy" title="点此按钮到下一步确认购买信息" href="/home/gopay?goods_id={{$goods->id}}">立即购买</a>
 								</div>
 							</li>
 							<li>
 								<div class="clearfix tb-btn tb-btn-basket theme-login">
-									<a id="LikBasket" title="加入购物车" href="#"><i></i>收藏</a>
+									<a id="{{$goods->id}}" class="collect" title="加入购物车" onclick="func(this)"><i></i>收藏</a>
 								</div>
 							</li>
 						</div>
@@ -145,44 +142,22 @@
 
 				</div>
 
-				<!--优惠套装-->
-				
-				<div class="clear"></div>
+			
 				
 							
 				<!-- introduce-->
 
 				<div class="introduce">
-					<div class="browse">
-					    <div class="mc"> 
-						     <ul>					    
-						     	<div class="mt">            
-						            <h2>看了又看</h2>        
-					            </div>
-						     	
-							      <li class="first">
-							      	<div class="p-img">                    
-							      		<a  href="#"> <img class="" src="/homes/images/browse1.jpg"> </a>               
-							      	</div>
-							      	<div class="p-name"><a href="#">
-							      		【三只松鼠_开口松子】零食坚果特产炒货东北红松子原味
-							      	</a>
-							      	</div>
-							      	<div class="p-price"><strong>￥35.90</strong></div>
-							      </li>
-						
-						     </ul>					
-					    </div>
-					</div>
+					
 					<div class="introduceMain">
-						<div class="am-tabs" data-am-tabs>
+						<div class="am-tabs" data-am-tabs style="margin-left: 100px ">
 							<ul class="am-avg-sm-3 am-tabs-nav am-nav am-nav-tabs">
 								
 
 								<li>
 									<a href="#">
 
-										<span class="index-needs-dt-txt">全部评价</span></a>
+										<span class="index-needs-dt-txt">卖家信用足迹</span></a>
 
 								</li>
 
@@ -194,24 +169,14 @@
 
 								<div class="am-tab-panel am-fade">
 									
-                                    <div class="actor-new">
-                                    	<div class="rate">                
-                                    		<strong>100<span>%</span></strong><br> <span>好评度</span>            
-                                    	</div>
-                                        <dl>                    
-                                            <dt>买家印象</dt>                    
-                                            <dd class="p-bfc">
-                                            			<q class="comm-tags"><span>味道不错</span><em>(2177)</em></q>
-                                            </dd>                                           
-                                         </dl> 
-                                    </div>	
+                                    
                                     <div class="clear"></div>
 									<div class="tb-r-filter-bar">
 										<ul class=" tb-taglist am-avg-sm-4">
 											<li class="tb-taglist-li tb-taglist-li-current">
 												<div class="comment-info">
-													<span>全部评价</span>
-													<span class="tb-tbcr-num">(32)</span>
+													<span>卖家走过的套路</span>
+													<span class="tb-tbcr-num"></span>
 												</div>
 											</li>
 										</ul>
@@ -225,6 +190,10 @@
 												<img class="am-comment-avatar" src="/homes/images/hwbn40x40.jpg" />
 												<!-- 评论者头像 -->
 											</a>
+
+
+
+
 
 											<div class="am-comment-main">
 												<!-- 评论内容容器 -->
@@ -252,11 +221,20 @@
 												</div>
 												<!-- 评论内容 -->
 											</div>
+
+
+
+
+
 										</li>
 								
 									</ul>
 
 									<div class="clear"></div>
+
+
+
+									
 
 									<!--分页 -->
 									<ul class="am-pagination am-pagination-right">
@@ -268,6 +246,11 @@
 										<li><a href="#">5</a></li>
 										<li><a href="#">&raquo;</a></li>
 									</ul>
+
+
+
+
+
 									<div class="clear"></div>
 
 									<div class="tb-reviewsft">
@@ -276,3 +259,24 @@
 
 
 @endsection()
+
+<script>
+	var func = function(obj){
+		var id = $(obj).attr('id');
+
+		$.post('/home/collect',{id:id,_token:'{{csrf_token()}}'},function(data){
+			alert(data);
+			/*layer.open({
+				content:'修改默认地址成功!'
+				,btn: ['确认']
+  				,btn1: function(){
+    				location.reload();
+    			}
+			})*/
+			
+		})
+  		
+	}
+</script>
+
+

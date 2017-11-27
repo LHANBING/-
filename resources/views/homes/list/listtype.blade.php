@@ -13,7 +13,7 @@
 @section('content')
 
 
-					<div class="user-order">
+					<div class="">
 
 						<!--标题 -->
 						<div class="am-cf am-padding">
@@ -26,7 +26,7 @@
 							
 
 							<div class="am-tabs-bd">
-								<div id="tab1" class="am-tab-panel am-fade am-in am-active">
+								<div id="tab1" class="am-tab-panel am-fade am-in am-active" >
 									<div class="order-top">
 										<div class="th th-item">
 											商品
@@ -46,9 +46,9 @@
 										<div class="th th-status">
 											描述
 										</div>
-										<div class="th th-change">
+										<!-- <div class="th th-change">
 											查看详情
-										</div>
+										</div> -->
 									</div>
 
 									<div class="order-main">
@@ -65,16 +65,16 @@
 														<ul class="item-list">
 															<li class="td td-item">
 																<div class="item-pic">
-																	<a class="J_MakePoint" href="#">
-																		<img class="itempic J_ItemImg" src="/homes/images/62988.jpg_80x80.jpg">
+																	<a class="J_MakePoint" href="/home/listdetail/{{$v->id}}">
+																		<img class="itempic J_ItemImg" src="http://ozstangaz.bkt.clouddn.com/{{$pic[$v->id]}}">
 																	</a>
 																</div>
 																<div class="item-info">
 																	<div class="item-basic-info">
-																		<a href="#">
-																			<p>礼盒袜子女秋冬 纯棉袜加厚 韩国可爱 </p>
-																			<p class="info-little">颜色分类：李清照
-																				<br>尺码：均码</p>
+																		<a href="/home/listdetail/{{$v->id}}">
+																			<p>{{$v->title}} </p>
+																			商品详情:
+																			<p>{{$description[$v->id]}}</p>
 																		</a>
 																	</div>
 																</div>
@@ -99,11 +99,7 @@
 																	{{$v->address}}
 																</div>
 															</li>
-															<li class="td td-price">
-																<div class="item-price">
-																	商品描述
-																</div>
-															</li>
+															
 															<li class="td td-price">
 																<div class="item-price">
 																	<a href="/home/listdetail/{{$v->id}}">查看详情</a>
@@ -130,25 +126,6 @@
 					</div>
 
 				
-			<script>
-
-				$.ajaxSetup({
-				        headers: {
-				            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-				        }
-				});
-
-				$('#uls li:eq(0) ').click(function(){
-
-				$.post('/home/center/order/list',{id:10},function(data){
-
-
-					//alert(data);
-				})
-
-
-			});
-			</script>		
 			
 
 @endsection()

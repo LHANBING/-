@@ -12,7 +12,16 @@
             </i>
             已完成订单列表
         </span>
+      
     </div>
+
+              @if(session('mypj'))
+                        <div class="mws-form-message info">                 
+
+                            {{session('mypj')}}
+
+                        </div>
+              @endif
     <div class="mws-panel-body no-padding">
         <div id="DataTables_Table_1_wrapper" class="dataTables_wrapper" role="grid">
        		 <form action="/admin/order/index" method="get">
@@ -44,7 +53,6 @@
 
 	            </div>
 			</form>
-
             <table class="mws-datatable-fn mws-table dataTable" id="DataTables_Table_1"
             aria-describedby="DataTables_Table_1_info">
                 <thead>
@@ -117,22 +125,18 @@
                         </td>
                          <td class="">
                          	  {{$v->title}}
-                               X 
-                              {{$r[$k]->goods_num}}
+                           
                         </td>
                         <td class="">
                              {{$r[$k]->order_num}}
                         </td>
                          <td class="">
-                            {{$r[$k]->order_atime}}
+                            {{$r[$k]->created_at}}
                             
                         </td>
                          <td class="">
                             {{$r[$k]->order_otime}} 
-                           
-                         
-                           
-                            
+
                         </td>
                         <td class="">
                              {{$r[$k]->pay_money  }}
@@ -142,7 +146,7 @@
                        
                         <td class="">
                          
-                         <a href="" style="color:blue;font-size:15px">查看评价</a>
+                         <a href="/admin/order/show?id={{$v->id}}" class="btn btn-warning">查看评价</a>
                           
                         </td>
   
@@ -155,7 +159,7 @@
             </table>
            <div class="dataTables_info" id="DataTables_Table_1_info">
            
-              
+               Showing 1 to {{$last}} of {{$count}} entries
             </div>
         
                 <style>
@@ -217,6 +221,9 @@
 @endsection()
 
 @section('js')
+<script type="text/javascript">
+        $('.mws-form-message').delay(3000).slideUp(1000);
+</script>
 
 
 @endsection

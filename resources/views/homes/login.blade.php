@@ -51,7 +51,7 @@
 
         <input type="submit" name="" id="submit" value="登 录" class="am-btn am-btn-primary am-btn-sm">
 
-
+            <!-- 登录失败时，显示信息 -->
             <div class="partner">
               @if (session('status'))
               <p style="color:red">
@@ -65,20 +65,23 @@
 @endsection
 
 @section('js')
+
 	<script type="text/javascript">
+        // 检测手机号
 		$('#phone').blur(function() 
-		{		
-
-			 checkTel($(this),$('#phonemsg'));
-
-			 
+		{	 
+             //调用checkTel函数检测手机号
+            checkTel($(this),$('#phonemsg'));
+	 
 		})
+        // 检测密码
 		$('#password').blur(function() 
-				{		
-					checkPassword($(this),$('#passwordmsg'), 6);
-
-					 
-				})
+		{		
+            //调用checkTel函数检测密码
+			checkPassword($(this),$('#passwordmsg'), 6);
+	 
+		})
+  
 	</script>
 
 @endsection

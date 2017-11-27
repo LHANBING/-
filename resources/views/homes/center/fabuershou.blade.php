@@ -38,12 +38,17 @@
     @if(session('sctp'))
        <span id='sctp'></span>           
     @endif
+
+
 	<div class="am-cf am-padding">
 		<div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">发布二手闲置物品</strong> / <small>New</small></div>
 	</div>
 	<hr>
+
+  <!-- 图片上传 -->
   <input type="file" multiple id="ssi-upload7"/>
-	<form action="/home/center/fabu" class="am-form" id="doc-vld-msg" method="post" enctype="multipart/form-data">
+
+	<form action="/home/center/fabu" class="am-form" id="doc-vld-msg" method="post" enctype="multipart/form-data" style="margin-top: 20px">
    
   <fieldset>
     <div class="am-form-group">
@@ -151,12 +156,12 @@
                             position: 'top center'
                         }));
                     },
-                    onEachUpload: function (fileInfo ,xhr) {
-                     imgNum++;
-                        console.log(xhr);
-                        var jsonData = $('.pic').val();
-                       $('.pic').val('');
-                        $('.pic').val(jsonData+'"img'+imgNum+'":"'+'goods/'+xhr+'",');
+                      onEachUpload: function (fileInfo,xhr) {
+                       imgNum++;
+                          console.log(xhr);
+                          var jsonData = $('.pic').val();
+                         $('.pic').val('');
+                          $('.pic').val(jsonData+'"img'+imgNum+'":"'+'goods/'+xhr+'",');
 
                         ssi_modal.notify('error', $.extend({}, notifyOptions, {
                             classSize: 'auto',

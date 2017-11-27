@@ -24,29 +24,34 @@
 						</div>
 						<hr/>
 						<ul class="am-avg-sm-1 am-avg-md-3 am-thumbnails">
-
+						@if(empty($res) == false)
+		                  @foreach($res as $k => $v)
 							<li class="user-addresslist defaultAddr">
+								@if($v->status == 1)
 								<span class="new-option-r"><i class="am-icon-check-circle"></i>默认地址</span>
+								@endif
 								<p class="new-tit new-p-re">
-									<span class="new-txt">小叮当</span>
-									<span class="new-txt-rd2">159****1622</span>
+									<span class="new-txt">{{ $v->addressname }}</span>
+									<span class="new-txt-rd2">{{ $v->address_tel }}</span>
 								</p>
 								<div class="new-mu_l2a new-p-re">
 									<p class="new-mu_l2cw">
 										<span class="title">地址：</span>
-										<span class="province">湖北</span>省
-										<span class="city">武汉</span>市
-										<span class="dist">洪山</span>区
-										<span class="street">雄楚大道666号(中南财经政法大学)</span></p>
+										<span class="province">{{ $v->province }}</span>
+									   @if($v->city != false)
+										<span class="city">{{ $v->city }}</span>
+									   @endif
+										<span class="dist">{{ $v->area }}</span>
+										<span class="street">{{ $v->address }}</span></p>
 								</div>
 								<div class="new-addr-btn">
-									<a href="#"><i class="am-icon-edit"></i>编辑</a>
+									<a href="/home/center/address/{{$v->id}}/edit"><i class="am-icon-edit"></i>修改</a>
 									<span class="new-addr-bar">|</span>
-									<a href="javascript:void(0);" onclick="delClick(this);"><i class="am-icon-trash"></i>删除</a>
+									<a href="javascript:void(0);" onclick="delClick({{$v->id}});"><i class="am-icon-trash"></i>删除</a>
 								</div>
 							</li>
-
-						
+						   @endforeach
+						@endif
 							
 						</ul>
 						<div class="clear"></div>		
@@ -124,19 +129,16 @@
                 </p>
             </div>
             
-            <script type="text/javascript">
-                
+            <script type="text/javascript">                
               $('#demo3').citys({
                     province:'北京市',
                     city:'东城区',
-                    area:'',
-                    
+                    area:'',                   
                     })
 
             </script>
     
     </div>
-    
 
 
 											</div>
@@ -183,10 +185,104 @@
 
 @section('js')
 	 <script type="text/javascript">
+
+	 		var username = false;
+	 		var userphone = false;
+	 		var userintro = false;
+
+	 		$('#user-name').blur(function(){
+
+	 			 username = isNull($(this).val());
+
+	 			 if(username !=false)
+	 			 {
+	 			 	username = true;
+
+	 			 	$('#usernamemsg').text('');
+	 			 }else
+	 			 {
+	 			 	$('#usernamemsg').text('收货人不能为空！');
+	 			 }
+	 		})
 	 		
+	 		$('#user-phone').blur(function() {
+
+	 			 userphone = checkTel($(this),$('#userphonemsg'));
+
+	 		})
+
+
+	 		$('#user-intro').blur(function(){
+
+	 			 userintro = isNull($(this).val());
+
+	 			 if(userintro !=false)
+	 			 {
+	 			 	userintro = true;
+	 			 	$('#userintromsg').text('');
+	 			 }else
+	 			 {
+	 			 	$('#userintromsg').text('收货人不能为空！');
+
+	 			 }
+	 		})
+			
 	 	 function address()
-	 	 {
-		 	console.log($('#province').val());
+	 	 {	
+	 	 	  var province = $('#province').val();
+	 	 	  var city = $('#city').val();
+	 	 	  var area = $('#area').val();
+
+	 	 	  var address = $('#user-intro').val();
+	 	 	  var address_tel = $('#user-phone').val();
+	 	 	  var addressname = $('#user-name').val();
+	 	 	  
+
+			  if( username == true && userphone == 100 && userintro==true)
+			  {
+				  $.post("{{url('/home/center/address')}}",{province:province,city:city,area:area,address:address,address_tel:address_tel,addressname:addressname},function(data){
+				  	  console.log(data);
+				  		if(data == 1)
+				  		{
+				  			layer.open({
+							  content:'添加成功！'
+							});
+							location.reload();
+				  		}else
+				  		{
+				  			layer.open({
+							  content:'添加失败！'
+							});
+
+				  		}
+				  })
+              }else
+              {
+              	 
+              	 layer.open({
+						  content:'请填写完整的收货信息！'
+						});
+              }
+	 	 }
+
+	 	 function delClick($id)
+	 	 {		var id = $id;
+	 	 		$.post("/home/center/address/delete",{id:id,"_token":"{{ csrf_token() }}"},function(data){
+
+	 	 			if(data == 1)
+	 	 			{
+	 	 				layer.open({
+							  content:'删除成功！'
+							});
+							location.reload();
+	 	 			}else
+	 	 			{
+	 	 				layer.open({
+							  content:'删除失败！'
+							});
+						location.reload();
+	 	 			}
+	 	 		})
 	 	 }
 	 </script>
 @endsection

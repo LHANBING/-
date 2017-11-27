@@ -1,11 +1,13 @@
-@if(session('zcsg'))
-	 <script>	
-		alert("{{ session('zcsg')}}");
-		
-	 </script>	
-							
-@endif		
-					
+
+
+
+
+
+
+
+
+
+
 
 @extends('homes.layout.center')
 @section('title','评价管理')
@@ -21,10 +23,19 @@
 
 		<script src="/homes/AmazeUI-2.4.2/assets/js/jquery.min.js"></script>
 		<script src="/homes/AmazeUI-2.4.2/assets/js/amazeui.js"></script>
+		
+        <script src="/homes/validate.js"></script>
+
+        <script type="text/javascript" src="{{url('/homes/layer1/jquery.js')}}"></script>
+        <script type="text/javascript" src="{{url('/homes/layer1/layer.js')}}"></script>
+        <script type="text/javascript" src="{{url('/homes/layer1/extend/layer.ext.js')}}"></script>
 
 
-
+	
 @endsection()
+
+
+
 
 @section('content')
 
@@ -52,7 +63,7 @@
 
 												
 												<div class="comment-top">
-													<div class="th th-price" style="width:350px">
+													<div class="th th-price">
 														评价
 													</div>
 													<div class="th th-item">
@@ -62,7 +73,7 @@
 												<li class="td td-item">
 													<div class="item-pic">
 														<a class="J_MakePoint" href="#">
-															<img class="itempic" src="{{$v->goods_photo}}">
+															<img class="itempic" src="{{$v->pic}}">
 														</a>
 													</div>
 												</li>
@@ -72,20 +83,18 @@
 														<div class="item-opinion">好评</div>
 														<div class="item-name">
 															<a href="#">
-																<p class="item-basic-info">
-																	{{$v->title}}
-																</p>
+																<p class="item-basic-info">{{$v->title}}</p>
 															</a>
 														</div>
 													</div>
-													<div class="item-comment" style="height:100px">
-														{{$v->comment}} 
+													<div class="item-comment">
+														{{$v->comment}}
 													</div>
 
 													<div class="item-info">
 														<div>
-															<p class="info-little">回复{{$k}} </p>
-															<p class="info-time">{{$v->time}}</p>
+															<p class="info-little">回复{{$v->id}} </p>
+															<p class="info-time">{{$v->username}}在{{$v->created_at}}12:12评论了你的商品</p>
 
 														</div>
 													</div>
@@ -102,9 +111,7 @@
 									<div class="comment-main">
 										<div class="comment-list">
 											@foreach ($re as $k => $v)
-											<ul class="item-list" id="{{$res[$k]->id}}all">
-
-												
+											<ul class="item-list" id="{{$v->id}}all">
 												<div class="comment-top">
 													<div class="th th-price" style="width:350px">
 														评价
@@ -116,7 +123,7 @@
 												<li class="td td-item">
 													<div class="item-pic">
 														<a class="J_MakePoint" href="#">
-															<img class="itempic" src="{{$v->goods_photo}}">
+															<img class="itempic" src="{{$v->pic}}">
 														</a>
 													</div>
 												</li>
@@ -138,15 +145,15 @@
 
 													<div class="item-info">
 														<div>
-											<p class="info-little dels" id="{{$res[$k]->id}}del" style="cursor:pointer;">删除{{$res[$k]->id}} </p>
-											<p class="info-time">{{$v->time}}</p>
+											<p class="info-little dels" id="{{$v->id}}del" style="cursor:pointer;">删除{{$v->id}}</p>
+											<p class="info-time">您在{{$v->created_at}}评论了31{{$v->username}}的商品</p>
 
 														</div>
 													</div>
 												</li>
 
 											</ul>
-											@endforeach
+										 	@endforeach 
 								
 										</div>
 									</div>									
@@ -156,6 +163,22 @@
 						</div>
 
 					</div>
+			@if(session('zcsg'))
+
+			 <script>	
+						layer.confirm('<div style="font-size:15px">评论成功,已经自动为您跳转评论页面</div>', {
+								btn: ['返回','确定'] //按钮
+								 ,icon: 1
+								,skin: 'layer-ext-moon'
+							   ,title: '<div style="font-size:18px;color:#dd514c;">系统提示</div>'
+								}, function(){
+										location.href="/home/center/order/index";
+								}); 
+				
+			 </script>	
+									
+		@endif		
+							
 
 					<script>
 						$('.dels').click(function(){
@@ -168,10 +191,38 @@
 
 								if(data ==1 ){
 
-										alert('删除成功');
-									    b.parents().find($('#'+id+'all')).remove();
+										
+										layer.open({
+										  type: 1 
+										  ,title: '<div style="font-size:18px;color:#dd514c;">系统提示</div>'
+										  ,area: ['500px', '200px']
+										  ,shade: 0
+										  ,maxmin: false
+										  ,content: '<div style="font-size:15px;margin:30px">删除成功</div>'
+										  ,btn: ['确定'] 
+										  ,zIndex: layer.zIndex 
+										  ,success: function(layero){
+										    layer.setTop(layero); 
+										  }
+										});
+
+
+									    b.parents().find($('#'+id+'all')).empty();
 								}else{
-									    alert('删除失败');
+									   
+									    layer.open({
+										  type: 1 
+										  ,title: '<div style="font-size:18px;color:#dd514c;">系统提示</div>'
+										  ,area: ['500px', '200px']
+										  ,shade: 0
+										  ,maxmin: false
+										  ,content: '<div style="font-size:15px;margin:30px">抱歉,遇到未知原因<br/>操作失败请重试</div>'
+										  ,btn: ['确定'] 
+										  ,zIndex: layer.zIndex 
+										  ,success: function(layero){
+										    layer.setTop(layero); 
+										  }
+										});
 								}
 
 							})

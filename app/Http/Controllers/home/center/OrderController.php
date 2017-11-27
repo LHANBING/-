@@ -15,21 +15,15 @@ class OrderController extends Controller
     public function index () 
     {
     	
-            $_session['uid']=10;
     		//联查商品
-    	/*	$res=Good::join('orders',function($join){
-
-    			$join->on('goods.id','=','orders.goods_id');
-
-  	  		})->where('orders.buy_uid',$_session['uid'])->orderBy('orders.buy_order_status')->get(); 
-	*/
             $res = DB::table('orders')->join('goods','goods.id','=','orders.goods_id')
                                       ->join('goodsdetail','goodsdetail.goods_id','=','goods.id')
-                                      ->where('orders.buy_uid',$_session['uid'])
+                                      ->join('users','users.id','=','orders.sale_uid')
+                                      ->where('orders.buy_uid',session('uid'))
                                       ->orderBy('orders.buy_order_status')
+                                     ->select('orders.*','users.username','goods.title','goods.newprice','goodsdetail.pic','goodsdetail.content')
                                       ->get();
-            //dd($res);                          
-
+           
     	return  view('homes.center.order',['res'=>$res]);
     }
  
@@ -39,14 +33,21 @@ class OrderController extends Controller
     {       
             $status=$Request->all()['status'];
 
-
-            $_session['uid']=10;
     	    //联查商品
-            $res=Good::join('orders',function($join){
+           /* $res=Good::join('orders',function($join){
 
                 $join->on('goods.id','=','orders.goods_id');
 
-            })->where('orders.buy_uid','=',$_session['uid'])->where('orders.buy_order_status',$status)->get();
+            })->where('orders.buy_uid','=',session('uid'))->where('orders.buy_order_status',$status)->get();*/
+
+            $res = DB::table('orders')->join('goods','goods.id','=','orders.goods_id')
+                                      ->join('goodsdetail','goodsdetail.goods_id','=','goods.id')
+                                      ->join('users','users.id','=','orders.sale_uid')
+                                      ->where('orders.buy_uid',session('uid'))
+                                      ->where('orders.buy_order_status',$status)
+                                      ->orderBy('orders.buy_order_status')
+                                     ->select('orders.*','users.username','goods.title','goods.newprice','goodsdetail.pic','goodsdetail.content')
+                                      ->get();
 
             echo json_encode($res);
     }
@@ -54,17 +55,11 @@ class OrderController extends Controller
 
     public function pay (Request $Request)
     {
-        
-         $ids=$Request->all()['id'];
-         $id = substr($ids,-1,1);
-         //echo $id;
-
-
         //传过来的订单id
-        //$id =$Request->all()['id'];
-
-
-
+        
+        $id=$Request->all()['id'];
+      
+ 
         $res=DB::table('orders')->where('id',$id)->first();
 
         $money = $res->pay_money+$res->pay_yunfei;
@@ -95,9 +90,16 @@ class OrderController extends Controller
 
          $C =DB::table('orders')->where('id',$id)->update(['buy_order_status'=>'2','sale_order_status'=>'2']);
 
+          //添加消息
+         $mes['order_id'] = $id;
+         $mes['msg_content'] ="支付提醒";
+                 
+         $D = DB::table('message')->insert($mes);
+         
+
         //var_dump($B);         
 
-        if($A && $B &&$C){
+        if($A && $B &&$C && $D ){
             DB::commit();
             
             echo 1;
@@ -111,21 +113,36 @@ class OrderController extends Controller
 
     public function sure(Request $Request)
     {
-        $id = substr($Request->all()['id'],-1,1);
+        //订单id
+        $id = $Request->all()['id'];
 
-     
+        $res =DB::table('orders')->where('id',$id)->first();  
+        
+        DB::beginTransaction();
+
+
         $A=DB::table('orders')->where('id',$id)->update(['buy_order_status'=>'4','sale_order_status'=>'4']);
-  
-        
-        if($A ){
-        
+    
+        //添加确认收货消息
+        $arr['order_id'] = $id;
+        $arr['msg_content'] = "确认收货";
+
+
+   
+        $B = DB::table('message')->insert($arr);
+    
+
+
+        if($A && $B ){
+              
+              DB::commit();
             echo 1;
         }else{
-         
+              DB::rollback();
             echo 0;
         }
 
-    
+     
     }
   
 }
