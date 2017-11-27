@@ -13,22 +13,87 @@ use zgldh\QiniuStorage\QiniuStorage;
 use DB;
 
 class InfoController extends Controller
-{
+{   
+    /**
+     * 显示个人信息页面
+     * 
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index ()
     {	
+        //获取session中的uid
         $id = session('uid');
-		if($id){
-    	$res = User::where('id',$id)->first();
-   		return view('homes.center.info',['res'=>$res]);
+
+        // 存在uid，进入个人信息页面，不存在，返回首页
+		if($id)
+        {   
+            // 通过session中uid获取用户信息
+        	$res = User::where('id',$id)->first();
+
+       		return view('homes.center.info',['res'=>$res]);
         }else
-        {
-            return view('homes.login');
+        {   
+            // 返回首页
+            return view('/');
         }
     }
 
+    /**
+     * 显示个人信息页面
+     * 
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function edit ()
+    {   
+        //获取session中的uid
+        $id = session('uid');
+        // 通过session中uid获取用户信息
+        $res = User::where('id',$id)->first();
 
+        return view('homes.center.edit',['res'=>$res]);
+    }
+
+    /**
+     * 修改个人信息
+     * 
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+     public function doedit (Request $request)
+    {   
+            // 去除传递过来参数中的token
+            $res = $request->except('_token');
+            // 获取存入session中的uid
+            $id = session('uid');
+            // 修改个人信息
+            $bool = User::where('id',$id)->update($res);
+            // 判断修改是否成功
+            if($bool)
+            {   
+                //返回ajax的值 
+                echo 1;
+            }else
+            {   
+                //返回ajax的值 
+                echo 0; 
+            }
+        
+    }
+    /**
+     * 修改个人头像
+     * 
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function douserphoto (Request $request)
     {	  
+            
         $id = session('uid');
     	$user_photo = $request->file('user_photo');
 
@@ -41,57 +106,71 @@ class InfoController extends Controller
 
             // 上传到七牛
             $bool = $disk->put('userphoto/'.$fileName,file_get_contents($user_photo->getRealPath()));
+
             $data = User::where('id',$id)->first();
-            $default = $data['user_photo'];
-            if($bool)
-            {   
-                $res = User::where('id',$id)->insert(['user_photo'=>$fileName]);
-                if($res)
-                {
-                    if( $default != "default.jpg")
-                    {
-                         $delete = $disk->delete($default);
-                    }else
-                    {
-                        
-                    }
+            $delete = $data['user_photo'];
+
+                if($bool)
+                {   
+
+                        if($delete == "default.jpg")
+                        {
+                           $res = User::where('id',$id)->update(['user_photo'=>$fileName]);
+                             if($res)
+                             {  
+                                //返回ajax的值 
+                                return ["status"=>1,'user_photo'=>$fileName];
+                             }else
+                             {  
+                                //返回ajax的值 
+                                return ["status"=>0,'user_photo'=>$delete];
+                             }      
+                             
+                        }else
+                        {
+                             
+
+                             $success = $disk->delete("userphoto/".$delete);
+                             
+                                 if($success)
+                                 {
+                                    $res = User::where('id',$id)->update(['user_photo'=>$fileName]);
+                                      if($res)
+                                      { 
+                                        //返回ajax的值 
+                                         return ["status"=>1,'user_photo'=>$fileName];
+                                      }
+                                 }else
+                                 {
+                                    $res = User::where('id',$id)->update(['user_photo'=>$fileName]);
+                                      if($res)
+                                      {     
+                                        //返回ajax的值 
+                                         return ["status"=>1,'user_photo'=>$fileName];
+                                      }else
+                                      { 
+                                        //返回ajax的值 
+                                        return ["status"=>0,'user_photo'=>$delete];
+                                      }
+
+                                 }  
+                        }
+                    
+                }else
+                {   
+                    //返回ajax的值 
+                    return ['status'=>0,'user_photo'=>$delete];
                 }
-            }
          }else
-         {
-            return "没有文件上传";
+         {  
+            //返回ajax的值 
+            return "没有上传文件！";
          }
     	
     }
 
-    public function edit ()
-    {	
+    
 
-    	$id = session('uid');
-		
-    	$res = User::where('id',$id)->first();
-    	return view('homes.center.perfect_edit',['res'=>$res]);
-    }
-
-     public function doedit (Request $request)
-    {	
-            // 去除传递过来参数中的token
-    		$res = $request->except('_token');
-            
-            $id = session('uid');
-
-            $bool = User::where('id',$id)->update($res);
-
-            if($bool)
-            {   
-                 
-                echo 1;
-            }else
-            {
-                echo 0; 
-            }
-    	
-    }
 
     public function user_change ()
     {	

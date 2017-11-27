@@ -42,91 +42,21 @@
 									<div class="block-income block  fn-left">
 										<h3 class="income-title block-title">
                                                                                                           支出
-                                      <span class="num ng-binding">
-                                              119.80
-                                       </span>
-                                    <span class="desc ng-binding">
+                                    
+                                    
+
+                                    @if( $sale != false)
+                                 	<span class="desc ng-binding">
                                            <a href="/home/center/bill/out">查看支出明细</a>
                                          </span>
+                                    @else
+									<span class="num ng-binding">
+                                              0.00
+                                       </span>
+                                    @endif
                                              </h3>
 
-										<div class="catatory-details  fn-hide shopping" ng-class="shoppingChart">
-											<div class="catatory-chart fn-left fn-hide">
-												<div class="title">类型</div>
-												<ul>
-
-
-												</ul>
-											</div>
-											<div class="catatory-detail fn-left">
-												<div class="title ng-binding">
-													购买商品
-												</div>
-												<ul>
-												
-													<li class="ng-scope  delete-false">
-
-														<div class="  ng-scope">
-															<a title="呢子大衣" class="text fn-left " href="#">
-																<span class="emoji-span ng-binding">呢子大衣</span>
-																<span class="amount fn-right ng-binding">349.00</span>
-															</a>
-														</div>
-													</li>
-
-													<li class="ng-scope  delete-false">
-
-														<div class="  ng-scope">
-															<a title="金士顿羊年限量版16gU盘" class="text fn-left " href="#">
-																<span class="emoji-span ng-binding">金士顿羊年限量版16gU盘</span>
-																<span class="amount fn-right ng-binding">39.00</span>
-															</a>
-														</div>
-													</li>
-
-													<li class="ng-scope  delete-false">
-
-														<div class="  ng-scope">
-															<a title="呢子大衣" class="text fn-left " href="#">
-																<span class="emoji-span ng-binding">呢子大衣</span>
-																<span class="amount fn-right ng-binding">349.00</span>
-															</a>
-														</div>
-													</li>
-
-													<li class="ng-scope  delete-false">
-
-														<div class="  ng-scope">
-															<a title="金士顿羊年限量版16gU盘" class="text fn-left " href="#">
-																<span class="emoji-span ng-binding">金士顿羊年限量版16gU盘</span>
-																<span class="amount fn-right ng-binding">39.00</span>
-															</a>
-														</div>
-													</li>
-
-													<li class="ng-scope  delete-false">
-
-														<div class="  ng-scope">
-															<a title="呢子大衣" class="text fn-left " href="#">
-																<span class="emoji-span ng-binding">呢子大衣</span>
-																<span class="amount fn-right ng-binding">349.00</span>
-															</a>
-														</div>
-													</li>
-
-													<li class="ng-scope  delete-false">
-
-														<div class="  ng-scope">
-															<a title="羊毛毡底鞋垫" class="text fn-left " href="#">
-																<span class="emoji-span ng-binding">羊毛毡底鞋垫</span>
-																<span class="amount fn-right ng-binding">9.90</span>
-															</a>
-														</div>
-													</li>
-
-												</ul>
-											</div>
-										</div>
+									
 									</div>
 									<div class="block-expense block  fn-left">
 										<div class="slide-button right"></div>
@@ -135,13 +65,16 @@
 
 									<!--收入-->
 									<h3 class="expense income-title block-title">
-                                                                                                                       收入                                                              
-                                      <span class="num ng-binding">
-                                              0.00
-                                       </span>
+                                                                                                                       收入                                                            	 
+                                    @if( $sale != false)
                                     <span class="desc ng-binding">
                                            <a href="/home/center/bill/in">查看收入明细</a>
                                     </span>
+                                    @else
+									<span class="num ng-binding">
+                                              0.00
+                                       </span>
+                                    @endif
                                 </h3>
 								</div>
 
@@ -149,7 +82,8 @@
 								<div class="module-consumeTrend inner-module">
 									<h3 class="module-income ng-scope" style="font-size: 24px;">余额</h3>
 									<div class="consumeTrend-chart" id="consumeTrend-chart">
-										&nbsp;&nbsp;&nbsp;<h2 style="font-size: 20px;">￥：元</h2>
+										&nbsp;&nbsp;&nbsp;<h2 style="font-size: 20px;">￥：{{ $money }} 元</h2>
+										
 									</div>
 								</div>
 

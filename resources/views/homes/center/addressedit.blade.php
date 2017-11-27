@@ -1,5 +1,5 @@
 @extends('homes.layout.center')
-@section('title','地址管理')
+@section('title','修改地址')
 
 @section('cssjs')
 
@@ -19,43 +19,8 @@
 
 
 					<div class="user-address">
-				<div class="am-cf am-padding">
-							<div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">收货地址列表</strong> / <small>Address&nbsp;list</small></div>
-						</div>
-						<hr/>
-						<ul class="am-avg-sm-1 am-avg-md-3 am-thumbnails">
-						@if(empty($res) == false)
-		                  @foreach($res as $k => $v)
-							<li class="user-addresslist defaultAddr">
-								@if($v->status == 1)
-								<span class="new-option-r"><i class="am-icon-check-circle"></i>默认地址</span>
-								@endif
-								<p class="new-tit new-p-re">
-									<span class="new-txt">{{ $v->addressname }}</span>
-									<span class="new-txt-rd2">{{ $v->address_tel }}</span>
-								</p>
-								<div class="new-mu_l2a new-p-re">
-									<p class="new-mu_l2cw">
-										<span class="title">地址：</span>
-										<span class="province">{{ $v->province }}</span>
-									   @if($v->city != false)
-										<span class="city">{{ $v->city }}</span>
-									   @endif
-										<span class="dist">{{ $v->area }}</span>
-										<span class="street">{{ $v->address }}</span></p>
-								</div>
-								<div class="new-addr-btn">
-									<a href="/home/center/address/{{$v->id}}/edit"><i class="am-icon-edit"></i>修改</a>
-									<span class="new-addr-bar">|</span>
-									<a href="javascript:void(0);" onclick="delClick({{$v->id}});"><i class="am-icon-trash"></i>删除</a>
-								</div>
-							</li>
-						   @endforeach
-						@endif
-							
-						</ul>
 						<div class="clear"></div>		
-						<a data-am-modal="{target: '#doc-modal-1', closeViaDimmer: 0}" class="new-abtn-type">添加新地址</a>
+						<a data-am-modal="{target: '#doc-modal-1', closeViaDimmer: 0}" class="new-abtn-type">修改地址</a>
 						<!--例子-->
 						<div id="doc-modal-1" class="">
 
@@ -63,17 +28,17 @@
 
 								<!--标题 -->
 								<div class="am-cf am-padding">
-									<div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">新增收货地址</strong> / <small>Add&nbsp;address</small></div>
+									<div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">修改收货地址</strong> / <small>Edit&nbsp;address</small></div>
 								</div>
 								<hr>
 
 								<div style="margin-top: 20px;" class="am-u-md-12 am-u-lg-8">
-									<form class="am-form am-form-horizontal" method="post" action="/home/center/address">
+									<form class="am-form am-form-horizontal" method="post" action="/home/center/address/">
 
 										<div class="am-form-group">
 											<label class="am-form-label" for="user-name">收货人</label>
 											<div class="am-form-content">
-												<input type="text" placeholder="收货人必填" id="user-name" name="username">
+												<input type="text" placeholder="收货人必填" id="user-name" name="username" value="{{ $res3->addressname }}" >
 											</div>
 										</div>
 										<div id="usernamemsg" class="yanzheng">
@@ -83,7 +48,7 @@
 										<div class="am-form-group">
 											<label class="am-form-label" for="user-phone">手机号码</label>
 											<div class="am-form-content">
-												<input type="tel" placeholder="手机号必填" id="user-phone" name="address_tel">
+												<input type="tel" placeholder="手机号必填" id="user-phone" name="address_tel" value="{{ $res3->address_tel }}">
 											</div>
 										</div>
                                           
@@ -131,9 +96,9 @@
             
             <script type="text/javascript">                
               $('#demo3').citys({
-                    province:'北京市',
-                    city:'东城区',
-                    area:'',                   
+                    province:'{{ $res3->province }}',
+                    city:'{{ $res3->city }}',
+                    area:'{{ $res3->area }}',                   
                     })
 
             </script>
@@ -147,21 +112,33 @@
 										<div class="am-form-group">
 											<label class="am-form-label" for="user-intro">详细地址</label>
 											<div class="am-form-content">
-												<textarea placeholder="输入详细地址" id="user-intro" rows="3" class="" name="address" style="resize:none;" ></textarea>
+												<textarea placeholder="输入详细地址" id="user-intro" rows="3" class="" name="address" style="resize:none;" >{{ $res3->address }}</textarea>
 												<small>100字以内写出你的详细地址...</small>
 											</div>
 										</div>
 					                    
 					                    <div class="yanzheng" id="userintromsg">
 										</div>
+										
+										
+										<div class="am-form-group">
+											<label for="user-address" class="am-form-label">默认地址</label>
+											<div class="am-form-content address">
+												<select data-am-selected  id="status" name="status">
+													<option value="1" @if($res3->status== 1) selected @endif>是</option>
+													<option value="0" @if($res3->status== 0) selected @endif>否</option>
+												</select>
+												
+											</div>
+										</div>
 
 										    <div class="am-form-group">
 											  <div class="am-u-sm-9 am-u-sm-push-3">
 												
 												{{ csrf_field() }}
-
+												{{  method_field('PUT') }}
 												
-											<a class="am-btn am-btn-danger" onclick="address()"  >添加</a>
+										<button  class="am-btn am-btn-danger" id="{{ $res3->id }}"  class="edit">修改</button>
 											
 												
 											</div>
@@ -226,9 +203,11 @@
 
 	 			 }
 	 		})
-			
-	 	 function address()
-	 	 {	
+ 	
+ 	 		$('button').click(function(){
+
+	  		  var id = $(this).attr('id');
+
 	 	 	  var province = $('#province').val();
 	 	 	  var city = $('#city').val();
 	 	 	  var area = $('#area').val();
@@ -236,53 +215,25 @@
 	 	 	  var address = $('#user-intro').val();
 	 	 	  var address_tel = $('#user-phone').val();
 	 	 	  var addressname = $('#user-name').val();
-	 	 	  
+	 	 	  var status = $('#status').val();
 
-			  if( username == true && userphone == 100 && userintro==true)
-			  {
-				  $.post("{{url('/home/center/address')}}",{province:province,city:city,area:area,address:address,address_tel:address_tel,addressname:addressname},function(data){
-				  	  console.log(data);
-				  		if(data == 1)
-				  		{
-				  			layer.open({
-							  content:'添加成功！'
-							});
-							location.reload();
-				  		}else
-				  		{
-				  			layer.open({
-							  content:'添加失败！'
-							});
-
-				  		}
-				  })
-              }else
-              {
-              	 
-              	 layer.open({
-						  content:'请填写完整的收货信息！'
+			  $.post("/home/center/address/edit",{id:id,province:province,city:city,area:area,address:address,address_tel:address_tel,addressname:addressname,status:status,"_token":"{{ csrf_token() }}"},function(data){
+			  	   
+			  		if(data == 1)
+			  		{
+			  			layer.open({
+						  content:'修改成功！'
+						})
+						
+			  		}else
+			  		{
+			  			layer.open({
+						  content:'修改失败！'
 						});
-              }
-	 	 }
 
-	 	 function delClick($id)
-	 	 {		var id = $id;
-	 	 		$.post("/home/center/address/delete",{id:id,"_token":"{{ csrf_token() }}"},function(data){
-
-	 	 			if(data == 1)
-	 	 			{
-	 	 				layer.open({
-							  content:'删除成功！'
-							});
-							location.reload();
-	 	 			}else
-	 	 			{
-	 	 				layer.open({
-							  content:'删除失败！'
-							});
-						location.reload();
-	 	 			}
-	 	 		})
-	 	 }
+			  		}
+			  })
+			   return false;
+	 	 	 })
 	 </script>
 @endsection

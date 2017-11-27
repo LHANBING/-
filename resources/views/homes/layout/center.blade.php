@@ -74,11 +74,10 @@
                     <div class="topMessage favorite">
                        <div class="menu-hd" id="as"> <img src="/homes/images/12news.png" alt="" style="width:13px;margin-top:-5px" /> 
 
-                        @if( DB::table('message')->where('receive_uid',10)->where('mes_status','0')->count() == 0  )
+                  
                         <span>消息</span>
-                        @else
-                        <span id="news">消息{{ DB::table('message')->where('receive_uid',10)->where('mes_status','0')->count() }}</span>
-                        @endif
+                 
+                     
                         </div>
                 </ul>
                 </div>
@@ -286,14 +285,12 @@
                                 </a>
                             </li>
                             <li>
-                          @if(DB::table('message')->where('receive_uid',10)->where('mes_status','0')->count() > 0 )       
+                               
                                 <a href="/home/center/news/index">
-                     消息 <span style="color:red">{{ DB::table('message')->where('receive_uid',10)->where('mes_status','0')->count() }}</span>
+                     消息 
                      
                                 </a>
-                         @else 
-                          <a href="/home/center/news/index">消息 </a> 
-                          @endif      
+                        
                             </li>
                         </ul>
                     </li>
