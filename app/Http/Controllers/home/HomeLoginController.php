@@ -42,7 +42,7 @@ class HomeLoginController extends Controller
         // 判断用户在数据中是否存在 
         $users = User::where('tel', $username)->first();
         
-        
+        // 使用Hash检测输入的手机号和数据库值是否一致
        $pass = Hash::check($request->input('password'),$users->password);
        
         if ($users && $pass ){
@@ -55,12 +55,20 @@ class HomeLoginController extends Controller
             // 跳转至首页
             return redirect('/');
         } else {
+
             // 返回登录页(带提示信息）
         return redirect('/home/login')->with('status', '手机号或密码错误，请重新登录。');
         }
          
     }
 
+    /**
+     * 用户退出账号登录并返回首页
+     * 
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function logout(Request $request)
     {
         $request->session()->forget('uid');
