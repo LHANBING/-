@@ -42,12 +42,11 @@
 					<div class="topMessage favorite">
 						<div class="menu-hd"><a href="home/center/news/index" target="_top" id="as"><img src="/homes/images/12news.png" alt="" style="width:13px;margin-top:-5px" /> 
 
-						@if($a == 0 )
+						
 						<span>消息</span>
-						@else
-						<span id="news">消息{{$a}}</span>
-						@endif
-
+						
+						<span id="news"></span>
+						
 						</a>
 						</div>
 					</ul>
@@ -303,7 +302,7 @@
 										原件:{{$goodsv->newprice}}
 									</div>
 								</div>
-								<a href="/home/listdetail/{{$goodsv->id}}"><img src="{{$goodsv->goods_photo}}" style="width: 60%" /></a>
+								<a href="/home/listdetail/{{$goodsv->id}}"><img src="http://ozstangaz.bkt.clouddn.com/{{$goods_photo[$goodsv->id]}}" style="width: 60%" /></a>
 							</div>
 						
 							@endforeach

@@ -174,5 +174,31 @@ Route::group(['prefix'=>'home','namespace'=>'home'],function(){
 	Route::resource('/listtype','ListTypeController');
 	//商品详情页
 	Route::resource('/listdetail','ListDetailController');
-
+	//点击进入结算页面
+	Route::get('/gopay','PayController@gopay');
+	//订单生成,待付款页面
+	Route::post('/pay','PayController@pay');
+	//确认付款
+	Route::get('/overpay','PayController@overpay');
+	//修改默认地址
+	Route::get('pay/edit','PayController@edit');
+	Route::post('pay/edit','PayController@doedit');
+	//添加地址
+	Route::get('pay/add','PayController@add');
+	Route::post('pay/add','PayController@doadd');
+	//删除地址信息
+	Route::post('/pay/del','PayController@del');
+	
+});
+//付款
+Route::group(['middleware'=>'homelogin','prefix'=>'home','namespace'=>'home'],function(){
+	
+	//点击进入结算页面
+	Route::get('/gopay','PayController@gopay');
+	//订单生成,待付款页面
+	Route::post('/pay','PayController@pay');
+	//确认付款
+	Route::get('/overpay','PayController@overpay');
+	//收藏
+	Route::post('/collect','PayController@collect');
 });

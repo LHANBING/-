@@ -286,14 +286,7 @@
                         我
                     </div>
                 </div>
-                <div id="shopCart-content" class="nav-content">
-                    <div class="nav-con-close">
-                        <i class="am-icon-angle-right am-icon-fw"></i>
-                    </div>
-                    <div>
-                        购物车
-                    </div>
-                </div>
+               
                 <div id="asset-content" class="nav-content">
                     <div class="nav-con-close">
                         <i class="am-icon-angle-right am-icon-fw"></i>
@@ -318,14 +311,7 @@
                     </div>
 
                 </div>
-                <div id="foot-content" class="nav-content">
-                    <div class="nav-con-close">
-                        <i class="am-icon-angle-right am-icon-fw"></i>
-                    </div>
-                    <div>
-                        足迹
-                    </div>
-                </div>
+               
                 <div id="brand-content" class="nav-content">
                     <div class="nav-con-close">
                         <i class="am-icon-angle-right am-icon-fw"></i>

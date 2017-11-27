@@ -8,6 +8,19 @@
         <title>
             @yield('title')
         </title>
+        <link href="/homes/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css" />
+        <link href="/homes/AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css" />
+        <link href="/homes/basic/css/demo.css" rel="stylesheet" type="text/css" />
+        <link type="text/css" href="/homes/css/optstyle.css" rel="stylesheet" />
+        <link type="text/css" href="/homes/css/style.css" rel="stylesheet" />
+
+        <script type="text/javascript" src="/homes/basic/js/jquery-1.7.min.js"></script>
+        <script type="text/javascript" src="/homes/basic/js/quick_links.js"></script>
+
+        <script type="text/javascript" src="/homes/AmazeUI-2.4.2/assets/js/amazeui.js"></script>
+        <script type="text/javascript" src="/homes/js/jquery.imagezoom.min.js"></script>
+        <script type="text/javascript" src="/homes/js/jquery.flexslider.js"></script>
+        <script type="text/javascript" src="/homes/js/list.js"></script>
        
     </head>
     

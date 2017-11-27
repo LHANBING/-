@@ -151,12 +151,12 @@
                             position: 'top center'
                         }));
                     },
-                    onEachUpload: function (fileInfo ,xhr) {
-                     imgNum++;
-                        console.log(xhr);
-                        var jsonData = $('.pic').val();
-                       $('.pic').val('');
-                        $('.pic').val(jsonData+'"img'+imgNum+'":"'+'goods/'+xhr+'",');
+                      onEachUpload: function (fileInfo,xhr) {
+                       imgNum++;
+                          console.log(xhr);
+                          var jsonData = $('.pic').val();
+                         $('.pic').val('');
+                          $('.pic').val(jsonData+'"img'+imgNum+'":"'+'goods/'+xhr+'",');
 
                         ssi_modal.notify('error', $.extend({}, notifyOptions, {
                             classSize: 'auto',

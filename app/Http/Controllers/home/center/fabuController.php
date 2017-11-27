@@ -63,7 +63,7 @@ class fabuController extends Controller
             $detail = $request->only('content','pic');
             $detail['goods_id'] = $data->id;
             
-
+            
             $info = Goodsdetail::insertGetId($detail);
 
             if ($info) {
