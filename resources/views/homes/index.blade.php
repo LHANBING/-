@@ -303,7 +303,7 @@
 										原件:{{$goodsv->newprice}}
 									</div>
 								</div>
-								<a href="/home/listdetail/{{$goodsv->id}}"><img src="http://ozstangaz.bkt.clouddn.com/{{$goods_photo[$goodsv->id]}}" style="width: 60%" /></a>
+								<a href="/home/listdetail/{{$goodsv->id}}"><img src="http://ozstangaz.bkt.clouddn.com/{{$goods_photo[$goodsv->id]}}" style="height: 130px" style="width: 60%" /></a>
 							</div>
 						
 							@endforeach

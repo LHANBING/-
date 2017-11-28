@@ -29,7 +29,7 @@
 							<div class="s-content">
 
 								<!-- 未下架 -->
-								@if(!empty($good) && !empty($goods))
+								@if(empty($good) && empty($goods))
 								<div style="float: left; margin-top: 100px;margin-left: 50px">
 									<div class="container">
 							              <div class="row">
