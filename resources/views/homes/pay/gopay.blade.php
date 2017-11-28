@@ -531,13 +531,12 @@
                                         	<input type="submit" id="J_Go"  class="btn-go" title="点击此按钮，提交订单" value="提交按钮" style="float: right;" />
                                         </div>
                                     </div>
-                                    <div class="clear">
-                                    </div>
+                                    <!-- <div class="clear">
+                                    </div> -->
                                 </div>
                             </div>
                         </div>
-                        <div class="clear">
-                        
+                       
                     </form>
                   
                 </div>
