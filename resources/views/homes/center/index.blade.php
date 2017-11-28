@@ -11,7 +11,7 @@
 								<div class="m-userinfo">
 									<div class="m-baseinfo">
 										<a href="information.html">
-											<img src="/homes/images/getAvatar.do.jpg">
+											<img src="http://ozstangaz.bkt.clouddn.com/userphoto/{{$users->user_photo}}">
 										</a>
 										
 										<div class="s-prestige am-btn am-round">

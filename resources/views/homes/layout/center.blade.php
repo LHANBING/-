@@ -10,6 +10,8 @@
         </title>
 
         <script src="/homes/validate.js"></script>
+        
+     <link href="/homes/css/fenye.css" rel="stylesheet" type="text/css" />
 
         <script type="text/javascript" src="{{url('/homes/layer1/jquery.js')}}"></script>
         <script type="text/javascript" src="{{url('/homes/layer1/layer.js')}}"></script>
@@ -26,21 +28,21 @@
             }
         </style>
 
-        @section('cssjs')
-        <link href="/homes/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet"
-        type="text/css">
-        <link href="/homes/AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet"
-        type="text/css">
-        <link href="/homes/basic/css/demo.css" rel="stylesheet" type="text/css"
-        />
-        <link href="/homes/css/hmstyle.css" rel="stylesheet" type="text/css" />
-        <link href="/homes/css/skin.css" rel="stylesheet" type="text/css" />
-        <link href="/homes/css/personal.css" rel="stylesheet" type="text/css">
-        <link href="/homes/css/systyle.css" rel="stylesheet" type="text/css">
-        <script src="/homes/AmazeUI-2.4.2/assets/js/jquery.min.js" type="text/javascript">
-        </script>
-        <script src="/homes/AmazeUI-2.4.2/assets/js/amazeui.js" type="text/javascript">
-        </script>
+     @section('cssjs')
+       <link href="/homes/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet"
+      type="text/css">
+      <link href="/homes/AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet"
+      type="text/css">
+      <link href="/homes/basic/css/demo.css" rel="stylesheet" type="text/css"
+      />
+      <link href="/homes/css/hmstyle.css" rel="stylesheet" type="text/css" />
+      <link href="/homes/css/skin.css" rel="stylesheet" type="text/css" />
+      <link href="/homes/css/personal.css" rel="stylesheet" type="text/css">
+      <link href="/homes/css/systyle.css" rel="stylesheet" type="text/css">
+      <script src="/homes/AmazeUI-2.4.2/assets/js/jquery.min.js" type="text/javascript">
+      </script>
+      <script src="/homes/AmazeUI-2.4.2/assets/js/amazeui.js" type="text/javascript">
+      </script>
         @show()
     </head>
     
@@ -84,26 +86,30 @@
                       @if(   
                         DB::table('message')->join('orders','orders.id','=','message.order_id')
                                    ->where('orders.buy_uid','=',session('uid'))
+                                   ->where('message.receive_uid','=',session('uid'))
                                     ->where('mes_status','0')   
                                    ->count() +
                         DB::table('message')->join('orders','orders.id','=','message.order_id')
                                     ->where('orders.sale_uid','=',session('uid'))
+                                    ->where('message.receive_uid','=',session('uid'))
                                      ->where('mes_status','0')  
                                     ->count() 
                           == 0)           
 
 
-                        <span>消息</span>
+                        <span style="cursor:pointer;" class="newsss">消息</span>
                        @else 
-                        <span id="news">消息</span>
+                        <span style="cursor:pointer;" class="newsss">消息</span>
                         <span style="color:#d2364c;"> 
                             {{ DB::table('message')->join('orders','orders.id','=','message.order_id')
                                     ->where('orders.buy_uid','=',session('uid'))
+                                    ->where('message.receive_uid','=',session('uid'))
                                      ->where('mes_status','0')   
                                     ->count() +
                            DB::table('message')->join('orders','orders.id','=','message.order_id')
                                     ->where('orders.sale_uid','=',session('uid'))
-                                     ->where('mes_status','0')  
+                                    ->where('message.receive_uid','=',session('uid'))
+                                    ->where('mes_status','0')  
                                     ->count()
                               }}      
                         </span>
@@ -111,6 +117,13 @@
                             </div>
                 </ul>
                 </div>
+
+                <script> 
+                    $('.newsss').click(function(){
+
+                     location.href="/home/center/order/index";
+                    })
+                </script>
              
                 <!--悬浮搜索框-->
                 <div class="nav white">
@@ -249,12 +262,12 @@
                         <ul>
                             <li>
                                 <a href="/home/center/order/index">
-                                    订单管理
+                                    我的订单
                                 </a>
                             </li>
                             <li>
                                 <a href="/home/center/change/index">
-                                    退款售后
+                                    我的退货
                                 </a>
                             </li>
                         </ul>
@@ -318,10 +331,12 @@
                                 
                      @if(  DB::table('message')->join('orders','orders.id','=','message.order_id')
                                    ->where('orders.buy_uid','=',session('uid'))
+                                   ->where('message.receive_uid','=',session('uid'))
                                     ->where('mes_status','0')   
                                    ->count() +
                         DB::table('message')->join('orders','orders.id','=','message.order_id')
                                     ->where('orders.sale_uid','=',session('uid'))
+                                    ->where('message.receive_uid','=',session('uid'))
                                      ->where('mes_status','0')  
                                     ->count()  
                           > 0)               
@@ -330,10 +345,12 @@
                         <span style="color:red">
                          {{ DB::table('message')->join('orders','orders.id','=','message.order_id')
                                    ->where('orders.buy_uid','=',session('uid'))
+                                   ->where('message.receive_uid','=',session('uid'))
                                     ->where('mes_status','0')   
                                    ->count() +
                           DB::table('message')->join('orders','orders.id','=','message.order_id')
                                     ->where('orders.sale_uid','=',session('uid'))
+                                    ->where('message.receive_uid','=',session('uid'))
                                      ->where('mes_status','0')  
                                     ->count()  
                            }}          

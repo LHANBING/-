@@ -40,7 +40,7 @@
 										<div class="order-list" id="all{{$v->id}}">
 											<div class="order-title">
 												<div class="dd-num">卖家：<a href="javascript:;">{{$v->username}}</a></div>
-												<span>时间：11:11{{$v->create_at}}</span>
+												<span>时间：{{$v->created_at}}</span>
 											
 											</div>
 											<div class="order-content">
@@ -48,14 +48,15 @@
 													<ul class="item-list">
 														<li class="td td-item">
 															<div class="item-pic">
-																<a href="#" class="J_MakePoint">
-																	<img src="" class="itempic J_ItemImg">
-																</a>
+															
+																	<img  class="itempic J_ItemImg" src="http://ozstangaz.bkt.clouddn.com/{{$v->pic}}" >
+																
 															</div>
 															<div class="item-info">
 																<div class="item-basic-info" style="">
 																	
-																		{{$v->msg_content}}
+																
+																	{{$v->msg_content}} 
 																	
 																</div>
 																<div style="text-align: left;margin-top: 10px">
@@ -92,16 +93,18 @@
 													
 
 												</div>
+
 											</div>
 										</div>
 									 	@endforeach	
+							
 								</div>
 									<div id="tab2" class="am-tab-panel am-fade am-in am-active">
 										@foreach ($ar as $k =>$v)	
 										<div class="order-list" id="all{{$v->id}}">
 											<div class="order-title">
 												<div class="dd-num">买家：<a href="javascript:;">{{$v->username}}</a></div>
-												<span>时间：11:11{{$v->create_at}}</span>
+												<span>时间：11:11{{$v->created_at}}</span>
 											
 											</div>
 											<div class="order-content">
@@ -109,14 +112,18 @@
 													<ul class="item-list">
 														<li class="td td-item">
 															<div class="item-pic">
-																<a href="#" class="J_MakePoint">
-																	<img src="" class="itempic J_ItemImg">
-																</a>
+															
+																	<img src="" class="itempic J_ItemImg" src="http://ozstangaz.bkt.clouddn.com/{{$v->pic}}">
+																
 															</div>
 															<div class="item-info">
 																<div class="item-basic-info" style="">
+
 																	
-																		{{$v->msg_content}}
+																 {{$v->msg_content}} 
+															
+	
+																		
 																	
 																</div>
 																<div style="text-align: left;margin-top: 10px">
@@ -156,6 +163,7 @@
 											</div>
 										</div>
 									 	@endforeach	
+
 								</div>
 
 							</div>
