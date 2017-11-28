@@ -130,7 +130,7 @@
              <div id="mws-navigation">
                 <ul>
                     <li>
-                        <a href="#"><i class="icon-users"></i> 管理员用户管理</a>
+                        <a href="#"><i class="icon-official"></i> 管理员用户管理</a>
                         <ul class="closed">
                             <li><a href="/admin/manager">管理员用户列表</a></li>
                             <li><a href="/admin/manager/create">管理员用户添加</a></li>
@@ -142,7 +142,7 @@
             <div id="mws-navigation">
                 <ul>
                     <li>
-                        <a href="#"><i class="icon-users"></i> 分类管理</a>
+                        <a href="#"><i class="icon-th-list"></i> 分类管理</a>
                         <ul class="closed">
                             <li><a href="/admin/type">分类列表</a></li>
                             <li><a href="/admin/type/create">添加父分类</a></li>
@@ -154,7 +154,7 @@
             <div id="mws-navigation">
                 <ul>
                     <li>
-                        <a href="#"><i class="icon-users"></i> 订单管理</a>
+                        <a href="#"><i class="icon-shopping-cart"></i> 订单管理</a>
                         <ul class="closed">
                             <li><a href="/admin/order/index">已完成订单</a></li>
                             <li><a href="/admin/order/online">在线订单</a></li> 
@@ -177,7 +177,7 @@
             <div id="mws-navigation">
                 <ul>
                     <li>
-                        <a href="#"><i class="icon-users"></i> 广告管理</a>
+                        <a href="#"><i class="icon-bullhorn"></i> 广告管理</a>
                         <ul class="closed">
                             <li><a href="/admin/advs">查看广告</a></li>
                             <li><a href="/admin/advs/create">添加广告</a></li>
@@ -189,7 +189,7 @@
             <div id="mws-navigation">
                 <ul>
                     <li>
-                        <a href="#"><i class="icon-users"></i> 友情链接管理</a>
+                        <a href="#"><i class="icon-paper-airplane"></i> 友情链接管理</a>
                         <ul class="closed">
                             <li><a href="/admin/friendlink">查看友情链接</a></li>
                             <li><a href="/admin/friendlink/create">添加友情链接</a></li>

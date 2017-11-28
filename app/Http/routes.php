@@ -58,10 +58,13 @@ Route::group(['middleware'=>'adminlogin','prefix'=>'admin','namespace'=>'admins'
 	Route::resource('/wallets','WalletsController');
 
 	//广告列表
+	Route::post('/statu','AdvsController@status');
 	Route::resource('/advs','AdvsController');
 	
 	//友情链接列表
+	Route::post('/status','FriendLinkController@status');
 	Route::resource('/friendlink','FriendLinkController');
+	
 	
 
 });

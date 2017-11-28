@@ -3,191 +3,217 @@
 @section('title','广告列表页面')
 
 @section('content')
-  
 
-<div class="mws-panel grid_8">
+        @if(session('msg'))
+
+            <div class="mws-form-message info">
+                
+
+                {{session('msg')}}
+
+            </div>
+            
+        @endif
+  
+  <div class="mws-panel grid_8">
     <div class="mws-panel-header">
         <span>
             <i class="icon-table">
             </i>
-            广告列表页面
+            广告列表
         </span>
     </div>
     <div class="mws-panel-body no-padding">
-        <div id="DataTables_Table_1_wrapper" class="dataTables_wrapper" role="grid">
-       		 <form action="/admin/user" method="get">
-	            <div id="DataTables_Table_1_length" class="dataTables_length">
-	                <label>
-	                    显示
-	                    <select size="1" name="num" aria-controls="DataTables_Table_1">
-	                        <option value="10">
-	                            10
-	                        </option>
-	                        <option value="25">
-	                            25
-	                        </option>
-	                        <option value="50">
-	                            50
-	                        </option>
-	                    </select>
-	                    条数据
-	                </label>
-	            </div>
-	            <div class="dataTables_filter" id="DataTables_Table_1_filter">
-	                <label>
-	                    关键字:
-	                    <input type="text" name="search" aria-controls="DataTables_Table_1" value="{{ isset($request->search) ? $request->search : '' }}">
-	                </label>
-		
-					<button class="btn btn-danger">搜索</button>
+        <div role="grid" class="dataTables_wrapper" id="DataTables_Table_1_wrapper">
 
-	            </div>
-			</form>
-
+        <form action="/admin/advs" method="get">
+            
+            <div class="dataTables_filter" id="DataTables_Table_1_filter">
+                <label>
+                    关键字:
+                    <input type="text" aria-controls="DataTables_Table_1" name="search">
+                </label>
+                <button class="btn btn-danger">搜索</button>
+            </div>
+        </form>
             <table class="mws-datatable-fn mws-table dataTable" id="DataTables_Table_1"
             aria-describedby="DataTables_Table_1_info">
                 <thead>
                     <tr role="row">
                         <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                        rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
-                        style="width: 191px;">
+                        rowspan="1" colspan="1" style="width: 80px;" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">
                             ID
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                        rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
-                        style="width: 200px;">
-                            用户名
+                        rowspan="1" colspan="1" style="width: 120px;" aria-label="Browser: activate to sort column ascending">
+                            商家
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                        rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending"
-                        style="width: 180px;">
-                            邮箱
+                        rowspan="1" colspan="1" style="width: 120px;" aria-label="Platform(s): activate to sort column ascending">
+                            产品
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                        rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending"
-                        style="width: 166.193px;">
-                            手机号
+                        rowspan="1" colspan="1" style="width: 188px;" aria-label="Engine version: activate to sort column ascending">
+                            产品详情
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                        rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
-                        style="width: 125.193px;">
-                            头像
+                        rowspan="1" colspan="1" style="width: 100px;" aria-label="CSS grade: activate to sort column ascending">
+                            产品图片
                         </th>
+
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                        rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
-                        style="width: 125.193px;">
+                        rowspan="1" colspan="1" style="width: 100px;" aria-label="CSS grade: activate to sort column ascending">
+                            产品链接
+                        </th>
+
+                        <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
+                        rowspan="1" colspan="1" style="width: 100px;" aria-label="CSS grade: activate to sort column ascending">
                             状态
                         </th>
+
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                        rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
-                        style="width: 160px;">
+                        rowspan="1" colspan="1" style="width: 100px;" aria-label="CSS grade: activate to sort column ascending">
                             操作
                         </th>
                     </tr>
                 </thead>
                 <tbody role="alert" aria-live="polite" aria-relevant="all">
-					
-					{{--@foreach($res as $k => $v) 
 
-                    <tr class="@if($k % 2 == 0) odd @else even @endif" style="height: 90px">
-                        <td class="">
+                    @foreach($res as $k => $v)
+                    <tr class="@if($k % 2 == 1) ood @else even @endif">
+
+                        <td class=" ">
                            {{$v->id}}
                         </td>
-                         <td class="">
-                           {{$v->username}}
-                        </td>
-                         <td class="">
-                           {{$v->email}}
-                        </td>
-                         <td class="">
-                           {{$v->phone}}
-                        </td>
-                         <td class="">
-                         	<img src="{{$v->profile}}" width="50%" alt="">
-                        </td>
-                         <td class="">
-                         	<button class="btn btn-info">{{$v->status ? '开启':'关闭'}}</button>
-                        </td>
-                        <td class="">
-                           <a href="/admin/user/{{$v->id}}/edit" class="btn btn-danger">修改</a>
 
-                           <form action="/admin/user/{{$v->id}}" method="post" style="display: inline;">
-                             
-                             {{ csrf_field() }}
-                             {{ method_field('DELETE') }}
-                             <button class="btn btn-warning">删除</button>  
-                           </form>
+                        <td class=" ">
+                            {{$v->advs_a}}
+                        </td>
+
+                        <td class=" ">
+                            {{$v->advs_d}}
+                        </td>
+
+                        <td class=" ">
+                            {{$v->advs_v}}
+                        </td>
+
+                        <td class=" ">
+                            <img src="{{$v->advs_s}}" alt="" style="width:60px">
+                        </td>
+
+                        <td class=" ">
+                            <a href="">{{$v->advs_src}}</a>
+                        </td>
+
+                        @if( $v->status == 1)
+                         <td class="" style="text-align:center;">
+                            <span class="btn btn-info open" onclick="checkadvs({{$v->id}},{{$v->status}})"> 开启</span>
+                         </td>
+                        
+                         @else
+                         <td class="" style="text-align:center;">      
+                             <span class="btn btn-info close" onclick="checkadvs({{$v->id}},{{$v->status}})">关闭</span>     
+                         </td>      
+                        @endif
+                        
+                        <td class=" ">
+                            <a href="/admin/advs/{{$v->id}}/edit" class="btn btn-danger">修改</a>
+                            
+                            <form action="/admin/advs/{{$v->id}}"
+                                method="post" style="display: inline">
+                                {{csrf_field()}}
+                                {{method_field('DELETE')}}
+                                <button class='btn btn-warning'>删除</button>
+                            </form>
+
                         </td>
 
                     </tr>
-
-                    @endforeach--}}
+                    @endforeach
                     
                 </tbody>
             </table>
-           {{-- <div class="dataTables_info" id="DataTables_Table_1_info">
-                Showing 1 to {{$last}} of {{$count}} entries
-            </div>
-            --}}
-                <style>
-                    .pagination li{
-                        float: left;
-                        height: 20px;
-                        padding: 0 10px;
-                        display: block;
-                        font-size: 12px;
-                        line-height: 20px;
-                        text-align: center;
-                        cursor: pointer;
-                        outline: none;
-                        background-color: #444444;
-                        color: #fff;
-                        text-decoration: none;
-                        border-right: 1px solid #232323;
-                        border-left: 1px solid #666666;
-                        border-right: 1px solid rgba(0, 0, 0, 0.5);
-                        border-left: 1px solid rgba(255, 255, 255, 0.15);
-                        -webkit-box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.5), inset 0px 1px 0px rgba(255, 255, 255, 0.15);
-                        -moz-box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.5), inset 0px 1px 0px rgba(255, 255, 255, 0.15);
-                        box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.5), inset 0px 1px 0px rgba(255, 255, 255, 0.15);
-                    }
-
-                  
-                .pagination a {
-                       color: #fff;
-                   } 
-
-                .pagination .active{
-                        background-color: #88a9eb;
-                        color: #323232;
-                        border: none;
-                        background-image: none;
-                        -webkit-box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.25);
-                        -moz-box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.25);
-                        box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.25);
-
-                  }
-
-                .pagination .disabled{
-                    color: #666666;
-                    cursor: default;
-                  }
+            
+            <style>
+            .pagination li{
+                background-color: #444444;
+                border-left: 1px solid rgba(255, 255, 255, 0.15);
+                border-right: 1px solid rgba(0, 0, 0, 0.5);
+                box-shadow: 0 1px 0 rgba(0, 0, 0, 0.5), 0 1px 0 rgba(255, 255, 255, 0.15) inset;
                 
-                .pagination{
-                    margin: 0px;
+                cursor: pointer;
+                display: block;
+                float: left;
+                font-size: 12px;
+                height: 20px;
+                line-height: 20px;
+                outline: medium none;
+                padding: 0 10px;
+                text-align: center;
+                text-decoration: none;
                 }
-                </style>
-            <div class="dataTables_paginate paging_full_numbers" id="paginate">
 
-                 {{--   {!! $res->appends($request->all())->render() !!}  --}}
+            .pagination a{
+                color: #fff;
+            }
+
+            .pagination .active{
+                background-color: #88a9eb;
+                background-image: none;
+                border: medium none;
+                box-shadow: 0 0 4px rgba(0, 0, 0, 0.25) inset;
+                color: #323232;
+            }
+
+            .pagination .disabled{
+                color: #666666;
+                cursor: default;
+
+            }
+
+            .pagination{
+
+                margin: 0px;
+            }
+
+            </style>
+
+            <div class="dataTables_paginate paging_full_numbers" id="DataTables_Table_1_paginate">
+
+                {!! $res->render()!!}
+                
             </div>
         </div>
     </div>
 </div>
 
-@endsection()
+
+
+@endsection
 
 @section('js')
 
+<script>
 
+    $('.mws-form-message').delay(3000).slideUp(1000);
+
+    function checkadvs(id,status){
+            
+        $.post('/admin/statu/',{'_token':'{{csrf_token()}}',id:id,status:status},function(data){
+            
+            if(data == 1)
+            {
+                alert('修改成功！');
+
+                location.reload();
+                // layer.alert({})
+            } else
+            {
+                alert('修改失败！');
+            }  
+
+        });
+    }    
+</script>
 @endsection

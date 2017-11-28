@@ -1,6 +1,6 @@
 @extends('admins.layout.admins')
 
-@section('title','友情链接添加页面')
+@section('title','友情链接修改页面')
 
 @section('content')
   
@@ -8,7 +8,7 @@
 <div class="mws-panel grid_8">
 						
                 	<div class="mws-panel-header">
-                    	<span><i class="icon-ok"></i> 添加友情链接</span>
+                    	<span><i class="icon-ok"></i> 修改友情链接</span>
                     </div> 
 
 						
@@ -32,50 +32,38 @@
 						                            </ul>
 						                        </div> -->
 
-                    	<form action="/admin/friendlink" class="mws-form" method="post" enctype="multipart/form-data">
+                    	<form action="/admin/friendlink/{{$res->id}}" class="mws-form" method="post" enctype="multipart/form-data">
                         	<div style="display:none;" class="mws-form-message error" id="mws-validate-error"></div>
                         	<div class="mws-form-inline">
                             	<div class="mws-form-row">
                                 	<label class="mws-form-label">友情链接名称:</label>
                                 	<div class="mws-form-item">
-                                    	<input type="text" class="required large" name="friend_title" value="{{old('friend_title')}}">
+                                    	<input type="text" class="required large" name="friend_title" value="{{$res->friend_title}}">
                                     </div>
                                 </div>
                             	<div class="mws-form-row">
                                 	<label class="mws-form-label">友情链接地址:</label>
                                 	<div class="mws-form-item">
-                                    	<input type="text" class="required email large" name="adr" value="{{old('adr')}}">
+                                    	<input type="text" class="required email large" name="adr" value="{{$res->adr}}">
                                     </div>
                                 </div>
                             	<div class="mws-form-row">
                                 	<label class="mws-form-label">友情链接描述:</label>
                                 	<div class="mws-form-item">
-                                    	<input type="text" class="required url large" name="des" value="{{old('des')}}">
+                                    	<input type="text" class="required url large" name="des" value="{{$res->des}}">
                                     </div>
                                 </div>
                             	
-                                <div class="mws-form-row">
-									<label class="mws-form-label">
-									    友情链接logo
-									</label>
-									<div class="mws-form-item">
-									    <div style="position: relative;" class="fileinput-holder" name="logo">
-									        
-									            
-									            <input type="file" name="logo" placeholder="文件上传" style="width: 100%; padding-
-									            right: 84px; position: absolute; top: 0px; right: 0px; margin: 0px; cursor:
-									            pointer; font-size: 999px; opacity: 0; z-index: 999;">
-									        </span>
-									    </div>
-									</div>
-									</div>
+                      
 									
 </div>
 <div class="mws-button-row">
 
 	{{ csrf_field() }}
-    <input type="submit" value='提交' class="btn btn-danger">
-    <input type="reset" class="btn btn-danger">
+	{{method_field('PUT')}}
+
+    <input type="submit" value='修改' class="btn btn-danger">
+    
 	
 </div>
 </form>
