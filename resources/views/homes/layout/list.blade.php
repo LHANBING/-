@@ -23,6 +23,21 @@
         <script type="text/javascript" src="/homes/js/jquery.imagezoom.min.js"></script>
         <script type="text/javascript" src="/homes/js/jquery.flexslider.js"></script>
         <script type="text/javascript" src="/homes/js/list.js"></script>
+        
+        <link href="/homes/css/hmstyle.css" rel="stylesheet" type="text/css"/>
+        <link href="/homes/css/skin.css" rel="stylesheet" type="text/css" />
+        <script src="/homes/AmazeUI-2.4.2/assets/js/jquery.min.js"></script>
+        
+        <script src="/homes/js/jquery-1.8.3.min.js"></script>
+
+        <link rel="stylesheet" href="/homes/bs/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/homes/bs/css/bootstrap-theme.min.css">
+        <script type="text/javascript" src="/homes/bs/js/jquery.js"></script>
+        <script type="text/javascript" src="/homes/bs/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/homes/layer/layer.js"></script>
+
+
+
         @show()
     </head>
     
@@ -84,9 +99,10 @@
                         <a name="index_none_header_sysc" href="#">
                         </a>
 
-                        <form>
-                            <input type="text" autocomplete="off" placeholder="搜索" name="index_none_header_sysc" id="searchInput">
-                            <input type="submit" index="1" value="搜索" class="submit am-btn" id="ai-topsearch">
+                        <form action="/home/search" method="post" >
+                            <input id="searchInput" name="search" type="text" placeholder="搜索" autocomplete="off" value="{{ isset($request->searchInput) ? $request->searchInput : '' }}">
+                            {{ csrf_field() }}
+                            <input id="ai-topsearch" class="submit am-btn" value="搜索" type="submit">
                         </form>
 
 
@@ -125,10 +141,10 @@
                     <div class="search-bar pr">
                         <a name="index_none_header_sysc" href="#">
                         </a>
-                        <form>
-                            <input id="searchInput" name="index_none_header_sysc" type="text" placeholder="搜索"
-                            autocomplete="off">
-                            <input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="submit">
+                        <form action="/home/search" method="get" >
+                            <input id="searchInput" name="search" type="text" placeholder="搜索" autocomplete="off" value="{{ isset($request->searchInput) ? $request->searchInput : '' }}">
+                            {{ csrf_field() }}
+                            <input id="ai-topsearch" class="submit am-btn" value="搜索" type="submit">
                         </form>
                     </div>
                 </div>
@@ -204,7 +220,7 @@
                 </p>
             </div>
         </div>
-        <div class=tip>
+        <!-- <div class=tip>
                 <div id="sidebar">
                     <div id="wrap">
                         <div id="prof" class="item">
@@ -225,7 +241,7 @@
                                 </div>
                                 <i class="icon_arrow_white"></i>
                             </div>
-
+        
                         </div>
                         <div id="asset" class="item">
                             <a href="#">
@@ -236,7 +252,7 @@
                                 <i class="icon_arrow_right_black"></i>
                             </div>
                         </div>
-
+        
                         <div id="brand" class="item">
                             <a href="#">
                                 <span class="wdsc"><img src="/homes/images/wdsc.png" /></span>
@@ -246,7 +262,7 @@
                                 <i class="icon_arrow_right_black"></i>
                             </div>
                         </div>
-
+        
                         <div id="broadcast" class="item">
                             <a href="#">
                                 <span class="chongzhi"><img src="/homes/images/chongzhi.png" /></span>
@@ -256,13 +272,13 @@
                                 <i class="icon_arrow_right_black"></i>
                             </div>
                         </div>
-
+        
                         <div class="quick_toggle">
                             <li class="qtitem">
                                 <a href="#"><span class="kfzx"></span></a>
                                 <div class="mp_tooltip">客服中心<i class="icon_arrow_right_black"></i></div>
                             </li>
-                            <!--二维码 -->
+                            二维码
                             <li class="qtitem">
                                 <a href="#none"><span class="mpbtn_qrcode"></span></a>
                                 <div class="mp_qrcode" style="display:none;"><img src="/homes/images/weixin_code_145.png" /><i class="icon_arrow_white"></i></div>
@@ -271,12 +287,12 @@
                                 <a href="#top" class="return_top"><span class="top"></span></a>
                             </li>
                         </div>
-
-                        <!--回到顶部 -->
+        
+                        回到顶部
                         <div id="quick_links_pop" class="quick_links_pop hide"></div>
-
+        
                     </div>
-
+        
                 </div>
                 <div id="prof-content" class="nav-content">
                     <div class="nav-con-close">
@@ -294,7 +310,7 @@
                     <div>
                         资产
                     </div>
-
+        
                     <div class="ia-head-list">
                         <a href="#" target="_blank" class="pl">
                             <div class="num">0</div>
@@ -309,7 +325,7 @@
                             <div class="text">余额</div>
                         </a>
                     </div>
-
+        
                 </div>
                
                 <div id="brand-content" class="nav-content">
@@ -328,7 +344,7 @@
                         充值
                     </div>
                 </div>
-            </div>
+            </div> -->
     </body>
 
 

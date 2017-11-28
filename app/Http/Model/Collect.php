@@ -8,5 +8,5 @@ class Collect extends Model
 {
     protected $table = "collect";
     protected $fillable = ['user_id','goods_id'];
-    
+    public $timestamps = false;
 }

@@ -64,9 +64,11 @@ Route::group(['middleware'=>'adminlogin','prefix'=>'admin','namespace'=>'admins'
 });
 
 
-
-//前台首页
+ 
+//前台首页   //搜索
 Route::get('/','home\IndexController@index');
+//前台搜索功能
+Route::get('/home/search','home\IndexController@search');
 
 // 获取注册验证码
 Route::post('/home/register/phone','home\HomeRegisterController@phone');
@@ -135,6 +137,7 @@ Route::group(['middleware'=>'homelogin','prefix'=>'home/center','namespace'=>'ho
 
 
 	//收藏
+	Route::post('/collection/del','CollectionController@del');
 	Route::get('/collection/index','CollectionController@index');
 	//足迹
 	Route::get('/foot/index','FootController@index');
@@ -178,22 +181,11 @@ Route::group(['middleware'=>'homelogin','prefix'=>'home/center','namespace'=>'ho
 Route::group(['prefix'=>'home','namespace'=>'home'],function(){
 	//商品分类列表
 	Route::resource('/listtype','ListTypeController');
+
 	//商品详情页
 	Route::resource('/listdetail','ListDetailController');
-	//点击进入结算页面
-	Route::get('/gopay','PayController@gopay');
-	//订单生成,待付款页面
-	Route::post('/pay','PayController@pay');
-	//确认付款
-	Route::get('/overpay','PayController@overpay');
-	//修改默认地址
-	Route::get('pay/edit','PayController@edit');
-	Route::post('pay/edit','PayController@doedit');
-	//添加地址
-	Route::get('pay/add','PayController@add');
-	Route::post('pay/add','PayController@doadd');
-	//删除地址信息
-	Route::post('/pay/del','PayController@del');
+	
+	
 	
 });
 //付款
@@ -207,4 +199,14 @@ Route::group(['middleware'=>'homelogin','prefix'=>'home','namespace'=>'home'],fu
 	Route::get('/overpay','PayController@overpay');
 	//收藏
 	Route::post('/collect','PayController@collect');
+	//设置默认地址
+	Route::post('/default','PayController@default');
+	//修改地址
+	Route::get('pay/edit','PayController@edit');
+	Route::post('pay/edit','PayController@doedit');
+	//添加地址
+	Route::get('pay/add','PayController@add');
+	Route::post('pay/add','PayController@doadd');
+	//删除地址信息
+	Route::post('/pay/del','PayController@del');
 });

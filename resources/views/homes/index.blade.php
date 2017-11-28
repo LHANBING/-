@@ -42,19 +42,11 @@
 					<div class="topMessage favorite">
 						<div class="menu-hd"><a href="home/center/news/index" target="_top" id="as"><img src="/homes/images/12news.png" alt="" style="width:13px;margin-top:-5px" /> 
 
-<<<<<<< HEAD
-						
-						<span>消息</span>
-						
-						<span id="news"></span>
-						
-=======
 						@if($num > 0)
 						<span>消息<span style="color:#d2364c;">{{$num}}</span></span>
 						@else
 						<span>消息</span>		 				
 						@endif	
->>>>>>> b76f73f98f4b81f4c0309bfec1fbe10f6b2cd3df
 						</a>
 						</div>
 					</ul>
@@ -72,9 +64,10 @@
 
 					<div class="search-bar pr">
 						<a name="index_none_header_sysc" href="#"></a>
-						<form>
-							<input id="searchInput" name="index_none_header_sysc" type="text" placeholder="搜索" autocomplete="off">
-							<input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="submit">
+						<form action="/home/search" method="get" >
+							<input id="searchInput" name="search" type="text" placeholder="搜索" autocomplete="off" value="{{ isset($request->searchInput) ? $request->searchInput : '' }}">
+							{{ csrf_field() }}
+							<input id="ai-topsearch" class="submit am-btn" value="搜索" type="submit">
 						</form>
 					</div>
 				</div>
@@ -242,7 +235,7 @@
 				<div class="shopMain" id="shopmain">
 
 					<!--热门活动 -->
-					<div class="am-container activity ">
+					<!-- <div class="am-container activity ">
 						<div class="shopTitle ">
 							<h4>活动</h4>
 							<h3>每期活动 优惠享不停 </h3>
@@ -262,13 +255,12 @@
 						
 						
 					  </div>
-                   </div>
+					                   </div> -->
 				<div class="clear "></div>
 
 
 					@foreach($type as $typek => $typev)
                     <div id="f1">
-					<!--甜点-->
 					
 					<div class="am-container ">
 						<div class="shopTitle " style="border-bottom:0px solid #000;">
@@ -373,35 +365,24 @@
 						</a>
 						<div class="ibar_login_box status_login ">
 							<div class="avatar_box ">
-								<p class="avatar_imgbox "><img src="/homes/images/no-img_mid_.jpg " /></p>
+								<p class="avatar_imgbox "><img src="http://ozstangaz.bkt.clouddn.com/userphoto/{{$user->user_photo}}" /></p>
 								<ul class="user_info ">
-									<li>用户名sl1903</li>
-									<li>级&nbsp;别普通会员</li>
+									<li>{{$user->username}}</li>
 								</ul>
 							</div>
 							<div class="login_btnbox ">
-								<a href="# " class="login_order ">我的订单</a>
-								<a href="# " class="login_favorite ">我的收藏</a>
+								<a href="/home/center/recharge/index" class="login_order ">充值</a>
+								<a href="/home/center/collection/index" class="login_favorite ">我的收藏</a>
 							</div>
 							<i class="icon_arrow_white "></i>
 						</div>
 
 					</div>
 				
-					<div id="asset " class="item ">
-						<a href="# ">
-							<span class="view "></span>
-						</a>
-						<div class="mp_tooltip ">
-							我的资产
-							<i class="icon_arrow_right_black "></i>
-						</div>
-					</div>
-
 				
 
 					<div id="brand " class="item ">
-						<a href="#">
+						<a href="/home/center/collection/index">
 							<span class="wdsc "><img src="/homes/images/wdsc.png " /></span>
 						</a>
 						<div class="mp_tooltip ">
@@ -411,7 +392,7 @@
 					</div>
 
 					<div id="broadcast " class="item ">
-						<a href="# ">
+						<a href="/home/center/recharge/index ">
 							<span class="chongzhi "><img src="/homes/images/chongzhi.png " /></span>
 						</a>
 						<div class="mp_tooltip ">
@@ -454,4 +435,14 @@
 		<script type="text/javascript " src="/homes/basic/js/quick_links.js "></script>
 	</body>
 
+<!-- <script type="text/javascript">
+	$('#ai-topsearch').click(function(){
+		// alert(132);
+		var search = $('#searchInput').val();
+		$.post('/search',{search:search,_token:'{{ csrf_token()}}'},function(data){
+			alert(data);
+		})
+
+	})
+</script> -->
 </html>

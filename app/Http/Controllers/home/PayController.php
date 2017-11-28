@@ -10,6 +10,7 @@ use App\Http\Model\Good;
 use App\Http\Model\Goodsdetail;
 use App\Http\Model\Order;
 use App\Http\Model\Useraddress;
+use App\Http\Model\Collect;
 use Session;
 use DB;
 
@@ -57,7 +58,10 @@ class PayController extends Controller
               "goods_id" => "7"
               "address" => "1"
             ]*/
-        $goods_id = $res['goods_id'];
+            
+            $goods_id = $res['goods_id'];
+            //修改商品状态status变为0
+            Good::where('id', $goods_id)->update(['status' => 0]);
             //生成订单号
             $res['order_num'] = time();  //1511599648
             //获取买家id
@@ -241,9 +245,43 @@ class PayController extends Controller
     //收藏商品
     public function collect(Request $request)
     {
-        $goods_id = (int)$request->except('_token')['id'];
+        //获取goods_id
+        // $goods_id =(int)$request->only('id');
+        $goods_id =$request->all()['id'];
 
+        //判断是否登录,登录可收藏
+        $user_id = session('uid');
+        if ($user_id) {
+            $collect = Collect::where(['user_id'=>session('uid'),'goods_id'=>$goods_id])->first();
+            //判断该商品是否已被用户收藏
+            if ($collect) {
+                $res = Collect::where(['user_id'=>session('uid'),'goods_id'=>$goods_id])->delete();
+                if ($res) {
+                     return 3;
+                }
+               
+            } else {
+                 
 
-    }
+                $arr = [];
+                $arr['goods_id'] = $goods_id;
+                $arr['user_id'] = $user_id;
+
+                 $res = Collect::create($arr);
+                //存入数据库成功
+                if ($res) {
+                    return 1;
+
+                } else {
+                    return 0;
+                }
+
+            }
+
+        } else {
+             echo 2;
+     }
+
+ }
 
 }

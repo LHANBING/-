@@ -25,199 +25,107 @@
 						<div class="you-like">
 							<div class="s-bar">
 								我的收藏
-								<a class="am-badge am-badge-danger am-round">降价</a>
-								<a class="am-badge am-badge-danger am-round">下架</a>
 							</div>
 							<div class="s-content">
-								<div class="s-item-wrap">
-									<div class="s-item">
 
-										<div class="s-pic">
-											<a class="s-pic-link" href="#">
-												<img class="s-pic-img s-guess-item-img" title="包邮s925纯银项链女吊坠短款锁骨链颈链日韩猫咪银饰简约夏配饰" alt="包邮s925纯银项链女吊坠短款锁骨链颈链日韩猫咪银饰简约夏配饰" src="/homes/images/0-item_pic.jpg_220x220.jpg">
-											</a>
-										</div>
-										<div class="s-info">
-											<div class="s-title"><a title="包邮s925纯银项链女吊坠短款锁骨链颈链日韩猫咪银饰简约夏配饰" href="#">包邮s925纯银项链女吊坠短款锁骨链颈链日韩猫咪银饰简约夏配饰</a></div>
-											<div class="s-price-box">
-												<span class="s-price"><em class="s-price-sign">¥</em><em class="s-value">42.50</em></span>
-												<span class="s-history-price"><em class="s-price-sign">¥</em><em class="s-value">68.00</em></span>
-											</div>
-											<div class="s-extra-box">
-												<span class="s-comment">好评: 98.03%</span>
-												<span class="s-sales">月销: 219</span>
-											</div>
-										</div>
-										<div class="s-tp">
-											<span class="ui-btn-loading-before">找相似</span>
-											<i class="am-icon-shopping-cart"></i>
-											<span class="ui-btn-loading-before buy">加入购物车</span>
-											<p>
-												<a class="c-nodo J_delFav_btn" href="javascript:;">取消收藏</a>
-											</p>
-										</div>
-									</div>
-								</div>
+								<!-- 未下架 -->
+								@if(!empty($good) && !empty($goods))
+								<div style="float: left; margin-top: 100px;margin-left: 50px">
+									<div class="container">
+							              <div class="row">
+							                  <div class="col-md-12">
+							                        <div class="jumbotron" style="background: transparent;">
+							                          <h1>您暂时没有收藏的商品</h1>
+							                        </div>
+							                  </div>
+							                  
+							                </div>
+							            </div>
+								</div>	
+								@else
+
+								@foreach($good as $k=>$v)
 
 								<div class="s-item-wrap">
 									<div class="s-item">
 
 										<div class="s-pic">
 											<a class="s-pic-link" href="#">
-												<img class="s-pic-img s-guess-item-img" title="s925纯银千纸鹤锁骨链短款简约时尚韩版素银项链小清新秋款女配饰" alt="s925纯银千纸鹤锁骨链短款简约时尚韩版素银项链小清新秋款女配饰" src="/homes/images/1-item_pic.jpg_220x220.jpg">
+												<img class="s-pic-img s-guess-item-img" title="{{$v->title}}" alt="{{$v->title}}" height="150px" src="http://ozstangaz.bkt.clouddn.com/{{$goodpic[$v->id]}}">
 											</a>
 										</div>
 										<div class="s-info">
-											<div class="s-title"><a title="s925纯银千纸鹤锁骨链短款简约时尚韩版素银项链小清新秋款女配饰" href="#">s925纯银千纸鹤锁骨链短款简约时尚韩版素银项链小清新秋款女配饰</a></div>
+											<div class="s-title"><a title="{{$v->title}}" href="#">{{$v->title}}</a></div>
 											<div class="s-price-box">
-												<span class="s-price"><em class="s-price-sign">¥</em><em class="s-value">49.90</em></span>
-												<span class="s-history-price"><em class="s-price-sign">¥</em><em class="s-value">88.00</em></span>
+												<span class="s-price"><em class="s-price-sign">¥</em><em class="s-value">{{$v->newprice}}</em></span>
+												<span class="s-history-price"><em class="s-price-sign">¥</em><em class="s-value">{{$v->oldprice}}</em></span>
 											</div>
-											<div class="s-extra-box">
-												<span class="s-comment">好评: 99.74%</span>
-												<span class="s-sales">月销: 69</span>
-											</div>
+											
 										</div>
 										<div class="s-tp">
-											<span class="ui-btn-loading-before">找相似</span>
-											<i class="am-icon-shopping-cart"></i>
-											<span class="ui-btn-loading-before buy">加入购物车</span>
-											<p>
-												<a class="c-nodo J_delFav_btn" href="javascript:;">取消收藏</a>
-											</p>
-										</div>
-									</div>
-								</div>
-
-								<div class="s-item-wrap">
-									<div class="s-item">
-
-										<div class="s-pic">
-											<a class="s-pic-link" href="#">
-												<img class="s-pic-img s-guess-item-img" title="4折抢购!十二生肖925银女戒指,时尚开口女戒" alt="4折抢购!十二生肖925银女戒指,时尚开口女戒" src="/homes/images/-0-saturn_solar.jpg_220x220.jpg">
-											<span class="tip-title">已下架</span>
-											</a>
-										</div>
-										<div class="s-info">
-											<div class="s-title"><a title="4折抢购!十二生肖925银女戒指,时尚开口女戒" href="#">4折抢购!十二生肖925银女戒指,时尚开口女戒</a></div>
-											<div class="s-price-box">
-												<span class="s-price"><em class="s-price-sign">¥</em><em class="s-value">378.00</em></span>
-												<span class="s-history-price"><em class="s-price-sign">¥</em><em class="s-value">1888.00</em></span>
-											</div>
-											<div class="s-extra-box">
-												<span class="s-comment">好评: 99.93%</span>
-												<span class="s-sales">月销: 278</span>
-											</div>
-										</div>
-										<div class="s-tp">
-											<span class="ui-btn-loading-before">找相似</span>
+											
 											<i class="am-icon-trash"></i>
-											<span class="ui-btn-loading-before buy">进入店铺</span>
-											<p>
-												<a class="c-nodo J_delFav_btn" href="javascript:;">取消收藏</a>
-											</p>
+											<a class="ui-btn-loading-before" style="color: red;font-size: 1.5em;width: 50px" href="/home/gopay?goods_id={{$v->id}}">购买</a>
+											
+												<span class="" style="color: red;font-size: 1.2em;margin-left: 60px;cursor: pointer;width: 60px" id="{{$v->id}}" onclick="del(this)" href="">取消收藏</span>
+											
 										</div>
 									</div>
 								</div>
 
+									@endforeach
+
+								<!-- 已下架 -->
+								@foreach($goods as $ks=>$vs)
 								<div class="s-item-wrap">
 									<div class="s-item">
 
 										<div class="s-pic">
 											<a class="s-pic-link" href="#">
-												<img class="s-pic-img s-guess-item-img" title="包邮s925纯银项链女吊坠短款锁骨链颈链日韩猫咪银饰简约夏配饰" alt="包邮s925纯银项链女吊坠短款锁骨链颈链日韩猫咪银饰简约夏配饰" src="/homes/images/0-item_pic.jpg_220x220.jpg">
+												<img class="s-pic-img s-guess-item-img" title="{{$vs->title}}" alt="{{$vs->title}}" height="150px" src="http://ozstangaz.bkt.clouddn.com/{{$goodspic[$vs->id]}}">
+											<span class="tip-title" style="font-size: 16px">已下架</span>
 											</a>
 										</div>
 										<div class="s-info">
-											<div class="s-title"><a title="包邮s925纯银项链女吊坠短款锁骨链颈链日韩猫咪银饰简约夏配饰" href="#">包邮s925纯银项链女吊坠短款锁骨链颈链日韩猫咪银饰简约夏配饰</a></div>
+											<div class="s-title"><a title="{{$vs->title}}" href="#">{{$vs->title}}</a></div>
 											<div class="s-price-box">
-												<span class="s-price"><em class="s-price-sign">¥</em><em class="s-value">42.50</em></span>
-												<span class="s-history-price"><em class="s-price-sign">¥</em><em class="s-value">68.00</em></span>
-											</div>
-											<div class="s-extra-box">
-												<span class="s-comment">好评: 98.03%</span>
-												<span class="s-sales">月销: 219</span>
+												<span class="s-price"><em class="s-price-sign">¥</em><em class="s-value">{{$vs->newprice}}</em></span>
+												<span class="s-history-price"><em class="s-price-sign">¥</em><em class="s-value">{{$vs->oldprice}}</em></span>
 											</div>
 										</div>
 										<div class="s-tp">
-											<span class="ui-btn-loading-before">找相似</span>
-											<i class="am-icon-shopping-cart"></i>
-											<span class="ui-btn-loading-before buy">加入购物车</span>
-											<p>
-												<a class="c-nodo J_delFav_btn" href="javascript:;">取消收藏</a>
-											</p>
-										</div>										
-									</div>
-								</div>
-
-								<div class="s-item-wrap">
-									<div class="s-item">
-
-										<div class="s-pic">
-											<a class="s-pic-link" href="#">
-												<img class="s-pic-img s-guess-item-img" title="s925纯银千纸鹤锁骨链短款简约时尚韩版素银项链小清新秋款女配饰" alt="s925纯银千纸鹤锁骨链短款简约时尚韩版素银项链小清新秋款女配饰" src="/homes/images/1-item_pic.jpg_220x220.jpg">
-											</a>
-										</div>
-										<div class="s-info">
-											<div class="s-title"><a title="s925纯银千纸鹤锁骨链短款简约时尚韩版素银项链小清新秋款女配饰" href="#">s925纯银千纸鹤锁骨链短款简约时尚韩版素银项链小清新秋款女配饰</a></div>
-											<div class="s-price-box">
-												<span class="s-price"><em class="s-price-sign">¥</em><em class="s-value">49.90</em></span>
-												<span class="s-history-price"><em class="s-price-sign">¥</em><em class="s-value">88.00</em></span>
-											</div>
-											<div class="s-extra-box">
-												<span class="s-comment">好评: 99.74%</span>
-												<span class="s-sales">月销: 69</span>
-											</div>
-										</div>
-										<div class="s-tp">
-											<span class="ui-btn-loading-before">找相似</span>
-											<i class="am-icon-shopping-cart"></i>
-											<span class="ui-btn-loading-before buy">加入购物车</span>
-											<p>
-												<a class="c-nodo J_delFav_btn" href="javascript:;">取消收藏</a>
-											</p>
+											<span class="" style="color: red;font-size: 1.2em;margin-left: 60px;cursor: pointer;" id="{{$vs->id}}" onclick="del(this)" href="">取消收藏</span>
 										</div>
 									</div>
 								</div>
+								@endforeach
+								@endif
 
-								<div class="s-item-wrap">
-									<div class="s-item">
+								
 
-										<div class="s-pic">
-											<a class="s-pic-link" href="#">
-												<img class="s-pic-img s-guess-item-img" title="4折抢购!十二生肖925银女戒指,时尚开口女戒" alt="4折抢购!十二生肖925银女戒指,时尚开口女戒" src="/homes/images/-0-saturn_solar.jpg_220x220.jpg">
-											</a>
-										</div>
-										<div class="s-info">
-											<div class="s-title"><a title="4折抢购!十二生肖925银女戒指,时尚开口女戒" href="#">4折抢购!十二生肖925银女戒指,时尚开口女戒</a></div>
-											<div class="s-price-box">
-												<span class="s-price"><em class="s-price-sign">¥</em><em class="s-value">378.00</em></span>
-												<span class="s-history-price"><em class="s-price-sign">¥</em><em class="s-value">1888.00</em></span>
-											</div>
-											<div class="s-extra-box">
-												<span class="s-comment">好评: 99.93%</span>
-												<span class="s-sales">月销: 278</span>
-											</div>
-										</div>
-										<div class="s-tp">
-											<span class="ui-btn-loading-before">找相似</span>
-											<i class="am-icon-shopping-cart"></i>
-											<span class="ui-btn-loading-before buy">加入购物车</span>
-											<p>
-												<a class="c-nodo J_delFav_btn" href="javascript:;">取消收藏</a>
-											</p>
-										</div>
-									</div>
-								</div>
+								
+								
 
 							</div>
 
-							<div data-screen="0" class="s-more-btn i-load-more-item"><i class="am-icon-refresh am-icon-fw"></i>更多</div>
 
 						</div>
 
 					</div>
-
+	
+<script type="text/javascript">
+	var del = function(obj)
+	{
+		var goods_id = $(obj).attr('id');
+		console.log(goods_id);
+		$.post('/home/center/collection/del',{id:goods_id,_token:'{{csrf_token()}}'},function(data){
+			if (data == 1) {
+				layer.msg('收藏已取消');
+				location.reload();
+			}
+		})
+	}
+</script>
 				
 
 @endsection()

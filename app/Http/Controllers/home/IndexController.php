@@ -10,13 +10,14 @@ use App\Http\Model\Type;
 use App\Http\Model\Typechild;
 use App\Http\Model\Good;
 use App\Http\Model\Goodsdetail;
+use App\Http\Model\User;
 use Session;
 use Cookie;
 use DB;
 
 class IndexController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         /*$res = Goodsdetail::find(16);
         $res = rtrim($res->pic);
@@ -32,7 +33,7 @@ class IndexController extends Controller
         $count = Good::count();
         // $count = Goodsdetail::count();
         //获取所有商品的id
-        $list = DB::table('goods')->lists('id');
+        $list = DB::table('goods')->where('status',1)->lists('id');
         //将商品id的数组打乱
         $lists = shuffle($list);
         //取出数组中的5条数据
@@ -49,6 +50,11 @@ class IndexController extends Controller
             $goods_photo[$v->id] = $re->img1;
         }
 
+        //用户信息
+        $user = User::where('id',session('uid'))->first();
+        // dd($user->username);die;
+        
+
 
          //这是出售消息 
         $b = DB::table('message')->join('orders','orders.id','=','message.order_id')
@@ -63,9 +69,44 @@ class IndexController extends Controller
 
         $num = $a + $b;           
         //dd($num);        
-    	return view('homes.index',['type'=>$type,'typechild'=>$typechild,'goods'=>$goods,'goods_photo'=>$goods_photo,'num'=>$num]);
+    	return view('homes.index',['type'=>$type,'typechild'=>$typechild,'goods'=>$goods,'goods_photo'=>$goods_photo,'num'=>$num,'user'=>$user]);
     
     }
+
+
+    public function search(Request $request)
+    {
+
+
+        $searchlist = Good::where('title','like','%'.$request->only('search')['search'].'%')->where('status',1)->lists('id');
+
+            //获取的商品信息
+        $goods = Good::whereIn('id',$searchlist)->where('status',1)->paginate(15);
+
+         if (!empty($goods[0])) {
+        // dd($goods);
+        // $goods = Good::whereIn('id',$searchlist)->where('status',1)->get();
+
+         //获取的商品的详细信息
+        $goodsdetail = Goodsdetail::whereIn('id',$searchlist)->get();
+
+        //定义存放图片的数组
+        $goods_photo = [];
+        foreach ($goodsdetail as $k => $v) {
+            //将json字符串编码
+            $re = json_decode($v->pic);
+            $goods_photo[$v->id] = $re->img1;
+        }
+
+        return view('homes.search',['goods'=>$goods,'goods_photo'=>$goods_photo]);
+
+    } else {
+        return view('homes.search',['goods[0]'=>$goods]);
+    }
+
+
+    }
+
 
 }
 

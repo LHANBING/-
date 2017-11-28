@@ -14,6 +14,11 @@
         <script type="text/javascript" src="{{url('/homes/layer1/jquery.js')}}"></script>
         <script type="text/javascript" src="{{url('/homes/layer1/layer.js')}}"></script>
         <script type="text/javascript" src="{{url('/homes/layer1/extend/layer.ext.js')}}"></script>
+         <link rel="stylesheet" href="/homes/bs/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/homes/bs/css/bootstrap-theme.min.css">
+        <script type="text/javascript" src="/homes/bs/js/jquery.js"></script>
+        <script type="text/javascript" src="/homes/bs/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/homes/layer/layer.js"></script>
         <style type="text/css">
             .yanzheng{
                 color: red;
@@ -120,10 +125,10 @@
                     <div class="search-bar pr">
                         <a name="index_none_header_sysc" href="#">
                         </a>
-                        <form>
-                            <input id="searchInput" name="index_none_header_sysc" type="text" placeholder="搜索"
-                            autocomplete="off">
-                            <input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="submit">
+                        <form action="/home/search" method="get" >
+                            <input id="searchInput" name="search" type="text" placeholder="搜索" autocomplete="off" value="{{ isset($request->searchInput) ? $request->searchInput : '' }}">
+                            {{ csrf_field() }}
+                            <input id="ai-topsearch" class="submit am-btn" value="搜索" type="submit">
                         </form>
                     </div>
                 </div>

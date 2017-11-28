@@ -163,9 +163,7 @@
                                 <div class="clear">
                                 </div>
                                 <div class="new-addr-btn">
-                                    <a href="#" class="hidden">
-                                        设为默认
-                                    </a>
+                                    
                                     <span class="new-addr-bar hidden">
                                         |
                                     </span>
@@ -624,6 +622,7 @@
     var delClick = function(obj)
     {
         var id = $(obj).attr('id');
+
         $.post('/home/pay/del',{id:id,_token:'{{csrf_token()}}'},function(data){
             layer.msg(data);
             location.reload();

@@ -15,6 +15,11 @@
         <script type="text/javascript" src="/homes/js/jquery.imagezoom.min.js"></script>
         <script type="text/javascript" src="/homes/js/jquery.flexslider.js"></script>
         <script type="text/javascript" src="/homes/js/list.js"></script>
+        <link rel="stylesheet" href="/homes/bs/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/homes/bs/css/bootstrap-theme.min.css">
+        <script type="text/javascript" src="/homes/bs/js/jquery.js"></script>
+        <script type="text/javascript" src="/homes/bs/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/homes/layer/layer.js"></script>
 
 	</head>
 
@@ -112,10 +117,14 @@
 								<div class="clear"></div>
 
 							</div>
+							
 
+
+<!-- QQ插件联系 -->
 							<div style="height: 50px;width: 100px;margin-left: 60px;margin-top: 20px">
-								<a href=""><img style="width: 30%" src="/homes/images/qq.jpg" alt="QQ"></a>
+								<!-- <a href=""><img style="width: 30%" src="/homes/images/qq.jpg" alt="QQ"></a> -->
 								<a href=""><span>联系卖家</span></a>
+								<a target=blank href=tencent://message/?uin={{$qq}}&Site=工具啦&Menu=yes><img border="0" SRC=http://wpa.qq.com/pa?p=1:1477660474:4 alt="点击这里给我发消息"></a>
 							</div>
 
 							
@@ -130,9 +139,15 @@
 								</div>
 							</li>
 							<li>
+								@if(!empty($collect))
 								<div class="clearfix tb-btn tb-btn-basket theme-login">
-									<a id="{{$goods->id}}" class="collect" title="加入购物车" onclick="func(this)"><i></i>收藏</a>
+									<a id="{{$goods->id}}" class="collect" title="收藏" onclick="collect(this)">已收藏</a>
 								</div>
+								@else
+								<div class="clearfix tb-btn tb-btn-basket theme-login">
+									<a id="{{$goods->id}}" class="collect" title="收藏" onclick="collect(this)">收藏</a>
+								</div>
+								@endif
 							</li>
 						</div>
 
@@ -145,7 +160,7 @@
 			
 				
 							
-				<!-- introduce-->
+<!-- 卖家信用足迹 -->
 
 				<div class="introduce">
 					
@@ -182,18 +197,31 @@
 										</ul>
 									</div>
 									<div class="clear"></div>
-
+									@if(!empty($goodsid))
+									
 									<ul class="am-comments-list am-comments-list-flip">
+
+
+										@foreach($goodsid as $k => $v)
 										<li class="am-comment">
 											<!-- 评论容器 -->
 											<a href="">
 												<img class="am-comment-avatar" src="/homes/images/hwbn40x40.jpg" />
 												<!-- 评论者头像 -->
 											</a>
+											<!-- 商品信息 -->
+											<div class="am-comment-main">
+												<!-- 评论内容容器 -->
+												<header class="am-comment-hd">
+													<!--<h3 class="am-comment-title">评论标题</h3>-->
+													<div class="am-comment-meta">
+														<img  style="height: 120px" src="http://ozstangaz.bkt.clouddn.com/{{$commentpic[$k]->img1}}">
+														<p>{{$commentcontent[$k]}}</p>
+													</div>
+												</header>
 
-
-
-
+												<!-- 评论内容 -->
+											</div>
 
 											<div class="am-comment-main">
 												<!-- 评论内容容器 -->
@@ -201,20 +229,39 @@
 													<!--<h3 class="am-comment-title">评论标题</h3>-->
 													<div class="am-comment-meta">
 														<!-- 评论元数据 -->
-														<a href="#link-to-user" class="am-comment-author">b***1 (匿名)</a>
+														<a href="r" class="am-comment-author">买家</a>
 														<!-- 评论者 -->
-														评论于
-														<time datetime="">2015年11月02日 17:46</time>
+														
 													</div>
 												</header>
 
 												<div class="am-comment-bd">
 													<div class="tb-rev-item " data-id="255776406962">
 														<div class="J_TbcRate_ReviewContent tb-tbcr-content ">
-															摸起来丝滑柔软，不厚，没色差，颜色好看！买这个衣服还接到诈骗电话，我很好奇他们是怎么知道我买了这件衣服，并且还知道我的电话的！
+															{{$buysay[$k]}}
 														</div>
-														<div class="tb-r-act-bar">
-															颜色分类：柠檬黄&nbsp;&nbsp;尺码：S
+													</div>
+
+												</div>
+												<!-- 评论内容 -->
+											</div>
+
+											<div class="am-comment-main">
+												<!-- 评论内容容器 -->
+												<header class="am-comment-hd">
+													<!--<h3 class="am-comment-title">评论标题</h3>-->
+													<div class="am-comment-meta">
+														<!-- 评论元数据 -->
+														<a href="r" class="am-comment-author">卖家</a>
+														<!-- 评论者 -->
+														
+													</div>
+												</header>
+
+												<div class="am-comment-bd">
+													<div class="tb-rev-item " data-id="255776406962">
+														<div class="J_TbcRate_ReviewContent tb-tbcr-content ">
+															{{$salesay[$k]}}
 														</div>
 													</div>
 
@@ -223,30 +270,42 @@
 											</div>
 
 
-
-
-
 										</li>
+
+										@endforeach
+
+
 								
 									</ul>
+									@endif
 
+
+
+									  
 									<div class="clear"></div>
 
-
+									<!-- <ul class="pagination">
+									    
+									</ul> -->
+									<!-- <div style="height: 30px;width: 200px; border:2px black solid">
+										{!!  $page->render() !!}
+									</div> -->
 
 									
+									<!--分页   出不来 !!! -->
 
-									<!--分页 -->
-									<ul class="am-pagination am-pagination-right">
-										<li class="am-disabled"><a href="#">&laquo;</a></li>
+									
+									<!-- <ul class=""> -->
+										
+										<!-- <li class="am-disabled"><a href="#">&laquo;</a></li>
 										<li class="am-active"><a href="#">1</a></li>
 										<li><a href="#">2</a></li>
 										<li><a href="#">3</a></li>
 										<li><a href="#">4</a></li>
 										<li><a href="#">5</a></li>
-										<li><a href="#">&raquo;</a></li>
-									</ul>
-
+										<li><a href="#">&raquo;</a></li> -->
+									<!-- </ul> -->
+									
 
 
 
@@ -261,11 +320,23 @@
 @endsection()
 
 <script>
-	var func = function(obj){
+	 //collect = $('.collect');
+
+	var collect = function(obj){
 		var id = $(obj).attr('id');
+		// console.log(id);
+		
 
 		$.post('/home/collect',{id:id,_token:'{{csrf_token()}}'},function(data){
-			alert(data);
+			if (data == 1) {
+				$(obj).text('已收藏');
+				layer.msg('您已成功收藏该商品');
+			} else if (data == 2) {
+				layer.msg('请先登录!');
+			} else if (data == 3) {
+				layer.msg('您已取消收藏');
+				$(obj).text('收藏');
+			}
 			/*layer.open({
 				content:'修改默认地址成功!'
 				,btn: ['确认']
