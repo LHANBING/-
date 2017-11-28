@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use DB;
+use App\Http\Model\Order;
 class NewsController extends Controller
 {
     public function index ()
@@ -80,6 +81,38 @@ class NewsController extends Controller
     }
 
 
+
+
+      // 卖家发送  提示买家收货消息
+     public function addm (Request $request)
+    { 
+      $num = $request->only(['num']);
+
+      $order = Order::where('order_num',$num)->first();
+      $order_id = $order['id'];
+      $receive_uid=$order['buy_uid'];
+      $uid=session('uid');
+      $b= DB::table('message')->where(['msg_content'=>3,'order_id'=>$order_id,'send_uid'=>$uid,'receive_uid'=>$receive_uid]);
+
+      if($b){
+          return 0;
+      }else{
+        $a=DB::table('message')->insert(['msg_content'=>3,'order_id'=>$order_id,'send_uid'=>$uid,'receive_uid'=>$receive_uid]);
+          if($a){
+              return 1;
+            }else{
+              return 2;
+            }
+      }
+      
+
+      
+    }
+
+
+
+
+    //已读
     public function readed (Request $Request)
     {
        $id = ($Request->all()['id']);
@@ -89,7 +122,7 @@ class NewsController extends Controller
        echo $bool;
     }
 
-
+    //删除
     public function del (Request $Request)
     {   
 
