@@ -48,8 +48,8 @@
 						<div data-am-tabs="" class="am-tabs am-tabs-d2 am-margin">
 
 							<ul class="am-avg-sm-2 am-tabs-nav am-nav am-nav-tabs">
-								<li class="am-active"><a href="#tab1">评价我的</a></li>
-								<li><a href="#tab2">我的评价</a></li>
+								<li class="am-active"><a href="#tab1">我的评价</a></li>
+								<li><a href="#tab2">评价我的</a></li>
 
 							</ul>
 
@@ -58,27 +58,72 @@
 
 									<div class="comment-main">
 										<div class="comment-list">
-											@foreach ($res as $k => $v)
-											<ul class="item-list">
+											@foreach ($a as $k => $v)
+											<ul class="item-list" id="{{$v->id}}all">
 
 												
 												<div class="comment-top">
 													<div class="th th-price">
 														评价
 													</div>
-													<div class="th th-item">
+													<div class="th th-item" style="width:200px">
 														商品
 													</div>													
 												</div>
 												<li class="td td-item">
 													<div class="item-pic">
 														<a class="J_MakePoint" href="#">
-															<img class="itempic" src="{{$v->pic}}">
+															<img class="itempic" src="http://ozstangaz.bkt.clouddn.com/{{$v->pic}}">
 														</a>
 													</div>
 												</li>
 
 												<li class="td td-comment">
+													<div class="item-title">
+														<div class="item-opinion">好评</div>
+														<div class="item-name">
+															<a href="#">
+																<p class="item-basic-info">{{$v->title}}</p>
+															</a>
+														</div>
+													</div>
+													<div class="item-comment" style="height:80px">
+														{{$v->comment}}
+													</div>
+
+													<div class="item-info">
+														<div>
+													<p class="info-little dels" id="{{$v->id}}del" style="cursor:pointer;">删除{{$v->id}}</p>
+															<p class="info-time">买家我在{{$v->created_at}}评论了卖家{{$v->username}}的商品</p>
+
+														</div>
+													</div>
+												</li>
+
+											</ul>
+											@endforeach
+
+											@foreach ($b as $k => $v)
+											<ul class="item-list" id="{{$v->id}}all">
+
+												
+												<div class="comment-top">
+													<div class="th th-price">
+														评价
+													</div>
+													<div class="th th-item" style="width:200px">
+														商品
+													</div>													
+												</div>
+												<li class="td td-item">
+													<div class="item-pic">
+														<a class="J_MakePoint" href="#">
+															<img class="itempic" src="http://ozstangaz.bkt.clouddn.com/{{$v->pic}}">
+														</a>
+													</div>
+												</li>
+
+												<li class="td td-comment" style="height:80px">
 													<div class="item-title">
 														<div class="item-opinion">好评</div>
 														<div class="item-name">
@@ -93,9 +138,9 @@
 
 													<div class="item-info">
 														<div>
-															<p class="info-little">回复{{$v->id}} </p>
-															<p class="info-time">{{$v->username}}在{{$v->created_at}}12:12评论了你的商品</p>
-
+														<p class="info-little dels" id="{{$v->id}}del" style="cursor:pointer;">删除{{$v->id}}</p>
+															<p class="info-time">卖家我在{{$v->created_at}}评论了买家{{$v->username}}</p>
+														
 														</div>
 													</div>
 												</li>
@@ -110,8 +155,8 @@
 									
 									<div class="comment-main">
 										<div class="comment-list">
-											@foreach ($re as $k => $v)
-											<ul class="item-list" id="{{$v->id}}all">
+											@foreach ($c as $k => $v)
+											<ul class="item-list" >
 												<div class="comment-top">
 													<div class="th th-price" style="width:350px">
 														评价
@@ -123,7 +168,7 @@
 												<li class="td td-item">
 													<div class="item-pic">
 														<a class="J_MakePoint" href="#">
-															<img class="itempic" src="{{$v->pic}}">
+															<img class="itempic" src="http://ozstangaz.bkt.clouddn.com/{{$v->pic}}">
 														</a>
 													</div>
 												</li>
@@ -145,8 +190,53 @@
 
 													<div class="item-info">
 														<div>
-											<p class="info-little dels" id="{{$v->id}}del" style="cursor:pointer;">删除{{$v->id}}</p>
-											<p class="info-time">您在{{$v->created_at}}评论了31{{$v->username}}的商品</p>
+											
+											<p class="info-time">卖家{{$v->username}}在{{$v->created_at}}评论了我</p>
+
+														</div>
+													</div>
+												</li>
+
+											</ul>
+										 	@endforeach 
+
+										 	@foreach ($d as $k => $v)
+											<ul class="item-list" >
+												<div class="comment-top">
+													<div class="th th-price" style="width:350px">
+														评价
+													</div>
+													<div class="th th-item">
+														商品
+													</div>													
+												</div>
+												<li class="td td-item">
+													<div class="item-pic">
+														<a class="J_MakePoint" href="#">
+															<img class="itempic" src="http://ozstangaz.bkt.clouddn.com/{{$v->pic}}">
+														</a>
+													</div>
+												</li>
+
+												<li class="td td-comment">
+													<div class="item-title">
+														<div class="item-opinion">好评</div>
+														<div class="item-name">
+															<a href="#">
+																<p class="item-basic-info">
+																	{{$v->title}}
+																</p>
+															</a>
+														</div>
+													</div>
+													<div class="item-comment" style="height:100px">
+														{{$v->comment}} 
+													</div>
+
+													<div class="item-info">
+														<div>
+											
+											<p class="info-time">买家{{$v->username}}在{{$v->created_at}}评论了我的商品</p>
 
 														</div>
 													</div>

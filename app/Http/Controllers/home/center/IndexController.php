@@ -14,15 +14,19 @@ class IndexController extends Controller
     {
     	
     	$users=DB::table('users')->where('id',session('uid'))->first();
+
+      //dd($users);
     
     	//这是出售消息 
         $b = DB::table('message')->join('orders','orders.id','=','message.order_id')
                                     ->where('orders.sale_uid','=',session('uid'))
+                                     ->where('message.receive_uid','=',session('uid'))
                                     ->where('mes_status','0') 
                                     ->count();  
         //这是购买消息   
         $a = DB::table('message')->join('orders','orders.id','=','message.order_id')
                                    ->where('orders.buy_uid','=',session('uid'))
+                                   ->where('message.receive_uid','=',session('uid'))
                                    ->where('mes_status','0')  
                                    ->count();                             
         $num = $a +$b;  

@@ -26,7 +26,7 @@
 							<div class="comment-list">
 								<div class="item-pic" style="float:left">
 									<a class="J_MakePoint" href="#">
-										<img class="itempic" src="{{ $arr->pic}}">
+										<img class="itempic" src="http://ozstangaz.bkt.clouddn.com/{{$arr->pic}}" style="width:150px;height:150px">
 										
 										
 									</a>
@@ -47,7 +47,7 @@
 										</div>
 
 										<div style="margin-top:10px">
-											详情：{{$con->content}}
+											详情：{{$arr->content}}
 										</div>	
 										
 

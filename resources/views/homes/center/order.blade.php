@@ -68,8 +68,8 @@
 												<div class="order-title">
 													<div class="dd-num">订单编号：<a href="javascript:;">{{$v->order_num}}</a></div>
 													<span>下单时间 : {{$v->created_at}}</span>
-												@if($v->buy_order_status >= 4) 	
-													<span style="float: right;color:#dd514c;margin:0px 10px">我要退货</span>
+												@if($v->buy_order_status == 3 ) 	
+													<a  href="/home/center/change/add?id={{$v->id}}" style="float: right;color:#dd514c;margin:0px 10px;cursor: pointer;" id="{{$v->id}}tui">我要退货</a>
 												@endif	
 												</div>
 												<div class="order-content">
@@ -79,10 +79,10 @@
 														<ul class="item-list">
 															<li class="td td-item">
 																<div class="item-pic">
-																	<a class="J_MakePoint" href="#">
-																<img src="{{$v->pic}}" alt="">
+																
+																<img src="http://ozstangaz.bkt.clouddn.com/{{$v->pic}}" alt="">
 																	
-																	</a>
+																
 																</div>
 																<div class="item-info">
 																	<div class="item-basic-info">
@@ -99,7 +99,7 @@
 															</li>
 															<li class="td td-price">
 																<div class="item-price">
-																	￥{{$v->newprice}}
+																	￥{{$v->pay_money}}
 																	
 																</div>
 															</li>
@@ -161,10 +161,6 @@
 										</div>
 
 									</div>
-
-				
-
-
 								</div>
 								<div id="tab2" class="am-tab-panel am-fade">
 
@@ -177,11 +173,11 @@
 											价格
 										</div>
 										<div class="th th-number">
-											数量
+											运费
 										</div>
 									
 										<div class="th th-amount" style="margin-left: 20px">
-											合计/ 运费
+											合计
 										</div>
 										<div class="th th-status" style="margin-left: 20px">
 											交易状态
@@ -211,11 +207,11 @@
 											价格
 										</div>
 										<div class="th th-number">
-											数量
+											运费
 										</div>
 									
 										<div class="th th-amount" style="margin-left: 20px">
-											合计/ 运费
+											合计
 										</div>
 										<div class="th th-status" style="margin-left: 20px">
 											交易状态
@@ -245,11 +241,11 @@
 											价格
 										</div>
 										<div class="th th-number">
-											数量
+											运费
 										</div>
 									
 										<div class="th th-amount" style="margin-left: 20px">
-											合计/ 运费
+											合计
 										</div>
 										<div class="th th-status" style="margin-left: 20px">
 											交易状态
@@ -279,11 +275,11 @@
 											价格
 										</div>
 										<div class="th th-number">
-											数量
+											运费
 										</div>
 									
 										<div class="th th-amount" style="margin-left: 20px">
-											合计/ 运费
+											合计
 										</div>
 										<div class="th th-status" style="margin-left: 20px">
 											交易状态
@@ -376,7 +372,7 @@
 					$('.test1').live('click',function(){
 
 						var id = $(this);
-						
+
 						pay(1,id);
 					})
 				
@@ -407,7 +403,7 @@
 										  ,area: ['500px', '200px']
 										  ,shade: 0
 										  ,maxmin: false
-										  ,content: '<div style="font-size:15px;margin:30px">消息已发送,请耐心等待哦<br/>如果长时间未收到货,请联系买家电话或点击举报!</div>'
+										  ,content: '<div style="font-size:15px;margin:30px">消息已发送,请耐心等待哦<br/>如果长时间未收到货,请尝试联系买家电话!</div>'
 										  ,btn: ['确定'] 
 										  ,zIndex: layer.zIndex 
 										  ,success: function(layero){
@@ -533,10 +529,7 @@
 				 })
 
 			</script>
-<style>	
-		
-			 
-</style>
+
 			<script>	
 
 			//付款函数	
@@ -616,26 +609,35 @@
 						for (var i in data ){
 
 
-					 if(data[i].buy_order_status >= 4) 	{ 
+					 if(data[i].buy_order_status == 3) 	{ 
 
-							 	var tui ="<span style='float: right;color:#dd514c;margin:0px 10px'>我要退货</span>"
+							 	var tui ="<a style='float: right;color:#dd514c;margin:0px 10px;cursor:pointer' clas='tuihuos' href='/home/center/change/add?id="+data[i].id+"'>我要退货</a>"
+						     } else{
+						     	 var tui = "<span></span>"
 						     }
 						
 
 							 if(data[i].buy_order_status ==1){ var status ='待付款';  var btn= data[i].id+"一键支付"; var a ="zhifu"}
-						else if(data[i].buy_order_status ==2){ var status ='待发货';  var btn=data[i].id+"提醒发货"; var a ="fahuo"}
-						else if(data[i].buy_order_status ==3){ var status ='待收货';  var btn=data[i].id+"确认收货"; var a ="shouhuo"}
+						else if(data[i].buy_order_status ==2){ var status ='待发货';  var btn=data[i].id+"提醒发货";  var a ="fahuo"}
+						else if(data[i].buy_order_status ==3){ var status ='待收货';  var btn=data[i].id+"确认收货";  var a ="shouhuo"}
 						else if(data[i].buy_order_status ==4){ var status ='待评价';  var btn=data[i].id+"<a href='/home/center/comment/add?id="+data[i].id+"' style='color:white'>评价商品</a>"; var a ="pingjia"}
-						else if(data[i].buy_order_status ==5){ var status ='已完成';  var btn=data[i].id+"查看评价"; var a ="show"}
+						else if(data[i].buy_order_status ==5){ var status ='已完成';  var btn=data[i].id+"查看评价";  var a ="show"}
+
+							var s = data[i].pay_money+data[i].pay_yunfei;
 
 
-						var op = $('<div class="order-status3" id="alls'+data[i].id+'" > <div class="order-title"> <div class="dd-num">订单编号：<a href="javascript:;">'+data[i].order_num+'</a></div> <span>下单时间：'+data[i].order_atime+'</span>'+tui+'</div> <div class="order-content"> <div class="order-left"> <ul class="item-list"> <li class="td td-item"> <div class="item-pic"> <a class="J_MakePoint" href="#"> '+data[i].pic+' </a> </div> <div class="item-info"> <div class="item-basic-info"> <a href="#"> <p class="info-little">商品名</p> <p class="info-little">'+data[i].title+' <br>卖家：'+data[i].username+' </p> </a> </div> </div> </li> <li class="td td-price"> <div class="item-price">'+data[i].newprice+' </div> </li> <li class="td td-number"> <div class="item-number"> <span>×</span>'+data[i].goods_num+'</div> </li> <li class="td td-operation"> <div class="item-operation">   <div class="item-amount"> '+ data[i].pay_money+' + '+data[i].pay_yunfei+'元</p> </div> </div> </li> </ul> </div> <div class="order-right">  <div class="move-right"> <li class="td td-status"> <div class="item-status"> <p class="Mystatus">'+status+'</p> <p class="order-info"><a href="orderinfo.html"></a></p> </div> </li> <li class="td td-change" style="margin-left: 20px"> <div class="am-btn am-btn-danger anniu '+a+'" id="'+data[i].id+'allss">'+btn+'</div> </li> </div> </div></div></div>'); 
+
+						var op = $('<div class="order-status3" id="alls'+data[i].id+'" > <div class="order-title"> <div class="dd-num">订单编号：<a href="javascript:;">'+data[i].order_num+'</a></div> <span>下单时间：'+data[i].created_at+'</span>'+tui+'</div> <div class="order-content"> <div class="order-left"> <ul class="item-list"> <li class="td td-item"> <div class="item-pic">  <img src="http://ozstangaz.bkt.clouddn.com/'+data[i].pic+' " alt=""> </div> <div class="item-info"> <div class="item-basic-info"> <a href="#"> <p class="info-little">商品名</p> <p class="info-little">'+data[i].title+' <br>卖家：'+data[i].username+' </p> </a> </div> </div> </li> <li class="td td-price"> <div class="item-price">￥'+data[i].pay_money+' </div> </li> <li class="td td-number"> <div class="item-number">￥'+data[i].pay_yunfei+'</div> </li> <li class="td td-operation"> <div class="item-operation">   <div class="item-amount" style="color: #dd514c">￥'+s+'</div> </div> </li> </ul> </div> <div class="order-right">  <div class="move-right"> <li class="td td-status"> <div class="item-status"> <p class="Mystatus">'+status+'</p> <p class="order-info"><a href="orderinfo.html"></a></p> </div> </li> <li class="td td-change" style="margin-left: 20px"> <div class="am-btn am-btn-danger anniu '+a+'" id="'+data[i].id+'allss">'+btn+'</div> </li> </div> </div></div></div>'); 
  
 						  op.appendTo($('#list'+sta));
+
+						
 
 					}
 
 				}	
+
+				
 
 			</script>	
 

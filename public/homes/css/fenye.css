@@ -1,0 +1,26 @@
+.pagination li {	  
+    background-color: #fff;
+    border: 1px solid #ddd;
+    color: #337ab7;
+    float: left;
+    line-height: 1.42857;
+    margin-left: -1px;
+    padding: 6px 12px;
+    position: relative;
+    text-decoration: none;
+
+}
+.pagination li a{
+	color: #337ab7;
+}
+.pagination .active {
+    background-color: #337ab7;
+    border-color: #337ab7;
+    color: #fff;
+    cursor: default;
+    z-index: 2;
+}
+ .pagination .disabled{  
+ 	color: #337ab7;
+    cursor: not-allowed;
+}

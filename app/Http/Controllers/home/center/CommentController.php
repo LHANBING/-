@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Http\Model\Comment;
+use App\Http\Model\Message;
 use DB;
 use Session;
 
@@ -14,47 +16,98 @@ class CommentController extends Controller
     public function index()
     {	
 
-          
-        //评价我的
-    	/*$res=DB::table('comment')->join('goods','goods.id','=','comment.goods_id')
-                                 ->join('goodsdetail','goodsdetail.goods_id','=','comment.goods_id')
-                                 ->join('users','users.id','=','comment.ed_user_id')
-                                 ->where('comment.ed_user_id',session('uid'))
-                                 ->select('goodsdetail.pic','goods.title','comment.*','users.username')
-                                 ->get();*/
 
-          $res =DB::table('comment')->join('orders','orders.id','=','comment.order_id')
-                                    ->join('goods','goods.id','=','orders.goods_id')
-                                    ->join('goodsdetail','goodsdetail.goods_id','=','goods.id')
-                                    ->join('users','users.id','=','orders.buy_uid')    //这里重点
-                                    ->where('orders.sale_uid','=',session('uid'))
-                                    ->select('goodsdetail.pic','goods.title','comment.*','users.username')
-                                    ->get();
-                                                                                               
+     //我评价的  买家身份  评价卖家
+       $A =DB::table('comment')->join('orders','orders.id','=','comment.order_id')
+                                ->join('goods','goods.id','=','orders.goods_id')
+                                ->join('goodsdetail','goodsdetail.goods_id','=','goods.id')
+                                ->join('users','users.id','=','orders.sale_uid')        
+                                ->where('orders.buy_uid','=',session('uid'))   //这里重点
+                                ->where('comment.b_id','=',session('uid'))
+                                ->select('goodsdetail.pic','goods.title','comment.*','users.username')
+                                ->get();
 
-        //$res = DB::table('comment')->join('orders','orders.id','=','')                     
-                                 
-        //dd($res);                         
+                            
 
-        //我的评价
-    	/*$re = DB::table('comment')->join('goods','goods.id','=','comment.goods_id')
-                                  ->join('users','users.id','=','comment.w_user_id')
-                                  ->join('goodsdetail','goodsdetail.goods_id','=','goods.id')   
-    						      ->where('comment.w_user_id',session('uid'))
-                                  ->select('goodsdetail.pic','goods.title','comment.*','users.username')
-    						      ->get();*/
+     //我评价的 卖家身份 评价买家
+       $B =DB::table('comment')->join('orders','orders.id','=','comment.order_id')
+                                ->join('goods','goods.id','=','orders.goods_id')
+                                ->join('goodsdetail','goodsdetail.goods_id','=','goods.id')
+                                ->join('users','users.id','=','orders.buy_uid')       
+                                ->where('orders.sale_uid','=',session('uid'))   //这里重点
+                                ->where('comment.b_id','=',session('uid'))
+                                ->select('goodsdetail.pic','goods.title','comment.*','users.username')
+                                ->get();
 
-       $re =DB::table('comment')->join('orders','orders.id','=','comment.order_id')
-                                    ->join('goods','goods.id','=','orders.goods_id')
-                                    ->join('goodsdetail','goodsdetail.goods_id','=','goods.id')
-                                    ->join('users','users.id','=','orders.sale_uid')         //这里重点
-                                    ->where('orders.buy_uid','=',session('uid'))
-                                    ->select('goodsdetail.pic','goods.title','comment.*','users.username')
-                                    ->get();
-         //dd($res); 
-                                                                
-       // dd($re);                          
-    	return view('homes.center.comment',['res'=>$res,'re'=>$re]);
+                              
+     
+                                
+   //我被评价 买家身份   被卖家评价
+         $C =DB::table('comment')->join('orders','orders.id','=','comment.order_id')
+                                 ->join('goods','goods.id','=','orders.goods_id')
+                                 ->join('goodsdetail','goodsdetail.goods_id','=','goods.id')
+                                 ->join('users','users.id','=','orders.sale_uid')       
+                                ->where('orders.buy_uid','=',session('uid'))   //这里重点
+                                ->where('comment.s_id','=',session('uid'))
+                                ->select('goodsdetail.pic','goods.title','comment.*','users.username')
+                                ->get();
+                                
+                                   
+   //我被评价  卖家身份  被买家评价
+         $D =DB::table('comment')->join('orders','orders.id','=','comment.order_id')
+                                 ->join('goods','goods.id','=','orders.goods_id')
+                                 ->join('goodsdetail','goodsdetail.goods_id','=','goods.id')
+                                 ->join('users','users.id','=','orders.buy_uid')         
+                                ->where('orders.sale_uid','=',session('uid'))
+                                ->where('comment.s_id','=',session('uid'))      //这里重点
+                                ->select('goodsdetail.pic','goods.title','comment.*','users.username')
+                                ->get();
+                                
+
+
+    //我评价的                           我被评价的
+    //我是买家身份 评论卖家              我是买家身份 ,卖家给我的评论
+    //我是卖家身份 评论买家              我是卖家身份 ,买家给我的评价
+    //b_id 评论人
+    //s_id 被评论人
+  
+
+          //转换json子串                            
+            foreach ($A as $key => $value) {
+                     
+                     $pic[$key] =  json_decode($value->pic); 
+
+                     $A[$key]->pic = $pic[$key]->img1;    
+                 }                          
+        
+          //转换json子串                            
+            foreach ($B as $key => $value) {
+                     
+                     $pic[$key] =  json_decode($value->pic); 
+
+                     $B[$key]->pic = $pic[$key]->img1;    
+                 }                          
+    
+          //转换json子串                            
+            foreach ($C as $key => $value) {
+                     
+                     $pic[$key] =  json_decode($value->pic); 
+
+                     $C[$key]->pic = $pic[$key]->img1;    
+                 }                          
+        
+          //转换json子串                            
+            foreach ($D as $key => $value) {
+                     
+                     $pic[$key] =  json_decode($value->pic); 
+
+                     $D[$key]->pic = $pic[$key]->img1;    
+                 }                          
+    
+
+      
+                                                     
+    	return view('homes.center.comment',['a'=>$A,'b'=>$B,'c'=>$C,'d'=>$D]);
     }
 
     public function add (Request $Request)
@@ -68,12 +121,14 @@ class CommentController extends Controller
     							->join('goods','goods.id','=','orders.goods_id')
                                 ->join('goodsdetail','goodsdetail.goods_id','=','goods.id')
     							->where('orders.id',$id)
-    							->select('goods.title','orders.*','users.username','goodsdetail.pic','goods.newprice')
+    							->select('goods.title','orders.*','users.username','goodsdetail.pic','goodsdetail.content','goods.newprice')
     	       					->first();
-		//dd($arr); 
-		$con=DB::table('goodsdetail')->where('goods_id',$arr->goods_id)->first();
-          
-        return view('homes.center.addcomment',['arr'=>$arr,'con'=>$con,'oid'=>$id]);
+		
+        //转换json字符串
+        $arr->pic = json_decode($arr->pic)->img1;
+
+ 
+        return view('homes.center.addcomment',['arr'=>$arr,'oid'=>$id]);
     
 
     }
@@ -90,36 +145,29 @@ class CommentController extends Controller
 
 
     	//添加事务
-    	DB::beginTransaction();
-    	//添加评论
-    	/*$arr['goods_id']=$or->goods_id;
+    	 DB::beginTransaction();
+    
 
-    	$arr['comment'] = $res['content'];
-
-    	$arr['w_user_id'] =session('uid');
-        $arr['ed_user_id']= $or->sale_uid;*/
-       // dd($res);
+         //添加评论     
         $arr['order_id'] = $id;
         $arr['comment'] = $res['content'];
+        $arr['b_id'] = session('uid');      //评论的人是我
+        $arr['s_id'] = $or->sale_uid;       //被评论的人是卖家
+         
+        $bool = Comment::create($arr);
 
-    	$bool=DB::table('comment')->insert($arr);
-
-        //给买家发送信息
+        
+        //添加消息   买家评论卖家 
         $res1['order_id'] = $id;
-        $res1['msg_content'] = "评论成功";
-       
+        $res1['msg_content'] = "买家评论了您";
+        $res1['send_uid'] = sssion('uid');
+        $res1['receive_uid'] = $or->sale_uid;
 
-       
+        $A = Message::create($res1);
 
         //修改订单状态()
-        $order = DB::table('orders')->where('id',$id)
-                     ->update(['buy_order_status'=>'5','sale_order_status'=>'5']);
+        $order = DB::table('orders')->where('id',$id)->update(['buy_order_status'=>'5']);
 
-
-        $A = DB::table('message')->insert($res1);
-                  
-
-    	// $bools=DB::table('message')->insert($new);
 
     	 if($bool && $order && $A ){
 
@@ -130,10 +178,12 @@ class CommentController extends Controller
     	 }else{
 
     	 		DB::rollback();
-    	 		return redirect()->back();
+    	 		return back();
 
     	 }
-    	
+
+
+         
     }
 
 

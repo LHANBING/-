@@ -23,22 +23,20 @@
 
 						<!--标题 -->
 						<div class="am-cf am-padding">
-							<div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">退换货管理</strong> / <small>Change</small></div>
+							<div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">我的退货</strong> / <small>Change</small></div>
 						</div>
 						<hr>
 
 						<div data-am-tabs="" class="am-tabs am-tabs-d2 am-margin">
 
-							<ul class="am-avg-sm-2 am-tabs-nav am-nav am-nav-tabs">
-								<li class="am-active"><a href="#tab1">退款管理</a></li>
-								<li class=""><a href="#tab2">售后管理</a></li>
-
-							</ul>
+							
 
 							<div class="am-tabs-bd">
+
+						
 								<div id="tab1" class="am-tab-panel am-fade am-active am-in">
 									<div class="order-top">
-										<div class="th th-item">
+										<div class="th th-item" >
 											商品
 										</div>
 										<div class="th th-orderprice th-price">
@@ -47,119 +45,41 @@
 										<div class="th th-changeprice th-price">
 											退款金额
 										</div>
-										<div class="th th-status th-moneystatus">
-											交易状态
-										</div>
-										<div class="th th-change th-changebuttom">
-											交易操作
-										</div>
-									</div>
-
-									<div class="order-main">
-										<div class="order-list">
-											<div class="order-title">
-												<div class="dd-num">退款编号：<a href="javascript:;">1601430</a></div>
-												<span>申请时间：2015-12-20</span>
-												<!--    <em>店铺：小桔灯</em>-->
-											</div>
-											<div class="order-content">
-												<div class="order-left">
-													<ul class="item-list">
-														<li class="td td-item">
-															<div class="item-pic">
-																<a class="J_MakePoint" href="#">
-																	<img class="itempic J_ItemImg" src="/homes/images/kouhong.jpg_80x80.jpg">
-																</a>
-															</div>
-															<div class="item-info">
-																<div class="item-basic-info">
-																	<a href="#">
-																		<p>美康粉黛醉美唇膏 持久保湿滋润防水不掉色</p>
-																		<p class="info-little">颜色：12#川南玛瑙
-																			<br>包装：裸装 </p>
-																	</a>
-																</div>
-															</div>
-														</li>
-
-														<ul class="td-changeorder">
-															<li class="td td-orderprice">
-																<div class="item-orderprice">
-																	<span>交易金额：</span>72.00
-																</div>
-															</li>
-															<li class="td td-changeprice">
-																<div class="item-changeprice">
-																	<span>退款金额：</span>70.00
-																</div>
-															</li>
-														</ul>
-														<div class="clear"></div>
-													</ul>
-
-													<div class="change move-right">
-														<li class="td td-moneystatus td-status">
-															<div class="item-status">
-																<p class="Mystatus">退款成功</p>
-
-															</div>
-														</li>
-													</div>
-													<li class="td td-change td-changebutton">
-														<a href="record.html">
-														<div class="am-btn am-btn-danger anniu">
-															钱款去向</div>
-														</a>
-													</li>
-
-												</div>
-											</div>
-										</div>
-
-									</div>
-
-								</div>
-								<div id="tab2" class="am-tab-panel am-fade">
-									<div class="order-top">
-										<div class="th th-item">
-											商品
-										</div>
-										<div class="th th-orderprice th-price">
-											交易金额
-										</div>
 										<div class="th th-changeprice th-price">
-											退款金额
+											卖家
 										</div>
-										<div class="th th-status th-moneystatus">
-											交易状态
-										</div>
-										<div class="th th-change th-changebuttom">
-											交易操作
+
+										<div class="th th-change th-changebuttom" style="width:270px">
+										交易状态
 										</div>
 									</div>
 
 									<div class="order-main">
+										@foreach ($res as $k => $v)
 										<div class="order-list">
 											<div class="order-title">
-												<div class="dd-num">退款编号：<a href="javascript:;">1601430</a></div>
-												<span>申请时间：2015-12-20</span>
+												<div class="dd-num">订单号码：<a href="javascript:;">{{$v->order_num}}</a></div>
+												<span>申请时间: {{$v->created_at}}</span>
 												<!--    <em>店铺：小桔灯</em>-->
 											</div>
 											<div class="order-content">
 												<div class="order-left">
-													<ul class="item-list">
+													<ul class="item-list" >
 														<li class="td td-item">
 															<div class="item-pic">
 																<a class="J_MakePoint" href="#">
-																	<img class="itempic J_ItemImg" src="../images/kouhong.jpg_80x80.jpg">
+																	<img class="itempic J_ItemImg" src="http://ozstangaz.bkt.clouddn.com/{{$v->pic}}">
 																</a>
 															</div>
-															<div class="item-info">
-																<div class="item-basic-info">
+															<div class="item-info" >
+																<div class="item-basic-info" >
 																	<a href="#">
-																		<p>美康粉黛醉美唇膏 持久保湿滋润防水不掉色</p>
-																		<p class="info-little">颜色：12#川南玛瑙
-																			<br>包装：裸装 </p>
+																		<p>{{$v->title}}</p>
+																		<br/>	 
+																		<p class="info-little">原因:{{$v->ops}}<br/>
+																			详细 :{{$v->content}}
+																			 </p>
+
 																	</a>
 																</div>
 															</div>
@@ -167,46 +87,77 @@
 
 														<ul class="td-changeorder">
 															<li class="td td-orderprice">
-																<div class="item-orderprice">
-																	<span>交易金额：</span>72.00
+																<div class="item-orderprice" >
+																	<span>交易金额:</span>{{$v->pay_money + $v->pay_yunfei}}
 																</div>
 															</li>
 															<li class="td td-changeprice">
-																<div class="item-changeprice">
-																	<span>退款金额：</span>70.00
+																<div class="item-changeprice" >
+																	<span>退款金额:</span>{{$v->pay_money + $v->pay_yunfei}}
+
 																</div>
 															</li>
-														</ul>
-														<div class="clear"></div>
-													</ul>
 
-													<div class="change move-right">
+														</ul>
+
+														<div class="change move-right">
 														<li class="td td-moneystatus td-status">
 															<div class="item-status">
-																<p class="Mystatus">退款成功</p>
+																<p class="Mystatus" style="color:black">{{$v->username}}</p>
 
 															</div>
 														</li>
 													</div>
+														<div class="clear"></div>
+													</ul>
+
+
 													<li class="td td-change td-changebutton">
-                                                        <a href="record.html">
-														    <div class="am-btn am-btn-danger anniu">
-															钱款去向</div>
-														</a>
+														
+														<div class="item-status">
+																<p class="Mystatus" style="color:#d2364c;">
+																	@if($v->status ==1) 退货成功
+																	@elseif($v->status ==2) 卖家收货成功
+																	@elseif($v->status ==3) 退款成功
+																	@endif
+														</p>
+														 </div>
+													
 													</li>
 
 												</div>
 											</div>
 										</div>
+										@endforeach	
 									</div>
 
 								</div>
+							
 
 							</div>
 
 						</div>
 					</div>
 
-			
+		
+
+			@if(session('thcg'))
+
+			 <script>	
+						layer.confirm('<div style="font-size:15px">退货成功,已经自动为您跳转到退货页面</div>', {
+								btn: ['返回','确定'] //按钮
+								 ,icon: 1
+								,skin: 'layer-ext-moon'
+							   ,title: '<div style="font-size:18px;color:#dd514c;">系统提示</div>'
+								}, function(){
+										location.href="/home/center/order/index";
+								}); 
+				
+			 </script>	
+									
+		@endif		
+							
+
+	
 
 @endsection()

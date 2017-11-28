@@ -120,6 +120,8 @@ Route::group(['middleware'=>'homelogin','prefix'=>'home/center','namespace'=>'ho
 
 	//退换货
 	Route::get('/change/index','ChangeController@index');
+	Route::get('/change/add','ChangeController@add');
+	Route::post('/change/stro','ChangeController@stro');
 
 
 
