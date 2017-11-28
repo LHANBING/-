@@ -160,7 +160,7 @@ class CommentController extends Controller
         //添加消息   买家评论卖家 
         $res1['order_id'] = $id;
         $res1['msg_content'] = "买家评论了您";
-        $res1['send_uid'] = sssion('uid');
+        $res1['send_uid'] = session('uid');
         $res1['receive_uid'] = $or->sale_uid;
 
         $A = Message::create($res1);

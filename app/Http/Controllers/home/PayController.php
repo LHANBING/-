@@ -105,7 +105,7 @@ class PayController extends Controller
          $res1 = DB::table('orders_money')->update(['shouru' => $money+$comein]);
 
         if ($res && $res1) {
-            return redirect('/center/order/index');
+            return redirect('/home/center/order/index');
         } else {
             return back();
         }
