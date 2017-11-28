@@ -146,6 +146,7 @@ Route::group(['middleware'=>'homelogin','prefix'=>'home/center','namespace'=>'ho
 	//消息
 	Route::get('/news/index','NewsController@index');
 	Route::post('/news/add','NewsController@add');
+	Route::post('/news/addm','NewsController@addm');
 	Route::get('/news/readed','NewsController@readed');
 	Route::post('/news/del','NewsController@del');
 	//出售订单
@@ -165,10 +166,12 @@ Route::group(['middleware'=>'homelogin','prefix'=>'home/center','namespace'=>'ho
 	Route::resource('xiugaidata','xiugaidataController');
 
 	//出售二手/订单管理
+	Route::get('maiOrder/wuliu','maiOrderController@wuliu');
+	Route::post('maiOrder/wuliu','maiOrderController@dowuliu');
 	Route::resource('maiOrder','maiOrderController');
+	Route::post('maiOrder/quxiao','maiOrderController@quxiao');
+	Route::post('maiOrder/pingjia','maiOrderController@pingjia');
 	
-	
-
 
 
 });
