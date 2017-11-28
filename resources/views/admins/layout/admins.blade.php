@@ -34,6 +34,11 @@
 <link rel="stylesheet" type="text/css" href="/admins/css/themer.css" media="screen">
 <link rel="stylesheet" type="text/css" href="/admins/css/styles.css" media="screen">
 
+<script type="text/javascript" src="{{url('/homes/layer1/jquery.js')}}"></script>
+<script type="text/javascript" src="{{url('/homes/layer1/layer.js')}}"></script>
+<script type="text/javascript" src="{{url('/homes/layer1/extend/layer.ext.js')}}">
+</script>
+
 <title>@yield('title')</title>
 
 </head>

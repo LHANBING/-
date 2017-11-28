@@ -44,8 +44,8 @@
                                                                                                           支出
                                     
                                     
-
-                                    @if( $sale != false)
+									<!-- 判断 $buy是否为空 -->
+                                    @if( $buy != false)
                                  	<span class="desc ng-binding">
                                            <a href="/home/center/bill/out">查看支出明细</a>
                                          </span>
@@ -66,6 +66,7 @@
 									<!--收入-->
 									<h3 class="expense income-title block-title">
                                                                                                                        收入                                                            	 
+                                    <!-- 判断 $sale是否为空 -->
                                     @if( $sale != false)
                                     <span class="desc ng-binding">
                                            <a href="/home/center/bill/in">查看收入明细</a>

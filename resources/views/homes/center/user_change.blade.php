@@ -52,7 +52,7 @@
 					</form>
 
 					<div class="info-btn">
-							<div class="am-btn am-btn-danger" id="passwordchange">保存修改</div>
+							<div class="am-btn am-btn-danger" id="passwordchange">修改</div>
 						</div>
 
 @endsection()
@@ -60,42 +60,55 @@
 
 @section('js')
 	 <script type="text/javascript">
-	 		var checkoldpassword = $('#oldpassword').val();
-			var checknewpassword = $('#newpassword').val();
-			var checkrelpassword = $('#passwordRepeat').val();
-
+	 	    // // 表单验证旧密码，新密码，确认密码初始值
+	 		var checkoldpassword = false;
+			var checknewpassword = false;
+			var checkrelpassword = false;
+			
+		  // 检测旧密码
 	 	$('#oldpassword').blur(function()
-	 	{
+	 	{	
+	 		//调用checkoldpassword函数检测旧密码
 	 		checkoldpassword = checkOldPassword($(this), $('#oldpasswordmsg'), 6)
 	 	})
 	 	
-         
+         // 检测新密码
 	 	$('#newpassword').blur(function() 
-        {                         
+        {     
+        	//调用checkoldpassword函数检测新密码             
             checknewpassword = checkNewPassword($(this),$('#newpasswordmsg'), 6)
              
         })
 
+	 	// 检测确认密码
         $('#passwordRepeat').blur(function() 
         {       
+        	//调用checkrelpassword函数检测确认密码 
              checkrelpassword = checkRelPassword($('#newpassword'), $(this), $('#confirmpasswordmsg'), 6)
         })
 
+        // 点击修改按钮发送ajax获取验证码
         $('#passwordchange').click(function() 
         {	
+        	// 获取用户输入旧密码的值
         	var Opassword = $('#oldpassword').val();
+        	// 获取用户输入新密码的值
         	var Npassword = $('#newpassword').val();
 
+        	// 判断旧密码，新密码，确认密码输入值是否符合格式
         	if(checkoldpassword ==100 && checknewpassword == 100 && checkrelpassword == 100)
         	{	
+        		// 发送ajax
         		 $.post("{{url('/home/center/info/douser_change')}}",{oldpassword:Opassword,newpassword:Npassword,'_token':'{{csrf_token()}}'},function(data) {
                 	
+                	// 通过判断data的值,得到信息
 	                if(data == '1')
 	                {   
 	                    layer.open({
 	                         
 	                          content: '修改成功！'
 	                        }); 
+
 	                    
 	                }else
 	                {
@@ -104,6 +117,7 @@
 		                      content: '修改失败！'
 		                    }); 
 	                }
+	                
 
                 })
         	}else

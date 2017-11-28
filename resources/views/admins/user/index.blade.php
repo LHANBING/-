@@ -3,6 +3,7 @@
 @section('title','用户列表页面')
 
 @section('content')
+
   @if(session('msg'))
 
     <div class="mws-form-message success">
@@ -34,14 +35,16 @@
                         <option value="10" @if($request->num == '10') selected="selected" @endif>10</option>
                         <option value="15" @if($request->num == '15') selected="selected" @endif>15</option>
                         
-                    </select>条数据</label></div>
+                    </select>条数据</label>
+                </div>
                     <div class="dataTables_filter" id="DataTables_Table_1_filter">
-                        <label>关键字: <input type="text" name="search" aria-controls="DataTables_Table_1" value="{{ $request->search }}"></label>
+                        <label>关键字: <input type="text" name="search" aria-controls="DataTables_Table_1" value="{{ $request->search }}">
+                        </label>
 
                         <button class="btn btn-danger">搜索</button>
                     </div>
 
-	            </div>
+	           
 			</form>
 
             <table class="mws-datatable-fn mws-table dataTable" id="DataTables_Table_1"
@@ -50,22 +53,27 @@
                     <tr role="row">
                         <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
-                        style="width: 191px;">
+                        style="width: 100px;">
                             ID
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
-                        style="width: 200px;">
+                        style="width: 100px;">
                             用户名
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending"
-                        style="width: 180px;">
+                        style="width: 100px;">
+                            qq
+                        </th>
+                        <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
+                        rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending"
+                        style="width: 100px;">
                             邮箱
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending"
-                        style="width: 166.193px;">
+                        style="width: 100px;">
                             手机号
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
@@ -76,11 +84,16 @@
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
                         style="width: 100px;">
+                            余额
+                        </th>
+                        <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
+                        rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
+                        style="width: 100px;">
                             状态
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
-                        style="width: 200px;">
+                        style="width: 100px;">
                             操作
                         </th>
                     </tr>
@@ -96,6 +109,9 @@
                          <td class="" style="text-align:center;">
                            {{$v->username}}
                         </td>
+                        <td class="" style="text-align:center;">
+                           {{$v->qq}}
+                        </td>
                          <td class="" style="text-align:center;">
                            {{$v->email}}
                         </td>
@@ -103,8 +119,11 @@
                            {{$v->tel}}
                         </td>
                          <td class="" style="text-align:center;">
-                         	<img src="{{$v->user_photo}}" width="50%" alt="">
+                         	<img src="http://ozstangaz.bkt.clouddn.com/userphoto/{{$v->user_photo}}" width="50%" alt="">
                         </td> 
+                         <td class="" style="text-align:center;">
+                           {{$v->money}}
+                        </td>
                         @if( $v->status > 3)
                          <td class="" style="text-align:center;">
                          	<a href="/admin/user/status/{{$v->status}}/{{$v->id}}"><button class="btn btn-info"> 开启</button></a>
@@ -116,12 +135,13 @@
                          </td>      
                         @endif
                         <td class="" style="text-align:center;">
-                           <form action="/admin/user/{{$v->id}}" method="post" style="display: inline;">
+                           <!-- <form action="/admin/user/{{$v->id}}" method="post" style="display: inline;">
                              
                              {{ csrf_field() }}
-                             {{ method_field('DELETE') }}
-                             <button class="btn btn-warning">删除</button>  
-                           </form>
+                             {{ method_field('DELETE') }} -->
+
+                             <input type="submit" id="{{$v->id}}" value="删除" class="btn btn-warning">
+                           <!-- </form> -->
                         </td>
 
                     </tr>
@@ -173,23 +193,54 @@
             } 
 
         </style>
-         <div class="dataTables_paginate paging_full_numbers" id="DataTables_Table_1_paginate">
-          
-                
-            {!! $res->appends($request->all())->render() !!}
-        
-        
-            </div>
+       <div class="dataTables_paginate paging_full_numbers" id="DataTables_Table_1_paginate">         
+               
+          {!! $res->appends($request->all())->render() !!}
+         
+           </div>
         </div>
     </div>
 </div>
 
 @endsection()
 
-@section('js')
-
+@section('js') 
     <script type="text/javascript">
         $('.mws-form-message').delay(3000).slideUp(1000);
+
+        // 点击删除按钮触发ajax
+        $('input[type=submit]').click(function(){
+            // 获取要删除的id值
+            var id = $(this).attr('id');
+
+            layer.confirm('确定删除？', {
+                          btn: ['是', '否'] 
+                          ,btn1: function(index, layero){
+                            // 发送ajax
+                            $.post('/admin/user/delete',{id:id,'_token':'{{ csrf_token() }}'},function(data){
+
+                                // 通过判断data的值,得到信息
+                                if(data)
+                                {
+                                    layer.open({
+                                        content:'删除成功！'
+                                    })
+                                    location.reload();
+                                }else
+                                {
+                                   layer.open({
+                                        content:'删除失败！'
+                                    }) 
+                                }
+                            });
+                          }
+                      })
+
+         // 消除默认设置
+          return false;
+        })
+
+
     </script>
 
 @endsection

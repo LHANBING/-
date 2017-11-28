@@ -31,7 +31,10 @@ Route::group(['middleware'=>'adminlogin','prefix'=>'admin','namespace'=>'admins'
 
 	//用户
 	Route::resource('/user','UserController');
+    // 用户的状态改变
 	Route::get('/user/status/{status}/{id}','UserController@status');
+	// 用户的删除
+	Route::post('/user/delete','UserController@delete');
 
 	//管理员用户列表
 	Route::resource('/manager','ManagerController');
@@ -92,21 +95,24 @@ Route::group(['middleware'=>'homelogin','prefix'=>'home/center','namespace'=>'ho
 	//个人信息页面
 	Route::get('/info/index','InfoController@index');
 
-	// 修改个人资料页面
+	// 进入修改个人资料页面
 	Route::get('/info/edit','InfoController@edit');
-	
+	// 修改个人资料
 	Route::post('/info/doedit','InfoController@doedit');
 	// 修改头像
 	Route::post('/info/douserphoto','InfoController@douserphoto');
 
-	// 修改密码
+	// 进入修改密码页面
 	Route::get('/info/user_change','InfoController@user_change');
+	//修改密码
 	Route::post('/info/douser_change','InfoController@douser_change');
 
 
-	//地址管理
+	//删除收货地址
 	Route::post('/address/delete','AddressController@delete');
+	//处理修改收货地址
 	Route::post('/address/edit','AddressController@editself');
+	//收货地址管理
 	Route::resource('/address','AddressController');
 	
 
@@ -121,15 +127,16 @@ Route::group(['middleware'=>'homelogin','prefix'=>'home/center','namespace'=>'ho
 	//退换货
 	Route::get('/change/index','ChangeController@index');
 
-
-
-	//充值
+	//进入充值页面
 	Route::get('/recharge/index','RechargeController@index');
+	//处理充值   
 	Route::post('/dorecharge','RechargeController@dorecharge');
 	
-	//账单
+	//进入账单明细页面
 	Route::get('/bill/index','BillController@index');
+	//进入收入页面
 	Route::get('/bill/in','BillController@in');
+	//进入支出页面
 	Route::get('/bill/out','BillController@out');
 
 

@@ -81,7 +81,7 @@
 
 @section('js')
 <script type="text/javascript">
-          // 表单验证手机号，验证码，密码，确认密码初始值
+          // 手机号，验证码，密码，确认密码进行判断的初始值
           var checktel = false;
           var checkverifyCode = false;
           var checkpassword = false;
