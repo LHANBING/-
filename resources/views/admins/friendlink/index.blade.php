@@ -64,6 +64,11 @@
 
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" style="width: 100px;" aria-label="CSS grade: activate to sort column ascending">
+                            状态
+                        </th>
+
+                        <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
+                        rowspan="1" colspan="1" style="width: 100px;" aria-label="CSS grade: activate to sort column ascending">
                             操作
                         </th>
                     </tr>
@@ -92,6 +97,19 @@
                         <td class=" ">
                             <img src="{{$v->logo}}" alt="" style="width:60px">
                         </td>
+
+
+                        @if( $v->status == 1)
+                         <td class="" style="text-align:center;">
+                            <span class="btn btn-info open" onclick="checklink({{$v->id}},{{$v->status}})"> 开启</span>
+                         </td>
+                        
+                         @else
+                         <td class="" style="text-align:center;">      
+                             <span class="btn btn-info close" onclick="checklink({{$v->id}},{{$v->status}})">关闭</span>     
+                         </td>      
+                        @endif
+
                         
                         <td class=" ">
                             <a href="/admin/friendlink/{{$v->id}}/edit" class="btn btn-danger">修改</a>
@@ -104,6 +122,8 @@
                             </form>
 
                         </td>
+
+                       
 
                     </tr>
                     @endforeach
@@ -173,5 +193,36 @@
 <script>
 
     $('.mws-form-message').delay(3000).slideUp(1000);
+
+
+    function checklink(id,status){
+            
+        $.post('/admin/status/',{'_token':'{{csrf_token()}}',id:id,status:status},function(data){
+            
+            if(data == 1)
+            {
+                alert('开启成功！');
+
+                location.reload();
+                // layer.alert({})
+            } else
+            {
+                alert('修改成功！');
+            }  
+
+            // alert(data);
+            // if (data == 1) {
+            //     alert(ok);
+            //     $('.open').val('关闭');
+               
+            // }else if(data == 2){
+            //     alert(0);
+            //     $('.open').val('开启');
+            // }else{
+            //     alert(失败);
+            // }
+        });
+    }    
 </script>
+
 @endsection

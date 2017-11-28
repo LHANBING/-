@@ -69,8 +69,16 @@
 									    </div>
 									</div>
 									</div>
-									
+								<div class="mws-form-row">
+                                	<label class="mws-form-label">广告链接:</label>
+                                	<div class="mws-form-item">
+                                    	<input type="text" class="required url large" name="advs_src" value="{{old('advs_src')}}">
+                                </div>
+</div>								
 </div>
+
+
+
 <div class="mws-button-row">
 
 	{{ csrf_field() }}

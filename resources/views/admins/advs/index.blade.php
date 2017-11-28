@@ -63,6 +63,16 @@
 
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" style="width: 100px;" aria-label="CSS grade: activate to sort column ascending">
+                            产品链接
+                        </th>
+
+                        <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
+                        rowspan="1" colspan="1" style="width: 100px;" aria-label="CSS grade: activate to sort column ascending">
+                            状态
+                        </th>
+
+                        <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
+                        rowspan="1" colspan="1" style="width: 100px;" aria-label="CSS grade: activate to sort column ascending">
                             操作
                         </th>
                     </tr>
@@ -91,6 +101,21 @@
                         <td class=" ">
                             <img src="{{$v->advs_s}}" alt="" style="width:60px">
                         </td>
+
+                        <td class=" ">
+                            <a href="">{{$v->advs_src}}</a>
+                        </td>
+
+                        @if( $v->status == 1)
+                         <td class="" style="text-align:center;">
+                            <span class="btn btn-info open" onclick="checkadvs({{$v->id}},{{$v->status}})"> 开启</span>
+                         </td>
+                        
+                         @else
+                         <td class="" style="text-align:center;">      
+                             <span class="btn btn-info close" onclick="checkadvs({{$v->id}},{{$v->status}})">关闭</span>     
+                         </td>      
+                        @endif
                         
                         <td class=" ">
                             <a href="/admin/advs/{{$v->id}}/edit" class="btn btn-danger">修改</a>
@@ -172,5 +197,23 @@
 <script>
 
     $('.mws-form-message').delay(3000).slideUp(1000);
+
+    function checkadvs(id,status){
+            
+        $.post('/admin/statu/',{'_token':'{{csrf_token()}}',id:id,status:status},function(data){
+            
+            if(data == 1)
+            {
+                alert('修改成功！');
+
+                location.reload();
+                // layer.alert({})
+            } else
+            {
+                alert('修改失败！');
+            }  
+
+        });
+    }    
 </script>
 @endsection

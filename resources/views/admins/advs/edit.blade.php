@@ -53,11 +53,20 @@
                                     	<input type="text" class="required url large" name="advs_v" value="{{$res->advs_v}}">
                                     </div>
                                 </div>
+
+
+                                <div class="mws-form-row">
+                                    <label class="mws-form-label">产品链接:</label>
+                                    <div class="mws-form-item">
+                                        <input type="text" class="required url large" name="advs_src" value="{{$res->advs_src}}">
+                                    </div>
+</div>
                             	
                                 
 									
 </div>
-<div class="mws-button-row">
+
+
 
 	{{ csrf_field() }}
 	{{method_field('PUT')}}

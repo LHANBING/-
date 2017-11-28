@@ -8,7 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use DB;
-
+use App\Http\Model\Adv;
 class AdvsController extends Controller
 {
     /**
@@ -171,5 +171,38 @@ class AdvsController extends Controller
             }
         }
         
+    }
+
+    public function status(Request $request)
+    {  
+        //获取传过来的id和status
+        $id = $request->input('id');
+        $status = $request->input('status');
+
+        //做判断，判断status传过来的值是不是等于1
+        if($status == 1)
+        {
+            //从数据库取出来值id进行处理，如果取出来的值等于1，更改status变成0
+            $info = Adv::where('id',$id)->update(['status'=>0]);
+                if($info)
+                {
+                    return 1;
+                }else
+                {
+                    return 0;
+                }
+        }else
+        {
+            $info = Adv::where('id',$id)->update(['status'=>1]);
+
+                if($info)
+                    {
+                        return 1;
+                    }else
+                    {
+                        return 0;
+                    }
+        }  
+
     }
 }
