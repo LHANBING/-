@@ -81,7 +81,33 @@
 			checkPassword($(this),$('#passwordmsg'), 6);
 	 
 		})
-  
+        
+        // $('#submit').click(function() {
+
+        //     var tel = $('#phone').val(); 
+        //     var password = $('#password').val();
+
+        //     $.post('/home/login',{tel:tel,password:password,'_token':"{{ csrf_token() }}"},function(data){
+
+        //         if(data)
+        //         {
+        //             layer.open({
+
+        //                 content:'登录成功！'
+        //             });
+                    
+        //          window.location.href ='/';
+        //         }else
+        //         {
+        //            layer.open({
+        //                 content:'手机号或密码错误，请重新登录。！'
+        //             });
+        //           location.reload(true);   
+        //         }
+        //     })
+
+        //     return false;
+        // })
 	</script>
 
 @endsection

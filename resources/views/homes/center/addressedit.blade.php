@@ -162,15 +162,17 @@
 
 @section('js')
 	 <script type="text/javascript">
-
+	 	    // 用户名，手机号，详细地址进行判断的初始值
 	 		var username = false;
 	 		var userphone = false;
 	 		var userintro = false;
 
+			// 失去焦点时，对用户名进行判断
 	 		$('#user-name').blur(function(){
-
+	 			// 判断用户名是否为空
 	 			 username = isNull($(this).val());
 
+	 			 //对username进行判断 
 	 			 if(username !=false)
 	 			 {
 	 			 	username = true;
@@ -182,17 +184,21 @@
 	 			 }
 	 		})
 	 		
+			// 失去焦点时，对手机号进行判断
 	 		$('#user-phone').blur(function() {
-
+	 			//调用checkTel函数检测手机号
 	 			 userphone = checkTel($(this),$('#userphonemsg'));
 
 	 		})
 
+	 		
 
-	 		$('#user-intro').blur(function(){
-
+	 		// 失去焦点时，对详细地址进行判断
+	 		$('#user-intro').blur(function()
+	 		{
+	 			// 判断用户名是否为空
 	 			 userintro = isNull($(this).val());
-
+	 			 //对userintro进行判断
 	 			 if(userintro !=false)
 	 			 {
 	 			 	userintro = true;
@@ -203,28 +209,35 @@
 
 	 			 }
 	 		})
- 	
+ 			
+ 			//点击修改按钮触发点击事件 
  	 		$('button').click(function(){
 
+ 	 			// 获取修改地址的id
 	  		  var id = $(this).attr('id');
-
+	  		  //获取省的值
 	 	 	  var province = $('#province').val();
+	 	 	  // 获取市的值
 	 	 	  var city = $('#city').val();
+	 	 	  // 获取县的值
 	 	 	  var area = $('#area').val();
-
+			// 获取详细的值
 	 	 	  var address = $('#user-intro').val();
+	 	 	  // 获取收货电话的值
 	 	 	  var address_tel = $('#user-phone').val();
+	 	 	  // 获取收货人的值
 	 	 	  var addressname = $('#user-name').val();
+	 	 	  // 是否设置为默认
 	 	 	  var status = $('#status').val();
-
+	 	 	  // 发送ajax
 			  $.post("/home/center/address/edit",{id:id,province:province,city:city,area:area,address:address,address_tel:address_tel,addressname:addressname,status:status,"_token":"{{ csrf_token() }}"},function(data){
-			  	   
+			  	   // 通过判断data的值,得到信息
 			  		if(data == 1)
 			  		{
 			  			layer.open({
 						  content:'修改成功！'
 						})
-						
+						location.href ='/home/center/address';					
 			  		}else
 			  		{
 			  			layer.open({

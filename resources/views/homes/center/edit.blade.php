@@ -91,6 +91,7 @@
 										<form name="form1" id="form1">
 	                                 <label for="user-email" class="am-form-label">头像：</label>
 									<img  id="photo" class="am-circle am-img-thumbnail" src="http://ozstangaz.bkt.clouddn.com/userphoto/{{$res->user_photo}}" alt="" style="margin-left: 70px;margin-top:-40px " />
+									
 										<div class="info-btn">
 											{{ csrf_field() }}
 											
@@ -155,7 +156,7 @@
  	    	// 判断qq的值是否为空
  	    	if(qq != false)
  	    	{	
-			//输入框中输入的是否为数字 false 为数字
+			//输入框中输入的是否为数字 false 为数字 
  	    		 if(isNaN(qq) == false) 
  	    		 {		
  	    		 	  // 初始化
@@ -313,7 +314,7 @@
                                       
                                     },
                                     error: function(XMLHttpRequest, textStatus, errorThrown) {
-                                    	
+
                                         layer.alert("上传失败，请检查网络后重试",{icon: 5});
                                     }
                                 });

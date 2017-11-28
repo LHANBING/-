@@ -24,7 +24,9 @@
 						</div>
 						<hr/>
 						<ul class="am-avg-sm-1 am-avg-md-3 am-thumbnails">
+						<!--判断传递过来的数组是否为空  -->
 						@if(empty($res) == false)
+						<!-- 对数组进行遍历 -->
 		                  @foreach($res as $k => $v)
 							<li class="user-addresslist defaultAddr">
 								@if($v->status == 1)
@@ -38,6 +40,7 @@
 									<p class="new-mu_l2cw">
 										<span class="title">地址：</span>
 										<span class="province">{{ $v->province }}</span>
+										<!-- 判断city是否为空 -->
 									   @if($v->city != false)
 										<span class="city">{{ $v->city }}</span>
 									   @endif
@@ -185,15 +188,16 @@
 
 @section('js')
 	 <script type="text/javascript">
-
+	 		 // 用户名，手机号，详细地址进行判断的初始值
 	 		var username = false;
 	 		var userphone = false;
 	 		var userintro = false;
-
+	 		// 失去焦点时，对用户名进行判断
 	 		$('#user-name').blur(function(){
-
+	 			 // 判断用户名是否为空
 	 			 username = isNull($(this).val());
 
+	 			 //对username进行判断 
 	 			 if(username !=false)
 	 			 {
 	 			 	username = true;
@@ -204,18 +208,19 @@
 	 			 	$('#usernamemsg').text('收货人不能为空！');
 	 			 }
 	 		})
-	 		
+	 		// 失去焦点时，对手机号进行判断
 	 		$('#user-phone').blur(function() {
-
+	 			//调用checkTel函数检测手机号
 	 			 userphone = checkTel($(this),$('#userphonemsg'));
 
 	 		})
 
-
+	 		// 失去焦点时，对详细地址进行判断
 	 		$('#user-intro').blur(function(){
-
+	 			// 判断用户名是否为空
 	 			 userintro = isNull($(this).val());
 
+	 			 //对userintro进行判断
 	 			 if(userintro !=false)
 	 			 {
 	 			 	userintro = true;
@@ -227,26 +232,32 @@
 	 			 }
 	 		})
 			
+			// 点击添加按钮触发点击事件
 	 	 function address()
-	 	 {	
+	 	 {		//获取省的值
 	 	 	  var province = $('#province').val();
+	 	 	  // 获取市的值
 	 	 	  var city = $('#city').val();
+	 	 	  // 获取县的值
 	 	 	  var area = $('#area').val();
-
+	 	 	  // 获取详细的值
 	 	 	  var address = $('#user-intro').val();
+	 	 	  // 获取收货电话的值
 	 	 	  var address_tel = $('#user-phone').val();
+	 	 	  // 获取收货人的值
 	 	 	  var addressname = $('#user-name').val();
 	 	 	  
-
+	 	 	  // 判断收货人，手机号码，详细地址输入值是否符合格式
 			  if( username == true && userphone == 100 && userintro==true)
-			  {
+			  {		
+			  	  // 发送ajax
 				  $.post("{{url('/home/center/address')}}",{province:province,city:city,area:area,address:address,address_tel:address_tel,addressname:addressname},function(data){
-				  	  console.log(data);
+				  	 	// 通过判断data的值,得到信息
 				  		if(data == 1)
 				  		{
 				  			layer.open({
-							  content:'添加成功！'
-							});
+							  content:'添加成功'
+							});							
 							location.reload();
 				  		}else
 				  		{
@@ -265,13 +276,17 @@
               }
 	 	 }
 
+	 	 // 点击删除按钮触发点击事件
 	 	 function delClick($id)
-	 	 {		var id = $id;
+	 	 {	   	var id = $id;
+	 	 		// 发送ajax的值
 	 	 		$.post("/home/center/address/delete",{id:id,"_token":"{{ csrf_token() }}"},function(data){
 
+	 	 			// 通过判断data的值,得到信息
 	 	 			if(data == 1)
-	 	 			{
-	 	 				layer.open({
+	 	 			{	
+
+	 	 						layer.open({
 							  content:'删除成功！'
 							});
 							location.reload();

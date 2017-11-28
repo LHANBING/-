@@ -21,14 +21,15 @@
 					<hr>
 
 					<!--交易时间	-->
-
+	                @if($sale)
 					<div class="order-time">
 						<label class="form-label">收入金额：</label>
-						<label class="form-label">  元</label>
-						
+					
+						<label class="form-label">{{ $sum }}  元</label>
+					
                           <div class="clear"></div>
 					</div>
-
+					
 					<table width="100%">
 
 						<thead>
@@ -40,36 +41,72 @@
 								<th class="action">操作</th>
 							</tr>
 						</thead>
-
+						
 						<tbody>
+							@foreach($sale as $k => $v)
 							<tr>
 								<td class="img">
-									<i><img src="/homes/images/songzi.jpg"></i>
+									<i><img src="http://ozstangaz.bkt.clouddn.com/good/{{$v->goods_photo}}"></i>
 								</td>
 								<td class="time">
-									<p> 2016-01-28
-									</p>
-									<p class="text-muted"> 10:58
+									
+									<p class="text-muted"> {{ $v->pay_time }}
 									</p>
 								</td>
 								<td class="title name">
 									<p class="content">
-										良品铺子精选松子，即开即食全国包邮
+										{{ $v->title}}
 									</p>
 								</td>
 
 								<td class="amount">
-									<span class="amount-pay">- 11.90</span>
+									<span class="amount-pay">{{ $v->pay_money }}</span>
 								</td>
+								
+								 @if($v->sale_order_status == 4)
 								<td class="operation">
-									<button class="am-btn am-btn-danger" id="delete" >删除</button>
+									已收货	
+								</td>
+								 @elseif($v->sale_order_status == 5)
+								 <td class="operation">
+									已评价
+								</td>
+								@else
+								<td class="operation">
 									
 								</td>
+								@endif
 							</tr>
-							
-							
+							 @endforeach
+						 </tbody>
+						 </table>
+						
+						 @else
+						 <div class="order-time">
+							<label class="form-label">收入金额：</label>
+						
+							<label class="form-label">{{ $sum }}  元</label>
+						
+	                          <div class="clear"></div>
+						</div>
+	                     <table width="100%">
+
+						<thead>
+							<tr>
+								<th class="memo"></th>
+								<th class="time">创建时间</th>
+								<th class="name">名称</th>
+								<th class="amount">金额</th>
+								<th class="action">操作</th>
+							</tr>
+						</thead>
+						<tbody>
 						</tbody>
-					</table>			
+						 </table>
+						@endif
+
+						
+								
 					
 				
 			

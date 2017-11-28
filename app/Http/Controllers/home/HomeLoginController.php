@@ -34,8 +34,7 @@ class HomeLoginController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   
-         
+    {    
     	 // 获取用户名
         $username = $request->input('username');
 
@@ -51,13 +50,22 @@ class HomeLoginController extends Controller
             $request->session()->put('uid', $users->id);
             $request->session()->put('uname', $users->username);
             $request->session()->put('uphoto', $users->user_photo);
-
+            
             // 跳转至首页
-            return redirect('/');
+            // return ('/');
+            echo"<script>alert('登录成功！');window.location.href='/'</script>";
+            
+
+            // 返回ajax的值
+             // return  1;
         } else {
 
             // 返回登录页(带提示信息）
-        return redirect('/home/login')->with('status', '手机号或密码错误，请重新登录。');
+             return redirect('/home/login')->with('status', '手机号或密码错误，请重新登录。');
+            
+            // 返回ajax的值
+            // return 0;
+       
         }
          
     }

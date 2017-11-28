@@ -56,8 +56,10 @@
 @endsection()
 
 @section('js')
+
 		<script type="text/javascript">
-					  
+
+					 // 选择充值按钮能进行选择面值充值
 				   $('input[type=button]').click(function() {
 				   	    
 				   	    var rechargemoney = $(this).val();
@@ -66,31 +68,30 @@
 				   })  
 					
 
-				
+				// 点击充值按钮进行充值
 				$('#recharge').click(function(){
+					// 获取充值金额的值
 					var money = $('#money').val();
- 
-					if( !isNaN(money) && money != false){	
-					  layer.confirm('是否充值？', {
+ 					  // 判断充值的值是否为数字，是否为空
+					if( !isNaN(money) && money != false){
+					  	//弹框询问用户是否确定充值 
+					  layer.confirm('确定充值？', {
 						  btn: ['是', '否'] 
 						  ,btn1: function(index, layero){
+						  	// 发送ajax
 						  	$.post("{{ url('/home/center/dorecharge') }}",{'_token':'{{csrf_token()}}',money:money},function(data){
-
+						  		// 通过判断data的值,得到信息
 						  		if(data)
 						  		{
 						  			layer.open({
-
 									 content: '充值成功！'
 									});
-
 									$('#money').val('');
 						  		}else
 						  		{
 						  			layer.open({
-
 									 content: '充值失败，请重新尝试！'
 									});
-
 								    $('#money').val('');
 						  		}
 
@@ -101,7 +102,6 @@
 					  }else
 						{
 							layer.open({
-
 							 content: '请填写充值金额！'
 							});
 						}
