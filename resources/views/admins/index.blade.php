@@ -4,12 +4,18 @@
 
 @section('content')
 
-<div id="dvs"></div>
+
+  <span id="dvs"></span>
 
 @endsection()
 
 
 @section('js')
+<style> 
+#dvs1{
+    float: right;
+}
+</style>
     
      <script type="text/javascript">
             var dvs = document.getElementById('dvs');
@@ -74,7 +80,7 @@
                 break;
 
             }
-            dvs.innerHTML = y+'-'+m+'-'+t+' '+h+':'+i+':'+s+' '+w ; 
+            dvs.innerHTML = '现在时间 : '+y+'-'+m+'-'+t+' '+h+':'+i+':'+s+' '+w ; 
             },1000)
         </script>
 

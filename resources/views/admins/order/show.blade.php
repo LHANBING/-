@@ -30,27 +30,30 @@
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
                         style="width: 120px;">
-                            买家
+                            评论人
                         </th>
-                        <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                        rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending"
-                        style="width: 120px;">
-                            卖家
-                        </th>
+                       
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending"
                         style="width: 100px;">
                             商品
                         </th>
+
+                        <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
+                        rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending"
+                        style="width: 100px;">
+                           评论时间
+                        </th>
+
                        
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
-                        style="width: 120px;">
+                        style="width: 150px;">
                             订单号
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
-                        style="width: 180px;">
+                        style="width: 200px;">
                            评论内容
                         </th>
                     
@@ -59,33 +62,76 @@
                 <tbody role="alert" aria-live="polite" aria-relevant="all">
 					
                    
-					
+					@foreach ($res as $k =>$v)
                     
+                    @if($v->b_id == $v->buy_uid)
+
                     <tr class="" style="height: 90px">
                         <td class="">
-                         {{$res->id}}
+                         {{$v->id}}
                         </td>
                           
                          <td class="">
-                            {{$res->username}}
+                            {{$v->username}}&nbsp;(买家)
                         </td>
                        
                          <td class="">
-                         {{$res1->username}}
-                        </td>
-                         <td class="">
-                         	{{$res->title}}
+                         	{{$v->title}}
                            
                         </td>
+
                         <td class="">
-                          {{$res->order_num}}
+                            {{$v->created_at}}
+                           
                         </td>
+
+                        <td class="">
+                          {{$v->order_num}}
+                        </td>
+
                          <td class="">
-                           {{$res->comment}}
+                           {{$v->comment}}
                             
                         </td>
                     </tr>
 
+                    @endif
+                 @endforeach 
+
+
+                    @foreach ($res1 as $k =>$v)
+                    
+                    @if($v->b_id == $v->sale_uid)
+
+                    <tr class="" style="height: 90px">
+                        <td class="">
+                         {{$v->id}}
+                        </td>
+                          
+                         <td class="">
+                            {{$v->username}}&nbsp;(卖家)
+                        </td>
+                       
+                         <td class="">
+                            {{$v->title}}
+                           
+                        </td>
+                        
+                        <td class="">
+                            {{$v->created_at}}
+                           
+                        </td>
+                        <td class="">
+                          {{$v->order_num}}
+                        </td>
+                         <td class="">
+                           {{$v->comment}}
+                            
+                        </td>
+                    </tr>
+
+                    @endif
+                 @endforeach     
                 
                   
                     

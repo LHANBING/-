@@ -104,7 +104,7 @@
 										<div class="order-list" id="all{{$v->id}}">
 											<div class="order-title">
 												<div class="dd-num">买家：<a href="javascript:;">{{$v->username}}</a></div>
-												<span>时间：11:11{{$v->created_at}}</span>
+												<span>时间：{{$v->created_at}}</span>
 											
 											</div>
 											<div class="order-content">
@@ -113,7 +113,7 @@
 														<li class="td td-item">
 															<div class="item-pic">
 															
-																	<img src="" class="itempic J_ItemImg" src="http://ozstangaz.bkt.clouddn.com/{{$v->pic}}">
+																	<img class="itempic J_ItemImg" src="http://ozstangaz.bkt.clouddn.com/{{$v->pic}}">
 																
 															</div>
 															<div class="item-info">
