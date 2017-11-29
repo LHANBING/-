@@ -41,30 +41,33 @@
                 <thead>
                     <tr role="row">
                         <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                        rowspan="1" colspan="1" style="width: 80px;" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">
+                        rowspan="1" colspan="1" style="width: 100px;" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">
                             ID
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                        rowspan="1" colspan="1" style="width: 120px;" aria-label="Browser: activate to sort column ascending">
+                        rowspan="1" colspan="1" style="width: 100px;" aria-label="Browser: activate to sort column ascending">
                             商家
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                        rowspan="1" colspan="1" style="width: 120px;" aria-label="Platform(s): activate to sort column ascending">
+                        rowspan="1" colspan="1" style="width: 100px;" aria-label="Platform(s): activate to sort column ascending">
                             产品
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                        rowspan="1" colspan="1" style="width: 188px;" aria-label="Engine version: activate to sort column ascending">
+                        rowspan="1" colspan="1" style="width: 100px;" aria-label="Engine version: activate to sort column ascending">
                             产品详情
-                        </th>
-                        <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                        rowspan="1" colspan="1" style="width: 100px;" aria-label="CSS grade: activate to sort column ascending">
-                            产品图片
                         </th>
 
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" style="width: 100px;" aria-label="CSS grade: activate to sort column ascending">
                             产品链接
                         </th>
+
+                        <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
+                        rowspan="1" colspan="1" style="width: 100px;" aria-label="CSS grade: activate to sort column ascending">
+                            产品图片
+                        </th>
+
+                        
 
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" style="width: 100px;" aria-label="CSS grade: activate to sort column ascending">
@@ -97,14 +100,16 @@
                         <td class=" ">
                             {{$v->advs_v}}
                         </td>
-
-                        <td class=" ">
-                            <img src="{{$v->advs_s}}" alt="" style="width:60px">
-                        </td>
-
+                        
                         <td class=" ">
                             <a href="">{{$v->advs_src}}</a>
                         </td>
+
+                        <td class=" ">
+                            <img src="http://ozstangaz.bkt.clouddn.com/{{$v->advs_s}}" alt="" style="width:60px">
+                        </td>
+
+                        
 
                         @if( $v->status == 1)
                          <td class="" style="text-align:center;">
@@ -120,12 +125,12 @@
                         <td class=" ">
                             <a href="/admin/advs/{{$v->id}}/edit" class="btn btn-danger">修改</a>
                             
-                            <form action="/admin/advs/{{$v->id}}"
-                                method="post" style="display: inline">
-                                {{csrf_field()}}
-                                {{method_field('DELETE')}}
-                                <button class='btn btn-warning'>删除</button>
-                            </form>
+                            
+                              
+                                
+                                <!-- <button class='btn btn-warning'>删除</button> -->
+                            
+                            <span class="btn btn-warning" onclick="checkdelete({{$v->id}})">删除</span>
 
                         </td>
 
@@ -200,7 +205,7 @@
 
     function checkadvs(id,status){
             
-        $.post('/admin/statu/',{'_token':'{{csrf_token()}}',id:id,status:status},function(data){
+        $.post('/admin/advs/statu/',{'_token':'{{csrf_token()}}',id:id,status:status},function(data){
             
             if(data == 1)
             {
@@ -214,6 +219,33 @@
             }  
 
         });
-    }    
+    } 
+
+    // 点击删除按钮触发ajax
+        function checkdelete(id){
+
+            layer.confirm('确定删除？', {
+                          btn: ['是', '否'] 
+                          ,btn1: function(index, layero){
+                            // 发送ajax
+                            $.post('/admin/advs/delete',{id:id,'_token':'{{ csrf_token() }}'},function(data){
+                               
+                                // 通过判断data的值,得到信息
+                                if(data)
+                                {
+                                    layer.open({
+                                        content:'删除成功！'
+                                    })
+                                    location.reload();
+                                }else
+                                {
+                                   layer.open({
+                                        content:'删除失败！'
+                                    }) 
+                                }
+                            });
+                          }
+                      })  
+        }
 </script>
 @endsection

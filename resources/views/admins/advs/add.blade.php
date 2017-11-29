@@ -54,6 +54,13 @@
                                     </div>
                                 </div>
                             	
+				                <div class="mws-form-row">
+                                	<label class="mws-form-label">广告链接:</label>
+                                	<div class="mws-form-item">
+                                    	<input type="text" class="required url large" name="advs_src" value="{{old('advs_src')}}">
+                                </div>
+							</div>
+
                                 <div class="mws-form-row">
 									<label class="mws-form-label">
 									    广告图片
@@ -69,12 +76,7 @@
 									    </div>
 									</div>
 									</div>
-								<div class="mws-form-row">
-                                	<label class="mws-form-label">广告链接:</label>
-                                	<div class="mws-form-item">
-                                    	<input type="text" class="required url large" name="advs_src" value="{{old('advs_src')}}">
-                                </div>
-</div>								
+																
 </div>
 
 
@@ -82,8 +84,8 @@
 <div class="mws-button-row">
 
 	{{ csrf_field() }}
-    <input type="submit" value='提交' class="btn btn-danger">
-    <input type="reset" class="btn btn-danger">
+    <input type="submit" value='添加' class="btn btn-danger">
+    
 	
 </div>
 </form>

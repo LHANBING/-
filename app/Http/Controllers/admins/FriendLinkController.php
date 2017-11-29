@@ -10,6 +10,8 @@ use App\Http\Controllers\Controller;
 use DB;
 use App\Http\Model\Friendlink;
 
+use zgldh\QiniuStorage\QiniuStorage;
+
 class FriendLinkController extends Controller
 {
     /**
@@ -47,52 +49,46 @@ class FriendLinkController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
         //表单验证
         $this->validate($request, [
-        'friend_title' => 'required',
-        
-        'des' => 'required'
-       
+        'friend_title' => 'required',       
+        'adr' => 'required',       
+        'des' => 'required',      
+        'logo' => 'required'       
     ],[
-
-        'friend_title.required'=>'友情链接名称不能为空！',
-        
-
-        'des.required'=>'友情链接描述不能为空！',
-        
-
+        'friend_title.required'=>'友情链接名称不能为空！',       
+        'adr.required'=>'友情链接地址不能为空！',       
+        'des.required'=>'友情链接描述不能为空！',       
+        'logo.required'=>'友情链接Logo不能为空！',       
     ]);
+        //剔除'_token','logo'
+        $res = $request->except('_token','logo');      
 
         //文件上传
-        if($request->hasFile('logo')){
-            //修改名字
-            $name = rand(1111,9999).time();
+        if($request->hasFile('logo'))
+        {
+            //获取文件
+            $file=$request->file('logo');
+            //初始化七牛
+            $disk=QiniuStorage::disk('qiniu');
+            //重命名文件名
+            $name=md5(rand(1111,9999).time()).'.'.$file->getClientOriginalExtension();
+            //上传到文件到七牛
+            $bool=$disk->put('friendlink/'.$name,file_get_contents($file->getRealPath()));
 
-            //修改后缀
-            $suffix = $request->file('logo')->getClientOriginalExtension();
-
-            //移动图片
-            $request->file('logo')->move('./Uploads',$name.'.'.$suffix);
-
-
+            $res['logo'] = $name;
         }
 
-       $res = $request->except('_token','logo');
-
-        
-       $res['logo'] = '/Uploads/'.$name.'.'.$suffix;
-       
-     
-
-       $data = DB::table('friendlink')->insert($res);
+        // 链接数据库
+       $data = Friendlink::insert($res);
 
        if($data){
 
         return redirect('/admin/friendlink')->with('msg','添加成功！');
        } else {
 
-        return back()->withInput();
+        return back()->withInput($request->except('_token','logo'));
        }
 
     }
@@ -130,9 +126,21 @@ class FriendLinkController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //
-        //echo $id;
+    {   
+
+
+      //验证
+       $this->validate($request, [
+        'friend_title' => 'required',       
+        'adr' => 'required',       
+        'des' => 'required',          
+    ],[
+        'friend_title.required'=>'友情链接名称不能为空！',       
+        'adr.required'=>'友情链接地址不能为空！',       
+        'des.required'=>'友情链接描述不能为空！',              
+    ]);
+
+        
         $res = $request->except('_token','_method');
 
         $data = DB::table('friendlink')->where('id',$id)->update($res);
@@ -155,22 +163,24 @@ class FriendLinkController extends Controller
     public function destroy($id)
     {
         //
-        $res = DB::table('friendlink')->where('id',$id)->first();
+        // $res = DB::table('friendlink')->where('id',$id)->first();
 
-        $data = unlink('.'.$res->logo);
+        // $data = unlink('.'.$res->logo);
 
-        if($data){
+        // if($data){
 
-            $info = DB::table('friendlink')->where('id',$id)->delete();
+        //     $info = DB::table('friendlink')->where('id',$id)->delete();
 
-            if($info){
+        //     if($info){
 
-                return redirect('/admin/friendlink')->with('msg','删除成功！');
-            } else {
-                return back();
-            }
-        }
+        //         return redirect('/admin/friendlink')->with('msg','删除成功！');
+        //     } else {
+        //         return back();
+        //     }
+        // }
     }
+
+    
 
     public function status(Request $request)
     {  
@@ -203,5 +213,34 @@ class FriendLinkController extends Controller
                     }
         }  
 
+    }
+
+    public function delete(Request $request)
+    {   
+
+        // 初始化
+        $disk = QiniuStorage::disk('qiniu');
+
+        // 获取传递过来的id值
+        $id = $request->input('id');
+
+        // 获取该id值得数据
+        $res = Friendlink::where('id',$id)->first();
+       
+        // 删除Logo图片在七牛
+        $success = $disk->delete("friendlink/".$res['logo']);
+        // 判断删除是否
+        if ($success) 
+        {   
+            // 删除该用户
+            $result = Friendlink::where('id',$id)->delete();
+
+            if ($result) 
+            {     
+                //返回ajax的值 
+                return 1;
+            }
+
+        }
     }
 }

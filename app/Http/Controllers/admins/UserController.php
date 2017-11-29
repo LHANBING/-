@@ -167,7 +167,7 @@ class UserController extends Controller
         // 获取传递过来的id值
         $id = $request->input('id');
 
-        // 出去该id值得数据
+        // 获取该id值得数据
         $res = User::where('id',$id)->first();
 
         // 判断该用户的user_photo是否为default.jpg
