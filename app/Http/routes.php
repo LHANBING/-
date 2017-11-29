@@ -57,12 +57,18 @@ Route::group(['middleware'=>'adminlogin','prefix'=>'admin','namespace'=>'admins'
 	//钱袋总支出金额
 	Route::resource('/wallets','WalletsController');
 
+	
+    //修改广告状态
+	Route::post('/advs/statu','AdvsController@status');
+	Route::post('/advs/delete','AdvsController@delete');
 	//广告列表
-	Route::post('/statu','AdvsController@status');
 	Route::resource('/advs','AdvsController');
 	
+	//修改友情链接状态
+	Route::post('/friendlink/status','FriendLinkController@status');
+	// 删除友情链接
+	Route::post('/friendlink/delete','FriendLinkController@delete');
 	//友情链接列表
-	Route::post('/status','FriendLinkController@status');
 	Route::resource('/friendlink','FriendLinkController');
 	
 	
