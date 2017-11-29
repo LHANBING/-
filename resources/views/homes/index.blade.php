@@ -170,13 +170,14 @@
 
 																</div>
 																<div class="brand-side">
-																	<dl class="dl-sort"><dt><span>实力商家</span></dt>
-																		<dd><a rel="nofollow" title="呵官方旗舰店" target="_blank" href="#" rel="nofollow"><span  class="red" >呵官方旗舰店</span></a></dd>
-																		<dd><a rel="nofollow" title="格瑞旗舰店" target="_blank" href="#" rel="nofollow"><span >格瑞旗舰店</span></a></dd>
-																		<dd><a rel="nofollow" title="飞彦大厂直供" target="_blank" href="#" rel="nofollow"><span  class="red" >飞彦大厂直供</span></a></dd>
-																		<dd><a rel="nofollow" title="红e·艾菲妮" target="_blank" href="#" rel="nofollow"><span >红e·艾菲妮</span></a></dd>
-																		<dd><a rel="nofollow" title="本真旗舰店" target="_blank" href="#" rel="nofollow"><span  class="red" >本真旗舰店</span></a></dd>
-																		<dd><a rel="nofollow" title="杭派女装批发网" target="_blank" href="#" rel="nofollow"><span  class="red" >杭派女装批发网</span></a></dd>
+																	<dl class="dl-sort"><dt><span>友情链接</span></dt>
+																		
+																		@foreach($link as $k=>$v)
+
+																		<dd><a rel="nofollow" title="{{$v->friend_title}}" target="_blank" href="{{$v->adr}}" rel="nofollow"><span  class="red" >{{$v->friend_title}}</span></a></dd>
+
+																		@endforeach
+
 																	</dl>
 																</div>
 															</div>

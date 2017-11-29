@@ -1,11 +1,11 @@
 @extends('admins.layout.admins')
 
-@section('title','父分类修改页面')
+@section('title','管理员修改页面')
 
 @section('content')
 <div class="mws-panel grid_8">
 	<div class="mws-panel-header">
-		<span>父分类修改页面</span>
+		<span>管理员头像修改页面</span>
 	</div>
 
 	@if (count($errors) > 0)
@@ -21,34 +21,29 @@
 
 
 	<div class="mws-panel-body no-padding">
-		<form class="mws-form" action="/admin/type/{{$res->id}}" method="post" enctype="multipart/form-data">
+		<form class="mws-form" action="/admin/manager/doedit" method="post" enctype="multipart/form-data">
 			<div class="mws-form-inline">
 
 				<div class="mws-form-row">
-					<label class="mws-form-label">父分类名字</label>
+					<label class="mws-form-label">管理员名字</label>
 					<div class="mws-form-item">
-						<input type="text" class="small"  placeholder="{{ $res->typename }}" >
+						<input type="text" class="small" name="m_name" value="{{$m_name}}" disabled >
+					</div>
+				</div>
+
+				<div class="mws-form-row">
+					<label class="mws-form-label">管理员新头像</label>
+					<div class="mws-form-item">
+						<input type="file"  style="width: 100%; padding-right: 84px;"  placeholder="管理员新头像" name="m_photo">
 					</div>
 				</div>
 				
-
-				<div class="mws-form-row">
-					<label class="mws-form-label">显示</label>
-					<div class="mws-form-item clearfix">
-						<ul class="mws-form-list inline">
-							<li><input type="radio" name="status" value="1" @if($res->status == 1) checked @endif > <label>显示</label></li>
-							<li><input type="radio" name="status" value="0" @if($res->status == 0) checked @endif > <label>不显示</label></li>
-						</ul>
-					</div>
-				</div>
-
 
 			</div>
 			<div class="mws-button-row">
 					{{csrf_field()}}
 
-					{{ method_field('PUT')}}
-				<input type="submit" value="修改" class="btn btn-danger" style="margin-left: 0px">
+				<input type="submit" value="修改头像" class="btn btn-danger">
 			</div>
 		</form>
 	</div>    	

@@ -92,7 +92,7 @@
                         </td>
 
                         <td class="" style="text-align: center">
-                            <img src="{{$v->m_photo}}" width="50%" alt="">
+                            <img src="http://ozstangaz.bkt.clouddn.com/{{$v->m_photo}}" width="50%" alt="">
                         </td>
                          <td class="" style="text-align: center">
                            {{$v->m_name}}

@@ -15,6 +15,7 @@
         <script type="text/javascript" src="/homes/js/jquery.imagezoom.min.js"></script>
         <script type="text/javascript" src="/homes/js/jquery.flexslider.js"></script>
         <script type="text/javascript" src="/homes/js/list.js"></script>
+
         <link rel="stylesheet" href="/homes/bs/css/bootstrap.min.css">
         <link rel="stylesheet" href="/homes/bs/css/bootstrap-theme.min.css">
         <script type="text/javascript" src="/homes/bs/js/jquery.js"></script>
@@ -124,13 +125,17 @@
 							<div style="height: 50px;width: 100px;margin-left: 60px;margin-top: 20px">
 								<!-- <a href=""><img style="width: 30%" src="/homes/images/qq.jpg" alt="QQ"></a> -->
 								<a href=""><span>联系卖家</span></a>
-								<a target=blank href=tencent://message/?uin={{$qq}}&Site=工具啦&Menu=yes><img border="0" SRC=http://wpa.qq.com/pa?p=1:1477660474:4 alt="点击这里给我发消息"></a>
-							</div>
+								<a target=blank  href=tencent://message/?uin={{$qq}}&Site=工具啦&Menu=yes>
+									<img border="0"  style="width: 50%;display: inline;" SRC=http://wpa.qq.com/pa?p=1:{{$qq}}:4 alt="点击这里给我发消息">
+								</a>
+
+								</div>
+								
 
 							
 							
 						</div>
-						<div style="height: 20px"></div>
+						<div style="height: 30px"></div>
 						<div class="pay">
 							
 							<li>
@@ -215,7 +220,7 @@
 												<header class="am-comment-hd">
 													<!--<h3 class="am-comment-title">评论标题</h3>-->
 													<div class="am-comment-meta">
-														<img  style="height: 120px" src="http://ozstangaz.bkt.clouddn.com/{{$commentpic[$k]->img1}}">
+														<img  style="width: 10%" src="http://ozstangaz.bkt.clouddn.com/{{$commentpic[$k]->img1}}">
 														<p>{{$commentcontent[$k]}}</p>
 													</div>
 												</header>
@@ -337,13 +342,6 @@
 				layer.msg('您已取消收藏');
 				$(obj).text('收藏');
 			}
-			/*layer.open({
-				content:'修改默认地址成功!'
-				,btn: ['确认']
-  				,btn1: function(){
-    				location.reload();
-    			}
-			})*/
 			
 		})
   		

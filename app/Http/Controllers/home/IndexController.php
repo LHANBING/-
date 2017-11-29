@@ -11,6 +11,7 @@ use App\Http\Model\Typechild;
 use App\Http\Model\Good;
 use App\Http\Model\Goodsdetail;
 use App\Http\Model\User;
+use App\Http\Model\Friendlink;
 use Session;
 use Cookie;
 use DB;
@@ -54,6 +55,9 @@ class IndexController extends Controller
         $user = User::where('id',session('uid'))->first();
         // dd($user->username);die;
         
+        //获取友情链接
+        $link = Friendlink::where('status',1)->get();
+        // dd($link);
 
 
          //这是出售消息 
@@ -71,7 +75,7 @@ class IndexController extends Controller
 
         $num = $a + $b;           
         //dd($num);        
-    	return view('homes.index',['type'=>$type,'typechild'=>$typechild,'goods'=>$goods,'goods_photo'=>$goods_photo,'num'=>$num,'user'=>$user]);
+    	return view('homes.index',['type'=>$type,'typechild'=>$typechild,'goods'=>$goods,'goods_photo'=>$goods_photo,'num'=>$num,'user'=>$user,'link'=>$link]);
     
     }
 

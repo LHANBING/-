@@ -71,13 +71,13 @@
 
 
                     $result = DB::table('manager')->where('id',session('mid'))->first();
-                    // dd($result);
+                   
 
                 ?>
 
                 
                     <div id="mws-user-photo">
-                        <img src="{{$result->m_photo}}" alt="User Photo">
+                        <img src="http://ozstangaz.bkt.clouddn.com/{{$result->m_photo}}" alt="User Photo">
                     </div>
                 
                 <!-- Username and Functions -->
@@ -86,8 +86,8 @@
                        Hello, {{$result->m_name}}
                     </div > 
                     <ul style="text-align: center;">
-                        <li><a href="">修改头像</a></li>
-                        <li><a href="">退出</a></li>
+                        <li><a href="/admin/manager/editpic">修改头像</a></li>
+                        <li><a href="/admin/manager/logout">退出</a></li>
                     </ul>
                 </div>
             </div>

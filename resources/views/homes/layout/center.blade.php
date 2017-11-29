@@ -16,7 +16,7 @@
         <script type="text/javascript" src="{{url('/homes/layer1/jquery.js')}}"></script>
         <script type="text/javascript" src="{{url('/homes/layer1/layer.js')}}"></script>
         <script type="text/javascript" src="{{url('/homes/layer1/extend/layer.ext.js')}}"></script>
-         <link rel="stylesheet" href="/homes/bs/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/homes/bs/css/bootstrap.min.css">
         <link rel="stylesheet" href="/homes/bs/css/bootstrap-theme.min.css">
         <script type="text/javascript" src="/homes/bs/js/jquery.js"></script>
         <script type="text/javascript" src="/homes/bs/js/bootstrap.min.js"></script>
@@ -195,33 +195,7 @@
                 </span>
             </div>
             <div class="nav-cont">
-                <ul style="width: 800px">
-                    <li class="index" style="width: 100px">
-                        <a href="#">
-                            首页
-                        </a>
-                    </li>
-                    <li class="qc" style="width: 100px">
-                        <a href="#">
-                            闪购
-                        </a>
-                    </li>
-                    <li class="qc" style="width: 100px">
-                        <a href="#">
-                            限时抢
-                        </a>
-                    </li>
-                    <li class="qc" style="width: 100px">
-                        <a href="#">
-                            团购
-                        </a>
-                    </li>
-                    <li class="qc last" style="width: 100px">
-                        <a href="#">
-                            大包装
-                        </a>
-                    </li>
-                </ul>
+                
             </div>
         </div>
         </div>

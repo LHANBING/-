@@ -36,8 +36,16 @@ Route::group(['middleware'=>'adminlogin','prefix'=>'admin','namespace'=>'admins'
 	// 用户的删除
 	Route::post('/user/delete','UserController@delete');
 
+	//执行管理员修改页面
+	Route::post('/manager/doedit','ManagerController@doedit');
+	//管理员修改头像页面
+	Route::get('/manager/editpic','ManagerController@editpic');
+	
+	//管理员退出
+	Route::get('/manager/logout','ManagerController@logout');
 	//管理员用户列表
 	Route::resource('/manager','ManagerController');
+
 
 	//分类子分类
 	Route::get('/typechild/add','TypechildController@add');

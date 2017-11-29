@@ -51,7 +51,7 @@ class ListTypeController extends Controller
     public function show($id)
     {
         //商品子类
-        $res = Good::where('type_id',$id)->where('status',1)->get();
+        $res = Good::where('type_id',$id)->where('status',1)->paginate(15);
         //商品详情的图片
         $pic = [];
         foreach ($res as $k => $v) {

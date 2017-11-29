@@ -10,31 +10,31 @@
         </title>
         @section('cssjs')
         
-        <link href="/homes/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css" />
-        <link href="/homes/AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css" />
-        <link href="/homes/basic/css/demo.css" rel="stylesheet" type="text/css" />
-        <link type="text/css" href="/homes/css/optstyle.css" rel="stylesheet" />
-        <link type="text/css" href="/homes/css/style.css" rel="stylesheet" />
+      <link href="/homes/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css" />
+      <link href="/homes/AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css" />
+      <link href="/homes/basic/css/demo.css" rel="stylesheet" type="text/css" />
+      <link type="text/css" href="/homes/css/optstyle.css" rel="stylesheet" />
+      <link type="text/css" href="/homes/css/style.css" rel="stylesheet" />
+      
+      <script type="text/javascript" src="/homes/basic/js/jquery-1.7.min.js"></script>
+      <script type="text/javascript" src="/homes/basic/js/quick_links.js"></script>
+      
+      <script type="text/javascript" src="/homes/AmazeUI-2.4.2/assets/js/amazeui.js"></script>
+      <script type="text/javascript" src="/homes/js/jquery.imagezoom.min.js"></script>
+      <script type="text/javascript" src="/homes/js/jquery.flexslider.js"></script>
+      <script type="text/javascript" src="/homes/js/list.js"></script>
 
-        <script type="text/javascript" src="/homes/basic/js/jquery-1.7.min.js"></script>
-        <script type="text/javascript" src="/homes/basic/js/quick_links.js"></script>
 
-        <script type="text/javascript" src="/homes/AmazeUI-2.4.2/assets/js/amazeui.js"></script>
-        <script type="text/javascript" src="/homes/js/jquery.imagezoom.min.js"></script>
-        <script type="text/javascript" src="/homes/js/jquery.flexslider.js"></script>
-        <script type="text/javascript" src="/homes/js/list.js"></script>
-        
-        <link href="/homes/css/hmstyle.css" rel="stylesheet" type="text/css"/>
-        <link href="/homes/css/skin.css" rel="stylesheet" type="text/css" />
-        <script src="/homes/AmazeUI-2.4.2/assets/js/jquery.min.js"></script>
-        
-        <script src="/homes/js/jquery-1.8.3.min.js"></script>
-
-        <link rel="stylesheet" href="/homes/bs/css/bootstrap.min.css">
-        <link rel="stylesheet" href="/homes/bs/css/bootstrap-theme.min.css">
-        <script type="text/javascript" src="/homes/bs/js/jquery.js"></script>
-        <script type="text/javascript" src="/homes/bs/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="/homes/layer/layer.js"></script>
+            
+      <link href="/homes/css/hmstyle.css" rel="stylesheet" type="text/css"/>
+      <link href="/homes/css/skin.css" rel="stylesheet" type="text/css" />
+      <!-- <script src="/homes/AmazeUI-2.4.2/assets/js/jquery.min.js"></script> -->
+      <!-- <script src="/homes/js/jquery-1.8.3.min.js"></script> -->
+      <!-- <link rel="stylesheet" href="/homes/bs/css/bootstrap.min.css">
+      <link rel="stylesheet" href="/homes/bs/css/bootstrap-theme.min.css">
+      <script type="text/javascript" src="/homes/bs/js/jquery.js"></script>
+      <script type="text/javascript" src="/homes/bs/js/bootstrap.min.js"></script>
+      <script type="text/javascript" src="/homes/layer/layer.js"></script> -->
 
 
 

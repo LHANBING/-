@@ -7,6 +7,10 @@
 		
 		<link href="/homes/css/personal.css" rel="stylesheet" type="text/css">
 		<link href="/homes/css/orstyle.css" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" href="/homes/bs/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/homes/bs/css/bootstrap-theme.min.css">
+        <script type="text/javascript" src="/homes/bs/js/jquery.js"></script>
+        <script type="text/javascript" src="/homes/bs/js/bootstrap.min.js"></script>
 
 @endsection()
 
@@ -55,12 +59,29 @@
 										<div class="order-list">
 											
 										
-											<!--不同状态订单-->
 											<div class="order-status3">
 												
 												<div class="order-content">
 													<div class="order-left">
-													
+
+														
+														@if(empty($res[0]))
+
+														<div style="float: left; margin-top: 100px;margin-left: 50px">
+															<div class="container">
+													              <div class="row">
+													                  <div class="col-md-12">
+													                        <div class="jumbotron" style="background: transparent;">
+													                          <h1>抱歉，暂时没有该类商品</h1>
+													                        </div>
+													                  </div>
+													                  
+													                </div>
+													            </div>
+														</div>
+														
+														@else
+
 														@foreach($res as $k=>$v)
 														<ul class="item-list">
 															<li class="td td-item">
@@ -102,11 +123,14 @@
 															
 															<li class="td td-price">
 																<div class="item-price">
-																	<a href="/home/listdetail/{{$v->id}}">查看详情</a>
+																	<a class="btn btn-info" href="/home/listdetail/{{$v->id}}">查看详情</a>
 																</div>
 															</li>
 														</ul>
 														@endforeach
+
+														@endif
+
 
 													</div>
 													
@@ -116,6 +140,10 @@
 
 										</div>
 
+									</div>
+
+									<div style="float: right;">
+										{!! $res->render() !!}
 									</div>
 
 								</div>
