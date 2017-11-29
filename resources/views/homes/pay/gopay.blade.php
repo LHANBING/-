@@ -94,24 +94,18 @@
                             确认收货地址
                         </h3>
                         <div class="control">
-                            <span onclick="addClick(this)"  class=" createAddr  am-btn am-btn-danger">
+                            <span onclick="addClick(this)" class=" createAddr  am-btn am-btn-danger">
                                 使用新地址
                             </span>
                         </div>
                         <div class="clear">
                         </div>
                         <ul>
-
                             <div class="per-border">
                             </div>
-
-								@foreach($address as $k=>$v)
-								
-								@if($v->status == 1)
+                            @if(!empty($address)) @foreach($address as $k=>$v) @if($v->status == 1)
                             <li class="user-addresslist defaultAddr">
-							
-							<!-- 默认地址 -->
-								
+                                <!-- 默认地址 -->
                                 <div class="address-left">
                                     <div class="user DefaultAddr">
                                         <span class="buy-address-detail">
@@ -129,19 +123,16 @@
                                         </span>
                                         <span class="buy--address-detail">
                                             <span class="province">
-                                                 {{$v->province}}
+                                                {{$v->province}}
                                             </span>
-                                            
                                             <span class="city">
                                                 {{$v->city}}
                                             </span>
-                                           
                                             <span class="dist">
                                                 {{$v->area}}
                                             </span>
-                                            
                                             <span class="street">
-                                                 {{$v->address}}
+                                                {{$v->address}}
                                             </span>
                                         </span>
                                         </span>
@@ -150,24 +141,19 @@
                                         默认地址
                                     </ins>
                                 </div>
-
-
                                 <div class="address-right">
                                     <a href="/homes/person/address.html">
                                         <span class="am-icon-angle-right am-icon-lg">
                                         </span>
                                     </a>
                                 </div>
-
-
                                 <div class="clear">
                                 </div>
                                 <div class="new-addr-btn">
-                                    
                                     <span class="new-addr-bar hidden">
                                         |
                                     </span>
-                                    <span href="" id = "{{$v->id}}" onclick="editClick(this);">
+                                    <span href="" id="{{$v->id}}" onclick="editClick(this);">
                                         编辑
                                     </span>
                                     <span class="new-addr-bar">
@@ -177,19 +163,13 @@
                                         删除
                                     </a>
                                 </div>
-                            </li>                         
-                            @endif
-							@endforeach
-
-								<!-- 设为默认 -->
-
+                            </li>
+                            @endif @endforeach @endif
+                            <!-- 设为默认 -->
                             <div class="per-border">
                             </div>
-							@foreach($address as $k=>$v)
-								
-								@if($v->status == 0)
-
-                             <li class="user-addresslist">
+                            @if(!empty($address)) @foreach($address as $k=>$v) @if($v->status == 0)
+                            <li class="user-addresslist">
                                 <div class="address-left">
                                     <div class="user DefaultAddr">
                                         <span class="buy-address-detail">
@@ -197,7 +177,7 @@
                                                 {{$v->addressname}}
                                             </span>
                                             <span class="buy-phone">
-                                                 {{$v->address_tel}}
+                                                {{$v->address_tel}}
                                             </span>
                                         </span>
                                     </div>
@@ -209,15 +189,12 @@
                                             <span class="province">
                                                 {{$v->province}}
                                             </span>
-                                            
                                             <span class="city">
                                                 {{$v->city}}
                                             </span>
-                                            
                                             <span class="dist">
                                                 {{$v->area}}
                                             </span>
-                                            
                                             <span class="street">
                                                 {{$v->address}}
                                             </span>
@@ -241,7 +218,7 @@
                                     <span class="new-addr-bar">
                                         |
                                     </span>
-                                    <span href="" id = "{{$v->id}}" onclick="editClick(this);">
+                                    <span href="" id="{{$v->id}}" onclick="editClick(this);">
                                         编辑
                                     </span>
                                     <span class="new-addr-bar">
@@ -252,15 +229,8 @@
                                     </a>
                                 </div>
                             </li>
-							 @endif
-							@endforeach
-
-
-
-
+                            @endif @endforeach @endif
                         </ul>
-
-
                         <div class="clear">
                         </div>
                     </div>
@@ -518,17 +488,18 @@
                                                 </em>
                                             </span>
                                         </div>
-                                        
                                     </div>
-                                    <input type="hidden" name="pay_money" value="{{$goods->newprice+$goods->transprice}}" />
-                                    <input type="hidden" name="pay_yunfei" value="{{$goods->transprice}}" />
+                                    <input type="hidden" name="pay_money" value="{{$goods->newprice+$goods->transprice}}"
+                                    />
+                                    <input type="hidden" name="pay_yunfei" value="{{$goods->transprice}}"
+                                    />
                                     <input type="hidden" name="goods_id" value="{{$goods->id}}" />
-                                    <input type="hidden" name="address" value="{{$default->id}}" />
-									
+                                    <input type="hidden" name="address" value="{{!empty($default->id)? $default->id : ''}}" />
                                     <div id="holyshit269" class="submitOrder">
                                         <div class="go-btn-wrap">
-                                        	{{ csrf_field() }}
-                                        	<input type="submit" id="J_Go"  class="btn-go" title="点击此按钮，提交订单" value="提交按钮" style="float: right;" />
+                                            {{ csrf_field() }}
+                                            <input type="submit" id="J_Go" class="btn-go" title="点击此按钮，提交订单" value="提交按钮"
+                                            style="float: right;" />
                                         </div>
                                     </div>
                                     <!-- <div class="clear">
@@ -536,11 +507,8 @@
                                 </div>
                             </div>
                         </div>
-                       
                     </form>
-                  
                 </div>
-                
             </div>
             <div class="footer">
                 <div class="footer-hd">
@@ -591,78 +559,72 @@
         </div>
         <div class="theme-popover-mask">
         </div>
-       
         <div class="clear">
         </div>
     </body>
+    <script type="text/javascript">
+        var func = function(obj) {
+            var id = $(obj).attr('id');
 
-<script type="text/javascript">
+            $.post('/home/default', {
+                id: id,
+                _token: '{{csrf_token()}}'
+            },
+            function(data) {
+                layer.open({
+                    content: '修改默认地址成功!',
+                    btn: ['确认'],
+                    btn1: function() {
+                        location.reload();
+                    }
+                })
 
+            })
 
+        }
 
-	var func = function(obj){
-		var id = $(obj).attr('id');
+        //删除地址
+        var delClick = function(obj) {
+            var id = $(obj).attr('id');
 
-		$.post('/home/default',{id:id,_token:'{{csrf_token()}}'},function(data){
-			layer.open({
-				content:'修改默认地址成功!'
-				,btn: ['确认']
-  				,btn1: function(){
-    				location.reload();
-  				}
-			})
-			
-		})
+            $.post('/home/pay/del', {
+                id: id,
+                _token: '{{csrf_token()}}'
+            },
+            function(data) {
+                layer.msg(data);
+                location.reload();
 
-	}
+            })
 
-    //删除地址
+        }
 
-    var delClick = function(obj)
-    {
-        var id = $(obj).attr('id');
+        var editClick = function(obj) {
+            var id = $(obj).attr('id');
 
-        $.post('/home/pay/del',{id:id,_token:'{{csrf_token()}}'},function(data){
-            layer.msg(data);
-            location.reload();
-            
-        })
-       
-    }
+            layer.open({
+                type: 2,
+                title: '修改用户地址信息页',
+                shadeClose: true,
+                shade: 0.8,
+                area: ['700px', '60%'],
+                content: '/home/pay/edit?id=' + id //iframe的url
+            })
 
-    var editClick = function(obj)
-    {
-        var id = $(obj).attr('id');
+        }
 
-        layer.open({
-          type: 2,
-          title: '修改用户地址信息页',
-          shadeClose: true,
-          shade: 0.8,
-          area: ['700px', '60%'],
-          content: '/home/pay/edit?id='+id //iframe的url
-        })
+        var addClick = function(obj) {
 
+            layer.open({
+                type: 2,
+                title: '添加用户地址信息页',
+                shadeClose: true,
+                shade: 0.8,
+                area: ['800px', '60%'],
+                content: '/home/pay/add' //iframe的url
+            })
 
-    }
+        }
+    </script>
 
-    var addClick = function(obj)
-    {
-
-        layer.open({
-          type: 2,
-          title: '添加用户地址信息页',
-          shadeClose: true,
-          shade: 0.8,
-          area: ['800px', '60%'],
-          content: '/home/pay/add' //iframe的url
-        })
-
-      
-    }
-
-
-    
-
-</script>
 </html>

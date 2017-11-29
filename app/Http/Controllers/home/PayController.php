@@ -24,22 +24,27 @@ class PayController extends Controller
         $user_id = session('uid');
         //获得用户地址
         $address = Useraddress::where('user_id',$user_id)->get();
+        // dd($address);
 
         $default = Useraddress::where('user_id',$user_id)
                     ->where('status',1)
                     ->first();
+        // dd($default);
        /* echo '<pre>';
         var_dump($address);die;*/
 
         $id = $_GET['goods_id'];
 
+
+
          //获取该条商品的信息和详细信息
         $goods = Good::find($id);
+        // dd($goods);
         $goodsdetail = Goodsdetail::find($id);
         //操作json字符串的图片信息
         $goods_photo = $goodsdetail->pic;
         $goods_photo = json_decode($goods_photo);
-
+        // dd($goods_photo);
         
 
 

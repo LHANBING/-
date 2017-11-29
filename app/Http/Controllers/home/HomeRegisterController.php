@@ -62,7 +62,7 @@ class HomeRegisterController extends Controller
           $sendSms->setTemplateParam(['code'=>$code]);
           $sendSms->setOutId('demo');
     	    $resp= $client->execute($sendSms);
-
+          
       //检测短信是否成功发送
     	if($resp->Code =='OK')
     		{	

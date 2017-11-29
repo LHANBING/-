@@ -74,7 +74,13 @@
 <div class="mws-button-row">
 
 	{{ csrf_field() }}
+<<<<<<< HEAD
     <input type="submit" value='添加' class="btn btn-danger">    
+=======
+	
+    <input type="submit" value='提交' class="btn btn-danger">
+    <input type="reset" class="btn btn-danger">
+>>>>>>> 135b5a4730b73a0e208ec06167bb897a5540e1fd
 	
 </div>
 </form>
@@ -85,7 +91,7 @@
 
 @section('js')
 <script>
-
+	//加的定时器，让弹框上拉
 	$('.mws-form-message').delay(3000).slideUp(1000);
 </script>
 @endsection

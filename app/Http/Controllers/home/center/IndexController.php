@@ -70,15 +70,22 @@ class IndexController extends Controller
         $spingjia  = DB::table('orders')->where('sale_uid',session('uid'))
                                       ->where('sale_order_status','4')
                                       ->count();
-                                                                                
+        
 
+        //查询状态为开启为1的status
+        $status = DB::table('advs')->where('status','1')->get();
+        
 
+        /*echo "<pre>";            
+        var_dump($status);die;*/
+        
+        //
 
 
 
         //dd($bpingjia);						   
 
-    	return view('homes.center.index',['users'=>$users,'num'=>$num,'bfukuan'=>$bfukuan,'bfahuo'=>$bfahuo,'bshouhuo'=>$bshouhuo,'bpingjia'=>$bpingjia,'sfukuan'=>$sfukuan,'sfahuo'=>$sfahuo,'sshouhuo'=>$sshouhuo,'spingjia'=>$spingjia]);
+    	return view('homes.center.index',['users'=>$users,'num'=>$num,'bfukuan'=>$bfukuan,'bfahuo'=>$bfahuo,'bshouhuo'=>$bshouhuo,'bpingjia'=>$bpingjia,'sfukuan'=>$sfukuan,'sfahuo'=>$sfahuo,'sshouhuo'=>$sshouhuo,'spingjia'=>$spingjia],['status'=>$status]);
     }
 
 }

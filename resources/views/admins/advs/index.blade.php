@@ -208,9 +208,10 @@
         $.post('/admin/advs/statu/',{'_token':'{{csrf_token()}}',id:id,status:status},function(data){
             
             if(data == 1)
-            {
+            {   
+                //这是一个弹框
                 alert('修改成功！');
-
+                //自动刷新页面
                 location.reload();
                 // layer.alert({})
             } else

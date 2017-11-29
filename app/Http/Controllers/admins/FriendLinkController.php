@@ -82,6 +82,7 @@ class FriendLinkController extends Controller
 
         // 链接数据库
        $data = Friendlink::insert($res);
+       
 
        if($data){
 
@@ -112,7 +113,7 @@ class FriendLinkController extends Controller
      */
     public function edit($id)
     {
-        //修改页面
+        //修改编辑页面
         $res = DB::table('friendlink')->where('id',$id)->first();
 
         return view('admins.friendlink.edit',['res'=>$res]);
@@ -162,22 +163,7 @@ class FriendLinkController extends Controller
      */
     public function destroy($id)
     {
-        //
-        // $res = DB::table('friendlink')->where('id',$id)->first();
 
-        // $data = unlink('.'.$res->logo);
-
-        // if($data){
-
-        //     $info = DB::table('friendlink')->where('id',$id)->delete();
-
-        //     if($info){
-
-        //         return redirect('/admin/friendlink')->with('msg','删除成功！');
-        //     } else {
-        //         return back();
-        //     }
-        // }
     }
 
     
