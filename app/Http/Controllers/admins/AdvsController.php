@@ -20,7 +20,7 @@ class AdvsController extends Controller
     {
         // $res = DB::table('advs')->get();
         // var_dump($request->all());
-
+        //
         $res = DB::table('advs')->
         where('advs_a','like','%'.$request->input('search').'%')
             ->

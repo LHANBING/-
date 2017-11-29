@@ -214,10 +214,12 @@
 								<i class="s-icon"></i>今日新品
 								<a class="i-load-more-item-shadow">15款新品</a>
 							</div>
+							
 							<div class="new-goods-info">
+
 								<a class="shop-info" href="#" target="_blank">
 									<div class="face-img-panel">
-										<img src="/homes/images/imgsearch1.jpg" alt="">
+										<img src="http://ozstangaz.bkt.clouddn.com/{{ $status[0]->advs_s }}" alt="">
 									</div>
 									<span class="new-goods-num ">4</span>
 									<span class="shop-title">剥壳松子</span>
@@ -225,23 +227,25 @@
 								<a class="follow " target="_blank">关注</a>
 							</div>
 						</div>
-
+							
 						<!--热卖推荐 -->
-						<div class="new-goods">
-							<div class="s-bar">
-								<i class="s-icon"></i>热卖推荐
+					<div class="new-goods">
+						<div class="s-bar">
+							<i class="s-icon"></i>热卖推荐
 							</div>
 							<div class="new-goods-info">
 								<a class="shop-info" href="#" target="_blank">
 									<div >
-										<img src="/homes/images/imgsearch1.jpg" alt="">
+										<img src="http://ozstangaz.bkt.clouddn.com/{{ $status[1]->advs_s }}" alt="">
 									</div>
                                     <span class="one-hot-goods">￥9.20</span>
 								</a>
 							</div>
 						</div>
-
 					</div>
+
+
+
  <script type="text/javascript">
             var time1 = document.getElementById('time1');
             var date1 = document.getElementById('date1');

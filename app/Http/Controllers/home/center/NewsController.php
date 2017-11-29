@@ -31,7 +31,7 @@ class NewsController extends Controller
         $ar = DB::table('message')->join('orders','orders.id','=','message.order_id')
                                  ->join('goods','goods.id','=','orders.goods_id') 
                                  ->join('goodsdetail','goodsdetail.goods_id','=','goods.id')
-                                 ->join('users','users.id','=','orders.sale_uid')
+                                 ->join('users','users.id','=','orders.buy_uid')
                                  ->where('orders.sale_uid','=',session('uid'))
                                  ->where('message.receive_uid','=',session('uid'))
                                  ->select('message.*','goods.title','goodsdetail.pic','users.username')

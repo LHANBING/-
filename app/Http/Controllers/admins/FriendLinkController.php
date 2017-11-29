@@ -77,14 +77,14 @@ class FriendLinkController extends Controller
 
 
         }
-
+       //接收到后去除token
        $res = $request->except('_token','logo');
 
-        
+       //拼接图片的后缀名
        $res['logo'] = '/Uploads/'.$name.'.'.$suffix;
        
      
-
+       //将数据添加进数据库
        $data = DB::table('friendlink')->insert($res);
 
        if($data){
@@ -116,7 +116,7 @@ class FriendLinkController extends Controller
      */
     public function edit($id)
     {
-        //修改页面
+        //修改编辑页面
         $res = DB::table('friendlink')->where('id',$id)->first();
 
         return view('admins.friendlink.edit',['res'=>$res]);
@@ -154,15 +154,15 @@ class FriendLinkController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //从数据库中查找id
         $res = DB::table('friendlink')->where('id',$id)->first();
-
+        //从数据库中提取数据
         $data = unlink('.'.$res->logo);
 
         if($data){
-
+            //定义一个info从数据库中找到id并执行删除
             $info = DB::table('friendlink')->where('id',$id)->delete();
-
+            //做判断给弹框提示
             if($info){
 
                 return redirect('/admin/friendlink')->with('msg','删除成功！');
