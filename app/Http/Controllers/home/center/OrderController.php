@@ -137,8 +137,8 @@ class OrderController extends Controller
 
         $time = date('Y-m-d h:i:s',time());
 
-       // dd($time);
-
+        
+        //修改订单状态
         $A=DB::table('orders')->where('id',$id)->update(['buy_order_status'=>'4','sale_order_status'=>'4','Order_otime'=>$time]);
     
         //添加确认收货消息
@@ -147,11 +147,25 @@ class OrderController extends Controller
         $arr['send_uid']=session('uid');
         $arr['receive_uid'] = $res->sale_uid;
 
-        $B = Message::create($arr);
+        //打钱给卖家
+        $money = $res->pay_money + $res->pay_yunfei;
+
+        //支出的钱
+        $zhichu=DB::table('orders_money')->select('zhichu')->first()->zhichu;
+        $update=$zhichu + $money;
+        $B = DB::table('orders_money')->update(['zhichu'=>$update]);
+
+
+        //加钱
+        $user_money = DB::table('users')->where('id',$res->sale_uid)->select('money')->first()->money;
+        $updates = $user_money + $money;
+        $C = DB::table('users')->where('id',$res->sale_uid)->update(['money'=>$updates]);
+
+        $D = Message::create($arr);
     
 
 
-        if($A && $B ){
+        if($A && $B && $C && $D){
               
               DB::commit();
             echo 1;

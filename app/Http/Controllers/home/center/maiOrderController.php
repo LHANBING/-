@@ -222,7 +222,7 @@ class maiOrderController extends Controller
         $uid = session('uid');
 
         $b=Order::where('order_num',$num)->first();
-        $buy_id = $b->buy_id;
+        $buy_id = $b->buy_uid;
 
         $order_id = $b->id;
 

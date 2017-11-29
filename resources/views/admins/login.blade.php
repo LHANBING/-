@@ -22,7 +22,7 @@
 
 </head>
 
-<body>
+<body style="background:url('/admins/images/bjtp.jpg');background-size:100%">
 
     <div id="mws-login-wrapper">
         <div id="mws-login">

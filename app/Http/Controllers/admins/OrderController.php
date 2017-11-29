@@ -101,21 +101,27 @@ class OrderController extends Controller
    {
         //订单id
         $id = $Request->all()['id'];
-        //有买家信息
-        $res=DB::table('comment')->join('orders','orders.id','=','comment.order_id')
-                                 ->join('users','users.id','=','orders.buy_uid')
-                                 ->join('goods','goods.id','=','orders.goods_id')
-                                 ->where('comment.order_id','=',$id)
-                                 ->select('users.username','orders.order_num','goods.title','comment.comment','comment.id')
-                                 ->first();
-        //有卖家信息                         
-        $res1=DB::table('comment')->join('orders','orders.id','=','comment.order_id')
-                                 ->join('users','users.id','=','orders.sale_uid')
-                                 ->join('goods','goods.id','=','orders.goods_id')
-                                 ->where('comment.order_id','=',$id)
-                                 ->select('users.username')
-                                 ->first();                          
 
+
+       //该订单买家评论
+       $res =DB::table('comment')->join('orders','orders.id','=','comment.order_id')
+                                ->join('goods','goods.id','=','orders.goods_id')
+                                ->join('users','users.id','=','orders.buy_uid')    
+                                ->where('comment.order_id','=',$id) 
+                                ->select('comment.*','users.username','goods.title','orders.order_num','orders.buy_uid')
+                                ->get();
+
+       //该订单卖家评论
+       $res1 =DB::table('comment')->join('orders','orders.id','=','comment.order_id')
+                                ->join('goods','goods.id','=','orders.goods_id')
+                                ->join('users','users.id','=','orders.sale_uid') 
+                                   ->select('comment.*','users.username','goods.title','orders.order_num','orders.sale_uid')      
+                                ->where('comment.order_id','=',$id) 
+                                ->get();
+
+                                
+                      
+//dd($res1);
        if(!empty($res) && !empty($res1)){
 
         return view('admins.order.show',['res'=>$res,'res1'=>$res1]);

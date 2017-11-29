@@ -31,14 +31,14 @@ class NewsController extends Controller
         $ar = DB::table('message')->join('orders','orders.id','=','message.order_id')
                                  ->join('goods','goods.id','=','orders.goods_id') 
                                  ->join('goodsdetail','goodsdetail.goods_id','=','goods.id')
-                                 ->join('users','users.id','=','orders.sale_uid')
+                                 ->join('users','users.id','=','orders.buy_uid')
                                  ->where('orders.sale_uid','=',session('uid'))
                                  ->where('message.receive_uid','=',session('uid'))
                                  ->select('message.*','goods.title','goodsdetail.pic','users.username')
                                  ->orderBy('message.created_at','desc')
                                  ->get();    
 
-         // dd($arr);    
+         //dd($ar);    
           //转换json子串                            
             foreach ($arr as $key => $value) {
                      
@@ -75,7 +75,7 @@ class NewsController extends Controller
          $arr['msg_content'] = "买家提醒您发货,请及时发货";
          $arr['order_id'] = $id;
          $arr['send_uid'] =session('uid');
-         $arr['receive'] = $res->sale_uid;            
+         $arr['receive_uid'] = $res->sale_uid;            
         
         $A=message::create($arr);
     	
@@ -94,21 +94,26 @@ class NewsController extends Controller
 
 
 
-      // 卖家发送  提示买家收货消息
+ // 卖家发送  提示买家收货消息
      public function addm (Request $request)
     { 
       $num = $request->only(['num']);
 
       $order = Order::where('order_num',$num)->first();
-      $order_id = $order['id'];
-      $receive_uid=$order['buy_uid'];
-      $uid=session('uid');
-      $b= DB::table('message')->where(['msg_content'=>3,'order_id'=>$order_id,'send_uid'=>$uid,'receive_uid'=>$receive_uid]);
 
+      $order_id = $order['id'];
+
+      $receive_uid=$order['buy_uid'];
+
+      $uid=session('uid');
+
+      $b= message::where(['order_id'=>$order_id,'send_uid'=>$uid,'receive_uid'=>$receive_uid])->first();
+
+      // dd($b);
       if($b){
           return 0;
       }else{
-        $a=DB::table('message')->insert(['msg_content'=>3,'order_id'=>$order_id,'send_uid'=>$uid,'receive_uid'=>$receive_uid]);
+        $a=message::create(['msg_content'=>'卖家提醒您及时确认收货!','order_id'=>$order_id,'send_uid'=>$uid,'receive_uid'=>$receive_uid]);
           if($a){
               return 1;
             }else{
@@ -119,6 +124,7 @@ class NewsController extends Controller
 
       
     }
+
 
 
 
