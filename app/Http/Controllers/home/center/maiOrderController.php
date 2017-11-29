@@ -12,6 +12,7 @@ use App\Http\Model\Goodsdetail;
 use App\Http\Model\Type;
 use App\Http\Model\Typechild;
 use App\Http\Model\Order;
+use App\Http\Model\message;
 use DB;
 use session;
 
@@ -57,7 +58,7 @@ class maiOrderController extends Controller
         }
 
         // dd($pic);
-
+        $zong1 = Order::where('sale_order_status','<',6)->where('sale_uid',$id)->count();
         // dd($zong);
 
 
@@ -71,6 +72,9 @@ class maiOrderController extends Controller
 
         // $dfkid = Order::where(['buy_order_status'=>1,'sale_uid'=>$id])->select('id')->get();
         // dd($dfkid);
+        $count1 = Order::where(['sale_order_status'=>1,'sale_uid'=>$id]) ->count();
+
+
 
         //待发货
         $daifahuo = Order::join('goods','goods.id','=','orders.goods_id')
@@ -78,7 +82,7 @@ class maiOrderController extends Controller
         ->join('typechild','typechild.id','=','goods.typechild_id')
         ->where(['sale_order_status'=>2,'sale_uid'=>$id])
         ->get();
-
+        $count2 = Order::where(['sale_order_status'=>2,'sale_uid'=>$id]) ->count();
         // $dfhid = Order::where(['buy_order_status'=>2,'sale_uid'=>$id])->select('id')->get();
         // dd($daifukuan);
 
@@ -88,7 +92,7 @@ class maiOrderController extends Controller
         ->join('typechild','typechild.id','=','goods.typechild_id')
         ->where(['sale_order_status'=>3,'sale_uid'=>$id])
         ->get();
-        
+        $count3 = Order::where(['sale_order_status'=>3,'sale_uid'=>$id]) ->count();
 
         //待评价
         $daipingjia = Order::join('goods','goods.id','=','orders.goods_id')
@@ -96,8 +100,10 @@ class maiOrderController extends Controller
         ->join('typechild','typechild.id','=','goods.typechild_id')
         ->where(['sale_order_status'=>4,'sale_uid'=>$id])
         ->get();
+        $count4 = Order::where(['sale_order_status'=>4,'sale_uid'=>$id]) ->count();
 
-        return view('homes.center.maiOrder',['zong'=>$zong,'pic'=>$pic,'daifukuan'=>$daifukuan,'daifahuo'=>$daifahuo,'daishouhuo'=>$daishouhuo,'daipingjia'=>$daipingjia]);
+        // return view('homes.center.maiOrder',['zong'=>$zong,'pic'=>$pic,'daifukuan'=>$daifukuan,'daifahuo'=>$daifahuo,'daishouhuo'=>$daishouhuo,'daipingjia'=>$daipingjia]);
+        return view('homes.center.maiOrder',compact('zong','pic','daifukuan','daifahuo','daishouhuo','daipingjia','zong1','count1','count2','count3','count4'));
     }
 
     /**
@@ -199,13 +205,30 @@ class maiOrderController extends Controller
         // $a = ;
         // $b = ;
         // $c = ;
+        $order = Order::where('order_num',$res['num'])->first();
+
+          $order_id = $order['id'];
+
+          $receive_uid=$order['buy_uid'];
+
+          $uid=session('uid');
 
         // var_dump($a);die;
+
+
         $status=Order::where('order_num',$res['num'])
         ->update(['kuaidi_ltd'=>$res['kuaidi'],'kuaidi_num'=>$res['danhao'],'buy_order_status'=>3,'sale_order_status'=>3]);
          // dd($re->num);
         if($status){
-            return 1 ; 
+            // return 1 ; 
+
+           $a=message::create(['msg_content'=>'卖家已发货!','order_id'=>$order_id,'send_uid'=>$uid,'receive_uid'=>$receive_uid]);
+
+           if($a){
+            return 1;
+           }else{
+            return 0;
+           }
         }else{
             return 0 ;
         }
@@ -213,6 +236,7 @@ class maiOrderController extends Controller
     }
 
 
+    //评价买家 
      public function pingjia(Request $request)
     {
         $res = $request->except('_token');
@@ -226,12 +250,15 @@ class maiOrderController extends Controller
 
         $order_id = $b->id;
 
-        $a = DB::table('comment')->insertGetid(['comment'=>$text,'order_id'=>$order_id,'b_id'=>$uid,'s_id'=>$buy_id]);
+        $a = DB::table('comment')->insert(['comment'=>$text,'order_id'=>$order_id,'b_id'=>$uid,'s_id'=>$buy_id]);
+        // dd($a);
 
 
         if($a){
             $c= Order::where('order_num',$num)->update(['sale_order_status'=>5]);
-            if($c){
+
+            $d=message::create(['msg_content'=>'卖家评价了您!','order_id'=>$order_id,'send_uid'=>$uid,'receive_uid'=>$buy_id]);
+            if($c && $d){
                 return 1 ; 
             }else{
                 return 2 ;
@@ -239,8 +266,7 @@ class maiOrderController extends Controller
         }else{
             return 0;
         }
-        // return ;
-
+       
         
     }
         

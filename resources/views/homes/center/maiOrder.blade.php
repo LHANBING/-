@@ -37,27 +37,31 @@
         <li class="am-active">
             <a href="#tab1">
                 所有订单
+                <em style='color:red'>{{$zong1}}</em>
             </a>
         </li>
         <li class="">
             <a href="#tab2">
                 待付款
+                <em style='color:red'>{{$count1}}</em>
             </a>
         </li>
         <li class="">
             <a href="#tab3">
                 待发货
+                <em style='color:red'>{{$count2}}</em>
             </a>
         </li>
         <li class="">
             <a href="#tab4">
                 待收货
-                <em>3</em>
+                <em style='color:red'>{{$count3}}</em>
             </a>
         </li>
         <li class="">
             <a href="#tab5">
                 待评价
+                <em style='color:red'>{{$count4}}</em>
             </a>
         </li>
     </ul>
@@ -145,9 +149,21 @@
                                     </div>
                                 </li>
                                 <div class="move-right">
-                                    <li class="td td-status">
+                                	<li class="td td-status">
+                                	  @if($v->sale_order_status == 1)
                                         <div class="item-status">
-                                            <p class="Mystatus">交易成功</p>
+                                           <p>等待买家付款</p>
+                                        </div>
+                                      @elseif($v->sale_order_status == 2)
+                                        <div class="item-status">
+                                            <p class="Mystatus">买家已付款</p>
+                                            <p class="Mystatus">等待卖家发货</p>
+                                        </div>
+                                      @elseif($v->sale_order_status == 3)
+                                         <div class="item-status">
+                                            <p class="Mystatus">
+                                                卖家已发货
+                                            </p>
                                             <p class="order-info">
                                                 <a href="orderinfo.html">
                                                     订单详情
@@ -159,11 +175,52 @@
                                                 </a>
                                             </p>
                                         </div>
-                                    </li>
-                                    <li class="td td-change">
-                                        <div class="am-btn am-btn-danger anniu">
-                                            删除订单
+                                      @elseif($v->sale_order_status == 4)
+                                         <div class="item-status">
+                                            <p class="Mystatus">
+                                                交易成功
+                                            </p>
+                                            <p class="order-info">
+                                                <a href="orderinfo.html">
+                                                    订单详情
+                                                </a>
+                                            </p>
+                                            <p class="order-info">
+                                                <a href="logistics.html">
+                                                    查看物流
+                                                </a>
+                                            </p>
                                         </div>
+                                	  @elseif($v->sale_order_status == 5)
+	                                        <div class="item-status">
+	                                            <p class="Mystatus">交易结束</p>
+	                                            <p class="order-info">卖家评价完成</p> 
+	                                        </div>
+	                                   @endif
+	                                </li>
+	                               
+                                    <li class="td td-change">
+                                      @if($v->sale_order_status == 1)
+                                        <div class="am-btn am-btn-danger anniu" onclick="quxiao({{$v->order_num}})">
+                                            取消订单
+                                        </div>
+                                      @elseif($v->sale_order_status == 2)
+                                        <div class="am-btn am-btn-danger anniu" onclick="danhao({{$v->order_num}})">
+                                            上传单号
+                                        </div>
+                                      @elseif($v->sale_order_status == 3)
+                                        <div class="am-btn am-btn-danger anniu" onclick="shouhuo({{$v->order_num}})">
+                                            提醒买家收货
+                                        </div>
+                                      @elseif($v->sale_order_status == 4)
+                                        <div class="am-btn am-btn-danger anniu" onclick="pingjia({{$v->order_num}})">
+                                            评价买家
+                                        </div>
+                                      @elseif($v->sale_order_status == 5)
+                                      	<div class="am-btn am-btn-danger anniu" onclick="chapingjia({{$v->order_num}})">
+                                            查看评价
+                                        </div>
+                                      @endif
                                     </li>
                                 </div>
                             </div>
