@@ -100,15 +100,20 @@ class NewsController extends Controller
       $num = $request->only(['num']);
 
       $order = Order::where('order_num',$num)->first();
-      $order_id = $order['id'];
-      $receive_uid=$order['buy_uid'];
-      $uid=session('uid');
-      $b= DB::table('message')->where(['msg_content'=>3,'order_id'=>$order_id,'send_uid'=>$uid,'receive_uid'=>$receive_uid]);
 
+      $order_id = $order['id'];
+
+      $receive_uid=$order['buy_uid'];
+
+      $uid=session('uid');
+
+      $b= message::where(['order_id'=>$order_id,'send_uid'=>$uid,'receive_uid'=>$receive_uid])->first();
+
+      // dd($b);
       if($b){
           return 0;
       }else{
-        $a=DB::table('message')->insert(['msg_content'=>3,'order_id'=>$order_id,'send_uid'=>$uid,'receive_uid'=>$receive_uid]);
+        $a=message::create(['msg_content'=>'卖家提醒您及时确认收货!','order_id'=>$order_id,'send_uid'=>$uid,'receive_uid'=>$receive_uid]);
           if($a){
               return 1;
             }else{

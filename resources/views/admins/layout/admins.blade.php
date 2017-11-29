@@ -197,7 +197,18 @@
                         </ul>
                     </li>
                 </ul>
-            </div>         
+            </div>      
+            <div id="mws-navigation">
+                <ul>
+                    <li>
+                        <a href="#"><i class="icon-users"></i>网站配置</a>
+                        <ul class="closed">
+                            <li><a href="/admin/wallet">网站开启与关闭</a></li>
+                            <li><a href="/admin/wallets">轮播图更换</a></li>   
+                        </ul>
+                    </li>
+                </ul>
+            </div>     
         </div>
         
         <!-- Main Container Start -->

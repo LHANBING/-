@@ -65,6 +65,9 @@ Route::group(['middleware'=>'adminlogin','prefix'=>'admin','namespace'=>'admins'
 	Route::post('/status','FriendLinkController@status');
 	Route::resource('/friendlink','FriendLinkController');
 	
+
+	//网站配置
+	Route::get('/peizhi','peizhiController@peizhi');
 	
 
 });
