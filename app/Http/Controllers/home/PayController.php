@@ -11,6 +11,7 @@ use App\Http\Model\Goodsdetail;
 use App\Http\Model\Order;
 use App\Http\Model\Useraddress;
 use App\Http\Model\Collect;
+use App\Http\Model\User;
 use Session;
 use DB;
 
@@ -19,37 +20,60 @@ class PayController extends Controller
     //进入结算页面
     public function gopay()
     {
-
+        //商品id
+        $id = $_GET['goods_id'];
         //用户id
         $user_id = session('uid');
-        //获得用户地址
-        $address = Useraddress::where('user_id',$user_id)->get();
-        // dd($address);
-
-        $default = Useraddress::where('user_id',$user_id)
-                    ->where('status',1)
-                    ->first();
-        // dd($default);
-       /* echo '<pre>';
-        var_dump($address);die;*/
-
-        $id = $_GET['goods_id'];
-
+        // dd($user_id);
+        // dd($user_id);
+        //商品价格
+        $goods_price = Good::where('id',$id)->select('newprice')->first()['newprice'];
+        //判断用户账户余额还够不够
+        $money = User::where('id',$user_id)->select('money')->first()['money'];
+        //账户余额不足
+        //判断用户购买的是否是自己的商品（不能买自己的东西）
+        //获取商品的卖家id
+        // $sale_uid = Good::where('user_id',$user_id)->first()['id'];
+        $sale_uid = Good::join('orders','orders.goods_id','=','goods.id')->where('goods.id',$id)->first()['sale_uid'];
 
 
-         //获取该条商品的信息和详细信息
-        $goods = Good::find($id);
-        // dd($goods);
-        $goodsdetail = Goodsdetail::find($id);
-        //操作json字符串的图片信息
-        $goods_photo = $goodsdetail->pic;
-        $goods_photo = json_decode($goods_photo);
-        // dd($goods_photo);
+        if ($sale_uid == $user_id) {
+                return back()->with('warning','对不起，您不能购买自己的商品');
+        }else {
+
+            if ($goods_price > $money)  {
+                return back()->with('msg','账户余额不足，请充值');
+        } else {
+
+            //获得用户地址
+            $address = Useraddress::where('user_id',$user_id)->get();
+            // dd($address);
+
+            $default = Useraddress::where('user_id',$user_id)
+                        ->where('status',1)
+                        ->first();
+            // dd($default);
+
+             //获取该条商品的信息和详细信息
+            $goods = Good::find($id);
+            // dd($goods);
+            $goodsdetail = Goodsdetail::find($id);
+            //操作json字符串的图片信息
+            $goods_photo = $goodsdetail->pic;
+            $goods_photo = json_decode($goods_photo);
+            // dd($goods_photo);
+            
+
+
+            return view('homes.pay.gopay',['goods'=>$goods,'goods_photo'=>$goods_photo,'address'=>$address,'default'=>$default]);
+        }
+
+        }
+
+        }
+
         
-
-
-    	return view('homes.pay.gopay',['goods'=>$goods,'goods_photo'=>$goods_photo,'address'=>$address,'default'=>$default]);
-    }
+    
     //订单生成进入付款页面
     public function pay(Request $request)
     {
@@ -95,6 +119,19 @@ class PayController extends Controller
 
         $order_id = $order_id['order_id'];
 
+        //获得用户id
+        $user_id = session('uid');
+
+        //获取商品价格
+        $price = Order::join('goods','orders.goods_id','=','goods.id')->where('orders.id',$order_id)->first()['newprice'];
+
+        //获得钱包余额
+        $money = User::where('id',$user_id)->first()['money'];
+
+        //余额减去价格然后存入数据库
+        $last = $money - $price;
+        $res2 = User::where('id',$user_id)->update(['money'=>$last]);
+
         $arr = [];
         //填写完整订单状态
         $arr['buy_order_status'] = 2;
@@ -107,9 +144,9 @@ class PayController extends Controller
         //获取收入字段并
         $money = DB::table('orders_money')->find(1)->shouru;
 
-         $res1 = DB::table('orders_money')->update(['shouru' => $money+$comein]);
+        $res1 = DB::table('orders_money')->update(['shouru' => $money+$comein]);
 
-        if ($res && $res1) {
+        if ($res && $res1 && $res2) {
             return redirect('/home/center/order/index');
         } else {
             return back();

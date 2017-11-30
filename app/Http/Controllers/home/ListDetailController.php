@@ -56,19 +56,18 @@ class ListDetailController extends Controller
     public function show($id)
     {
 
-        
         //将goods_id转换为整型
         // $id = (int)$id;//
         // dd($id);
         //获取卖家足迹信息
         //获取卖家已成交商品
         $res = Good::join('orders','orders.sale_uid','=','goods.user_id')->where(['goods.id'=>$id,'sale_order_status'=>5])->get();
-        
         // dd($res);
 
         //分页
         //$users = DB::table('users')->paginate(15);
         $page = Good::join('orders','orders.sale_uid','=','goods.user_id')->where(['goods.id'=>$id,'sale_order_status'=>5])->paginate(2);
+
         // dd($page);
         //获取已成交商品信息
         $goodsid = [];
@@ -94,7 +93,7 @@ class ListDetailController extends Controller
             $commentpic[$k] = $goods_photo;
             $commentcontent[$k] = $goodsdetail->content;
         }
-        // dd($commentcomment);
+        // dd($commentcontent);
         // dd($commentpic);
 
 
@@ -104,16 +103,25 @@ class ListDetailController extends Controller
          //获得卖家回复
         $salesay = [];
         foreach($orderid as $k=>$v){
-            
-            $buy = Comment::where(['s_id'=>$v['sale_uid'],'order_id'=>$v['order_id']])->select('comment')->get();
-            $buysay[$k] = $buy[$k]->comment;
-            $sale = Comment::where(['b_id'=>$v['sale_uid'],'order_id'=>$v['order_id']])->select('comment')->get();
-            $salesay[$k] = $sale[$k]->comment;
+            //获取一个值，看看空不空 ，不空则继续 获得所有
+             $buyone = Comment::where(['s_id'=>$v['sale_uid'],'order_id'=>$v['order_id']])->select('comment')->first();
+             // dd($buyone);
+             if ($buyone) {
+                $buy = Comment::where(['s_id'=>$v['sale_uid'],'order_id'=>$v['order_id']])->select('comment')->get();
+                $buysay[$k] = $buy[$k]->comment;
+            }
+            $saleone = Comment::where(['b_id'=>$v['sale_uid'],'order_id'=>$v['order_id']])->select('comment')->first();
+            if ($saleone) {
+                $sale = Comment::where(['b_id'=>$v['sale_uid'],'order_id'=>$v['order_id']])->select('comment')->get();
+                $salesay[$k] = $sale[$k]->comment;
+            }
+          
             
         }
         // dd($buysay);
         // dd($salesay);
        
+
         //获取卖家qq号
         $qq = Good::join('users','users.id','=','goods.user_id')
                     ->where('goods.id',$id)
@@ -127,6 +135,8 @@ class ListDetailController extends Controller
 
         //获取该条商品的信息和详细信息
         $goods = Good::find($id);
+
+        // dd($goods);
         $goodsdetail = Goodsdetail::find($id);
         //操作json字符串的图片信息
         $goods_photo = $goodsdetail->pic;
@@ -138,6 +148,8 @@ class ListDetailController extends Controller
         foreach ($goods_photo as $k => $v) {
             $length++;
         }
+
+
 
         //检测商品是否被收藏
         if (session('uid')) {

@@ -18,7 +18,7 @@ class CollectionController extends Controller
     	//收藏的未下架商品
     	$user_id = Session('uid');
     	//收藏的未下架商品
-    	$good = Collect::join('goods','collect.goods_id','=','goods.id')->where(['collect.user_id'=>$user_id,'goods.status'=>1])->get();
+    	$good = Collect::join('goods','collect.goods_id','=','goods.id')->where(['collect.user_id'=>$user_id,'goods.status'=>1])->paginate(100);
     	// dd($goods);
     	//获得未下架商品图片
     	$goodpic = [];
@@ -30,6 +30,7 @@ class CollectionController extends Controller
 
 
     	//收藏的已下架商品
+        // $goods = Collect::join('goods','collect.goods_id','=','goods.id')->where(['collect.user_id'=>$user_id,'goods.status'=>0])->paginate(100);
     	$goods = Collect::join('goods','collect.goods_id','=','goods.id')->where(['collect.user_id'=>$user_id,'goods.status'=>0])->get();
     	//获得下架商品图片
     	$goodspic = [];
@@ -39,6 +40,7 @@ class CollectionController extends Controller
             $goodspic[$v->id] = $re->img1;
     	}
     	// dd($goodspic);
+        // dd($goods); 
 
     	return view('homes.center.collection',['good'=>$good,'goodpic'=>$goodpic,'goods'=>$goods,'goodspic'=>$goodspic]);
     }

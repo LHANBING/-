@@ -58,7 +58,7 @@
                     </div>
                     <div class="topMessage favorite">
                         <div class="menu-hd">
-                            <a href="#" target="_top">
+                            <a href="/home/center/collection/index" target="_top">
                                 <i class="am-icon-heart am-icon-fw">
                                 </i>
                                 <span>

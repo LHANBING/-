@@ -130,16 +130,16 @@
 				<div class="slideall">
 					
 					   <div class="long-title"><span class="all-goods">全部分类</span></div>
-					   <div class="nav-cont">
-							<ul style="width: 800px">
-								<li class="index" style="width: 100px"><a href="#">首页</a></li>
-                                <li class="qc" style="width: 100px"><a href="#">闪购</a></li>
-                                <li class="qc" style="width: 100px"><a href="#">限时抢</a></li>
-                                <li class="qc" style="width: 100px"><a href="#">团购</a></li>
-                                <li class="qc last" style="width: 100px"><a href="#">大包装</a></li>
-							</ul>
-						  
-						</div>					
+					   <!-- <div class="nav-cont">
+					   											<ul style="width: 800px">
+					   												<li class="index" style="width: 100px"><a href="#">首页</a></li>
+					   				                                <li class="qc" style="width: 100px"><a href="#">闪购</a></li>
+					   				                                <li class="qc" style="width: 100px"><a href="#">限时抢</a></li>
+					   				                                <li class="qc" style="width: 100px"><a href="#">团购</a></li>
+					   				                                <li class="qc last" style="width: 100px"><a href="#">大包装</a></li>
+					   											</ul>
+					   										  
+					   										</div>	 -->				
 		        				
 						<!--侧边导航 -->
 						<div id="nav" class="navfull">
@@ -163,7 +163,7 @@
 																		<dt><span title="蛋糕">{{$v->typename}}</span></dt>
 																		@foreach($typechild as $key=>$val)
 																		@if($v->id == $val->type_id)
-																		<dd><a title="蒸蛋糕" href="/home/listtype/{{$v->id}}"><span>{{$val->typechildname}}</span></a></dd>
+																		<dd><a title="蒸蛋糕" href="/home/listtype/{{$val->id}}"><span>{{$val->typechildname}}</span></a></dd>
 																		@endif
 																		@endforeach
 																	</dl>
@@ -273,7 +273,7 @@
 
 								@foreach($typechild as $typechildk=>$typechildv)
 								@if($typev->id == $typechildv->type_id)
-								<a href="/home/listtype/{{$typev->id}}" style="font-size: 1.2em;color: skyblue">{{$typechildv->typechildname}}</a>
+								<a href="/home/listtype/{{$typechildv->id}}" style="font-size: 1.2em;color: skyblue">{{$typechildv->typechildname}}</a>
 								@endif
 								@endforeach
 							</div>
