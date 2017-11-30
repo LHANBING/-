@@ -24,7 +24,7 @@
 					<!--交易时间	-->
  					@if($buy)
 					<div class="order-time">
-						<label class="form-label">收入金额：</label>
+						<label class="form-label">总支出金额：</label>
 					
 						<label class="form-label">{{ $sum }}  元</label>
 					
@@ -38,7 +38,7 @@
 								<th class="memo"></th>
 								<th class="time">创建时间</th>
 								<th class="name">名称</th>
-								<th class="amount">金额</th>
+								<th class="amount">支出金额</th>
 								<th class="action">操作</th>
 							</tr>
 						</thead>
@@ -47,11 +47,11 @@
 							@foreach($buy as $k => $v)
 							<tr>
 								<td class="img">
-									<i><img src="http://ozstangaz.bkt.clouddn.com/good/{{$v->goods_photo}}"></i>
+									<i><img src="http://ozstangaz.bkt.clouddn.com/{{$v->goods_photo}}"></i>
 								</td>
 								<td class="time">
 									
-									<p class="text-muted"> {{ $v->order_otime }}
+									<p class="text-muted"> {{ date("Y-m-d H:i:s $v->order_otime ") }}
 									</p>
 								</td>
 								<td class="title name">

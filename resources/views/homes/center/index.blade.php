@@ -152,7 +152,7 @@
 					
 
 							<!--收藏夹 -->
-							<div class="you-like">
+<!-- 							<div class="you-like">
 								<div class="s-bar">我的收藏
 									<a class="am-badge am-badge-danger am-round">降价</a>
 									<a class="am-badge am-badge-danger am-round">下架</a>
@@ -186,7 +186,7 @@
 
 								<div class="s-more-btn i-load-more-item" data-screen="0"><i class="am-icon-refresh am-icon-fw"></i>更多</div>
 
-							</div>
+							</div> -->
 
 						</div>
 					</div>
@@ -212,19 +212,18 @@
 						<div class="new-goods">
 							<div class="s-bar">
 								<i class="s-icon"></i>今日新品
-								<a class="i-load-more-item-shadow">15款新品</a>
+								
 							</div>
 							
 							<div class="new-goods-info">
 
-								<a class="shop-info" href="#" target="_blank">
+								
 									<div class="face-img-panel">
+										<a class="shop-info" href="http://{{ $status[0]->advs_src }}" target="_blank">
 										<img src="http://ozstangaz.bkt.clouddn.com/{{ $status[0]->advs_s }}" alt="">
+										</a>
 									</div>
-									<span class="new-goods-num ">4</span>
-									<span class="shop-title">剥壳松子</span>
-								</a>
-								<a class="follow " target="_blank">关注</a>
+								
 							</div>
 						</div>
 							
@@ -234,12 +233,13 @@
 							<i class="s-icon"></i>热卖推荐
 							</div>
 							<div class="new-goods-info">
-								<a class="shop-info" href="#" target="_blank">
+								
 									<div >
+										<a class="shop-info" href="http://{{$status[1]->advs_src}}" target="_blank">
 										<img src="http://ozstangaz.bkt.clouddn.com/{{ $status[1]->advs_s }}" alt="">
+									</a>
 									</div>
-                                    <span class="one-hot-goods">￥9.20</span>
-								</a>
+								
 							</div>
 						</div>
 					</div>

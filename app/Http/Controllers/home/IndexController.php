@@ -53,6 +53,7 @@ class IndexController extends Controller
 
         //用户信息
         $user = User::where('id',session('uid'))->first();
+        
         // dd($user->username);die;
         
         //获取友情链接
@@ -72,7 +73,6 @@ class IndexController extends Controller
                                  ->where('message.receive_uid','=',session('uid'))
                                  ->where('mes_status','0') 
                                  ->count();                             
-
         $num = $a + $b;           
         //dd($num);        
     	return view('homes.index',['type'=>$type,'typechild'=>$typechild,'goods'=>$goods,'goods_photo'=>$goods_photo,'num'=>$num,'user'=>$user,'link'=>$link]);
