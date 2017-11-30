@@ -139,13 +139,13 @@
 															<li class="td td-change" style="margin-left: 20px">
 																
 																	
-				@if ($v->buy_order_status ==1) <div class="am-btn am-btn-danger anniu test{{$v->buy_order_status}}" id="{{$v->id}}zhifu">一键支付{{$v->id}}
+				@if ($v->buy_order_status ==1) <div class="am-btn am-btn-danger anniu test{{$v->buy_order_status}}" id="{{$v->id}}zhifu">一键支付
 				
 				</div>
-				@elseif ($v->buy_order_status ==2)<div class="am-btn am-btn-danger anniu test{{$v->buy_order_status}}" id="{{$v->id}}fahuo"> 提醒发货{{$v->id}} </div>
+				@elseif ($v->buy_order_status ==2)<div class="am-btn am-btn-danger anniu test{{$v->buy_order_status}}" id="{{$v->id}}fahuo"> 提醒发货</div>
 
-				@elseif ($v->buy_order_status ==3) <div class="am-btn am-btn-danger anniu test{{$v->buy_order_status}}" id="{{$v->id}}shouhuo">确认收货{{$v->id}} </div>
-				 @elseif ($v->buy_order_status ==4) <div class="am-btn am-btn-danger anniu test{{$v->buy_order_status}}"><a href="/home/center/comment/add?id={{$v->id}}" style="color:white">评价商品{{$v->id}} </a></div>
+				@elseif ($v->buy_order_status ==3) <div class="am-btn am-btn-danger anniu test{{$v->buy_order_status}}" id="{{$v->id}}shouhuo">确认收货 </div>
+				 @elseif ($v->buy_order_status ==4) <div class="am-btn am-btn-danger anniu test{{$v->buy_order_status}}"><a href="/home/center/comment/add?id={{$v->id}}" style="color:white">评价商品</a></div>
 			    @elseif ($v->buy_order_status ==5) <div class="am-btn am-btn-danger anniu test{{$v->buy_order_status}}"><a href="/home/center/comment/index" style="color:white">查看评价</a></div>
 				@endif	
 					
@@ -617,11 +617,11 @@
 						     }
 						
 
-							 if(data[i].buy_order_status ==1){ var status ='待付款';  var btn= data[i].id+"一键支付"; var a ="zhifu"}
-						else if(data[i].buy_order_status ==2){ var status ='待发货';  var btn=data[i].id+"提醒发货";  var a ="fahuo"}
-						else if(data[i].buy_order_status ==3){ var status ='待收货';  var btn=data[i].id+"确认收货";  var a ="shouhuo"}
-						else if(data[i].buy_order_status ==4){ var status ='待评价';  var btn=data[i].id+"<a href='/home/center/comment/add?id="+data[i].id+"' style='color:white'>评价商品</a>"; var a ="pingjia"}
-						else if(data[i].buy_order_status ==5){ var status ='已完成';  var btn=data[i].id+"查看评价";  var a ="show"}
+							 if(data[i].buy_order_status ==1){ var status ='待付款';  var btn="一键支付"; var a ="zhifu"}
+						else if(data[i].buy_order_status ==2){ var status ='待发货';  var btn="提醒发货";  var a ="fahuo"}
+						else if(data[i].buy_order_status ==3){ var status ='待收货';  var btn="确认收货";  var a ="shouhuo"}
+						else if(data[i].buy_order_status ==4){ var status ='待评价';  var btn="<a href='/home/center/comment/add?id="+data[i].id+"' style='color:white'>评价商品</a>"; var a ="pingjia"}
+						else if(data[i].buy_order_status ==5){ var status ='已完成';  var btn="查看评价";  var a ="show"}
 
 							var s = data[i].pay_money+data[i].pay_yunfei;
 

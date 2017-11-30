@@ -121,7 +121,7 @@
                 <script> 
                     $('.newsss').click(function(){
 
-                     location.href="/home/center/order/index";
+                     location.href="/home/center/news/index";
                     })
                 </script>
              
