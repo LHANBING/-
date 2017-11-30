@@ -37,7 +37,7 @@
 								<th class="memo"></th>
 								<th class="time">创建时间</th>
 								<th class="name">名称</th>
-								<th class="amount">金额</th>
+								<th class="amount">收入金额</th>
 								<th class="action">操作</th>
 							</tr>
 						</thead>
@@ -46,11 +46,11 @@
 							@foreach($sale as $k => $v)
 							<tr>
 								<td class="img">
-									<i><img src="http://ozstangaz.bkt.clouddn.com/good/{{$v->goods_photo}}"></i>
+									<i><img src="http://ozstangaz.bkt.clouddn.com/{{$v->goods_photo}}"></i>
 								</td>
 								<td class="time">
 									
-									<p class="text-muted"> {{ $v->pay_time }}
+									<p class="text-muted"> {{ date("Y-m-d H:i:s $v->pay_time ") }}
 									</p>
 								</td>
 								<td class="title name">

@@ -33,7 +33,7 @@
 					<div class="topMessage home">
 						<div class="menu-hd"><a href="/" target="_top" class="h">商城首页</a></div>
 					</div>
-					<div class="topMessage my-shangcheng">
+					<div class="topMessage my-shangcheng qq" id="{{ $user['qq'] }}">
 						<div class="menu-hd MyShangcheng"><a href="/home/center/index" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>
 					</div>
 					<div class="topMessage my-shangcheng">
@@ -64,7 +64,7 @@
 					</div>
 
 					<div class="search-bar pr">
-						<a name="index_none_header_sysc" href="#"></a>
+						<a name="index_none_header_sysc"  href="#"></a>
 						<form action="/home/search" method="get" >
 							<input id="searchInput" name="search" type="text" placeholder="搜索" autocomplete="off" value="{{ isset($request->searchInput) ? $request->searchInput : '' }}">
 							{{ csrf_field() }}
@@ -103,6 +103,7 @@
 						<form>
 							<input id="searchInput" name="index_none_header_sysc" type="text" placeholder="搜索" autocomplete="off">
 							<input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="submit">
+							
 						</form>
 					</div>
 				</div>
@@ -319,7 +320,7 @@
 
 					<div class="footer ">
 
-						<div class="footer-bd ">
+						<div class="footer-bd " >
 							<p>
 								<a href="# ">关于恒望</a>
 								<a href="# ">合作伙伴</a>
@@ -414,8 +415,8 @@
 					</div>
 
 					<!--回到顶部 -->
-					<div id="quick_links_pop " class="quick_links_pop hide "></div>
-
+					<div id="quick_links_pop "  class="quick_links_pop hide "></div>
+	               
 				</div>
 
 			</div>
@@ -427,6 +428,35 @@
 
 		</script>
 		<script type="text/javascript " src="/homes/basic/js/quick_links.js "></script>
+	    <script type="text/javascript" src="{{url('/homes/layer1/jquery.js')}}"></script>
+        <script type="text/javascript" src="{{url('/homes/layer1/layer.js')}}"></script>
+        <script type="text/javascript" src="{{url('/homes/layer1/extend/layer.ext.js')}}"></script>
+
+		<script type="text/javascript">
+
+			// 
+			var qq = $('.qq').attr('id');
+          
+			
+				if(qq == false )
+				{
+			layer.open({
+					  type: 1 
+					  ,title: '<div style="font-size:18px;color:#dd514c;">系统提示</div>'
+					  ,area: ['400px', '200px']
+					  ,shade: 0
+					  ,maxmin: false
+					  ,content: '<div style="font-size:15px;margin:30px">您的信息资料填写不完整<br/>这将会影响您的商品发布和出售！</div>'
+					  ,btn: ['确定'] 
+					  ,zIndex: layer.zIndex 
+					  ,success: function(layero){
+					    layer.setTop(layero); 
+					  }
+					})
+			  
+				}
+			
+		</script>
 	</body>
 
 <!-- <script type="text/javascript">
