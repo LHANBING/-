@@ -85,7 +85,7 @@
 												
 														
 														<div class="am-btn am-btn-danger anniu del" id="{{$v->id}}del">
-														   删除{{$v->id}}</div>
+														   删除</div>
 														
 													</li>
 												
@@ -152,7 +152,7 @@
 												
 														
 														<div class="am-btn am-btn-danger anniu del" id="{{$v->id}}del">
-														   删除{{$v->id}}</div>
+														   删除</div>
 														
 													</li>
 												

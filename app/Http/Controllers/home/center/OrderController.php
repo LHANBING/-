@@ -147,6 +147,9 @@ class OrderController extends Controller
         $arr['send_uid']=session('uid');
         $arr['receive_uid'] = $res->sale_uid;
 
+
+
+
         //打钱给卖家
         $money = $res->pay_money + $res->pay_yunfei;
 
@@ -161,11 +164,21 @@ class OrderController extends Controller
         $updates = $user_money + $money;
         $C = DB::table('users')->where('id',$res->sale_uid)->update(['money'=>$updates]);
 
+
+        //添加钱到账消息
+        $arr1['order_id'] = $id;
+        $arr1['msg_content'] = '您的出售的商品钱款已到账';
+        $arr1['send_uid'] = session('uid');
+        $arr1['receive_uid'] = $res->sale_uid;
+
+        $E =Message::create($arr1); 
+
+
         $D = Message::create($arr);
     
 
 
-        if($A && $B && $C && $D){
+        if($A && $B && $C && $D && $E){
               
               DB::commit();
             echo 1;

@@ -93,7 +93,7 @@
 
 													<div class="item-info">
 														<div>
-													<p class="info-little dels" id="{{$v->id}}del" style="cursor:pointer;">删除{{$v->id}}</p>
+													<p class="info-little dels" id="{{$v->id}}del" style="cursor:pointer;">删除</p>
 															<p class="info-time">买家我在{{$v->created_at}}评论了卖家{{$v->username}}的商品</p>
 
 														</div>

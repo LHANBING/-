@@ -24,6 +24,7 @@ class CommentController extends Controller
                                 ->join('users','users.id','=','orders.sale_uid')        
                                 ->where('orders.buy_uid','=',session('uid'))   //这里重点
                                 ->where('comment.b_id','=',session('uid'))
+                                ->orderBy('comment.created_at','desc')
                                 ->select('goodsdetail.pic','goods.title','comment.*','users.username')
                                 ->get();
 
@@ -37,6 +38,7 @@ class CommentController extends Controller
                                 ->where('orders.sale_uid','=',session('uid'))   //这里重点
                                 ->where('comment.b_id','=',session('uid'))
                                 ->select('goodsdetail.pic','goods.title','comment.*','users.username')
+
                                 ->get();
 
                               
@@ -49,6 +51,7 @@ class CommentController extends Controller
                                  ->join('users','users.id','=','orders.sale_uid')       
                                 ->where('orders.buy_uid','=',session('uid'))   //这里重点
                                 ->where('comment.s_id','=',session('uid'))
+                                ->orderBy('comment.created_at','desc')
                                 ->select('goodsdetail.pic','goods.title','comment.*','users.username')
                                 ->get();
                                 
@@ -59,7 +62,8 @@ class CommentController extends Controller
                                  ->join('goodsdetail','goodsdetail.goods_id','=','goods.id')
                                  ->join('users','users.id','=','orders.buy_uid')         
                                 ->where('orders.sale_uid','=',session('uid'))
-                                ->where('comment.s_id','=',session('uid'))      //这里重点
+                                ->where('comment.s_id','=',session('uid'))  //这里重点
+                                ->orderBy('comment.created_at','desc')    
                                 ->select('goodsdetail.pic','goods.title','comment.*','users.username')
                                 ->get();
                                 

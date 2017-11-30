@@ -67,20 +67,20 @@
 													<ul class="item-list" >
 														<li class="td td-item">
 															<div class="item-pic">
-																<a class="J_MakePoint" href="#">
+																
 																	<img class="itempic J_ItemImg" src="http://ozstangaz.bkt.clouddn.com/{{$v->pic}}">
-																</a>
+															
 															</div>
 															<div class="item-info" >
 																<div class="item-basic-info" >
-																	<a href="#">
+															
 																		<p>{{$v->title}}</p>
 																		<br/>	 
 																		<p class="info-little">原因:{{$v->ops}}<br/>
 																			详细 :{{$v->content}}
 																			 </p>
 
-																	</a>
+																
 																</div>
 															</div>
 														</li>
@@ -116,7 +116,7 @@
 														
 														<div class="item-status">
 																<p class="Mystatus" style="color:#d2364c;">
-																	@if($v->status ==1) 退货成功
+																	@if($v->status ==1) 申请退货成功
 																	@elseif($v->status ==2) 卖家收货成功
 																	@elseif($v->status ==3) 退款成功
 																	@endif
