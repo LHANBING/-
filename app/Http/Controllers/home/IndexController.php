@@ -19,14 +19,15 @@ class IndexController extends Controller
 {
     public function index(Request $request)
     {
-        /*$res = Goodsdetail::find(16);
-        $res = rtrim($res->pic);
-        // dd($res);
-         $ress = json_decode($res);
-        dd($ress);die;*/
 
-        //获取前台允许显示的父类信息
-    	$type = Type::where('status',1)->get();
+    $asd = DB::table('config')->where('id',1)->first();
+
+    $qwe = $asd->config;
+
+if($qwe){
+
+    //获取前台允许显示的父类信息
+        $type = Type::where('status',1)->get();
         //获取前台允许显示的子类信息
         $typechild = Typechild::where('status',1)->get();
         //获取所有商品的数量
@@ -71,7 +72,14 @@ class IndexController extends Controller
 
         $num = $a + $b;           
         //dd($num);        
-    	return view('homes.index',['type'=>$type,'typechild'=>$typechild,'goods'=>$goods,'goods_photo'=>$goods_photo,'num'=>$num,'user'=>$user]);
+        return view('homes.index',['type'=>$type,'typechild'=>$typechild,'goods'=>$goods,'goods_photo'=>$goods_photo,'num'=>$num,'user'=>$user]);
+}else{
+    return redirect(404);
+}
+
+        
+
+        
     
     }
 
