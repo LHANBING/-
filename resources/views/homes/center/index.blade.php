@@ -107,30 +107,30 @@
 								<ul>
 									<li>
 										@if($sfukuan == 0)
-										<a href="/home/center/order/index"><i><img src="/homes/images/pay.png"/></i><span>待付款</span></a>
+										<a href="/home/center/maiOrder"><i><img src="/homes/images/pay.png"/></i><span>待付款</span></a>
 										@else
-										<a href="/home/center/order/index"><i><img src="/homes/images/pay.png"/></i><span>待付款<em class="m-num">{{$sfukuan}}</em></span></a>	
+										<a href="/home/center/maiOrder"><i><img src="/homes/images/pay.png"/></i><span>待付款<em class="m-num">{{$sfukuan}}</em></span></a>	
 										@endif
 									</li>
 									<li>
 										@if($sfahuo == 0)
-										<a href="/home/center/order/index"><i><img src="/homes/images/pay.png"/></i><span>待发货</span></a>
+										<a href="/home/center/maiOrder"><i><img src="/homes/images/pay.png"/></i><span>待发货</span></a>
 										@else
-										<a href="/home/center/order/index"><i><img src="/homes/images/pay.png"/></i><span>待发货<em class="m-num">{{$sfahuo}}</em></span></a>	
+										<a href="/home/center/maiOrder"><i><img src="/homes/images/pay.png"/></i><span>待发货<em class="m-num">{{$sfahuo}}</em></span></a>	
 										@endif
 									</li>
 									<li>
 										@if($sshouhuo == 0)
-										<a href="/home/center/order/index"><i><img src="/homes/images/pay.png"/></i><span>待收货</span></a>
+										<a href="/home/center/maiOrder"><i><img src="/homes/images/pay.png"/></i><span>待收货</span></a>
 										@else
-										<a href="/home/center/order/index"><i><img src="/homes/images/pay.png"/></i><span>待收货<em class="m-num">{{$sshouhuo}}</em></span></a>	
+										<a href="/home/center/maiOrder"><i><img src="/homes/images/pay.png"/></i><span>待收货<em class="m-num">{{$sshouhuo}}</em></span></a>	
 										@endif
 									</li>
 									<li>
 										@if($spingjia == 0)
-										<a href="/home/center/order/index"><i><img src="/homes/images/pay.png"/></i><span>待评价</span></a>
+										<a href="/home/center/maiOrder"><i><img src="/homes/images/pay.png"/></i><span>待评价</span></a>
 										@else
-										<a href="/home/center/order/index"><i><img src="/homes/images/pay.png"/></i><span>待评价<em class="m-num">{{$spingjia}}</em></span></a>	
+										<a href="/home/center/maiOrder"><i><img src="/homes/images/pay.png"/></i><span>待评价<em class="m-num">{{$spingjia}}</em></span></a>	
 										@endif
 									</li>
 								</ul>
@@ -151,6 +151,7 @@
 							</div>
 					
 
+<<<<<<< HEAD
 							<!--收藏夹 -->
 <!-- 							<div class="you-like">
 								<div class="s-bar">我的收藏
@@ -188,6 +189,9 @@
 
 							</div> -->
 
+=======
+							
+>>>>>>> 8634bf942cf8ad75be2cf9d4fbe6be3b57d64bca
 						</div>
 					</div>
 					<div class="wrap-right">
