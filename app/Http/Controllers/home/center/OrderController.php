@@ -98,9 +98,10 @@ class OrderController extends Controller
          //开启事务
          DB::beginTransaction();
 
-         $A = DB::table('orders_money')->update(['shouru'=>$a]);
 
-         $B =DB::table('users')->where('id',$res->buy_uid)->update(['money'=>$b]); 
+         $A = DB::table('orders_money')->update(['shouru'=>$b]);
+
+         $B =DB::table('users')->where('id',$res->buy_uid)->update(['money'=>$a]); 
 
          $C =DB::table('orders')->where('id',$id)->update(['buy_order_status'=>'2','sale_order_status'=>'2']);
 

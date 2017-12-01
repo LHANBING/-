@@ -39,7 +39,14 @@
 										@foreach ($arr as $k =>$v)	
 										<div class="order-list" id="all{{$v->id}}">
 											<div class="order-title">
-												<div class="dd-num">卖家：<a href="javascript:;">{{$v->username}}</a></div>
+												<div class="dd-num">
+                                                 @if($v->send_uid ==0)
+                                                   系统提示
+                                                  @else  
+													卖家：<a href="javascript:;">{{$v->username}}</a>
+                                                 @endif
+
+												</div>
 												<span>时间：{{$v->created_at}}</span>
 											
 											</div>
@@ -103,7 +110,13 @@
 										@foreach ($ar as $k =>$v)	
 										<div class="order-list" id="all{{$v->id}}">
 											<div class="order-title">
-												<div class="dd-num">买家：<a href="javascript:;">{{$v->username}}</a></div>
+												<div class="dd-num">
+													  @if($v->send_uid ==0)
+                                                   系统提示
+                                                  @else  
+													买家：<a href="javascript:;">{{$v->username}}</a>
+                                                 @endif
+												</div>
 												<span>时间：{{$v->created_at}}</span>
 											
 											</div>

@@ -20,6 +20,7 @@ class ChangeController extends Controller
                                 ->join('goods','goods.id','=','orders.goods_id')
                                 ->join('goodsdetail','goodsdetail.goods_id','=','goods.id')
                                 ->join('users','users.id','=','orders.sale_uid')
+                                ->where('orders.buy_uid','=',session('uid'))
                                 ->select('users.username','goodsdetail.pic','goods.title','orders.order_num','refund.*','orders.pay_money','orders.pay_yunfei') 
                                 ->get();
       ///转换json子串                            
@@ -97,5 +98,12 @@ class ChangeController extends Controller
         	return back();
         }
 
+    }
+
+
+
+    public function rechange ()
+    {
+      echo "123";
     }
 }
