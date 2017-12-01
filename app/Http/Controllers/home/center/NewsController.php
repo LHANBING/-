@@ -110,7 +110,18 @@ class NewsController extends Controller
 
       $uid=session('uid');
 
-      $b= message::where(['order_id'=>$order_id,'send_uid'=>$uid,'receive_uid'=>$receive_uid])->first();
+      $b= message::where(['order_id'=>$order_id,'send_uid'=>$uid,'receive_uid'=>$receive_uid,'msg_content'=>'卖家提醒您及时确认收货!'])->first();
+
+      // dd($b);
+
+      // $content = $b->msg_content;
+
+      // $o_id=$b->order_id;
+
+      // $status = $b->mes_status;
+
+      // dd($order_id);
+      // $content == '卖家提醒您及时确认收货!' && $o_id == $order_id && $status == '0'
 
       // dd($b);
       if($b){

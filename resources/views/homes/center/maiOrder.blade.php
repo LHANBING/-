@@ -771,7 +771,11 @@
 
 		$.post('/home/center/maiOrder/chapingjia',{num:num,_token:'{{csrf_token()}}'},function(data){
 			layer.load(1);
-
+                 if(data['0'] == '10'){
+                    var asd = '买家暂未评价!';
+                 }else{
+                    var asd = data[0].comment;
+                 }
 			if(data){
 				layer.closeAll('loading');
 				layer.open({
@@ -779,7 +783,7 @@
 				  title: '评价信息',
 				  skin: 'layui-layer-rim', //加上边框
 				  area: ['420px', '240px'], //宽高
-				  content: '<div> <div style="background:deeppink;width:400px;height:80px"> <p>买家评价您:</p> <p>'+data[0].comment+'</p> </div> <div style="background:pink;width:400px;height:80px"> <p>您评价买家:</p> <p>'+data[1].comment+'</p> </div> </div>'
+				  content: '<div> <div style="background:deeppink;width:400px;height:80px"> <p>买家评价您:</p> <p>'+asd+'</p> </div> <div style="background:pink;width:400px;height:80px"> <p>您评价买家:</p> <p>'+data[1].comment+'</p> </div> </div>'
 				});
 			}
 			
