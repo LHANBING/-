@@ -132,11 +132,12 @@
                     @elseif($v->buy_order_status == 3)
                             待收货  
                     @elseif($v->buy_order_status == 4)
-                            等待确认收货 
+                            待评价
                     @endif
                         </td>
                         <td class=" ">
                             <form action="/admin/wallet/{{$v->id}}" method="POST">
+                    
                                 {{ csrf_field() }}
                                 {{ method_field('PUT') }}
                                 <button class='btn btn-success btn-lg btn-block'>
@@ -147,6 +148,7 @@
                             <form action="/admin/wallet/{{$v->id}}" method="POST" style='margin-top: 10px;'>
                                 {{ csrf_field() }}
                                 {{ method_field('DELETE') }}
+                            
                                 <button class='btn btn-primary btn-lg btn-block'>
                                     退款给买家
                                 </button>

@@ -9,6 +9,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Model\Order;
 use App\Http\Model\Order_money;
 use App\Http\Model\User;
+use App\Http\Model\Good;
+use App\Http\Model\Goodsdetail;
+use App\Http\Model\Type;
+use App\Http\Model\Typechild;
+use App\Http\Model\message;
+use App\Http\Model\Comment;
 use DB;
 
 class WalletController extends Controller
@@ -106,6 +112,8 @@ class WalletController extends Controller
 
         // 查询卖家id
         $sale_uid = $res->sale_uid;
+        //查询买家id
+        $buy_uid = $res->buy_uid;
 
         //
         $zhichu = Order_money::value('zhichu');
@@ -115,25 +123,33 @@ class WalletController extends Controller
         $a = $zhichu+$money;
 
         $b = $qianbao+$money;
-
+        // $c= DB::table('orders')->where('id',$id)->first();
+        // dd($c->buy_order_status);
         // dd($user1);
         // 开启事务
         DB::beginTransaction();  
         try {  
                 // 出账总金额加上商品价格 
-                $user1 = DB::table('orders_money')->where('id',1)->update(['zhichu' => '-'.$a]);
+                $user1 = DB::table('orders_money')->where('id',1)->update(['zhichu' =>$a]);
                 // 卖家账户加上商品价格
                 $user2 = DB::table('users')->where('id',$sale_uid)->update(['money'=> $b]);
                 // 更改买家状态为待评价
-                $c= DB::table('orders')->where('id',$id)->update(['buy_order_status' => '5']);
+                $c= DB::table('orders')->where('id',$id)->update(['buy_order_status' => '4']);
                 //更改卖家状态为待评价
-                $d= DB::table('orders')->where('id',$id)->update(['sale_order_status'=> '5']);          
-                    if( $user1 && $user2 && $c && $d){  
+                $d= DB::table('orders')->where('id',$id)->update(['sale_order_status'=> '4']);
+                //给买卖家发送消息 
+                $e= message::create(['msg_content'=>'买家交易超时,系统自动打款给您!','send_uid'=>'0','receive_uid'=>$sale_uid,'order_id'=>$id]);
+              
+             $f= message::create(['msg_content'=>'买家交易超时,系统自动打款给卖家!','send_uid'=>'0','receive_uid'=>$buy_uid,'order_id'=>$id]);  
+
+
+                    if( $user1 && $user2 && $c && $d && $e && $f){  
                             DB::commit(); 
                             return redirect('/admin/wallet');
                         
                     }else{
-                        return redirect('404');
+                        // return redirect('404');
+                        return 1;
                     }
 
             } catch (\Exception $e) {  
@@ -157,6 +173,8 @@ class WalletController extends Controller
         $money = $res->pay_money + $res->pay_yunfei ;
 
         // 查询卖家id
+        $sale_uid = $res->sale_uid;
+        //查询买家id
         $buy_uid = $res->buy_uid;
 
         //
@@ -174,18 +192,25 @@ class WalletController extends Controller
         try {  
                 // 出账总金额加上商品价格 
                 $user1 = DB::table('orders_money')->where('id',1)->update(['shouru' => $a]);
-                // 卖家账户加上商品价格
+                // 买家账户加上商品价格
                 $user2 = DB::table('users')->where('id',$buy_uid)->update(['money'=> $b]);
                 // 更改买家状态为待评价
-                $c= DB::table('orders')->where('id',$id)->update(['buy_order_status' => '5']);
+                $c= DB::table('orders')->where('id',$id)->update(['buy_order_status' => '4']);
                 //更改卖家状态为待评价
-                $d= DB::table('orders')->where('id',$id)->update(['sale_order_status'=> '5']);          
-                    if( $user1 && $user2 && $c && $d){  
+                $d= DB::table('orders')->where('id',$id)->update(['sale_order_status'=> '4']);
+                
+
+                $e= message::create(['msg_content'=>'卖家交易超时,系统自动打款给您!','send_uid'=>'0','receive_uid'=>$buy_uid,'order_id'=>$id]);
+                $f= message::create(['msg_content'=>'卖家交易超时,系统自动打款给买家!','send_uid'=>'0','receive_uid'=>$sale_uid,'order_id'=>$id]);  
+
+
+                    if( $user1 && $user2 && $c && $d && $e && $f){  
                             DB::commit(); 
                             return redirect('/admin/wallet');
                         
                     }else{
-                        return redirect('404');
+                        // return redirect('404');
+                        return  1;
                     }
 
             } catch (\Exception $e) {  
