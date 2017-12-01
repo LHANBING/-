@@ -144,7 +144,7 @@
                             <div class="order-right">
                                 <li class="td td-amount">
                                     <div class="item-amount">
-                                        合计：{{$v->pay_money + $v->pay_yunfei}} 元
+                                        合计：{{$v->pay_money}} 元
                                         <p>含运费：<span>{{$v->pay_yunfei}} 元</span></p>
                                     </div>
                                 </li>
@@ -307,7 +307,7 @@
                             <div class="order-right">
                                 <li class="td td-amount">
                                     <div class="item-amount">
-                                        合计：{{$v->pay_money + $v->pay_yunfei}} 元
+                                        合计：{{$v->pay_money}} 元
                                         <p>含运费：<span>{{$v->pay_yunfei}} 元</span></p>
                                     </div>
                                 </li>
@@ -408,7 +408,7 @@
                             <div class="order-right">
                                 <li class="td td-amount">
                                     <div class="item-amount">
-                                        合计：{{$v->pay_money + $v->pay_yunfei}} 元
+                                        合计：{{$v->pay_money}} 元
                                         <p>含运费：<span>{{$v->pay_yunfei}} 元</span></p>
                                     </div>
                                 </li>
@@ -509,7 +509,7 @@
                             <div class="order-right">
                                 <li class="td td-amount">
                                     <div class="item-amount">
-                                        合计：{{$v->pay_money + $v->pay_yunfei}} 元
+                                        合计：{{$v->pay_money}} 元
                                         <p>含运费：<span>{{$v->pay_yunfei}} 元</span></p>
                                     </div>
                                 </li>
@@ -621,7 +621,7 @@
                             <div class="order-right">
                                 <li class="td td-amount">
                                     <div class="item-amount">
-                                        合计：{{$v->pay_money + $v->pay_yunfei}} 元
+                                        合计：{{$v->pay_money}} 元
                                         <p>含运费：<span>{{$v->pay_yunfei}} 元</span></p>
                                     </div>
                                 </li>
@@ -789,4 +789,5 @@
 			
 		});
 	}
+    
 </script>
