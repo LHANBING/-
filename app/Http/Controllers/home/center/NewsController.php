@@ -14,7 +14,9 @@ class NewsController extends Controller
     public function index (Request $Request)
     {
 
-      
+          
+
+
          //我购买的  收到的消息                            
          $arr = DB::table('message')->join('orders','orders.id','=','message.order_id')
                                      ->join('goods','goods.id','=','orders.goods_id') 
@@ -25,7 +27,7 @@ class NewsController extends Controller
                                      ->select('message.*','goods.title','goodsdetail.pic','users.username')
                                      ->orderBy('message.created_at','desc')
                                      ->get();
-
+        
 
         //我出售的 我收到的
         $ar = DB::table('message')->join('orders','orders.id','=','message.order_id')
@@ -36,7 +38,8 @@ class NewsController extends Controller
                                  ->where('message.receive_uid','=',session('uid'))
                                  ->select('message.*','goods.title','goodsdetail.pic','users.username')
                                  ->orderBy('message.created_at','desc')
-                                 ->get();    
+                                 ->get(); 
+                       
 
          //dd($ar);    
           //转换json子串                            
@@ -55,8 +58,8 @@ class NewsController extends Controller
 
                      $ar[$key]->pic = $pic[$key]->img1;    
                  }                          
-                                 
-    
+
+         
 
         // dd($arr);                                                      
 
