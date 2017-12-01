@@ -76,7 +76,7 @@ if($qwe){
                                  ->count();                             
         $num = $a + $b;           
         //dd($num);        
-        return view('homes.index',['type'=>$type,'typechild'=>$typechild,'goods'=>$goods,'goods_photo'=>$goods_photo,'num'=>$num,'user'=>$user]);
+        return view('homes.index',['type'=>$type,'typechild'=>$typechild,'goods'=>$goods,'goods_photo'=>$goods_photo,'num'=>$num,'user'=>$user,'link'=>$link]);
 }else{
     return redirect(404);
 }
