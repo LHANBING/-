@@ -446,20 +446,18 @@
 			
 				if(qq == false )
 				{
-			layer.open({
-					  type: 1 
-					  ,title: '<div style="font-size:18px;color:#dd514c;">系统提示</div>'
-					  ,area: ['400px', '200px']
-					  ,shade: 0
-					  ,maxmin: false
-					  ,content: '<div style="font-size:15px;margin:30px">您的信息资料填写不完整<br/>这将会影响您的商品发布和出售！</div>'
-					  ,btn: ['确定'] 
-					  ,zIndex: layer.zIndex 
-					  ,success: function(layero){
-					    layer.setTop(layero); 
-					  }
-					})
-			  
+			  layer.open({  
+			  			title: '<div style="font-size:18px;color:#dd514c;">系统提示</div>',
+                        content: '您的信息资料填写不完整,这将会影响您的商品发布和出售！',  
+                        btn: ['确认'],  
+                        yes: function(index, layero) {  
+                            window.location.href='/home/center/info/index';  
+                        },cancel: function() {  
+                            //右上角关闭回调  
+  
+
+                        }  
+                    });
 				}
 			
 		</script>

@@ -217,6 +217,8 @@ class InfoController extends Controller
               // 判断是否更新成功
                  if ($info) 
                  {  
+                    // 删除点session中的uid
+                    $request->session()->forget('uid');
                     // 返会ajax的值
                     echo 1;
                  }else

@@ -137,12 +137,14 @@ class PayController extends Controller
 
         //获取商品价格
         $price = Order::join('goods','orders.goods_id','=','goods.id')->where('orders.id',$order_id)->first()['newprice'];
+        //获取运费
+        $trans = Order::join('goods','orders.goods_id','=','goods.id')->where('orders.id',$order_id)->first()['transprice'];
 
         //获得钱包余额
         $money = User::where('id',$user_id)->first()['money'];
 
         //余额减去价格然后存入数据库
-        $last = $money - $price;
+        $last = $money - $price - $trans;
         $res2 = User::where('id',$user_id)->update(['money'=>$last]);
 
         $arr = [];
@@ -157,7 +159,8 @@ class PayController extends Controller
         //运费
         $goods_trans = Order::where('id',$order_id)->first()->pay_yunfei;
         //总费用
-        $comein = $goods_price + $goods_trans;
+        $comein = $goods_price;
+       
         //获取收入字段
         $money = DB::table('orders_money')->find(1)->shouru;
         //将总价格加入收入字段

@@ -76,7 +76,7 @@ class OrderController extends Controller
  
         $res=DB::table('orders')->where('id',$id)->first();
 
-        $money = $res->pay_money+$res->pay_yunfei;
+        $money = $res->pay_money;
 
         $arr=DB::table('users')->join('orders',function($query){
 
@@ -152,7 +152,7 @@ class OrderController extends Controller
 
 
         //打钱给卖家
-        $money = $res->pay_money + $res->pay_yunfei;
+        $money = $res->pay_money;
 
         //支出的钱
         $zhichu=DB::table('orders_money')->select('zhichu')->first()->zhichu;
@@ -172,6 +172,12 @@ class OrderController extends Controller
         $arr1['send_uid'] = session('uid');
         $arr1['receive_uid'] = $res->sale_uid;
 
+
+        //把商品字段改为2
+        $goods_id = $res->goods_id;
+
+        $res9 = DB::table('goods')->where('id',$goods_id)->update(['status'=>'2']); 
+
         $E =Message::create($arr1); 
 
 
@@ -179,7 +185,7 @@ class OrderController extends Controller
     
 
 
-        if($A && $B && $C && $D && $E){
+        if($A && $B && $C && $D && $E && $res9){
               
               DB::commit();
             echo 1;

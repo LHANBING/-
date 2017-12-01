@@ -63,6 +63,7 @@
 										<div class="order-list">
 											
 										@foreach($res as $k => $v)
+										  @if($v->buy_order_status != 0 )
 											<!--不同状态订单-->
 											<div class="order-status3 " id="a_{{$v->id}}" >
 												<div class="order-title">
@@ -124,6 +125,7 @@
 																<div class="item-status">
 																	<p class="Mystatus">
 															@if ($v->buy_order_status ==1) 待付款 
+															@elseif ($v->buy_order_status ==0) 订单已取消 
 															@elseif ($v->buy_order_status ==2) 待发货 
 															@elseif ($v->buy_order_status ==3) 待收货 
 															@elseif ($v->buy_order_status ==4) 待评价 
@@ -157,6 +159,7 @@
 												</div>
 
 											</div>
+											@endif
 										@endforeach
 										</div>
 
