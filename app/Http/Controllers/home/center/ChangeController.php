@@ -45,7 +45,11 @@ class ChangeController extends Controller
     	                  ->where('orders.id',$id)
     	                  ->select('orders.*','goodsdetail.pic','goods.title','users.username')
     	                  ->first();
-    	//dd($arr);
+      
+                   
+        $ar =  json_decode($arr->pic)->img1; 
+
+        $arr->pic = $ar;
 
     	return view('homes.center.addChange',['arr'=>$arr]);
     } 
