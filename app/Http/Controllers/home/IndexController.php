@@ -39,7 +39,7 @@ if($qwe){
         //将商品id的数组打乱
         $lists = shuffle($list);
         //取出数组中的5条数据
-        $res = array_slice($list,1,10);
+        $res = array_slice($list,0,10);
         //获取随机获取的商品信息
         $goods = Good::whereIn('id',$res)->get();
         //获取随机获取的商品的详细信息

@@ -289,7 +289,13 @@ class maiOrderController extends Controller
 
         $salepingjia =Comment::where(['order_id'=>$order_id,'b_id'=>$id])->first(); 
         
-        return [$buypingjia,$salepingjia];
+
+        if($buypingjia == ''){
+            return ['10',$salepingjia];
+        }else{
+            return [$buypingjia,$salepingjia];
+        }
+        
         
 
     }
