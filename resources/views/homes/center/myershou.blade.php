@@ -133,10 +133,12 @@
                                          </li> -->
                                          <li class="td td-price">
                                             <div class="item-price" id="item-price{{$ress[$k]->id}}">
-                                              @if($ress[$k]->status)
+                                              @if($ress[$k]->status == 1)
                                                		<span>上架中</span>
-                                              @else
+                                              @elseif($ress[$k]->status == 0)
                                                		<p>已下架</p>
+                                              @elseif($ress[$k]->status == 2)
+                                                  <p>已售出</p>
                                               @endif
                                             </div>
                                        	 </li>
@@ -148,23 +150,43 @@
                                        	 <li class="td td-price">
                             <div class="item-price" style='width:150px'>
 
-                        @if($ress[$k]->status) 
+
+
+
+                    @if($ress[$k]->status == 1) 
 		                 <button class="am-btn am-btn-danger xia{{$ress[$k]->id}}" onclick="xia({{$ress[$k]->id}})">下架</button>
-		                @else
+		                @elseif($ress[$k]->status == 0) 
 		                 <button class="am-btn am-btn-danger xia{{$ress[$k]->id}}" onclick="shang({{$ress[$k]->id}})">上架</button>
+                    @elseif($ress[$k]->status == 2) 
+
 		                @endif
+                      
 
 
+
+
+
+                      @if($ress[$k]->status == 1 ) 
 		                    <a href="/home/center/xiugaidata/{{$ress[$k]->id}}/edit"><button class="am-btn am-btn-danger">修改</button></a>
+                        @endif
 
 
 
+
+
+                        @if($ress[$k]->status == 1) 
 		                    <button id='shanchu{{$ress[$k]->id}}' class="am-btn am-btn-danger" onclick="shan({{$ress[$k]->id}})" style='margin-top:3px;'>删除</button>
+                          @endif
 
 
 
 
+
+
+                        @if($ress[$k]->status == 1) 
 		                    <a href="/home/listdetail/{{$ress[$k]->id}}"><button class="am-btn am-btn-danger" style='margin-top:3px;'>详情</button></a>
+
+                        @endif
                             </div>
                     
                                        	 </li>
