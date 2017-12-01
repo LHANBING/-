@@ -358,11 +358,15 @@
 						<a href="# ">
 							<span class="setting "></span>
 						</a>
+						@if(!empty($user))
 						<div class="ibar_login_box status_login ">
 							<div class="avatar_box ">
 								<p class="avatar_imgbox "><img src="http://ozstangaz.bkt.clouddn.com/userphoto/{{$user->user_photo}}" /></p>
 								<ul class="user_info ">
+									
 									<li>{{$user->username}}</li>
+									<li></li>
+									
 								</ul>
 							</div>
 							<div class="login_btnbox ">
@@ -371,6 +375,8 @@
 							</div>
 							<i class="icon_arrow_white "></i>
 						</div>
+						@endif
+						
 
 					</div>
 				
