@@ -103,13 +103,13 @@
 				$.post("/home/register/phone",{tel:phone,'_token':'{{csrf_token()}}'},function(data) 
 				 {	
 				 	
-					通过判断data的值,得到信息
+					// 通过判断data的值,得到信息
 					if (data == "1") 
 					{	
 						layer.open({						 
 						  content: '短信已发送！'
 						});						
-						location.reload();
+						// location.reload();
 					}else if(data == "0")
 					{	
 						layer.open({						 

@@ -88,12 +88,12 @@
 														<ul class="td-changeorder">
 															<li class="td td-orderprice">
 																<div class="item-orderprice" >
-																	<span>交易金额:</span>{{$v->pay_money + $v->pay_yunfei}}
+																	<span>交易金额:</span>{{$v->pay_money }}
 																</div>
 															</li>
 															<li class="td td-changeprice">
 																<div class="item-changeprice" >
-																	<span>退款金额:</span>{{$v->pay_money + $v->pay_yunfei}}
+																	<span>退款金额:</span>{{$v->pay_money}}
 
 																</div>
 															</li>

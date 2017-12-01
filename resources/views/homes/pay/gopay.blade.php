@@ -484,7 +484,7 @@
                                                     ¥
                                                 </span>
                                                 <em class="style-large-bold-red " id="J_ActualFee">
-                                                    {{$goods->newprice+$goods->transprice}}
+                                                    {{$goods->newprice + $goods->transprice}}
                                                 </em>
                                             </span>
                                         </div>

@@ -12,6 +12,7 @@ use App\Http\Model\Order;
 use App\Http\Model\Useraddress;
 use App\Http\Model\Collect;
 use App\Http\Model\User;
+use App\Http\Model\Message;
 use Session;
 use DB;
 
@@ -35,7 +36,6 @@ class PayController extends Controller
         //获取商品的卖家id
         // $sale_uid = Good::where('user_id',$user_id)->first()['id'];
         $sale_uid = Good::join('orders','orders.goods_id','=','goods.id')->where('goods.id',$id)->first()['sale_uid'];
-
 
         if ($sale_uid == $user_id) {
                 return back()->with('warning','对不起，您不能购买自己的商品');
@@ -119,8 +119,21 @@ class PayController extends Controller
 
         $order_id = $order_id['order_id'];
 
+        //商品拥有者
+        $sale_id = Order::where('id',$order_id)->first()['sale_uid'];
+
         //获得用户id
         $user_id = session('uid');
+
+        //商品消息提醒
+        $arr = [];
+        $arr['send_uid'] = $user_id;
+        $arr['receive_uid'] = $sale_id;
+        $arr['order_id'] = $order_id;
+        $arr['msg_content'] = '买家已付款,请及时发货';
+        //插入数据
+        $res3 = Message::create($arr);
+
 
         //获取商品价格
         $price = Order::join('goods','orders.goods_id','=','goods.id')->where('orders.id',$order_id)->first()['newprice'];
@@ -139,14 +152,18 @@ class PayController extends Controller
         $arr['pay_time'] = time();
 
         $res = Order::where('id',$order_id)->update($arr);
-
-        $comein = Order::where('id',$order_id)->first()->pay_money;
-        //获取收入字段并
+        //商品价格
+        $goods_price = Order::where('id',$order_id)->first()->pay_money;
+        //运费
+        $goods_trans = Order::where('id',$order_id)->first()->pay_yunfei;
+        //总费用
+        $comein = $goods_price + $goods_trans;
+        //获取收入字段
         $money = DB::table('orders_money')->find(1)->shouru;
-
+        //将总价格加入收入字段
         $res1 = DB::table('orders_money')->update(['shouru' => $money+$comein]);
 
-        if ($res && $res1 && $res2) {
+        if ($res && $res1 && $res2 && $res3) {
             return redirect('/home/center/order/index');
         } else {
             return back();

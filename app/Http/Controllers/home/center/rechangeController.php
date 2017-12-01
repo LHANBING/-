@@ -58,7 +58,7 @@ class rechangeController extends Controller
          $order_id = Refund::with('Order')->where('id',$id)->first()->order->id;
         
 
-         $money = $pay_money +$pay_yunfei;
+         $money = $pay_money;
  
         //给系统减钱
          $zhichu = Order_money::value('zhichu');  
