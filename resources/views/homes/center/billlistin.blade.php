@@ -43,7 +43,7 @@
 						</thead>
 						
 						<tbody>
-							@foreach($sale as $k => $v)
+							@foreach($goods as $k => $v)
 							<tr>
 								<td class="img">
 									<i><img src="http://ozstangaz.bkt.clouddn.com/{{$pics[$k]}}"></i>
@@ -73,7 +73,7 @@
 								</td>
 								@else
 								<td class="operation" style="text-align: center;">
-									
+									已退货
 								</td>
 								@endif
 							</tr>

@@ -214,7 +214,7 @@
 										  ,btn: ['确定'] 
 										  ,zIndex: layer.zIndex 
 										  ,success: function(layero){
-										    layer.setTop(layero); 
+										    window.location.href="/home/center/news/index";
 										  }
 										});
 

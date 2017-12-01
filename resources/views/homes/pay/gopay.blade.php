@@ -356,7 +356,7 @@
                                                     <li class="td td-item">
                                                         <div class="item-pic">
                                                             <a href="#" class="J_MakePoint">
-                                                                <img src="http://ozstangaz.bkt.clouddn.com/{{$goods_photo->img1}}">
+                                                                <img style="width: 100%" src="http://ozstangaz.bkt.clouddn.com/{{$goods_photo->img1}}">
                                                             </a>
                                                         </div>
                                                         <div class="item-info">

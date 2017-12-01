@@ -290,11 +290,16 @@
 	 	 			// 通过判断data的值,得到信息
 	 	 			if(data == 1)
 	 	 			{	
-
-	 	 						layer.open({
-							  content:'删除成功！'
-							});
-							location.reload();
+				
+							layer.open({  
+	                        content: '删除成功！',  
+	                        btn: ['确认'],  
+	                        yes: function(index, layero) {  
+	                            window.location.href='/home/center/address';  
+	                        },cancel: function() {  
+	                            //右上角关闭回调  			 
+	                        }  
+	                    });
 	 	 			}else
 	 	 			{
 	 	 				layer.open({

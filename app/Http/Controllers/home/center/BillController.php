@@ -30,7 +30,7 @@ class BillController extends Controller
         // 用户的余额
         $money = $user_info['money'];
         // 用户是否有收入
-        $sale = DB::select('select * from orders where sale_uid ='.$id.' and sale_order_status > 3');
+        $sale = DB::select('select * from orders where sale_uid ='.$id.' and sale_order_status > 3 ');
         // 用户是否有支出
         $buy = DB::select('select * from orders where buy_uid ='.$id.' and buy_order_status > 1');
 
@@ -74,7 +74,7 @@ class BillController extends Controller
             $sum += $v->pay_money + $v->pay_yunfei;
         }
                                                  // 用户支出的信息
-        return view('homes.center.billlistout',compact('goods','pics','sum','name'));
+        return view('homes.center.billlistin',compact('goods','pics','sum','name'));
     	
     }
 
