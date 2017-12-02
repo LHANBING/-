@@ -48,7 +48,7 @@ class BillController extends Controller
     {   
         // 在session获取uid
         $id = session('uid');
-        // 用户收入的信息
+       
         // 获取用户卖出商品的订单信息
         
         //获取购买所有商品订单信息
@@ -71,9 +71,12 @@ class BillController extends Controller
             $goodsdetail = goodsdetail::where('id',$goods_id)->first();
             $pic = json_decode($goodsdetail->pic)->img1; 
             $pics[$k] = $pic;
-            $sum += $v->pay_money + $v->pay_yunfei;
+            if($v->buy_order_status != 6)
+            {
+                $sum += $v->pay_money;
+            }
         }
-                                                 // 用户支出的信息
+                                                // 用户支出的信息
         return view('homes.center.billlistin',compact('goods','pics','sum','name'));
     	
     }

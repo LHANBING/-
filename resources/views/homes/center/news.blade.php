@@ -204,19 +204,18 @@
 
 									if(data == 1){
 
-										layer.open({
-										  type: 1 
-										  ,title: '<div style="font-size:18px;color:#dd514c;">系统提示</div>'
-										  ,area: ['500px', '200px']
-										  ,shade: 0
-										  ,maxmin: false
-										  ,content: '<div style="font-size:15px;margin:30px">操作成功</div>'
-										  ,btn: ['确定'] 
-										  ,zIndex: layer.zIndex 
-										  ,success: function(layero){
-										    window.location.href="/home/center/news/index";
-										  }
-										});
+										layer.open({  
+										title: '<div style="font-size:18px;color:#dd514c;">系统提示</div>',
+				                        content: '操作成功！',  
+				                        btn: ['确认'],  
+				                        yes: function(index, layero) {  
+				                            window.parent.location.reload();
+									        parent.layer.close(index);  
+				                        },cancel: function() {  
+				                            //右上角关闭回调  
+				  
+				                        }  
+				                    });
 
 										read.attr('class','Mystatus')	
 										read.css('color','black');
@@ -252,20 +251,18 @@
 
 									if(data == 1){
 
-										
-										layer.open({
-										  type: 1 
-										  ,title: '<div style="font-size:18px;color:#dd514c;">系统提示</div>'
-										  ,area: ['500px', '200px']
-										  ,shade: 0
-										  ,maxmin: false
-										  ,content: '<div style="font-size:15px;margin:30px">删除成功</div>'
-										  ,btn: ['确定'] 
-										  ,zIndex: layer.zIndex 
-										  ,success: function(layero){
-										    layer.setTop(layero); 
-										  }
-										});
+										layer.open({  
+										title: '<div style="font-size:18px;color:#dd514c;">系统提示</div>',
+				                        content: '删除成功！',  
+				                        btn: ['确认'],  
+				                        yes: function(index, layero) {  
+				                            window.parent.location.reload();
+									        parent.layer.close(index);  
+				                        },cancel: function() {  
+				                            //右上角关闭回调  
+				  
+				                        }  
+				                    });
 
 										del.parents().find('#all'+ids).remove();
 									}else{
