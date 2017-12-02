@@ -22,11 +22,11 @@
 					<hr>
 
 					<!--交易时间	-->
- 					@if($buy)
+ 					
 					<div class="order-time">
-						<label class="form-label">总支出金额：</label>
+						<label class="form-label" style="width: 100px">总支出金额：</label>
 					
-						<label class="form-label">{{ $sum }}  元</label>
+						<label class="form-label">{{ $sum }}元</label>
 					
                           <div class="clear"></div>
 					</div>
@@ -35,53 +35,53 @@
 
 						<thead>
 							<tr>
-								<th class="memo"></th>
-								<th class="time">创建时间</th>
-								<th class="name">名称</th>
-								<th class="amount">支出金额</th>
-								<th class="action">操作</th>
+								<th class="memo" style="text-align: center;"></th>
+								<th class="time" style="text-align: center;">订单号</th>
+								<th class="name" style="text-align: center;">名称</th>
+								<th class="amount" style="text-align: center;">支出金额</th>
+								<th class="action" style="text-align: center;">状态</th>
 							</tr>
 						</thead>
 						
 						<tbody>
-							@foreach($buy as $k => $v)
+							@foreach($goods as $k => $v)
 							<tr>
-								<td class="img">
-									<i><img src="http://ozstangaz.bkt.clouddn.com/{{$v->goods_photo}}"></i>
+								<td class="img" style="text-align: center;">
+									<i><img src="http://ozstangaz.bkt.clouddn.com/{{$pics[$k]}}"></i>
 								</td>
-								<td class="time">
+								<td class="time" style="text-align: center;">
 									
-									<p class="text-muted"> {{ date("Y-m-d H:i:s $v->order_otime ") }}
+									<p class="text-muted"> {{ $v->order_num }}
 									</p>
 								</td>
-								<td class="title name">
+								<td class="title name" style="text-align: center;">
 									<p class="content">
-										{{ $v->title}}
+										{{$name[$k]}}
 									</p>
 								</td>
 
-								<td class="amount">
-									<span class="amount-pay">{{ $v->pay_money }}</span>
+								<td class="amount" style="text-align: center;">
+									<span class="amount-pay">{{ $v->pay_money + $v->pay_yunfei }}</span>
 								</td>
 								
 								 @if($v->sale_order_status == 2)
-								<td class="operation">
+								<td class="operation" style="text-align: center;">
 									待发货	
 								</td>
 								 @elseif($v->sale_order_status == 3)
-								 <td class="operation">
+								 <td class="operation" style="text-align: center;"> 
 									待收货
 								</td>
 								 @elseif($v->sale_order_status == 4)
-								 <td class="operation">
+								 <td class="operation" style="text-align: center;">
 									待评价
 								</td>
 								@elseif($v->sale_order_status == 5)
-								 <td class="operation">
+								 <td class="operation" style="text-align: center;">
 									已评价
 								</td>
 								@else
-								<td class="operation">
+								<td class="operation" style="text-align: center;">
 									
 								</td>
 								@endif
@@ -90,29 +90,6 @@
 						 </tbody>
 						 </table>
 						
-						 @else
-						 <div class="order-time">
-							<label class="form-label">收入金额：</label>
-						
-							<label class="form-label">{{ $sum }}  元</label>
-						
-	                          <div class="clear"></div>
-						</div>
-	                     <table width="100%">
-
-						<thead>
-							<tr>
-								<th class="memo"></th>
-								<th class="time">创建时间</th>
-								<th class="name">名称</th>
-								<th class="amount">金额</th>
-								<th class="action">操作</th>
-							</tr>
-						</thead>
-						<tbody>
-						</tbody>
-						 </table>
-						@endif
 
 				
 									

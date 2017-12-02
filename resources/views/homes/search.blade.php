@@ -20,7 +20,7 @@
 						现价:{{$goodsv->newprice}}
 					</div>
 					<div class="sub-title ">
-						原件:{{$goodsv->newprice}}
+						原件:{{$goodsv->oldprice}}
 					</div>
 				</div>
 				<a href="/home/listdetail/{{$goodsv->id}}"><img style="height: 140px" src="http://ozstangaz.bkt.clouddn.com/{{$goods_photo[$goodsv->id]}}" style="width: 60%" /></a>

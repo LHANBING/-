@@ -131,16 +131,16 @@
 				<div class="slideall">
 					
 					   <div class="long-title"><span class="all-goods">全部分类</span></div>
-					   <div class="nav-cont">
-							<ul style="width: 800px">
-								<li class="index" style="width: 100px"><a href="#">首页</a></li>
-                                <li class="qc" style="width: 100px"><a href="#">闪购</a></li>
-                                <li class="qc" style="width: 100px"><a href="#">限时抢</a></li>
-                                <li class="qc" style="width: 100px"><a href="#">团购</a></li>
-                                <li class="qc last" style="width: 100px"><a href="#">大包装</a></li>
-							</ul>
-						  
-						</div>					
+					   <!-- <div class="nav-cont">
+					   											<ul style="width: 800px">
+					   												<li class="index" style="width: 100px"><a href="#">首页</a></li>
+					   				                                <li class="qc" style="width: 100px"><a href="#">闪购</a></li>
+					   				                                <li class="qc" style="width: 100px"><a href="#">限时抢</a></li>
+					   				                                <li class="qc" style="width: 100px"><a href="#">团购</a></li>
+					   				                                <li class="qc last" style="width: 100px"><a href="#">大包装</a></li>
+					   											</ul>
+					   										  
+					   										</div>	 -->				
 		        				
 						<!--侧边导航 -->
 						<div id="nav" class="navfull">
@@ -164,7 +164,7 @@
 																		<dt><span title="蛋糕">{{$v->typename}}</span></dt>
 																		@foreach($typechild as $key=>$val)
 																		@if($v->id == $val->type_id)
-																		<dd><a title="蒸蛋糕" href="/home/listtype/{{$v->id}}"><span>{{$val->typechildname}}</span></a></dd>
+																		<dd><a title="蒸蛋糕" href="/home/listtype/{{$val->id}}"><span>{{$val->typechildname}}</span></a></dd>
 																		@endif
 																		@endforeach
 																	</dl>
@@ -274,7 +274,7 @@
 
 								@foreach($typechild as $typechildk=>$typechildv)
 								@if($typev->id == $typechildv->type_id)
-								<a href="/home/listtype/{{$typev->id}}" style="font-size: 1.2em;color: skyblue">{{$typechildv->typechildname}}</a>
+								<a href="/home/listtype/{{$typechildv->id}}" style="font-size: 1.2em;color: skyblue">{{$typechildv->typechildname}}</a>
 								@endif
 								@endforeach
 							</div>
@@ -302,7 +302,7 @@
 										现价:{{$goodsv->newprice}}
 									</div>
 									<div class="sub-title ">
-										原件:{{$goodsv->newprice}}
+										原件:{{$goodsv->oldprice}}
 									</div>
 								</div>
 								<a href="/home/listdetail/{{$goodsv->id}}"><img src="http://ozstangaz.bkt.clouddn.com/{{$goods_photo[$goodsv->id]}}" style="height: 130px" style="width: 60%" /></a>
@@ -358,11 +358,15 @@
 						<a href="# ">
 							<span class="setting "></span>
 						</a>
+						@if(!empty($user))
 						<div class="ibar_login_box status_login ">
 							<div class="avatar_box ">
 								<p class="avatar_imgbox "><img src="http://ozstangaz.bkt.clouddn.com/userphoto/{{$user->user_photo}}" /></p>
 								<ul class="user_info ">
+									
 									<li>{{$user->username}}</li>
+									<li></li>
+									
 								</ul>
 							</div>
 							<div class="login_btnbox ">
@@ -371,6 +375,8 @@
 							</div>
 							<i class="icon_arrow_white "></i>
 						</div>
+						@endif
+						
 
 					</div>
 				
@@ -440,20 +446,18 @@
 			
 				if(qq == false )
 				{
-			layer.open({
-					  type: 1 
-					  ,title: '<div style="font-size:18px;color:#dd514c;">系统提示</div>'
-					  ,area: ['400px', '200px']
-					  ,shade: 0
-					  ,maxmin: false
-					  ,content: '<div style="font-size:15px;margin:30px">您的信息资料填写不完整<br/>这将会影响您的商品发布和出售！</div>'
-					  ,btn: ['确定'] 
-					  ,zIndex: layer.zIndex 
-					  ,success: function(layero){
-					    layer.setTop(layero); 
-					  }
-					})
-			  
+			  layer.open({  
+			  			title: '<div style="font-size:18px;color:#dd514c;">系统提示</div>',
+                        content: '您的信息资料填写不完整,这将会影响您的商品发布和出售！',  
+                        btn: ['确认'],  
+                        yes: function(index, layero) {  
+                            window.location.href='/home/center/info/index';  
+                        },cancel: function() {  
+                            //右上角关闭回调  
+  
+
+                        }  
+                    });
 				}
 			
 		</script>

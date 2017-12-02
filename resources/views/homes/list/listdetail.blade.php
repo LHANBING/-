@@ -141,6 +141,7 @@
 							<li>
 								<div class="clearfix tb-btn tb-btn-buy theme-login">
 									<a id="LikBuy" title="点此按钮到下一步确认购买信息" href="/home/gopay?goods_id={{$goods->id}}">立即购买</a>
+									<!-- <span style="width: 100px;padding-left: 25px; background: #db192a; color: white"  title="点此按钮到下一步确认购买信息" id="{{--{{$goods->id}}--}}" onclick="buy(this)" >立即购买</span style="width: 120px;border: 1px solid black"> -->
 								</div>
 							</li>
 							<li>
@@ -243,7 +244,7 @@
 												<div class="am-comment-bd">
 													<div class="tb-rev-item " data-id="255776406962">
 														<div class="J_TbcRate_ReviewContent tb-tbcr-content ">
-															{{$buysay[$k]}}
+															{{isset($buysay[$k]) ? $buysay[$k] : ''}}
 														</div>
 													</div>
 
@@ -266,7 +267,7 @@
 												<div class="am-comment-bd">
 													<div class="tb-rev-item " data-id="255776406962">
 														<div class="J_TbcRate_ReviewContent tb-tbcr-content ">
-															{{$salesay[$k]}}
+															{{isset($salesay[$k]) ? $salesay[$k] : ''}}
 														</div>
 													</div>
 
@@ -321,8 +322,26 @@
 										<div class="tb-rate-alert type-attention">购买前请查看该商品的 购物保障，明确您的售后保障权益。</div>
 									</div>
 
+									@if(session('msg'))
+
+									<script type="text/javascript">
+										alert('账户余额不足，请充值！')
+									</script>
+									
+									@endif
+
+									@if(session('warning'))
+
+									<script type="text/javascript">
+										alert('对不起，您不能购买自己的商品!')
+									</script>
+									
+									@endif
+
 
 @endsection()
+
+
 
 <script>
 	 //collect = $('.collect');
@@ -330,8 +349,6 @@
 	var collect = function(obj){
 		var id = $(obj).attr('id');
 		// console.log(id);
-		
-
 		$.post('/home/collect',{id:id,_token:'{{csrf_token()}}'},function(data){
 			if (data == 1) {
 				$(obj).text('已收藏');
@@ -346,6 +363,30 @@
 		})
   		
 	}
+
+
+
+	/*var buy = function(obj){
+		var id = $(obj).attr('id');
+
+		// console.log(id);
+		$.post('/home/gopay',{id:id,_token:'{{csrf_token()}}'},function(data){
+
+
+			if (data == 0) {
+				layer.msg('您的余额不足，请先充值');
+			} else {
+				console.log(data)
+			}
+			
+		})
+
+
+  		
+	}
+*/
+
+
 </script>
 
 

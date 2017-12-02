@@ -40,7 +40,7 @@
     <body>
         <div class="container">
             <div class="content">
-                <div class="title">404 NOT FOUND</div>
+                <div class="title">网站维护,请等会再来!</div>
             </div>
         </div>
     </body>

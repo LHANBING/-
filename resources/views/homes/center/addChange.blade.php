@@ -52,7 +52,7 @@
 						<div class="refund-aside">
 							<div class="item-pic">
 								<a class="J_MakePoint" href="#">
-									<img class="itempic" src="/homes/images/comment.jpg_400x400.jpg">
+									<img class="itempic" src="http://ozstangaz.bkt.clouddn.com/{{$arr->pic}}">
 								</a>
 							</div>
 

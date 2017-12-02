@@ -121,7 +121,7 @@
                 <script> 
                     $('.newsss').click(function(){
 
-                     location.href="/home/center/order/index";
+                     location.href="/home/center/news/index";
                     })
                 </script>
              
@@ -236,7 +236,7 @@
                         <ul>
                             <li>
                                 <a href="/home/center/order/index">
-                                    我的订单
+                                    购买订单
                                 </a>
                             </li>
                             <li>
@@ -263,12 +263,12 @@
                             </li>
                             <li>
                                 <a href="/home/center/maiOrder">
-                                    订单管理
+                                    出售订单
                                 </a>
                             </li>
                             <li>
-                                <a href="/home/center/change/index">
-                                    退款售后
+                                <a href="/home/center/rechange/index">
+                                    向我退货
                                 </a>
                             </li>
                         </ul>

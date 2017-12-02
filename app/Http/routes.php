@@ -82,6 +82,7 @@ Route::group(['middleware'=>'adminlogin','prefix'=>'admin','namespace'=>'admins'
 
 	//网站配置
 	Route::get('/peizhi','peizhiController@peizhi');
+	Route::get('/dupeizhi','peizhiController@dupeizhi');
 	
 
 });
@@ -150,6 +151,10 @@ Route::group(['middleware'=>'homelogin','prefix'=>'home/center','namespace'=>'ho
 	Route::get('/change/index','ChangeController@index');
 	Route::get('/change/add','ChangeController@add');
 	Route::post('/change/stro','ChangeController@stro');
+    
+    //退换货
+    Route::get('/rechange/index','rechangeController@index');
+    Route::post('/rechange/save','rechangeController@save');
 
 	//进入充值页面
 	Route::get('/recharge/index','RechargeController@index');
@@ -203,6 +208,7 @@ Route::group(['middleware'=>'homelogin','prefix'=>'home/center','namespace'=>'ho
 	Route::resource('maiOrder','maiOrderController');
 	Route::post('maiOrder/quxiao','maiOrderController@quxiao');
 	Route::post('maiOrder/pingjia','maiOrderController@pingjia');
+	Route::post('maiOrder/chapingjia','maiOrderController@chapingjia');
 	
 
 

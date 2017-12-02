@@ -20,14 +20,15 @@ class IndexController extends Controller
 {
     public function index(Request $request)
     {
-        /*$res = Goodsdetail::find(16);
-        $res = rtrim($res->pic);
-        // dd($res);
-         $ress = json_decode($res);
-        dd($ress);die;*/
 
-        //获取前台允许显示的父类信息
-    	$type = Type::where('status',1)->get();
+    $asd = DB::table('config')->where('id',1)->first();
+
+    $qwe = $asd->config;
+
+if($qwe){
+
+    //获取前台允许显示的父类信息
+        $type = Type::where('status',1)->get();
         //获取前台允许显示的子类信息
         $typechild = Typechild::where('status',1)->get();
         //获取所有商品的数量
@@ -37,10 +38,11 @@ class IndexController extends Controller
         $list = DB::table('goods')->where('status',1)->lists('id');
         //将商品id的数组打乱
         $lists = shuffle($list);
-        //取出数组中的5条数据
-        $res = array_slice($list,1,10);
+        //取出数组中的10条数据
+        $res = array_slice($list,0,10);
         //获取随机获取的商品信息
         $goods = Good::whereIn('id',$res)->get();
+
         //获取随机获取的商品的详细信息
         $goodsdetail = Goodsdetail::whereIn('id',$res)->get();
         //定义存放图片的数组
@@ -75,7 +77,14 @@ class IndexController extends Controller
                                  ->count();                             
         $num = $a + $b;           
         //dd($num);        
-    	return view('homes.index',['type'=>$type,'typechild'=>$typechild,'goods'=>$goods,'goods_photo'=>$goods_photo,'num'=>$num,'user'=>$user,'link'=>$link]);
+        return view('homes.index',['type'=>$type,'typechild'=>$typechild,'goods'=>$goods,'goods_photo'=>$goods_photo,'num'=>$num,'user'=>$user,'link'=>$link]);
+}else{
+    return redirect(404);
+}
+
+        
+
+        
     
     }
 

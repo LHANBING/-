@@ -76,7 +76,7 @@ class OrderController extends Controller
  
         $res=DB::table('orders')->where('id',$id)->first();
 
-        $money = $res->pay_money+$res->pay_yunfei;
+        $money = $res->pay_money;
 
         $arr=DB::table('users')->join('orders',function($query){
 
@@ -98,9 +98,10 @@ class OrderController extends Controller
          //开启事务
          DB::beginTransaction();
 
-         $A = DB::table('orders_money')->update(['shouru'=>$a]);
 
-         $B =DB::table('users')->where('id',$res->buy_uid)->update(['money'=>$b]); 
+         $A = DB::table('orders_money')->update(['shouru'=>$b]);
+
+         $B =DB::table('users')->where('id',$res->buy_uid)->update(['money'=>$a]); 
 
          $C =DB::table('orders')->where('id',$id)->update(['buy_order_status'=>'2','sale_order_status'=>'2']);
 
@@ -147,8 +148,11 @@ class OrderController extends Controller
         $arr['send_uid']=session('uid');
         $arr['receive_uid'] = $res->sale_uid;
 
+
+
+
         //打钱给卖家
-        $money = $res->pay_money + $res->pay_yunfei;
+        $money = $res->pay_money;
 
         //支出的钱
         $zhichu=DB::table('orders_money')->select('zhichu')->first()->zhichu;
@@ -161,11 +165,27 @@ class OrderController extends Controller
         $updates = $user_money + $money;
         $C = DB::table('users')->where('id',$res->sale_uid)->update(['money'=>$updates]);
 
+
+        //添加钱到账消息
+        $arr1['order_id'] = $id;
+        $arr1['msg_content'] = '您的出售的商品钱款已到账';
+        $arr1['send_uid'] = session('uid');
+        $arr1['receive_uid'] = $res->sale_uid;
+
+
+        //把商品字段改为2
+        $goods_id = $res->goods_id;
+
+        $res9 = DB::table('goods')->where('id',$goods_id)->update(['status'=>'2']); 
+
+        $E =Message::create($arr1); 
+
+
         $D = Message::create($arr);
     
 
 
-        if($A && $B && $C && $D){
+        if($A && $B && $C && $D && $E && $res9){
               
               DB::commit();
             echo 1;

@@ -46,7 +46,7 @@
 											退款金额
 										</div>
 										<div class="th th-changeprice th-price">
-											卖家
+											买家
 										</div>
 
 										<div class="th th-change th-changebuttom" style="width:270px">
@@ -88,12 +88,12 @@
 														<ul class="td-changeorder">
 															<li class="td td-orderprice">
 																<div class="item-orderprice" >
-																	<span>交易金额:</span>{{$v->pay_money }}
+																	<span>交易金额:</span>{{$v->pay_money + $v->pay_yunfei}}
 																</div>
 															</li>
 															<li class="td td-changeprice">
 																<div class="item-changeprice" >
-																	<span>退款金额:</span>{{$v->pay_money}}
+																	<span>退款金额:</span>{{$v->pay_money + $v->pay_yunfei}}
 
 																</div>
 															</li>
@@ -116,12 +116,10 @@
 														
 														<div class="item-status">
 																<p class="Mystatus" style="color:#d2364c;">
-																	@if($v->status ==1)
-																	 <div class="am-btn am-btn-danger anniu" style="cursor:not-allowed;">等待卖家收货</div>
-
-																	@elseif($v->status ==2) 
-																	<div class="am-btn am-btn-danger anniu" style="cursor:not-allowed;">退货成功</div>
-																	@endif
+																	@if($v->status ==1) 
+																	<div class="am-btn am-btn-danger anniu" id="{{$v->id}}dvs" onclick='func({{$v->id}})'>我已收货</div>
+																	@elseif($v->status ==2)  <div class="am-btn am-btn-danger anniu" style="cursor:not-allowed;">退货成功</div>
+																	 @endif 
 														</p>
 														 </div>
 													
@@ -143,21 +141,29 @@
 
 		
 
-			@if(session('thcg'))
+			{{-- @if(session('thcg')) --}}
 
 			 <script>	
-						layer.confirm('<div style="font-size:15px">退货成功,已经自动为您跳转到退货页面</div>', {
-								btn: ['返回','确定'] //按钮
-								 ,icon: 1
-								,skin: 'layer-ext-moon'
-							   ,title: '<div style="font-size:18px;color:#dd514c;">系统提示</div>'
-								}, function(){
-										location.href="/home/center/order/index";
-								}); 
-				
+					
+				      
+				      
+				      function func (data)
+				      { 
+				      	  id = data;
+				      	 $.post('/home/center/rechange/save',{_token:'{{csrf_token()}}',id:id},function(data){	    
+
+				      	 	    if(data ==1){
+	   
+				                    layer.msg('操作成功');
+				      	 	    	$('#'+id+'dvs').attr('onclick','');
+				      	 	    	$('#'+id+'dvs').text('退货成功');
+				      	 	    	$('#'+id+'dvs').css('cursor','not-allowed');
+				      	 	    }
+				      	 })
+				      }
 			 </script>	
 									
-		@endif		
+	{{--	@endif		--}}
 							
 
 	

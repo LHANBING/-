@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Model\User;
 use App\Http\Model\Order;
 use App\Http\Model\Good;
+use App\Http\Model\goodsdetail;
 use DB;
 class BillController extends Controller
 {   
@@ -29,7 +30,7 @@ class BillController extends Controller
         // 用户的余额
         $money = $user_info['money'];
         // 用户是否有收入
-        $sale = DB::select('select * from orders where sale_uid ='.$id.' and sale_order_status > 3');
+        $sale = DB::select('select * from orders where sale_uid ='.$id.' and sale_order_status > 3 ');
         // 用户是否有支出
         $buy = DB::select('select * from orders where buy_uid ='.$id.' and buy_order_status > 1');
 
@@ -48,28 +49,32 @@ class BillController extends Controller
         // 在session获取uid
         $id = session('uid');
         // 用户收入的信息
-        $sale = DB::table('orders')
-                ->join('users','orders.sale_uid','=','users.id')
-                ->join('goods','goods_id','=','goods.id')
-                ->where('sale_order_status','>','3')
-                ->select('orders.*','goods.goods_photo','goods.title')
-                ->where('users.id',$id)
-                ->get();
+        // 获取用户卖出商品的订单信息
+        
+        //获取购买所有商品订单信息
+        $goods = Order::where('sale_uid',$id)->get();
 
-        if($sale != false)
-        {   
-            //用户收入的金额 
-            $sum = 0;
-            foreach ($sale as $key => $value) 
-            {
-                $sum = $sum + $value->pay_money;
-            }
-            return view('homes.center.billlistin',['sale'=>$sale,'sum'=>$sum]);
-        }else
-        {    //用户收入的金额
-             $sum = 0;
-            return view('homes.center.billlistin',['sale'=>$sale,'sum'=>$sum]);
+        //获取商品详情
+        
+        //存放商品图片
+        $pics = [];
+        //存放商品名称
+        $name = [];
+        $sum = 0;
+
+        foreach ($goods as $k => $v) {
+            //获得商品id
+            $goods_id = $v->goods_id;
+            //获得title
+            $name[$k] = Good::where('id',$goods_id)->first()['title'];
+            //获得图片
+            $goodsdetail = goodsdetail::where('id',$goods_id)->first();
+            $pic = json_decode($goodsdetail->pic)->img1; 
+            $pics[$k] = $pic;
+            $sum += $v->pay_money + $v->pay_yunfei;
         }
+                                                 // 用户支出的信息
+        return view('homes.center.billlistin',compact('goods','pics','sum','name'));
     	
     }
 
@@ -84,30 +89,31 @@ class BillController extends Controller
     {   
         // 在session获取uid
         $id = session('uid');
-        // 用户支出的信息
-        $buy = DB::table('orders')
-                ->join('users','orders.buy_uid','=','users.id')
-                ->join('goods','goods_id','=','goods.id')
-                ->where('buy_order_status','>','1')
-                ->select('orders.*','goods.goods_photo','goods.title')
-                ->where('users.id',$id)
-                ->get();
 
-        if($buy != false)
-        {   
-            //用户支出的金额 
-            $sum = 0;
-            foreach ($buy as $key => $value) 
-            {   
-                               
-                $sum = $sum + $value->pay_money + $value->pay_yunfei;
-            }
-            return view('homes.center.billlistout',['buy'=>$buy,'sum'=>$sum]);
-        }else
-        {    //用户收入的金额
-             $sum = 0;
-            return view('homes.center.billlistout',['buy'=>$buy,'sum'=>$sum]);
+        //获取购买所有商品订单信息
+        $goods = Order::where('buy_uid',$id)->get();
+
+        //获取商品详情
+        
+        //存放商品图片
+        $pics = [];
+        //存放商品名称
+        $name = [];
+        $sum = 0;
+
+        foreach ($goods as $k => $v) {
+            //获得商品id
+            $goods_id = $v->goods_id;
+            //获得title
+            $name[$k] = Good::where('id',$goods_id)->first()['title'];
+            //获得图片
+            $goodsdetail = goodsdetail::where('id',$goods_id)->first();
+            $pic = json_decode($goodsdetail->pic)->img1; 
+            $pics[$k] = $pic;
+            $sum += $v->pay_money + $v->pay_yunfei;
         }
-    	
+                                                 // 用户支出的信息
+        return view('homes.center.billlistout',compact('goods','pics','sum','name'));
+       
     }
 }

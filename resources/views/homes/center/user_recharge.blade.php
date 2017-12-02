@@ -83,10 +83,15 @@
 						  		// 通过判断data的值,得到信息
 						  		if(data)
 						  		{
-						  			layer.open({
-									 content: '充值成功！'
-									});
-									$('#money').val('');
+									layer.open({  
+			                        content: '充值成功！',  
+			                        btn: ['确认'],  
+			                        yes: function(index, layero) {  
+			                            window.location.href='/home/center/bill/index';  
+			                        },cancel: function() {  
+			                            //右上角关闭回调  			 
+			                        }  
+			                    });
 						  		}else
 						  		{
 						  			layer.open({

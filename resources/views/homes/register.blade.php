@@ -102,14 +102,12 @@
 				// 发送ajax
 				$.post("/home/register/phone",{tel:phone,'_token':'{{csrf_token()}}'},function(data) 
 				 {	
-				 	
-					//通过判断data的值,得到信息
+				 	//通过判断data的值,得到信息
 					if (data == "1") 
 					{	
 						layer.open({						 
 						  content: '短信已发送！'
 						});						
-						
 					}else if(data == "0")
 					{	
 						layer.open({						 
@@ -179,22 +177,48 @@
 						// 通过判断data的值,得到信息
 						if(data == "1")
 						{
-							layer.open({								 
-								  content: '注册成功,赶快去登录吧！'
-								});	
+					layer.open({  
+                        content: '注册成功,赶快去登陆吧！',  
+                        btn: ['确认'],  
+                        yes: function(index, layero) {  
+                            window.location.href='/home/login';  
+                        },cancel: function() {  
+                            //右上角关闭回调  
+  
+                        }  
+                    });
 							
 						}else if(data == "0")
 						{
-							layer.open({
-								 
-								  content: '注册失败！'
-								});		
+					layer.open({
+						  type: 1 
+						  ,title: '<div style="font-size:18px;color:#dd514c;">系统提示</div>'
+						  ,area: ['400px', '200px']
+						  ,shade: 0
+						  ,maxmin: false
+						  ,content: '<div style="font-size:15px;margin:30px">注册失败</div>'
+						  ,btn: ['确定'] 
+						  ,zIndex: layer.zIndex 
+						  ,success: function(layero){
+						    layer.setTop(layero); 
+						  }
+						})
+	
 						}else
 						{
-							layer.open({
-								 
-								  content: '手机号已注册！'
-								});
+					layer.open({
+						  type: 1 
+						  ,title: '<div style="font-size:18px;color:#dd514c;">系统提示</div>'
+						  ,area: ['400px', '200px']
+						  ,shade: 0
+						  ,maxmin: false
+						  ,content: '<div style="font-size:15px;margin:30px">手机号已注册,请重新注册!</div>'
+						  ,btn: ['确定'] 
+						  ,zIndex: layer.zIndex 
+						  ,success: function(layero){
+						    layer.setTop(layero); 
+						  }
+						})
 					    }
 
 					})

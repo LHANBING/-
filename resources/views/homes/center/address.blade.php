@@ -151,7 +151,7 @@
 											<label class="am-form-label" for="user-intro">详细地址</label>
 											<div class="am-form-content">
 												<textarea placeholder="输入详细地址" id="user-intro" rows="3" class="" name="address" style="resize:none;" ></textarea>
-												<small>100字以内写出你的详细地址...</small>
+												<small>30字以内写出你的详细地址...</small>
 											</div>
 										</div>
 					                    
@@ -254,11 +254,16 @@
 				  $.post("{{url('/home/center/address')}}",{province:province,city:city,area:area,address:address,address_tel:address_tel,addressname:addressname},function(data){
 				  	 	// 通过判断data的值,得到信息
 				  		if(data == 1)
-				  		{
-				  			layer.open({
-							  content:'添加成功'
-							});							
-							location.reload();
+				  		{					
+							layer.open({  
+	                        content: '添加成功！',  
+	                        btn: ['确认'],  
+	                        yes: function(index, layero) {  
+	                            window.location.href='/home/center/address';  
+	                        },cancel: function() {  
+	                            //右上角关闭回调  			 
+	                        }  
+	                    });
 				  		}else
 				  		{
 				  			layer.open({
@@ -285,11 +290,16 @@
 	 	 			// 通过判断data的值,得到信息
 	 	 			if(data == 1)
 	 	 			{	
-
-	 	 						layer.open({
-							  content:'删除成功！'
-							});
-							location.reload();
+				
+							layer.open({  
+	                        content: '删除成功！',  
+	                        btn: ['确认'],  
+	                        yes: function(index, layero) {  
+	                            window.location.href='/home/center/address';  
+	                        },cancel: function() {  
+	                            //右上角关闭回调  			 
+	                        }  
+	                    });
 	 	 			}else
 	 	 			{
 	 	 				layer.open({

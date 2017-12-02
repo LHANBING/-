@@ -39,7 +39,14 @@
 										@foreach ($arr as $k =>$v)	
 										<div class="order-list" id="all{{$v->id}}">
 											<div class="order-title">
-												<div class="dd-num">卖家：<a href="javascript:;">{{$v->username}}</a></div>
+												<div class="dd-num">
+                                                 @if($v->send_uid ==0)
+                                                   系统提示
+                                                  @else  
+													卖家：<a href="javascript:;">{{$v->username}}</a>
+                                                 @endif
+
+												</div>
 												<span>时间：{{$v->created_at}}</span>
 											
 											</div>
@@ -85,7 +92,7 @@
 												
 														
 														<div class="am-btn am-btn-danger anniu del" id="{{$v->id}}del">
-														   删除{{$v->id}}</div>
+														   删除</div>
 														
 													</li>
 												
@@ -103,7 +110,13 @@
 										@foreach ($ar as $k =>$v)	
 										<div class="order-list" id="all{{$v->id}}">
 											<div class="order-title">
-												<div class="dd-num">买家：<a href="javascript:;">{{$v->username}}</a></div>
+												<div class="dd-num">
+													  @if($v->send_uid ==0)
+                                                   系统提示
+                                                  @else  
+													买家：<a href="javascript:;">{{$v->username}}</a>
+                                                 @endif
+												</div>
 												<span>时间：{{$v->created_at}}</span>
 											
 											</div>
@@ -152,7 +165,7 @@
 												
 														
 														<div class="am-btn am-btn-danger anniu del" id="{{$v->id}}del">
-														   删除{{$v->id}}</div>
+														   删除</div>
 														
 													</li>
 												
@@ -201,7 +214,7 @@
 										  ,btn: ['确定'] 
 										  ,zIndex: layer.zIndex 
 										  ,success: function(layero){
-										    layer.setTop(layero); 
+										    window.location.href="/home/center/news/index";
 										  }
 										});
 

@@ -13,6 +13,7 @@ use App\Http\Model\Type;
 use App\Http\Model\Typechild;
 use App\Http\Model\Order;
 use App\Http\Model\message;
+use App\Http\Model\Comment;
 use DB;
 use session;
 
@@ -270,5 +271,34 @@ class maiOrderController extends Controller
         
     }
         
+    //查看评价
+    public function chapingjia(Request $request)
+    {
+        $num  = $request->only('num');
+
+        $order=Order::where('order_num',$num)->first();
+
+        $order_id=$order->id;
+
+        $buy_uid = $order->buy_uid;
+        $id=session('uid');
+
+// return $buy_uid;
+
+        $buypingjia = Comment::where(['order_id'=>$order_id,'b_id'=>$buy_uid])->first();
+
+        $salepingjia =Comment::where(['order_id'=>$order_id,'b_id'=>$id])->first(); 
+        
+
+        if($buypingjia == ''){
+            return ['10',$salepingjia];
+        }else{
+            return [$buypingjia,$salepingjia];
+        }
+        
+        
+
+    }
+    
         
 }

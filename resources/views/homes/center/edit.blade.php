@@ -231,18 +231,22 @@
 				 	// 通过判断data的值,得到信息
 				 	 if(data)
 				 	 {
-				 	 	 layer.open({
-	                         
-	                          content: '修改成功！'
-	                        });
-				 	 	 location.reload();
+				 	 	 layer.open({  
+	                        content: '修改成功！',  
+	                        btn: ['确认'],  
+	                        yes: function(index, layero) {  
+	                            window.location.href='/home/center/info/index';  
+	                        },cancel: function() {  
+	                            //右上角关闭回调  			 
+	                        }  
+	                    });
 				 	 }else
 				 	 {
 				 	 	 layer.open({
 	                         
 	                          content: '修改失败！'
 	                        });
-				 	 	 location.reload();
+				 	 	 location.reload(true);
 				 	 }
 				 })
 
